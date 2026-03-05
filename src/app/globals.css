@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-green-1: #A0D9D8;
+  --color-green-2: #7CCDCD;
+  --color-green-3: #5EC6C7;
+  --color-green-4: #45C1BF;
+  --color-green-5: #00AFAA;
+  --color-green-6: #139A95;
+  --color-green-7: #138581;
+  --color-green-8: #12706D;
+  --color-green-9: #105D5A;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-purple-1: #9D8DC3;
+  --color-purple-2: #7E66AD;
+  --color-purple-3: #61489A;
+  --color-purple-4: #483378;
+  --color-purple-5: #312252;
+  --color-purple-6: #2A1B4C;
+  --color-purple-7: #241444;
+  --color-purple-8: #1E0F3E;
+  --color-purple-9: #1A0E36;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-yellow-1: #FFE6D4;
+  --color-yellow-2: #FFCDB0;
+  --color-yellow-3: #FFB58B;
+  --color-yellow-4: #FF9752;
+  --color-yellow-5: #E67E39;
+  --color-yellow-6: #B85D22;
+  --color-yellow-7: #8A4114;
+  --color-yellow-8: #5C2809;
+  --color-yellow-9: #2E1404;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --text-base: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+  --text-h5: clamp(1.25rem, 1.1957rem + 0.2717vw, 1.406rem);
+  --text-h4: clamp(1.563rem, 1.4934rem + 0.3478vw, 1.758rem);
+  --text-h3: clamp(1.953rem, 1.866rem + 0.4348vw, 2.197rem);
+  --text-h2: clamp(2.441rem, 2.3323rem + 0.5435vw, 2.747rem);
+  --text-h1: clamp(3.052rem, 2.9155rem + 0.6826vw, 3.433rem);
+
+  @keyframes gradient-move {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
   }
+
+  --animate-gradient: gradient-move 15s ease infinite;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background-color: theme('colors.white');
+    color: theme('colors.purple.5');
+  }
 }
