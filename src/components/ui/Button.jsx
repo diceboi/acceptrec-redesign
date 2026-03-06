@@ -18,7 +18,7 @@ export const Button = React.forwardRef(
         const Component = asChild ? "span" : "button";
 
         const baseStyles =
-            "inline-flex items-center justify-center rounded-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+            "cursor-pointer inline-flex items-center justify-center rounded-lg font-bold transition-all disabled:opacity-50 disabled:pointer-events-none";
 
         // Size variants
         const sizeStyles = {
@@ -31,29 +31,29 @@ export const Button = React.forwardRef(
         const variantStyles = {
             solid: {
                 green:
-                    "bg-green-5 text-white hover:bg-green-6 focus:ring-green-3",
+                    "bg-green-5 text-white hover:bg-green-6",
                 purple:
-                    "bg-purple-5 text-white hover:bg-purple-6 focus:ring-purple-3",
+                    "bg-purple-5 text-white hover:bg-purple-6",
                 yellow:
-                    "bg-yellow-5 text-white hover:bg-yellow-6 focus:ring-yellow-3",
+                    "bg-yellow-5 text-white hover:bg-yellow-6",
                 black:
-                    "bg-black text-white hover:bg-black/30 hover:text-black",
+                    "bg-black text-white hover:bg-black/50 hover:text-black backdrop-blur-sm",
             },
             outline: {
                 green:
-                    "border-2 border-green-5 text-green-5 hover:bg-green-1 focus:ring-green-3",
+                    "border-2 border-green-5 text-green-5 hover:bg-green-1",
                 purple:
-                    "border-2 border-purple-5 text-purple-5 hover:bg-purple-1 focus:ring-purple-3",
+                    "border-2 border-purple-5 text-purple-5 hover:bg-purple-1",
                 yellow:
-                    "border-2 border-yellow-5 text-yellow-5 hover:bg-yellow-1 focus:ring-yellow-3",
+                    "border-2 border-yellow-5 text-yellow-5 hover:bg-yellow-1",
                 black:
                     "border-2 border-black text-black hover:bg-black/30 hover:text-black",
             },
             ghost: {
-                green: "text-green-5 hover:bg-green-1 focus:ring-green-3",
-                purple: "text-purple-5 hover:bg-purple-1 focus:ring-purple-3",
-                yellow: "text-yellow-5 hover:bg-yellow-1 focus:ring-yellow-3",
-                black: "text-black hover:bg-black/30 hover:text-black",
+                green: "text-green-5 hover:bg-green-1",
+                purple: "text-purple-5 hover:bg-purple-1",
+                yellow: "text-yellow-5 hover:bg-yellow-1",
+                black: "text-black hover:bg-black/50 hover:text-black backdrop-blur-sm",
             },
         };
 

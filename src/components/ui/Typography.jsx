@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 
 export function Heading({
     as: Component = "h1",
+    variant,
     className,
     children,
     ...props
@@ -17,8 +18,9 @@ export function Heading({
         h6: "text-[length:var(--text-h5)]", // Fallback for h6
     };
 
+    const effectiveVariant = variant || Component;
     const defaultSizeClass =
-        sizeClassMap[Component] || sizeClassMap.h1;
+        sizeClassMap[effectiveVariant] || sizeClassMap.h1;
 
     return (
         <Component
@@ -43,7 +45,7 @@ export function Text({
     return (
         <Component
             className={cn(
-                "font-sans text-[length:var(--text-base)] leading-relaxed text-purple-4 dark:text-purple-2",
+                "font-sans text-(length:--text-base) leading-relaxed text-purple-4 dark:text-purple-2",
                 className
             )}
             {...props}
