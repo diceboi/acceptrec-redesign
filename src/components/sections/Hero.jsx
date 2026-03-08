@@ -2,15 +2,120 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#0F0D1A] pt-16">
-      {/* ── Radial glow accents ── */}
-      <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-5/15 blur-[140px]" />
-      <div className="pointer-events-none absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-purple-6/20 blur-[120px]" />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-5/5 blur-[80px]" />
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-16">
+      {/* ── Animated blob background ── */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Blob 1 – top left, teal */}
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            height: "75%",
+            width: "70%",
+            left: "-15%",
+            top: "-10%",
+            background: "var(--color-teal-5)",
+            opacity: 0.18,
+            filter: "blur(80px)",
+          }}
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, 120, 0],
+            y: [0, 60, 0],
+          }}
+          transition={{
+            scale: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+            x: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
+          }}
+        />
+        {/* Blob 2 – top right, purple */}
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            height: "65%",
+            width: "60%",
+            right: "-10%",
+            top: "-8%",
+            background: "var(--color-purple-5)",
+            opacity: 0.22,
+            filter: "blur(90px)",
+          }}
+          animate={{
+            scale: [1, 1.4, 1],
+            x: [0, -100, 0],
+            y: [0, 120, 0],
+          }}
+          transition={{
+            scale: {
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            },
+            x: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
+          }}
+        />
+        {/* Blob 3 – bottom right, teal darker */}
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            height: "55%",
+            width: "65%",
+            right: "-15%",
+            bottom: "-10%",
+            background: "var(--color-teal-6)",
+            opacity: 0.15,
+            filter: "blur(100px)",
+          }}
+          animate={{
+            scale: [1, 1.35, 1],
+            x: [0, -140, 0],
+            y: [0, -80, 0],
+          }}
+          transition={{
+            scale: {
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5,
+            },
+            x: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
+          }}
+        />
+        {/* Blob 4 – bottom left, purple dark */}
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            height: "60%",
+            width: "60%",
+            left: "-10%",
+            bottom: "-10%",
+            background: "var(--color-purple-6)",
+            opacity: 0.2,
+            filter: "blur(80px)",
+          }}
+          animate={{
+            scale: [1, 1.45, 1],
+            x: [0, 110, 0],
+            y: [0, -100, 0],
+          }}
+          transition={{
+            scale: {
+              duration: 7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
+            },
+            x: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 },
+          }}
+        />
+      </div>
 
       {/* ── Dot pattern ── */}
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-30" />
