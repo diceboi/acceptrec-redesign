@@ -57,9 +57,7 @@
   /* ======================
      FONTS
   ======================== */
-  --font-sans:
-    var(--font-jakarta), var(--font-geist-sans), ui-sans-serif, system-ui,
-    sans-serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
   /* ======================
@@ -79,44 +77,56 @@
     0% {
       background-position: 0% 50%;
     }
+
     50% {
       background-position: 100% 50%;
     }
+
     100% {
       background-position: 0% 50%;
     }
   }
+
   @keyframes float-slow {
+
     0%,
     100% {
       transform: translateY(0px);
     }
+
     50% {
       transform: translateY(-20px);
     }
   }
+
   @keyframes pulse-glow {
+
     0%,
     100% {
       opacity: 0.4;
     }
+
     50% {
       opacity: 0.8;
     }
   }
+
   @keyframes shimmer {
     0% {
       background-position: -200% 0;
     }
+
     100% {
       background-position: 200% 0;
     }
   }
+
   @keyframes counter-up {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -144,6 +154,7 @@
 .teal-glow {
   box-shadow: 0 0 40px -10px rgba(0, 165, 165, 0.4);
 }
+
 .teal-glow-sm {
   box-shadow: 0 0 20px -8px rgba(0, 165, 165, 0.35);
 }
@@ -157,9 +168,7 @@
 
 /* Section pattern overlay */
 .dot-pattern {
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.06) 1px,
-    transparent 1px
-  );
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px);
   background-size: 28px 28px;
 }
