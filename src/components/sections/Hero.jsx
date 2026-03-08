@@ -1,195 +1,126 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
-import { Heading, Text } from "@/components/ui/Typography";
-import { Button } from "@/components/ui/Button";
 
 export function Hero() {
-    const [hoverState, setHoverState] = useState(null);
+  return (
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-16">
+      {/* ── Radial glow accents ── */}
+      <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-5/15 blur-[140px]" />
+      <div className="pointer-events-none absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-purple-6/20 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-5/5 blur-[80px]" />
 
-    // Define blob colors based on hover state for dynamic response
-    const blob1Color = hoverState === "left" ? "var(--color-green-4)" : hoverState === "right" ? "var(--color-purple-4)" : "var(--color-green-5)";
-    const blob2Color = hoverState === "left" ? "var(--color-green-7)" : hoverState === "right" ? "var(--color-purple-7)" : "var(--color-purple-5)";
-    const blob3Color = hoverState === "left" ? "var(--color-purple-3)" : hoverState === "right" ? "var(--color-green-3)" : "var(--color-green-3)";
-    const blob4Color = hoverState === "left" ? "var(--color-green-5)" : hoverState === "right" ? "var(--color-purple-5)" : "var(--color-purple-3)";
+      {/* ── Dot pattern ── */}
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-30" />
 
-    return (
-        <div className="flex flex-col w-full">
+      {/* ── Content ── */}
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-6 text-center">
+        {/* Pill badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 inline-flex items-center gap-2 rounded-full border border-teal-5/30 bg-teal-5/10 px-4 py-2"
+        >
+          <span className="h-2 w-2 rounded-full bg-teal-5 animate-pulse" />
+          <span className="text-sm font-semibold text-teal-4">
+            Trusted by 190+ companies across the UK
+          </span>
+        </motion.div>
 
+        {/* H1 — SEO + design hero */}
+        <motion.h1
+          className="font-sans text-5xl font-extrabold leading-[1.05] tracking-tight text-white md:text-7xl lg:text-8xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          We Give a{" "}
+          <span className="relative">
+            <span className="text-teal-5">Shift.</span>
+            {/* Glow under the word */}
+            <span className="pointer-events-none absolute -bottom-2 left-0 h-1 w-full rounded-full bg-teal-5/50 blur-sm" />
+          </span>
+        </motion.h1>
 
-            <section className="relative flex min-h-[calc(100vh)] w-full flex-col overflow-hidden bg-white md:flex-row dark:bg-[#0a0a0a]">
-                {/* Animated Mesh Gradient Background */}
-                <div className="absolute inset-0 z-0 overflow-hidden">
-                    {/* Blob 1 (Top Left) */}
-                    <motion.div
-                        className="absolute rounded-full"
-                        style={{ height: "90%", width: "80%", left: "-20%", top: "-10%", mixBlendMode: "multiply", opacity: 0.8, filter: "blur(10px)" }}
-                        animate={{
-                            backgroundColor: blob1Color,
-                            scale: [1, 1.3, 1],
-                            x: [0, 150, 0],
-                            y: [0, 80, 0],
-                        }}
-                        transition={{
-                            backgroundColor: { duration: 0.35, ease: "easeOut" },
-                            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                            x: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                            y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                        }}
-                    />
-                    {/* Blob 2 (Top Right) */}
-                    <motion.div
-                        className="absolute rounded-full"
-                        style={{ height: "80%", width: "70%", right: "-10%", top: "-12%", mixBlendMode: "multiply", opacity: 0.8, filter: "blur(20px)" }}
-                        animate={{
-                            backgroundColor: blob2Color,
-                            scale: [1, 1.4, 1],
-                            x: [0, -120, 0],
-                            y: [0, 150, 0],
-                        }}
-                        transition={{
-                            backgroundColor: { duration: 0.35, ease: "easeOut" },
-                            scale: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 },
-                            x: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 },
-                            y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 },
-                        }}
-                    />
-                    {/* Blob 3 (Bottom Right) */}
-                    <motion.div
-                        className="absolute rounded-full"
-                        style={{ height: "65%", width: "80%", right: "-20%", bottom: "-15%", mixBlendMode: "multiply", opacity: 0.8, filter: "blur(80px)" }}
-                        animate={{
-                            backgroundColor: blob3Color,
-                            scale: [1, 1.35, 1],
-                            x: [0, -180, 0],
-                            y: [0, -100, 0],
-                        }}
-                        transition={{
-                            backgroundColor: { duration: 0.35, ease: "easeOut" },
-                            scale: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
-                            x: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
-                            y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 },
-                        }}
-                    />
-                    {/* Blob 4 (Bottom Left) */}
-                    <motion.div
-                        className="absolute rounded-full"
-                        style={{ height: "70%", width: "75%", left: "-15%", bottom: "-10%", mixBlendMode: "multiply", opacity: 0.8, filter: "blur(10px)" }}
-                        animate={{
-                            backgroundColor: blob4Color,
-                            scale: [1, 1.45, 1],
-                            x: [0, 140, 0],
-                            y: [0, -130, 0],
-                        }}
-                        transition={{
-                            backgroundColor: { duration: 0.35, ease: "easeOut" },
-                            scale: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 },
-                            x: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 },
-                            y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 },
-                        }}
-                    />
+        {/* Sub-tagline — SEO H2 (screen-reader accessible) */}
+        <motion.p
+          className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-white/60 md:text-2xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          About your operation. About your deadlines. About your people.
+        </motion.p>
 
-                    {/* The Glass Blur Overlay that ties the blobs together */}
-                    <div className="absolute inset-0 z-10 backdrop-blur-[100px] bg-white/30 dark:bg-black/40" />
-                </div>
+        {/* Hidden SEO H2 for screen readers / crawlers */}
+        <h2 className="sr-only">Looking for work?</h2>
 
-                {/* Left Side: FIND STAFF */}
-                <motion.div
-                    className="relative z-20 flex flex-1 cursor-pointer flex-col items-center justify-center p-8 pb-20 text-center md:p-16 md:pb-24"
-                    onMouseEnter={() => setHoverState("left")}
-                    onMouseLeave={() => setHoverState(null)}
-                    animate={{
-                        flex: hoverState === "left" ? 1.1 : hoverState === "right" ? 0.9 : 1,
-                        backdropFilter: hoverState === "left" ? "blur(10px)" : "blur(0px)",
-                        backgroundColor: hoverState === "left" ? "rgba(255, 255, 255, 0.05)" : "rgba(255, 255, 255, 0)",
-                    }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                >
-                    <Text as="span" className="mb-4 font-bold tracking-widest text-green-7 dark:text-green-3 uppercase">
-                        Clients
-                    </Text>
-                    <Heading as="h1" variant="h2" className="mb-6 max-w-sm leading-[1.1] text-black dark:text-white">
-                        Trusted workers. Better results.
-                    </Heading>
-                    <Text className="mb-64 max-w-sm text-gray-800 dark:text-gray-200">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                        nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                    </Text>
-                    
-                    {/* Worker Image */}
-                    <motion.div
-                        className="pointer-events-none absolute -bottom-24 left-1/2 -translate-x-1/2 w-96 h-96 md:w-130 md:h-130"
-                        animate={{
-                            opacity: hoverState === "left" ? 1 : 0.4
-                        }}
-                        transition={{ duration: 0.35 }}
-                    >
-                        <Image
-                            src="/boss.webp"
-                            alt="Worker"
-                            fill
-                            className="object-contain object-bottom"
-                        />
-                    </motion.div>
+        {/* CTA Buttons */}
+        <motion.div
+          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+        >
+          <Link
+            href="#"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-teal-5 px-8 py-4 text-base font-bold text-white shadow-lg shadow-teal-5/25 transition-all duration-300 hover:bg-teal-6 hover:shadow-teal-5/40 hover:shadow-xl"
+          >
+            <span>Find Staff</span>
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
 
-                    <Button colorScheme="black" textColor="text-white" hoverTextColor="hover:text-white" size="lg" className="absolute bottom-8 z-10 md:bottom-24">
-                        Find clients
-                    </Button>
-                </motion.div>
+          <Link
+            href="#"
+            className="group inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-8 py-4 text-base font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/15"
+          >
+            <span>Find Work</span>
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
+        </motion.div>
 
-                {/* Right Side: FIND WORK */}
-                <motion.div
-                    className="relative z-20 flex flex-1 cursor-pointer flex-col items-center justify-center p-8 pb-20 text-center md:p-16 md:pb-24"
-                    onMouseEnter={() => setHoverState("right")}
-                    onMouseLeave={() => setHoverState(null)}
-                    animate={{
-                        flex: hoverState === "right" ? 1.1 : hoverState === "left" ? 0.9 : 1,
-                        backdropFilter: hoverState === "right" ? "blur(10px)" : "blur(0px)",
-                        backgroundColor: hoverState === "right" ? "rgba(255, 255, 255, 0.05)" : "rgba(255, 255, 255, 0)",
-                    }}
-                    transition={{ duration: 0.35, ease: "easeOut" }}
-                >
-                    <Text as="span" className="mb-4 font-bold tracking-widest text-purple-7 dark:text-purple-3 uppercase">
-                        Candidates
-                    </Text>
-                    <Heading as="h1" variant="h2" className="mb-6 max-w-sm leading-[1.1] text-black dark:text-white">
-                        Find work<br></br>that fits.
-                    </Heading>
-                    <Text className="mb-64 max-w-sm text-gray-800 dark:text-gray-200">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                        nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                    </Text>
+        {/* Social proof mini bar */}
+        <motion.div
+          className="mt-14 flex flex-wrap items-center justify-center gap-6 text-sm text-white/40"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.55 }}
+        >
+          <span className="flex items-center gap-1.5">
+            <span className="text-yellow-4">★★★★★</span> 4.8 Google Rating
+          </span>
+          <span className="h-4 w-px bg-white/20" />
+          <span>1,200 workers deployed daily</span>
+          <span className="h-4 w-px bg-white/20" />
+          <span>Leicester · Coventry · Tamworth</span>
+        </motion.div>
+      </div>
 
-                    {/* Boss Image */}
-                    <motion.div
-                        className="pointer-events-none absolute -bottom-24 left-1/2 -translate-x-1/2 w-96 h-96 md:w-130 md:h-130"
-                        animate={{
-                            opacity: hoverState === "right" ? 1 : 0.4
-                        }}
-                        transition={{ duration: 0.35 }}
-                    >
-                        <Image
-                            src="/worker.webp"
-                            alt="Boss"
-                            fill
-                            className="object-contain object-bottom"
-                        />
-                    </motion.div>
+      {/* ── Bottom gradient fade into next section ── */}
+      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-900 to-transparent" />
 
-                    <Button colorScheme="black" textColor="text-white" hoverTextColor="hover:text-white" size="lg" className="absolute bottom-8 md:bottom-24 z-10">
-                        Find work
-                    </Button>
-                </motion.div>
-
-                {/* Large Background Text */}
-                <div className="pointer-events-none absolute bottom-0 left-0 w-full flex justify-center -translate-y-[25%] z-10 select-none">
-                    <h2 className="text-[18vw] md:text-[12vw] font-bold uppercase leading-none tracking-tighter text-transparent opacity-50 flex justify-center whitespace-nowrap invert-25 [-webkit-text-stroke:2px_rgba(0,0,0,0.75)] dark:[-webkit-text-stroke:2px_rgba(255,255,255,0.75)]">
-                        We give a shift
-                    </h2>
-                </div>
-            </section>
-        </div>
-    );
+      {/* ── Scroll indicator ── */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex h-10 w-6 items-start justify-center rounded-full border border-white/20 pt-2"
+        >
+          <div className="h-1.5 w-1 rounded-full bg-white/50" />
+        </motion.div>
+      </motion.div>
+    </section>
+  );
 }

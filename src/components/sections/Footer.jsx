@@ -2,111 +2,156 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FaLinkedin, FaXTwitter, FaYoutube, FaChevronDown } from "react-icons/fa6";
-import { Heading, Text } from "@/components/ui/Typography";
+import { FaLinkedin, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
+
+const footerLinks = {
+  "Industry Sectors": [
+    "Warehousing & Industrial",
+    "Manufacturing",
+    "Food Production",
+    "Driving & Logistics",
+    "Technical",
+    "Commercial",
+  ],
+  Candidates: ["Register Now", "Find Jobs", "Download App", "FAQ", "Support"],
+  Clients: [
+    "Find Workers",
+    "Case Studies",
+    "Our Locations",
+    "Managed Services",
+    "Book a Demo",
+  ],
+  Company: [
+    "About Us",
+    "Meet the Team",
+    "Blogs",
+    "Contact Us",
+    "Work for Us",
+    "Privacy Policy",
+  ],
+};
+
+const offices = [
+  { city: "Leicester", phone: "0116 218 2133" },
+  { city: "Coventry", phone: "0247 718 0356" },
+  { city: "Tamworth", phone: "0182 743 8334" },
+];
 
 export function Footer() {
-    return (
-        <footer className="w-full bg-white px-8 py-12 md:px-16 dark:bg-[#0a0a0a]">
-            {/* Top Section - Grid Layout */}
-            <div className="mx-auto flex w-full max-w-7xl flex-col justify-between gap-12 lg:flex-row">
-                {/* Logo & Socials (Left Column) */}
-                <div className="flex flex-col items-start gap-8 lg:w-1/4">
-                    <Link href="/">
-                        {/* Using the same logo as Hero, but styled for Footer sizing */}
-                        <Image 
-                            src="/acceptrec-white-logo.webp" 
-                            alt="AcceptRec Logo" 
-                            width={160} 
-                            height={48} 
-                            className="h-10 w-auto object-contain"
-                        />
+  return (
+    <footer className="w-full bg-navy-950 border-t border-white/8 px-6 py-16 md:px-12">
+      <div className="mx-auto max-w-7xl">
+        {/* Top: Logo + columns */}
+        <div className="flex flex-col gap-12 lg:flex-row">
+          {/* Left: Logo, tagline, social, offices */}
+          <div className="flex flex-col gap-8 lg:w-72 lg:shrink-0">
+            <Link href="/">
+              <Image
+                src="/acceptrec-white-logo.webp"
+                alt="Accept Recruitment Logo"
+                width={160}
+                height={48}
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
+            <p className="text-sm leading-relaxed text-white/40">
+              Dependable temporary and permanent staffing across the Midlands.
+              4.8★ rated on Google.
+            </p>
+
+            {/* Social icons */}
+            <div className="flex gap-4 text-white/50">
+              <Link
+                href="#"
+                aria-label="LinkedIn"
+                className="transition-colors hover:text-teal-5"
+              >
+                <FaLinkedin size={20} />
+              </Link>
+              <Link
+                href="#"
+                aria-label="Facebook"
+                className="transition-colors hover:text-teal-5"
+              >
+                <FaFacebook size={20} />
+              </Link>
+              <Link
+                href="#"
+                aria-label="TikTok"
+                className="transition-colors hover:text-teal-5"
+              >
+                <FaTiktok size={20} />
+              </Link>
+              <Link
+                href="#"
+                aria-label="Instagram"
+                className="transition-colors hover:text-teal-5"
+              >
+                <FaInstagram size={20} />
+              </Link>
+            </div>
+
+            {/* Offices */}
+            <div className="flex flex-col gap-3">
+              {offices.map((o) => (
+                <div
+                  key={o.city}
+                  className="flex items-center justify-between text-sm"
+                >
+                  <span className="font-semibold text-white/60">{o.city}</span>
+                  <a
+                    href={`tel:${o.phone.replace(/\s/g, "")}`}
+                    className="text-white/40 transition-colors hover:text-teal-4"
+                  >
+                    {o.phone}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right: Nav columns */}
+          <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-4">
+            {Object.entries(footerLinks).map(([section, links]) => (
+              <div key={section} className="flex flex-col gap-4">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-white/60">
+                  {section}
+                </h3>
+                <div className="flex flex-col gap-2.5">
+                  {links.map((label) => (
+                    <Link
+                      key={label}
+                      href="#"
+                      className="text-sm text-white/35 transition-colors hover:text-white"
+                    >
+                      {label}
                     </Link>
-                    <div className="flex gap-4 text-gray-800 dark:text-gray-300">
-                        <Link href="#" className="transition-opacity hover:opacity-75">
-                            <span className="sr-only">LinkedIn</span>
-                            <FaLinkedin size={24} />
-                        </Link>
-                        <Link href="#" className="transition-opacity hover:opacity-75">
-                            <span className="sr-only">X (Twitter)</span>
-                            <FaXTwitter size={24} />
-                        </Link>
-                        <Link href="#" className="transition-opacity hover:opacity-75">
-                            <span className="sr-only">YouTube</span>
-                            <FaYoutube size={24} />
-                        </Link>
-                    </div>
+                  ))}
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-                {/* Navigation Links Columns */}
-                <div className="grid w-full grid-cols-2 gap-8 sm:grid-cols-4 lg:w-3/4">
-                    {/* FOR JOB SEEKERS */}
-                    <div className="flex flex-col gap-4">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-black dark:text-white">
-                            For Job Seekers
-                        </h3>
-                        <div className="flex flex-col gap-3 text-[15px] font-medium text-gray-500 dark:text-gray-400">
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Get work today</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Download app</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Support</Link>
-                        </div>
-                    </div>
-
-                    {/* FOR COMPANIES */}
-                    <div className="flex flex-col gap-4">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-black dark:text-white">
-                            For Companies
-                        </h3>
-                        <div className="flex flex-col gap-3 text-[15px] font-medium text-gray-500 dark:text-gray-400">
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Find reliable workers</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">AcceptRec Business</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Our locations</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Customer stories</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Book a demo</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Blog</Link>
-                        </div>
-                    </div>
-
-                    {/* ACCEPTREC */}
-                    <div className="flex flex-col gap-4">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-black dark:text-white">
-                            AcceptRec
-                        </h3>
-                        <div className="flex flex-col gap-3 text-[15px] font-medium text-gray-500 dark:text-gray-400">
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">About us</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Newsroom</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Careers</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Graduate Program</Link>
-                        </div>
-                    </div>
-
-                    {/* LEGAL */}
-                    <div className="flex flex-col gap-4">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-black dark:text-white">
-                            Legal
-                        </h3>
-                        <div className="flex flex-col gap-3 text-[15px] font-medium text-gray-500 dark:text-gray-400">
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Terms of use</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Privacy notice</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Whistleblower channel</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Policies and Disclosures</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Security</Link>
-                            <Link href="#" className="hover:text-black dark:hover:text-white transition-colors">Cookie Policy</Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Bottom Section - Language & Copyright */}
-            <div className="mx-auto mt-16 flex w-full max-w-7xl flex-col items-center justify-between gap-6 border-t border-gray-200 dark:border-gray-800 pt-8 sm:flex-row">
-                <button className="flex items-center gap-2 rounded-md bg-[#111] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-black dark:bg-[#222] dark:hover:bg-[#333]">
-                    Language (US)
-                    <FaChevronDown size={14} className="opacity-80" />
-                </button>
-                <Text className="text-sm text-gray-500 dark:text-gray-400">
-                    &copy; {new Date().getFullYear()} Accept Recruitment. All rights reserved.
-                </Text>
-            </div>
-        </footer>
-    );
+        {/* Bottom bar */}
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-8 text-sm text-white/30 sm:flex-row">
+          <span>
+            &copy; {new Date().getFullYear()} Accept Recruitment. All rights
+            reserved.
+          </span>
+          <div className="flex gap-5">
+            <Link href="#" className="hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="#" className="hover:text-white transition-colors">
+              GDPR
+            </Link>
+            <Link href="#" className="hover:text-white transition-colors">
+              Modern Slavery Statement
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

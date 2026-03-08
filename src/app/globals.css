@@ -1,39 +1,70 @@
 @import "tailwindcss";
 
 @theme {
-  --color-green-1: #A0D9D8;
-  --color-green-2: #7CCDCD;
-  --color-green-3: #5EC6C7;
-  --color-green-4: #45C1BF;
-  --color-green-5: #00AFAA;
-  --color-green-6: #139A95;
-  --color-green-7: #138581;
-  --color-green-8: #12706D;
-  --color-green-9: #105D5A;
+  /* ======================
+     BRAND COLORS - Teal
+  ======================== */
+  --color-teal-1: #ccefef;
+  --color-teal-2: #99e0df;
+  --color-teal-3: #66d0cf;
+  --color-teal-4: #33c1bf;
+  --color-teal-5: #00a5a5;
+  --color-teal-6: #008888;
+  --color-teal-7: #006b6b;
+  --color-teal-8: #004f4f;
+  --color-teal-9: #003333;
 
-  --color-purple-1: #9D8DC3;
-  --color-purple-2: #7E66AD;
-  --color-purple-3: #61489A;
+  /* Legacy Green (kept for Navbar compatibility) */
+  --color-green-1: #a0d9d8;
+  --color-green-2: #7ccdcd;
+  --color-green-3: #5ec6c7;
+  --color-green-4: #45c1bf;
+  --color-green-5: #00afaa;
+  --color-green-6: #139a95;
+  --color-green-7: #138581;
+  --color-green-8: #12706d;
+  --color-green-9: #105d5a;
+
+  /* Purple (kept for Navbar compatibility) */
+  --color-purple-1: #9d8dc3;
+  --color-purple-2: #7e66ad;
+  --color-purple-3: #61489a;
   --color-purple-4: #483378;
   --color-purple-5: #312252;
-  --color-purple-6: #2A1B4C;
+  --color-purple-6: #2a1b4c;
   --color-purple-7: #241444;
-  --color-purple-8: #1E0F3E;
-  --color-purple-9: #1A0E36;
+  --color-purple-8: #1e0f3e;
+  --color-purple-9: #1a0e36;
 
-  --color-yellow-1: #FFE6D4;
-  --color-yellow-2: #FFCDB0;
-  --color-yellow-3: #FFB58B;
-  --color-yellow-4: #FF9752;
-  --color-yellow-5: #E67E39;
-  --color-yellow-6: #B85D22;
-  --color-yellow-7: #8A4114;
-  --color-yellow-8: #5C2809;
-  --color-yellow-9: #2E1404;
+  /* Yellow */
+  --color-yellow-1: #ffe6d4;
+  --color-yellow-2: #ffcdb0;
+  --color-yellow-3: #ffb58b;
+  --color-yellow-4: #ff9752;
+  --color-yellow-5: #e67e39;
+  --color-yellow-6: #b85d22;
+  --color-yellow-7: #8a4114;
+  --color-yellow-8: #5c2809;
+  --color-yellow-9: #2e1404;
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Navy Dark backgrounds */
+  --color-navy-950: #060810;
+  --color-navy-900: #0a0d14;
+  --color-navy-800: #0d121c;
+  --color-navy-700: #111827;
+  --color-navy-600: #1a2235;
+
+  /* ======================
+     FONTS
+  ======================== */
+  --font-sans:
+    var(--font-jakarta), var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
+  /* ======================
+     TYPE SCALE
+  ======================== */
   --text-base: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
   --text-h5: clamp(1.25rem, 1.1957rem + 0.2717vw, 1.406rem);
   --text-h4: clamp(1.563rem, 1.4934rem + 0.3478vw, 1.758rem);
@@ -41,26 +72,94 @@
   --text-h2: clamp(2.441rem, 2.3323rem + 0.5435vw, 2.747rem);
   --text-h1: clamp(3.052rem, 2.9155rem + 0.6826vw, 3.433rem);
 
+  /* ======================
+     ANIMATIONS
+  ======================== */
   @keyframes gradient-move {
     0% {
       background-position: 0% 50%;
     }
-
     50% {
       background-position: 100% 50%;
     }
-
     100% {
       background-position: 0% 50%;
     }
   }
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  @keyframes counter-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   --animate-gradient: gradient-move 15s ease infinite;
+  --animate-float: float-slow 6s ease-in-out infinite;
+  --animate-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
 }
 
 @layer base {
   body {
-    background-color: theme('colors.white');
-    color: theme('colors.purple.5');
+    background-color: #0a0d14;
+    color: #ffffff;
   }
+}
+
+/* =====================================================
+   UTILITY CLASSES
+====================================================== */
+
+/* Teal glow for cards/highlights */
+.teal-glow {
+  box-shadow: 0 0 40px -10px rgba(0, 165, 165, 0.4);
+}
+.teal-glow-sm {
+  box-shadow: 0 0 20px -8px rgba(0, 165, 165, 0.35);
+}
+
+/* Card glass style */
+.glass-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* Section pattern overlay */
+.dot-pattern {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.06) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
 }
