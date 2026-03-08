@@ -32,7 +32,7 @@ const itemVariants = {
 
 export function StatsBar() {
   return (
-    <section className="relative w-full bg-navy-900 py-20 md:py-28 overflow-hidden">
+    <section className="relative w-full bg-[#111827] py-20 md:py-28 overflow-hidden">
       {/* Subtle dot pattern */}
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
 

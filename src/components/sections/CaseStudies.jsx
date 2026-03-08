@@ -35,7 +35,7 @@ const caseStudies = [
 
 export function CaseStudies() {
   return (
-    <section className="relative w-full bg-navy-900 overflow-hidden py-24 md:py-32">
+    <section className="relative w-full bg-gradient-to-b from-[#1F2937] to-[#111827] overflow-hidden py-24 md:py-32">
       <div className="pointer-events-none absolute right-0 top-0 h-[500px] w-[500px] rounded-full bg-purple-6/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-6">

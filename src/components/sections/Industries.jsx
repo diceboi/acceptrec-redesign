@@ -60,7 +60,7 @@ const cardVariants = {
 
 export function Industries() {
   return (
-    <section className="relative w-full bg-navy-800 py-24 md:py-32 overflow-hidden">
+    <section className="relative w-full bg-gradient-to-b from-[#111827] to-[#1F2937] py-24 md:py-32 overflow-hidden">
       {/* Background glow */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-5/8 blur-[120px]" />
 

@@ -39,7 +39,7 @@ const offices = [
 
 export function Footer() {
   return (
-    <footer className="w-full bg-navy-950 border-t border-white/8 px-6 py-16 md:px-12">
+    <footer className="w-full bg-[#111827] border-t border-white/8 px-6 py-16 md:px-12">
       <div className="mx-auto max-w-7xl">
         {/* Top: Logo + columns */}
         <div className="flex flex-col gap-12 lg:flex-row">

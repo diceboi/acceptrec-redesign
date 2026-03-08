@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-16">
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-[#0F0D1A] pt-16">
       {/* ── Radial glow accents ── */}
       <div className="pointer-events-none absolute left-1/4 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-5/15 blur-[140px]" />
       <div className="pointer-events-none absolute right-1/4 bottom-1/4 h-[400px] w-[400px] rounded-full bg-purple-6/20 blur-[120px]" />

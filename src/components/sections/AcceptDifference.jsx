@@ -53,7 +53,7 @@ const cardVariants = {
 
 export function AcceptDifference() {
   return (
-    <section className="relative w-full bg-navy-800 overflow-hidden py-24 md:py-32">
+    <section className="relative w-full bg-gradient-to-b from-[#0F0D1A] to-[#111827] overflow-hidden py-24 md:py-32">
       {/* Background glow */}
       <div className="pointer-events-none absolute left-1/4 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-teal-5/8 blur-[120px]" />
 

@@ -11,7 +11,7 @@ const bigStats = [
 
 export function Impact() {
   return (
-    <section className="relative w-full bg-navy-900 overflow-hidden py-24 md:py-32">
+    <section className="relative w-full bg-gradient-to-b from-[#111827] via-[#0A2A2A] to-[#111827] overflow-hidden py-24 md:py-32">
       {/* Background accents */}
       <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="pointer-events-none absolute -left-48 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-purple-6/15 blur-[100px]" />
