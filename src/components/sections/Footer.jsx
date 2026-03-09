@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { FaLinkedin, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
 
 const footerLinks = {
@@ -38,8 +39,12 @@ const offices = [
 ];
 
 export function Footer() {
+  const { resolvedTheme } = useTheme();
+  const isLight = resolvedTheme === "light";
   return (
-    <footer className="w-full bg-[#111827] border-t border-white/8 px-6 py-16 md:px-12">
+    <footer
+      className={`w-full border-t px-6 py-16 md:px-12 transition-colors duration-300 ${isLight ? "bg-gray-50 border-gray-200" : "bg-black border-white/8"}`}
+    >
       <div className="mx-auto max-w-7xl">
         {/* Top: Logo + columns */}
         <div className="flex flex-col gap-12 lg:flex-row">
@@ -47,7 +52,11 @@ export function Footer() {
           <div className="flex flex-col gap-8 lg:w-72 lg:shrink-0">
             <Link href="/">
               <Image
-                src="/acceptrec-white-logo.webp"
+                src={
+                  isLight
+                    ? "/Accept-Stacked-Logo-with-Strapline-RGB300.webp"
+                    : "/acceptrec-white-logo.webp"
+                }
                 alt="Accept Recruitment Logo"
                 width={160}
                 height={48}

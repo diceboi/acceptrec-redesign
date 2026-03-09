@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { AnimatedNumber } from "../ui/AnimatedNumber";
 
 const stats = [
   { value: "190+", label: "Clients", sublabel: "and growing" },
@@ -12,12 +13,14 @@ const stats = [
 ];
 
 const logos = [
-  { name: "DPD", bg: "#DC0032", text: "#fff" },
-  { name: "Wayfair", bg: "#7B2D8B", text: "#fff" },
-  { name: "InPost", bg: "#FFD100", text: "#222" },
-  { name: "Poundstretcher", bg: "#E31837", text: "#fff" },
-  { name: "Ocado", bg: "#5C068C", text: "#fff" },
-  { name: "CEVA", bg: "#004B87", text: "#fff" },
+  { name: "DPD", src: "/partner-logos/DPD_Bildmotiv_Logo.png" },
+  { name: "Wayfair", src: "/partner-logos/wayfair-logo.png" },
+  { name: "InPost", src: "/partner-logos/InPost_logo.png" },
+  { name: "Vistry Group", src: "/partner-logos/vistry-group.webp" },
+  { name: "Poundstretcher", src: "/partner-logos/Poundstretcher_Logo.png" },
+  { name: "Pharmacy2U", src: "/partner-logos/pharmacy2u-logo.svg" },
+  { name: "Rhenus Logistics", src: "/partner-logos/rhenus-logistics-logo.png" },
+  { name: "Howard Tenens", src: "/partner-logos/howard-tenens.png" },
 ];
 
 const containerVariants = {
@@ -32,7 +35,7 @@ const itemVariants = {
 
 export function StatsBar() {
   return (
-    <section className="relative w-full bg-[#111827] py-20 md:py-28 overflow-hidden">
+    <section className="relative w-full bg-navy-700 py-20 md:py-28 overflow-hidden">
       {/* Subtle dot pattern */}
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
 
@@ -45,7 +48,7 @@ export function StatsBar() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="font-sans text-4xl font-extrabold leading-tight text-white md:text-5xl">
+          <h2 className="font-sans text-4xl font-semibold leading-tight text-white md:text-5xl">
             They trust us.{" "}
             <span className="text-teal-5">Every single day.</span>
           </h2>
@@ -67,15 +70,16 @@ export function StatsBar() {
             <motion.div
               key={stat.value}
               variants={itemVariants}
-              className="glass-card group rounded-2xl p-6 transition-all duration-300 hover:teal-glow-sm hover:border-teal-5/30"
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 text-center transition-all duration-300 hover:teal-glow-sm hover:border-teal-5/30"
             >
-              <div className="text-3xl font-extrabold text-teal-5 md:text-4xl">
-                {stat.value}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative text-4xl font-semibold text-white md:text-5xl">
+                <AnimatedNumber value={stat.value} />
               </div>
-              <div className="mt-1 text-sm font-bold uppercase tracking-wider text-white">
+              <div className="relative mt-2 text-[13px] font-semibold uppercase tracking-wider text-teal-5">
                 {stat.label}
               </div>
-              <div className="mt-0.5 text-xs text-white/40">
+              <div className="relative mt-1 text-xs text-white/40">
                 {stat.sublabel}
               </div>
             </motion.div>
@@ -92,26 +96,28 @@ export function StatsBar() {
           <p className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-white/30">
             Household names we supply
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-stretch justify-center gap-3 lg:flex-nowrap">
             {logos.map((logo) => (
               <div
                 key={logo.name}
-                className="flex h-12 min-w-[100px] items-center justify-center rounded-xl px-5 text-sm font-extrabold tracking-wide opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
-                style={{ backgroundColor: logo.bg, color: logo.text }}
+                className="company-stat-box flex h-14 flex-1 basis-[120px] items-center justify-center rounded-xl bg-white px-3 py-2 transition-all duration-300 hover:shadow-lg"
               >
-                {logo.name}
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  width={100}
+                  height={40}
+                  className="h-7 w-auto max-w-full object-contain"
+                />
               </div>
             ))}
           </div>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-16 flex justify-center">
             <Link
               href="#"
-              className="group inline-flex items-center gap-2 rounded-full border border-teal-5/40 bg-teal-5/10 px-6 py-3 text-sm font-semibold text-teal-4 transition-all duration-300 hover:border-teal-5 hover:bg-teal-5/20"
+              className="group inline-flex items-center gap-2 rounded-xl bg-teal-5 px-7 py-3.5 text-base font-bold text-white shadow-lg shadow-teal-5/20 transition-all duration-300 hover:bg-teal-6"
             >
-              Want to be on this list? Let&apos;s Talk
-              <span className="transition-transform group-hover:translate-x-1">
-                →
-              </span>
+              <span>Let&apos;s Talk</span>
             </Link>
           </div>
         </motion.div>

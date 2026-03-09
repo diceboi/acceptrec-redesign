@@ -6,6 +6,8 @@ import { Industries } from "@/components/sections/Industries";
 import { Impact } from "@/components/sections/Impact";
 import { AcceptDifference } from "@/components/sections/AcceptDifference";
 import { CaseStudies } from "@/components/sections/CaseStudies";
+import { Blog } from "@/components/sections/Blog";
+import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
 
 export default function Home() {
@@ -19,6 +21,8 @@ export default function Home() {
       <Impact />
       <AcceptDifference />
       <CaseStudies />
+      <Blog />
+      <CtaBanner />
       <Footer />
     </main>
   );

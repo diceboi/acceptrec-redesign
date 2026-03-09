@@ -139,10 +139,48 @@
   --animate-shimmer: shimmer 3s linear infinite;
 }
 
+/* =====================================================
+   SEMANTIC THEME TOKENS
+   Used so components inherit theme without dark: variants
+====================================================== */
+
+/* Light mode (default) */
+:root {
+  --bg-page:          #f0f4f8;
+  --bg-section-alt:   #e8edf5;
+  --bg-surface:       #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --bg-deep:          #1c2230;   /* kept dark for special sections */
+  --text-primary:     #0f172a;
+  --text-secondary:   #475569;
+  --text-muted:       #94a3b8;
+  --border-color:     rgba(0, 0, 0, 0.08);
+  --border-hover:     rgba(0, 0, 0, 0.15);
+}
+
+/* Dark mode */
+.dark {
+  --bg-page:          #111827;
+  --bg-section-alt:   #0d111a;
+  --bg-surface:       #1c2230;
+  --bg-surface-hover: #232938;
+  --bg-deep:          #0a0d14;
+  --text-primary:     #ffffff;
+  --text-secondary:   rgba(255, 255, 255, 0.65);
+  --text-muted:       #8B98AB;
+  --border-color:     rgba(255, 255, 255, 0.05);
+  --border-hover:     rgba(255, 255, 255, 0.10);
+}
+
 @layer base {
+  /* Smooth theme transition */
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
   body {
-    background-color: #0F0D1A;
-    color: #ffffff;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
   }
 }
 
@@ -171,4 +209,101 @@
   background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px,
       transparent 1px);
   background-size: 28px 28px;
+}
+
+/* =====================================================
+   LIGHT MODE — COMPREHENSIVE FLAT OVERRIDES
+====================================================== */
+
+/* Section backgrounds — any section using dark bg */
+html:not(.dark) section {
+  background-color: var(--bg-page) !important;
+}
+
+/* Catch ALL hardcoded hex backgrounds (#xxx) */
+html:not(.dark) [class*="bg-[#"] {
+  background-color: var(--bg-surface) !important;
+}
+
+/* Navy scale backgrounds */
+html:not(.dark) .bg-navy-700,
+html:not(.dark) .bg-navy-800,
+html:not(.dark) .bg-navy-900,
+html:not(.dark) .bg-black {
+  background-color: var(--bg-surface) !important;
+}
+
+/* Hover state for cards */
+html:not(.dark) [class*="hover:bg-[#"]:hover {
+  background-color: var(--bg-surface-hover) !important;
+}
+html:not(.dark) .hover\:bg-navy-700:hover,
+html:not(.dark) .hover\:bg-navy-800:hover {
+  background-color: var(--bg-surface-hover) !important;
+}
+
+/* ── Text ── */
+html:not(.dark) [class*="text-white"] {
+  color: var(--text-primary) !important;
+}
+/* Secondary / muted overrides must come AFTER to win specificity */
+html:not(.dark) [class*="text-white\/6"],
+html:not(.dark) [class*="text-white\/7"],
+html:not(.dark) [class*="text-white\/8"] {
+  color: var(--text-secondary) !important;
+}
+html:not(.dark) [class*="text-white\/4"],
+html:not(.dark) [class*="text-white\/3"],
+html:not(.dark) [class*="text-white\/2"] {
+  color: var(--text-muted) !important;
+}
+html:not(.dark) [class*="text-[#8B98AB"],
+html:not(.dark) [class*="text-[#94A3B8"],
+html:not(.dark) [class*="text-[#64748B"] {
+  color: var(--text-secondary) !important;
+}
+
+/* ── Borders ── */
+html:not(.dark) [class*="border-white"] {
+  border-color: var(--border-color) !important;
+}
+
+/* ── Dot pattern ── */
+html:not(.dark) .dot-pattern {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.055) 1px, transparent 1px);
+}
+
+/* ── Subtle bg-white/* opacity backgrounds (card glows etc) ── */
+html:not(.dark) [class*="bg-white\/"] {
+  background-color: transparent !important;
+}
+
+/* ── Hero bottom gradient: swap to-black -> to-bg-page ── */
+html:not(.dark) [class*="from-black"],
+html:not(.dark) [class*="to-black"] {
+  --tw-gradient-stops: unset;
+}
+
+/* ── StatsBar company boxes: give them a pale purple tint + border ── */
+html:not(.dark) .company-stat-box {
+  background-color: #f0edf8 !important;
+  border: 1px solid rgba(99, 74, 152, 0.15) !important;
+}
+
+/* ── Footer specific ── */
+html:not(.dark) footer {
+  background-color: #f8f9fc !important;
+  border-top-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ── Keep teal colors unchanged ── */
+html:not(.dark) [class*="text-teal"],
+html:not(.dark) [class*="bg-teal"],
+html:not(.dark) [class*="border-teal"] {
+  /* Intentionally left alone — teal accent is unchanged */
+}
+
+/* ── Announcement banner stays dark ── */
+html:not(.dark) .announcement-banner {
+  background-color: #111827 !important;
 }

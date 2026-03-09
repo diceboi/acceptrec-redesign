@@ -1,71 +1,30 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
-
-const industries = [
-  {
-    icon: "📦",
-    title: "Warehousing & Industrial",
-    description:
-      "Recruiting a temporary warehouse workforce can be one of the most challenging aspects of your business. We're here to simplify the process.",
-    href: "#",
-  },
-  {
-    icon: "🏭",
-    title: "Manufacturing",
-    description:
-      "We source skilled and semi-skilled workers for production lines, assembly, and quality control across the Midlands.",
-    href: "#",
-  },
-  {
-    icon: "🍽️",
-    title: "Food Production",
-    description:
-      "Specialist recruitment for food manufacturing environments with strict hygiene and compliance standards.",
-    href: "#",
-  },
-  {
-    icon: "🚛",
-    title: "Driving & Logistics",
-    description:
-      "The logistics and driving markets have grown increasingly unpredictable. We find the right drivers — fast.",
-    href: "#",
-  },
-  {
-    icon: "⚙️",
-    title: "Technical",
-    description:
-      "Engineering and technical roles filled by specialists who understand your operational requirements.",
-    href: "#",
-  },
-  {
-    icon: "💼",
-    title: "Commercial",
-    description:
-      "Office support, admin, HR and customer service roles placed with precision across all sectors.",
-    href: "#",
-  },
-];
+import {
+  IconPackage,
+  IconSettings,
+  IconTruck,
+  IconFlask,
+  IconUsersGroup,
+} from "@tabler/icons-react";
+import { BentoCard } from "../ui/BentoCard";
 
 const containerVariants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
+  visible: { transition: { staggerChildren: 0.1 } },
 };
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 export function Industries() {
   return (
-    <section className="relative w-full bg-gradient-to-b from-[#111827] to-[#1F2937] py-24 md:py-32 overflow-hidden">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal-5/8 blur-[120px]" />
-
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
-        {/* Section label + heading (SEO H2) */}
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 overflow-hidden font-sans">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6">
+        {/* Section label + heading */}
         <motion.div
           className="mb-14 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -73,50 +32,103 @@ export function Industries() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-teal-5">
-            What We Cover
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">
+            WHAT WE DO
           </span>
-          <h2 className="font-sans text-4xl font-extrabold text-white md:text-5xl">
-            Scale with <span className="text-teal-5">precision</span>
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
+            Powering Every Sector
           </h2>
-          {/* Hidden SEO H2 for screen readers & crawlers */}
-          <h2 className="sr-only">Industries</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-white/60 text-lg leading-relaxed">
-            Specialising within niche industries, we use our expertise and
-            systems to source the staff you need. We provide both temporary
-            staffing and permanent solutions.
-          </p>
         </motion.div>
 
-        {/* Industry Cards Grid */}
+        {/* Bento Grid */}
         <motion.div
-          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {industries.map((industry) => (
-            <motion.div key={industry.title} variants={cardVariants}>
-              <Link
-                href={industry.href}
-                className="group flex h-full flex-col rounded-2xl border border-white/8 bg-white/[0.03] p-7 transition-all duration-300 hover:border-teal-5/40 hover:bg-teal-5/5 hover:teal-glow-sm"
-              >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-teal-5/15 text-2xl transition-transform duration-300 group-hover:scale-110">
-                  {industry.icon}
+          {/* Card 1: Large Left Card (Warehousing) */}
+          <motion.div variants={cardVariants} className="lg:row-span-2">
+            <BentoCard
+              href="#"
+              icon={IconPackage}
+              title={
+                <>
+                  Warehousing &<br />
+                  Logistics
+                </>
+              }
+              titleClassName="text-[32px] leading-[1.15]"
+              description="Warehouse operatives, forklift drivers, pickers, packers — the backbone of distribution."
+            >
+              <div className="mt-8 flex items-center gap-8 border-t border-white/10 pt-8">
+                <div>
+                  <div className="text-[34px] font-bold text-[#00A99D] leading-none mb-2">
+                    500+
+                  </div>
+                  <div className="text-[13px] text-[#64748B] font-medium">
+                    Daily Workers
+                  </div>
                 </div>
-                <h3 className="mb-3 font-sans text-lg font-bold text-white group-hover:text-teal-4 transition-colors">
-                  {industry.title}
-                </h3>
-                <p className="flex-1 text-sm leading-relaxed text-white/50 group-hover:text-white/70 transition-colors">
-                  {industry.description}
-                </p>
-                <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-teal-5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1">
-                  Learn more <span>→</span>
+                <div>
+                  <div className="text-[34px] font-bold text-[#00A99D] leading-none mb-2">
+                    98%
+                  </div>
+                  <div className="text-[13px] text-[#64748B] font-medium">
+                    Fill Rate
+                  </div>
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+              </div>
+            </BentoCard>
+          </motion.div>
+
+          {/* Card 2: Top Middle (Manufacturing) */}
+          <motion.div variants={cardVariants}>
+            <BentoCard
+              href="#"
+              icon={IconSettings}
+              title="Manufacturing"
+              description="Production operatives, machine operators, assembly workers"
+            />
+          </motion.div>
+
+          {/* Card 3: Top Right (Food Production) */}
+          <motion.div variants={cardVariants}>
+            <BentoCard
+              href="#"
+              icon={IconFlask}
+              title="Food Production"
+              description="Food production staff, packers, line operatives"
+            />
+          </motion.div>
+
+          {/* Card 4: Bottom Middle (Transport & Driving) */}
+          <motion.div variants={cardVariants}>
+            <BentoCard
+              href="#"
+              icon={IconTruck}
+              title="Transport & Driving"
+              description="Van drivers, HGV Class 1 & 2, multi-drop specialists"
+            />
+          </motion.div>
+
+          {/* Card 5: Bottom Right (Permanent Recruitment - Teal) */}
+          <motion.div variants={cardVariants}>
+            <BentoCard
+              href="#"
+              icon={IconUsersGroup}
+              title={
+                <>
+                  Permanent
+                  <br />
+                  Recruitment
+                </>
+              }
+              description="From supervisors to senior leadership — hire talent that stays."
+              isTeal={true}
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>

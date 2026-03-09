@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { AnimatedNumber } from "../ui/AnimatedNumber";
 
 const bigStats = [
   { value: "30K+", label: "Workers Placed" },
@@ -11,7 +12,7 @@ const bigStats = [
 
 export function Impact() {
   return (
-    <section className="relative w-full bg-gradient-to-b from-[#111827] via-[#0A2A2A] to-[#111827] overflow-hidden py-24 md:py-32">
+    <section className="relative w-full bg-navy-700 overflow-hidden py-24 md:py-32">
       {/* Background accents */}
       <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="pointer-events-none absolute -left-48 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-purple-6/15 blur-[100px]" />
@@ -27,7 +28,7 @@ export function Impact() {
           <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-teal-5">
             Our Impact
           </span>
-          <h2 className="font-sans text-4xl font-extrabold text-white md:text-5xl lg:text-6xl">
+          <h2 className="font-sans text-4xl font-semibold text-white md:text-5xl lg:text-6xl">
             1,200 Workers
             <br />
             <span className="text-teal-5">deployed every single day</span>
@@ -46,8 +47,8 @@ export function Impact() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="relative text-5xl font-extrabold text-white md:text-6xl">
-                {stat.value}
+              <div className="relative text-4xl font-semibold text-white md:text-5xl">
+                <AnimatedNumber value={stat.value} />
               </div>
               <div className="relative mt-2 text-sm font-semibold uppercase tracking-wider text-teal-5">
                 {stat.label}
