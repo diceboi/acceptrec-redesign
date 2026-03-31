@@ -5,7 +5,14 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/Button";
 
-export function CtaBanner() {
+export function CtaBanner({
+  badge = "GET STARTED TODAY",
+  title = "Ready to Get",
+  titleHighlight = "Started?",
+  subtitle = "Whether you're looking for staff or looking for work, we're here to help. Speak to our team today.",
+  primaryButtonText = "I Need Staff",
+  secondaryButtonText = "I Need Work"
+} = {}) {
   const { resolvedTheme } = useTheme();
   const isLight = resolvedTheme === "light";
   return (
@@ -48,25 +55,26 @@ export function CtaBanner() {
           transition={{ duration: 0.7 }}
         >
           <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">
-            GET STARTED TODAY
+            {badge}
           </span>
           <h2 className="text-5xl font-semibold text-white tracking-tight leading-tight md:text-6xl">
-            Ready to Get
+            {title}
             <br />
-            <span className="text-teal-5">Started?</span>
+            <span className="text-teal-5">{titleHighlight}</span>
           </h2>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/60 mx-auto">
-            Whether you&apos;re looking for staff or looking for work,
-            we&apos;re here to help. Speak to our team today.
+            {subtitle}
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
             <Button variant="primary" size="lg">
-              I Need Staff
+              {primaryButtonText}
             </Button>
-            <Button variant="secondary" size="lg">
-              I Need Work
-            </Button>
+            {secondaryButtonText && (
+              <Button variant="secondary" size="lg">
+                {secondaryButtonText}
+              </Button>
+            )}
           </div>
         </motion.div>
       </div>
