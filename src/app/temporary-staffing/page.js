@@ -1,6 +1,10 @@
 "use client";
 
+import { useState, useEffect, useRef, Suspense } from "react";
 import { motion } from "framer-motion";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF, Html, Environment, ContactShadows, Bounds } from "@react-three/drei";
+import * as THREE from "three";
 import { Navbar } from "@/components/sections/Navbar";
 import { Industries } from "@/components/sections/Industries";
 import { CtaBanner } from "@/components/sections/CtaBanner";
@@ -8,40 +12,198 @@ import { Footer } from "@/components/sections/Footer";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { IconStar, IconTrendingUp, IconTrophy, IconScan } from "@tabler/icons-react";
 
+// ─── Animated Staffing Screen ────────────────────────────────────────────
+function StaffingScreen() {
+  return (
+    <div
+      style={{
+        width: 200,
+        height: 433.33,
+        background: "#ffffff",
+        borderRadius: 30,
+        overflow: "hidden",
+        fontFamily: "system-ui, sans-serif",
+        color: "#0d1522",
+        display: "flex",
+        flexDirection: "column",
+        userSelect: "none",
+        pointerEvents: "none",
+        padding: "16px",
+      }}
+    >
+      {/* Status bar */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 9,
+          opacity: 0.8,
+          marginBottom: 12,
+          fontWeight: 600,
+        }}
+      >
+        <span>09:41</span>
+        <span>▶▶ ⊡</span>
+      </div>
+
+      <div style={{ textAlign: "center", display: "flex", flexDirection: "column", height: "100%" }}>
+        <h3 style={{ margin: "4px 0", fontSize: 13, fontWeight: "bold" }}>Your Performance</h3>
+        <p style={{ margin: "0 0 16px", fontSize: 9, color: "#64748B", fontWeight: 500 }}>This week • 5 shifts</p>
+        
+        <div style={{ fontSize: 56, fontWeight: "bold", lineHeight: 1, marginBottom: 4 }}>4.8</div>
+        <div style={{ display: "flex", justifyContent: "center", gap: 2, marginBottom: 4 }}>
+           {[1,2,3,4,5].map(i => <IconStar key={i} size={14} style={{ fill: "#FACC15", color: "#FACC15" }} />)}
+        </div>
+        <p style={{ margin: "0 0 20px", fontSize: 9, color: "#64748B", fontWeight: 600 }}>Top 15% of workers</p>
+
+        <div style={{ background: "#effefb", borderRadius: 12, padding: "10px", display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 -4px 20px" }}>
+           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+             <div style={{ background: "#2dd4bf", borderRadius: 6, padding: 4 }}>
+               <IconStar size={10} strokeWidth={3} style={{ color: "white", fill: "white" }} />
+             </div>
+             <span style={{ fontWeight: "bold", fontSize: 12 }}>Points</span>
+           </div>
+           <span style={{ color: "#0f766e", fontWeight: "bold", fontSize: 16 }}>2,450</span>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 10, borderTop: "1px solid #f1f5f9", paddingTop: 12, fontSize: 10, margin: "auto -4px 0" }}>
+           <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#64748B", fontWeight: 500 }}>Punctuality</span>
+              <span style={{ color: "#0f766e", fontWeight: "bold" }}>100%</span>
+           </div>
+           <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span style={{ color: "#64748B", fontWeight: 500 }}>Performance</span>
+              <span style={{ color: "#0f766e", fontWeight: "bold" }}>Excellent</span>
+           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StaffingPhoneModel({ mouseRef }) {
+  const { scene } = useGLTF("/models/phone.glb");
+  const groupRef = useRef();
+
+  useEffect(() => {
+    scene.traverse((obj) => {
+      if (obj.isMesh) {
+        obj.castShadow = true;
+        obj.receiveShadow = true;
+      }
+    });
+  }, [scene]);
+
+  useFrame(() => {
+    if (!groupRef.current) return;
+    const { x, y } = mouseRef.current;
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(
+      groupRef.current.rotation.y,
+      x * 0.35,
+      0.06,
+    );
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(
+      groupRef.current.rotation.x,
+      -y * 0.22,
+      0.06,
+    );
+  });
+
+  return (
+    <group ref={groupRef}>
+      <group>
+        <primitive object={scene} />
+        <Html
+          position={[-0.49, 0.45, 0.4]}
+          transform
+          distanceFactor={0}
+          scale={1.33}
+          style={{ pointerEvents: "none" }}
+        >
+          <StaffingScreen />
+        </Html>
+      </group>
+    </group>
+  );
+}
+
+function StaffingPhoneScene() {
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const onMove = (e) => {
+      mouseRef.current = {
+        x: (e.clientX / window.innerWidth - 0.5) * 2,
+        y: (e.clientY / window.innerHeight - 0.5) * 2,
+      };
+    };
+    const onLeave = () => {
+      mouseRef.current = { x: 0, y: 0 };
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseleave", onLeave);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  return (
+    <Canvas
+      camera={{ position: [0, 0, 5], fov: 38 }}
+      gl={{ antialias: true, alpha: true }}
+      style={{ background: "transparent" }}
+    >
+      <ambientLight intensity={0.4} />
+      <spotLight position={[5, 10, 5]} intensity={1.2} castShadow penumbra={1} />
+      <pointLight position={[-4, -2, 3]} intensity={0.5} color="#2dd4bf" />
+      <pointLight position={[4, 4, -2]} intensity={0.3} color="#7c3aed" />
+
+      <Suspense fallback={null}>
+        <Bounds fit clip observe margin={1.2}>
+          <StaffingPhoneModel mouseRef={mouseRef} />
+        </Bounds>
+        <Environment preset="city" />
+        <ContactShadows position={[0, -3.5, 0]} opacity={0.4} scale={8} blur={2.5} far={4} />
+      </Suspense>
+    </Canvas>
+  );
+}
+
 // ─── Inner Hero Component ──────────────────────────────────────────────────
 function InnerHero() {
   return (
-    <section className="relative flex min-h-[85vh] w-full items-center justify-center overflow-hidden bg-[#0d1522] pt-32 pb-16">
+    <section className="relative flex min-h-screen w-full items-center overflow-hidden bg-navy-900 pt-20">
       {/* ── Background Blobs ── */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <motion.div
           className="absolute rounded-full"
           style={{
-            height: "60%",
-            width: "50%",
-            left: "5%",
-            top: "10%",
+            height: "70%",
+            width: "55%",
+            left: "-10%",
+            top: "-10%",
             background: "var(--color-teal-5)",
-            opacity: 0.1,
-            filter: "blur(100px)",
+            opacity: 0.13,
+            filter: "blur(90px)",
           }}
-          animate={{ scale: [1, 1.2, 1], x: [0, 40, 0], y: [0, 30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          animate={{ scale: [1, 1.3, 1], x: [0, 80, 0], y: [0, 50, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute rounded-full"
           style={{
-            height: "50%",
-            width: "45%",
-            right: "5%",
-            top: "20%",
+            height: "60%",
+            width: "55%",
+            right: "-10%",
+            top: "-5%",
             background: "var(--color-purple-5)",
-            opacity: 0.1,
+            opacity: 0.18,
             filter: "blur(100px)",
           }}
-          animate={{ scale: [1, 1.3, 1], x: [0, -40, 0], y: [0, 50, 0] }}
+          animate={{ scale: [1, 1.4, 1], x: [0, -80, 0], y: [0, 100, 0] }}
           transition={{
-            duration: 9,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 1,
@@ -49,14 +211,14 @@ function InnerHero() {
         />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-10" />
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
 
       {/* ── Content ── */}
       <div className="relative z-10 mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-6 py-16 lg:grid-cols-2 lg:gap-0">
         {/* Left: Text */}
-        <div className="flex flex-col items-start text-left">
+        <div className="flex flex-col items-start flex-1 text-left justify-center lg:justify-start">
           <motion.h1 
-            className="font-sans text-5xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-[76px] mb-6"
+            className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -65,7 +227,7 @@ function InnerHero() {
           </motion.h1>
 
           <motion.p 
-            className="text-xl leading-relaxed text-white/50 mb-6"
+            className="mt-6 max-w-lg text-lg leading-relaxed text-white/50 mb-1"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -74,7 +236,7 @@ function InnerHero() {
           </motion.p>
 
           <motion.p 
-            className="text-xl font-bold leading-relaxed text-white mb-8"
+            className="text-lg font-bold leading-relaxed text-white mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
@@ -84,13 +246,13 @@ function InnerHero() {
           
           {/* Pills */}
           <motion.div 
-             className="flex flex-wrap gap-2.5 mb-10"
-             initial={{ opacity: 0, y: 20 }}
+             className="mt-5 flex flex-wrap gap-2 mb-10"
+             initial={{ opacity: 0, y: 10 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6, delay: 0.3 }}
+             transition={{ duration: 0.5, delay: 0.28 }}
           >
             {["AcceptRate", "AcceptCoach", "AcceptRewards", "AcceptPulse"].map(p => (
-              <span key={p} className="px-4 py-1.5 rounded-full bg-[#1c2230] border border-white/5 text-xs font-bold text-white tracking-wide">
+              <span key={p} className="rounded-full border border-white/15 bg-white/6 px-3 py-1 text-sm text-white/60 font-semibold">
                 {p}
               </span>
             ))}
@@ -98,15 +260,15 @@ function InnerHero() {
 
           {/* Buttons */}
           <motion.div 
-            className="flex flex-wrap gap-4"
+            className="mt-8 flex flex-wrap gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
           >
-            <button className="bg-teal-5 hover:bg-teal-4 text-white font-bold px-7 py-3.5 rounded-xl transition-colors shadow-[0_0_20px_rgba(45,212,191,0.2)]">
+            <button className="group inline-flex items-center gap-2 rounded-xl bg-teal-5 px-7 py-3.5 text-base font-bold text-white shadow-lg shadow-teal-5/20 transition-all duration-300 hover:bg-teal-6">
               Get Reliable Staff
             </button>
-            <button className="bg-[#1c2230] hover:bg-[#232a3b] text-white border border-white/5 font-bold px-7 py-3.5 rounded-xl transition-colors">
+            <button className="group inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-7 py-3.5 text-base font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/15">
               See the Technology
             </button>
           </motion.div>
@@ -114,46 +276,32 @@ function InnerHero() {
 
         {/* Right: Phone UI */}
         <motion.div 
-           className="relative mx-auto w-full max-w-[320px] rounded-[2.5rem] bg-white p-6 shadow-2xl hidden lg:block"
-           initial={{opacity: 0, scale: 0.9, rotate: -2}} 
-           animate={{opacity:1, scale:1, rotate:0}} 
-           transition={{duration: 0.8, delay: 0.3}}
+           className="hidden lg:block w-full"
+           style={{ height: 600 }}
+           initial={{ opacity: 0 }}
+           animate={{ opacity: 1 }}
+           transition={{ duration: 1, delay: 0.4 }}
         >
-          {/* Phone styling */}
-          <div className="text-center font-sans">
-            <h3 className="text-[#0d1522] font-bold text-[17px] mt-4">Your Performance</h3>
-            <p className="text-[#64748B] text-xs font-medium mb-10">This week • 5 shifts</p>
-            
-            <div className="text-[#0d1522] text-[72px] font-bold leading-none mb-1 tracking-tight">4.8</div>
-            <div className="flex justify-center gap-1.5 mb-2">
-               {[1,2,3,4,5].map(i => <IconStar key={i} size={22} className="fill-[#FACC15] text-[#FACC15]" />)}
-            </div>
-            <p className="text-[#64748B] text-xs font-semibold mb-12">Top 15% of workers</p>
-
-            <div className="bg-[#effefb] rounded-2xl p-4 flex justify-between items-center mb-6">
-               <div className="flex items-center gap-2">
-                 <div className="bg-teal-5 rounded-md p-1.5"><IconStar size={14} strokeWidth={3} className="text-white fill-white border-0" /></div>
-                 <span className="font-bold text-[#0d1522] text-[15px]">Points</span>
-               </div>
-               <span className="text-teal-5 font-bold text-[22px]">2,450</span>
-            </div>
-
-            <div className="space-y-4 border-t border-gray-100 pt-5 text-sm pb-2">
-               <div className="flex justify-between items-center">
-                  <span className="text-[#64748B] font-medium">Punctuality</span>
-                  <span className="text-teal-6 font-bold">100%</span>
-               </div>
-               <div className="flex justify-between items-center">
-                  <span className="text-[#64748B] font-medium">Performance</span>
-                  <span className="text-teal-6 font-bold">Excellent</span>
-               </div>
-            </div>
-          </div>
-          {/* Faux notch */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-[26px] bg-[#0d111a] rounded-b-3xl" />
+          <StaffingPhoneScene />
         </motion.div>
       </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-[#0d111a] to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-900 to-transparent" />
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.5 }}
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex h-10 w-6 items-start justify-center rounded-full border border-white/20 pt-2"
+        >
+          <div className="h-1.5 w-1 rounded-full bg-white/50" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
@@ -401,7 +549,7 @@ function HowItWorks() {
 // ─── Main Page ─────────────────────────────────────────────────────────────
 export default function TemporaryStaffing() {
   return (
-    <main className="bg-[#0d1522] min-h-screen">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
       
       <InnerHero />
