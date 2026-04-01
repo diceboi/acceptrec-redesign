@@ -1,0 +1,279 @@
+"use client";
+
+import { Navbar } from "@/components/sections/Navbar";
+import { Footer } from "@/components/sections/Footer";
+import { CtaBanner } from "@/components/sections/CtaBanner";
+import { BentoCard } from "@/components/ui/BentoCard";
+import { Button } from "@/components/ui/Button";
+import { motion } from "framer-motion";
+import {
+  IconCheck,
+  IconPackage,
+  IconBox,
+  IconForklift,
+  IconTruckLoading,
+  IconTruckDelivery,
+  IconUsersGroup,
+  IconMapPin,
+  IconArrowRight,
+} from "@tabler/icons-react";
+import Link from "next/link";
+
+function InnerHero() {
+  return (
+    <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden bg-[#0d1522] pt-32 pb-16">
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            height: "60%",
+            width: "50%",
+            left: "5%",
+            top: "10%",
+            background: "var(--color-teal-5)",
+            opacity: 0.1,
+            filter: "blur(100px)",
+          }}
+          animate={{ scale: [1, 1.2, 1], x: [0, 40, 0], y: [0, 30, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute rounded-full"
+          style={{
+            height: "50%",
+            width: "45%",
+            right: "5%",
+            top: "20%",
+            background: "var(--color-purple-5)",
+            opacity: 0.1,
+            filter: "blur(100px)",
+          }}
+          animate={{ scale: [1, 1.3, 1], x: [0, -40, 0], y: [0, 50, 0] }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+      </div>
+
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-10" />
+
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-8 inline-flex items-center gap-2"
+        >
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">
+            Warehouse Staffing
+          </span>
+        </motion.div>
+
+        <motion.h1
+          className="font-sans text-5xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-[76px] mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          Warehouse Staff <span className="text-teal-5">Who Show Up</span>
+        </motion.h1>
+
+        <motion.p
+          className="mx-auto max-w-2xl text-xl font-medium leading-relaxed text-white/70 mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Real-time visibility. Verified attendance. Workers you can rely on across the Midlands.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-wrap justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <Button variant="primary" size="lg">Find Warehouse Staff</Button>
+          <Button variant="secondary" size="lg">View Current Jobs</Button>
+        </motion.div>
+      </div>
+
+      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-linear-to-t from-[#0d1522] to-transparent" />
+    </section>
+  );
+}
+
+function ProblemSolution() {
+  const fixes = [
+    "Real-time check-in - know who's on site the moment they arrive",
+    "Geo-verified attendance - proof they're actually at your location",
+    "Pre-screened workers - trained, inducted, ready to work",
+    "Rapid response - emergency cover within hours, not days",
+  ];
+
+  return (
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-red-400">
+              THE PAIN POINT
+            </span>
+            <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight leading-tight mb-8">
+              You suffer from unpredictable warehouse labour.
+            </h2>
+            <p className="text-lg leading-relaxed text-white/60">
+              Peak season hits and you can&apos;t get enough bodies. Workers don&apos;t show up. The ones that do aren&apos;t trained. Your permanent team is burning out covering the gaps.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="bg-[#161b28] border border-white/5 rounded-3xl p-10 md:p-12 shadow-2xl"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h3 className="text-2xl font-bold text-teal-4 mb-8">We give you certainty.</h3>
+            <ul className="space-y-6">
+              {fixes.map((f, i) => (
+                <li key={i} className="flex items-start gap-4">
+                  <div className="bg-teal-5/10 rounded-full p-1.5 shrink-0 mt-0.5">
+                    <IconCheck size={18} className="text-teal-4" />
+                  </div>
+                  <span className="text-white/80 text-lg leading-snug">{f}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RolesWeSupply() {
+  const roles = [
+    { title: "Warehouse Operatives", desc: "General warehouse duties, goods handling, stock management", icon: IconPackage },
+    { title: "Pickers & Packers", desc: "Order picking, packing, dispatch preparation", icon: IconBox },
+    { title: "Forklift Drivers", desc: "Counterbalance, reach, PPT, VNA - all licences", icon: IconForklift },
+    { title: "Goods-In Operatives", desc: "Receiving, checking, putting away stock", icon: IconTruckLoading },
+    { title: "Loading & Unloading", desc: "Container stripping, loading trailers, manual handling", icon: IconTruckDelivery },
+    { title: "Team Leaders", desc: "Shift supervision, team coordination, reporting", icon: IconUsersGroup },
+  ];
+
+  return (
+    <section className="relative w-full bg-[#0d1522] py-24 md:py-32 font-sans border-b border-white/5">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6">
+        <motion.div
+          className="mb-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">
+            WHAT WE SUPPLY
+          </span>
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight mb-4">
+            Roles We Supply
+          </h2>
+          <p className="max-w-xl mx-auto text-lg text-white/50">
+            Across all warehouse functions
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {roles.map((r, i) => (
+            <div key={i} className="h-full">
+              <BentoCard icon={r.icon} title={r.title} description={r.desc} href="#" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CoverageLocations() {
+  const locations = [
+    { name: "Leicester", sub: "Our headquarters. Deep pool of warehouse-experienced workers." },
+    { name: "Coventry", sub: "Strong coverage across automotive and logistics sectors." },
+    { name: "Tamworth", sub: "Central location serving major distribution hubs." },
+  ];
+
+  return (
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6">
+        <motion.div
+          className="mb-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <IconMapPin className="mx-auto text-teal-5 mb-6 opacity-60" size={48} stroke={1} />
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
+            Coverage Across the Midlands
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {locations.map((loc, i) => (
+            <motion.div
+              key={i}
+              className="group bg-[#161b28] border border-white/5 rounded-3xl p-10 text-center hover:border-teal-5/30 transition-all flex flex-col justify-between"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-4">{loc.name}</h3>
+                <p className="text-white/60 text-[15px] leading-relaxed mb-8">{loc.sub}</p>
+              </div>
+              <Link href="#" className="font-semibold text-teal-4 inline-flex items-center justify-center gap-2 group-hover:text-teal-3 transition-colors">
+                View office <IconArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+export default function WarehouseStaffing() {
+  return (
+    <main className="bg-[#0d1522] min-h-screen">
+      <Navbar />
+      
+      <InnerHero />
+      <ProblemSolution />
+      <RolesWeSupply />
+      <CoverageLocations />
+      
+      <CtaBanner
+        badge="GET STARTED"
+        title="Need warehouse"
+        titleHighlight="staff?"
+        subtitle="Tell us what you need. We'll have workers ready."
+        primaryButtonText="Find Warehouse Staff"
+        secondaryButtonText="Call Our Team"
+      />
+
+      <Footer />
+    </main>
+  );
+}

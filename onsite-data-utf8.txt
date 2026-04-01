@@ -1,0 +1,84 @@
+
+--- H1 ---
+Heading: Built for<!-- --> <span class="text-[#00A5A5]">Volume</span>.
+Text: Need 50, 100, 200+ temps a day? We&#x27;ve got the infrastructure.
+
+--- H2 ---
+Heading: Poundstretcher
+Text: <strong class="text-white">150 workers a day. Every day. For 9 years.</strong>
+
+--- H2 ---
+Heading: We&#x27;ve been doing this for a decade.
+Text: Not promises. Data. Every shift, every worker, every outcome — tracked, analysed, improved.
+
+--- H2 ---
+Heading: We predict your needs before you know them.
+Text: Other agencies wait for your call. We model demand using historical data, seasonal patterns, and real-time signals — so you never scramble for staff.
+
+--- H3 ---
+Heading: Historical Pattern Analysis
+Text: We know your busy periods before they hit. Seasonal spikes, monthly patterns, weekly fluctuations — all modelled.
+
+--- H3 ---
+Heading: Predictive Demand Planning
+Text: Our models anticipate demand 2-4 weeks out. We&#x27;re recruiting before you even call.
+
+--- H3 ---
+Heading: Real-Time Adjustments
+Text: Production changes? Order spikes? We flex in real-time. Our pool is ready; our systems are live.
+
+--- H3 ---
+Heading: What This Means For You:</h3><ul class="space-y-4"><li class="flex items-start gap-3"><img src="/images/icons/check-circle.svg" alt="" class="w-6 h-6 brightness-0 invert opacity-70 flex-shrink-0 mt-0.5"/><span class="text-white/80"><strong class="text-white">No scrambling.</strong> Workers are lined up before peak hits.</span></li><li class="flex items-start gap-3"><img src="/images/icons/check-circle.svg" alt="" class="w-6 h-6 brightness-0 invert opacity-70 flex-shrink-0 mt-0.5"/><span class="text-white/80"><strong class="text-white">Cost predictability.</strong> Forecast accuracy means budget accuracy.</span></li><li class="flex items-start gap-3"><img src="/images/icons/check-circle.svg" alt="" class="w-6 h-6 brightness-0 invert opacity-70 flex-shrink-0 mt-0.5"/><span class="text-white/80"><strong class="text-white">Fewer emergencies.</strong> Problems anticipated, not reacted to.</span></li><li class="flex items-start gap-3"><img src="/images/icons/check-circle.svg" alt="" class="w-6 h-6 brightness-0 invert opacity-70 flex-shrink-0 mt-0.5"/><span class="text-white/80"><strong class="text-white">Operational stability.</strong> Your production runs; we handle the people.</span></li></ul></div></div></div></section><section class="py-24 bg-gray-800 relative overflow-hidden"><div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative"><div class="text-center mb-16"><p class="text-[#00A5A5] font-bold text-sm uppercase tracking-widest mb-4">Volume Capability</p><h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">Why we can handle big numbers.</h2><p class="text-xl text-white/60 max-w-3xl mx-auto">Infrastructure built for scale. Not promises — systems.</p></div><div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6"><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-[#00A5A5]/30 transition-all"><div class="w-12 h-12 bg-gradient-to-br from-[#00A5A5] to-[#008a8a] rounded-xl flex items-center justify-center mb-4"><img src="/images/icons/users-three.svg" alt="" class="w-6 h-6 brightness-0 invert"/></div><h3 class="text-xl font-bold text-white mb-2">Deep Candidate Pool
+Text: Thousands of vetted, rated workers ready to deploy. Not scraping job boards — our own pool.
+
+--- H3 ---
+Heading: 3 Regional Branches
+Text: Leicester, Coventry, Tamworth. Local presence means local coverage across the Midlands.
+
+--- H3 ---
+Heading: Tech-Enabled Operations
+Text: AcceptPulse for attendance. AcceptRate for quality. AcceptConnect for comms. Systems, not spreadsheets.
+
+--- H3 ---
+Heading: 24/7 Operations
+Text: Night shifts, early starts, weekend coverage. We&#x27;re staffed when you need us, not just 9-5.
+
+--- H2 ---
+Heading: What You Get
+Text: Everything managed. Nothing left to chance.
+
+--- H3 ---
+Heading: Dedicated Account Manager
+Text: Your single point of contact. On-site presence tailored to your needs.
+
+--- H3 ---
+Heading: Demand Forecasting
+Text: Data-driven predictions. Workers lined up before you need them.
+
+--- H3 ---
+Heading: Real-Time Attendance
+Text: Live dashboard. Photo verification. Instant no-show alerts.
+
+--- H3 ---
+Heading: Quality Management
+Text: Every worker rated. Poor performers removed. Standards maintained.
+
+--- H3 ---
+Heading: Worker Coaching
+Text: Continuous improvement. Feedback loops. Workers get better over time.
+
+--- H3 ---
+Heading: Full Compliance
+Text: Right to work, payroll, holiday pay, insurance. All handled.
+
+--- H2 ---
+Heading: Volume delivered. Trust earned.</h2></div><div class="grid md:grid-cols-2 gap-8"><a class="group" href="/case-studies/inpost"><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:border-[#00A5A5]/30 transition-all h-full"><div class="text-3xl font-bold text-white mb-2 group-hover:text-[#00A5A5] transition-colors">InPost UK</div><p class="text-white/60 mb-6">Crisis call on Friday. 55 workers deployed by Monday. Preferred supplier within 17 days.</p><div class="flex gap-6"><div><div class="text-2xl font-bold text-[#00A5A5]">55</div><div class="text-white/50 text-sm">Workers in 72hrs</div></div><div><div class="text-2xl font-bold text-[#00A5A5]">4,200+</div><div class="text-white/50 text-sm">Shifts delivered</div></div><div><div class="text-2xl font-bold text-[#00A5A5]">98%</div><div class="text-white/50 text-sm">Attendance</div></div></div></div></a><a class="group" href="/case-studies/vistry"><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-3xl p-8 hover:border-[#00A5A5]/30 transition-all h-full"><div class="text-3xl font-bold text-white mb-2 group-hover:text-[#00A5A5] transition-colors">Vistry Group</div><p class="text-white/60 mb-6">Doubled workforce capacity in 10 weeks. On-site model transformed their temp management.</p><div class="flex gap-6"><div><div class="text-2xl font-bold text-[#00A5A5]">7,000+</div><div class="text-white/50 text-sm">Shifts delivered</div></div><div><div class="text-2xl font-bold text-[#00A5A5]">94.2%</div><div class="text-white/50 text-sm">Fulfilment rate</div></div><div><div class="text-2xl font-bold text-[#00A5A5]">42</div><div class="text-white/50 text-sm">Converted to perm</div></div></div></div></a></div></div></section><section class="py-24 bg-gray-800"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-12"><h2 class="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">Is This Right For You?</h2></div><div class="grid md:grid-cols-2 gap-8"><div class="bg-gradient-to-br from-[#00A5A5]/10 to-[#00A5A5]/5 backdrop-blur-sm border border-[#00A5A5]/30 rounded-3xl p-8"><h3 class="text-xl font-bold text-[#00A5A5] mb-4 flex items-center gap-2"><img src="/images/icons/check-circle.svg" alt="" class="w-6 h-6 brightness-0 invert"/>Good fit if you:</h3><ul class="space-y-3 text-white/80"><li>• Use 50+ temps daily (or scaling towards it)</li><li>• Need predictable coverage, not firefighting</li><li>• Want one partner, not multiple agencies</li><li>• Value data-driven decisions</li><li>• Need to free up management time</li></ul></div><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-3xl p-8"><h3 class="text-xl font-bold text-white/50 mb-4 flex items-center gap-2"><img src="/images/icons/x-circle.svg" alt="" class="w-6 h-6 brightness-0 invert opacity-50"/>Not right if you:</h3><ul class="space-y-3 text-white/50"><li>• Only need occasional temp cover</li><li>• Purely price-driven (cheapest wins)</li><li>• Don&#x27;t want to share operational data</li><li>• Already have effective in-house management</li></ul></div></div></div></section><section class="py-24 bg-gradient-to-br from-[#00A5A5] to-[#008a8a]"><div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"><h2 class="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to scale with confidence?
+Text: Data-driven forecasting. Volume capability. One trusted partner.
+
+--- H3 ---
+Heading: Trusted by 1500+ People
+Text: See what our clients and candidates say about us
+
+--- H3 ---
+Heading: Accept Recruitment
+Text: Delivering dependable temporary staffing solutions since 2015.

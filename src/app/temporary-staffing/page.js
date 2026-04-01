@@ -10,6 +10,7 @@ import { Industries } from "@/components/sections/Industries";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
 import { BentoCard } from "@/components/ui/BentoCard";
+import { Button } from "@/components/ui/Button";
 import { IconStar, IconTrendingUp, IconTrophy, IconScan } from "@tabler/icons-react";
 
 // ─── Animated Staffing Screen ────────────────────────────────────────────
@@ -372,9 +373,9 @@ function WhyUsGrid() {
         </div>
         
         <div className="mt-14 text-center">
-           <a href="#" className="font-bold text-teal-4 hover:text-teal-3 transition-colors flex items-center justify-center gap-2 group">
-             Explore all our technology <span className="group-hover:translate-x-1 transition-transform">→</span>
-           </a>
+           <Button variant="secondary" size="lg">
+             Explore all our technology
+           </Button>
         </div>
       </div>
     </section>

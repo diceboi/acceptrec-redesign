@@ -1,0 +1,44 @@
+
+--- H1 ---
+Heading: Warehouse Staff Who Show Up
+Text: Real-time visibility. Verified attendance. Workers you can rely on across the Midlands.
+
+--- H2 ---
+Heading: You suffer from unpredictable warehouse labour.
+Text: Peak season hits and you can&#x27;t get enough bodies. Workers don&#x27;t show up. The ones that do aren&#x27;t trained. Your permanent team is burning out covering the gaps.
+
+--- H3 ---
+Heading: We give you certainty.</h3><ul class="space-y-4"><li class="flex items-start gap-3"><svg class="w-6 h-6 text-[#00A5A5] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-lg text-white/80">Real-time check-in - know who&#x27;s on site the moment they arrive</span></li><li class="flex items-start gap-3"><svg class="w-6 h-6 text-[#00A5A5] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-lg text-white/80">Geo-verified attendance - proof they&#x27;re actually at your location</span></li><li class="flex items-start gap-3"><svg class="w-6 h-6 text-[#00A5A5] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-lg text-white/80">Pre-screened workers - trained, inducted, ready to work</span></li><li class="flex items-start gap-3"><svg class="w-6 h-6 text-[#00A5A5] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-lg text-white/80">Rapid response - emergency cover within hours, not days</span></li></ul></div></div></div></section><section class="py-32 bg-gradient-to-b from-gray-900 to-gray-800"><div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"><div class="text-center mb-12"><p class="text-base font-semibold uppercase tracking-widest mb-6 text-[#00A5A5]">What We Supply</p><h2 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight mb-6">Roles We Supply</h2><p class="text-xl text-white/60">Across all warehouse functions</p></div><div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:border-[#00A5A5]/30 transition-all"><h3 class="text-2xl font-bold text-white mb-2">Warehouse Operatives
+Text: General warehouse duties, goods handling, stock management
+
+--- H3 ---
+Heading: Pickers &amp; Packers
+Text: Order picking, packing, dispatch preparation
+
+--- H3 ---
+Heading: Forklift Drivers
+Text: Counterbalance, reach, PPT, VNA - all licences
+
+--- H3 ---
+Heading: Goods-In Operatives
+Text: Receiving, checking, putting away stock
+
+--- H3 ---
+Heading: Loading &amp; Unloading
+Text: Container stripping, loading trailers, manual handling
+
+--- H3 ---
+Heading: Team Leaders
+Text: Shift supervision, team coordination, reporting
+
+--- H2 ---
+Heading: Coverage Across the Midlands</h2></div><div class="grid md:grid-cols-3 gap-6"><a class="group" href="/offices/leicester"><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:border-[#00A5A5]/30 hover:scale-105 transition-all"><h3 class="text-2xl font-bold text-white mb-2">Leicester</h3><p class="text-white/60 text-lg mb-4">Our headquarters. Deep pool of warehouse-experienced workers.</p><span class="text-[#00A5A5] font-semibold group-hover:underline text-lg">View office</span></div></a><a class="group" href="/offices/coventry"><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:border-[#00A5A5]/30 hover:scale-105 transition-all"><h3 class="text-2xl font-bold text-white mb-2">Coventry</h3><p class="text-white/60 text-lg mb-4">Strong coverage across automotive and logistics sectors.</p><span class="text-[#00A5A5] font-semibold group-hover:underline text-lg">View office</span></div></a><a class="group" href="/offices/tamworth"><div class="bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:border-[#00A5A5]/30 hover:scale-105 transition-all"><h3 class="text-2xl font-bold text-white mb-2">Tamworth</h3><p class="text-white/60 text-lg mb-4">Central location serving major distribution hubs.</p><span class="text-[#00A5A5] font-semibold group-hover:underline text-lg">View office</span></div></a></div></div></section><section class="py-32 bg-gradient-to-br from-gray-900 to-[#00A5A5]"><div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center"><h2 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight mb-8">Need warehouse staff?
+Text: Tell us what you need. We&#x27;ll have workers ready.
+
+--- H3 ---
+Heading: Trusted by 1500+ People
+Text: See what our clients and candidates say about us
+
+--- H3 ---
+Heading: Accept Recruitment
+Text: Delivering dependable temporary staffing solutions since 2015.
