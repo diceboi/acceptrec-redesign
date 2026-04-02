@@ -563,7 +563,7 @@ export function Navbar() {
     <header
       style={{ top: navTop }}
       className={`fixed z-50 flex w-full items-center justify-between transition-[background,box-shadow,height] duration-300 px-4 xl:px-8
-                ${isSolid ? "bg-white shadow-sm h-16" : "bg-transparent h-25"}`}
+                ${isSolid ? "bg-[#0d1522]/95 backdrop-blur-md shadow-lg shadow-black/20 h-16" : "bg-transparent h-25"}`}
       onMouseLeave={handleMouseLeave}
     >
       <div
@@ -574,7 +574,7 @@ export function Navbar() {
           <Link href="/">
             <Image
               src={
-                isLight || isSolid
+                isLight
                   ? "/Accept-Stacked-Logo-with-Strapline-RGB300.webp"
                   : "/acceptrec-white-logo.webp"
               }
@@ -603,12 +603,8 @@ export function Navbar() {
                 className={`flex items-center gap-1 rounded-lg px-3 py-1.5 text-[14px] font-semibold transition-colors duration-150
                   ${
                     activeDropdown === menu.id
-                      ? isSolid
-                        ? "text-teal-6 bg-gray-50"
-                        : "text-teal-4 bg-white/8"
-                      : isSolid
-                        ? "text-gray-800 hover:text-gray-900 hover:bg-gray-50"
-                        : "text-white/90 hover:text-white hover:bg-white/8"
+                      ? "text-teal-4 bg-white/8"
+                      : "text-white/90 hover:text-white hover:bg-white/8"
                   }`}
               >
                 {menu.title}
@@ -657,11 +653,7 @@ export function Navbar() {
                   }}
                   transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   style={{ overflow: "hidden" }}
-                  className={`rounded-b-2xl border-t ${
-                    isSolid
-                      ? "bg-white border-gray-100 shadow-xl shadow-black/10"
-                      : "bg-[#0F1320] border-white/10 shadow-2xl shadow-black/50"
-                  }`}
+                  className={`rounded-b-2xl border-t bg-[#0F1320] border-white/10 shadow-2xl shadow-black/50`}
                 >
                   {/* Inner: natural size, measured by ResizeObserver */}
                   <div ref={contentRef} style={{ width: "max-content" }}>
@@ -682,12 +674,12 @@ export function Navbar() {
                           {menuData[activeDropdown].id === "technology" ? (
                             <TechnologyPanel
                               menu={menuData[activeDropdown]}
-                              isSolid={isSolid}
+                              isSolid={false}
                             />
                           ) : (
                             <StandardColumns
                               menu={menuData[activeDropdown]}
-                              isSolid={isSolid}
+                              isSolid={false}
                             />
                           )}
                         </motion.div>
@@ -706,18 +698,12 @@ export function Navbar() {
           <Button
             variant="secondary"
             size="md"
-            className={
-              isSolid
-                ? "border-gray-300 bg-transparent text-gray-800 hover:bg-gray-100"
-                : ""
-            }
           >
             Find Work
           </Button>
           <Button
             variant="primary"
             size="md"
-            className={isSolid ? "shadow-none" : ""}
           >
             Get Started
           </Button>
@@ -726,7 +712,7 @@ export function Navbar() {
         {/* Mobile hamburger */}
         <div className="flex items-center xl:hidden">
           <button
-            className={`p-2 transition-colors focus:outline-none ${isSolid ? "text-gray-900" : "text-white"}`}
+            className={`p-2 transition-colors focus:outline-none text-white`}
           >
             <svg
               className="h-6 w-6"

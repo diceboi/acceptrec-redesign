@@ -23,6 +23,8 @@ import {
   IconTrendingUp,
   IconAnalyze,
   IconAdjustments,
+  IconDatabase,
+  IconChartBar,
 } from "@tabler/icons-react";
 
 // ─── Inner Hero ────────────────────────────────────────────────────────────
@@ -170,15 +172,18 @@ function TrackRecord() {
   const points = [
     {
       title: "10+ Years of Historical Data",
-      desc: "We know what happens in your industry, in your region, at every time of year. No surprises."
+      desc: "We know what happens in your industry, in your region, at every time of year. No surprises.",
+      icon: IconDatabase,
     },
     {
       title: "98% Fill Rate — Consistently",
-      desc: "Not a target. Our actual performance. Week in, week out, across all managed sites."
+      desc: "Not a target. Our actual performance. Week in, week out, across all managed sites.",
+      icon: IconChartBar,
     },
     {
       title: "190+ Clients Trust Us",
-      desc: "From 10-person operations to 200+ daily. We scale with you."
+      desc: "From 10-person operations to 200+ daily. We scale with you.",
+      icon: IconUsersGroup,
     }
   ];
 
@@ -205,21 +210,14 @@ function TrackRecord() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {points.map((p, i) => (
-            <motion.div
-              key={i}
-              className="bg-[#161b28] border border-white/5 rounded-[24px] p-8 hover:border-white/10 transition-colors shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <h3 className="text-xl font-bold text-teal-4 mb-4">
-                {p.title}
-              </h3>
-              <p className="text-white/60 leading-relaxed text-[15px]">
-                {p.desc}
-              </p>
-            </motion.div>
+            <div key={i} className="h-full">
+              <BentoCard
+                href="#"
+                icon={p.icon}
+                title={p.title}
+                description={p.desc}
+              />
+            </div>
           ))}
         </div>
       </div>
