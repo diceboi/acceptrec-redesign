@@ -97,7 +97,7 @@ function InnerHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           Need 50, 100, 200+ temps a day? We&apos;ve got the infrastructure.<br />
-          <span className="opacity-80">1,200 workers deployed daily. Data-driven forecasting. Zero guesswork.</span>
+          <span className="opacity-80 leading-relaxed block mt-2 text-lg">1,200 workers deployed daily. Data-driven forecasting. Zero guesswork.</span>
         </motion.p>
 
         <motion.div
@@ -119,10 +119,10 @@ function InnerHero() {
 // ─── Hero Stats ────────────────────────────────────────────────────────────
 function HeroStats() {
   const stats = [
-    { value: "1200+", label: "Workers Daily", desc: "Deployed across sites" },
-    { value: "150", label: "Workers Per Site", desc: "Poundstretcher — 9 years" },
-    { value: "98%", label: "Fill Rate", desc: "Consistent delivery" },
-    { value: "10+", label: "Years On-Site", desc: "Managed services experience" },
+    { value: "1,200+", label: "Workers daily", desc: "Deployed across sites" },
+    { value: "190+", label: "Active clients", desc: "Volume operations managed" },
+    { value: "9+", label: "Years with Poundstretcher", desc: "Scale & longevity" },
+    { value: "100%", label: "Audit Compliance", desc: "GLA & ethical certified" },
   ];
   return (
     <section className="relative w-full bg-[#0d1522] py-12 md:py-16 font-sans text-white border-b border-white/5 z-20">
@@ -216,6 +216,7 @@ function TrackRecord() {
                 icon={p.icon}
                 title={p.title}
                 description={p.desc}
+                noArrow
               />
             </div>
           ))}
@@ -281,6 +282,7 @@ function PredictivePlanning() {
                 icon={f.icon}
                 title={f.title}
                 description={f.desc}
+                noArrow
               />
             </div>
           ))}
@@ -365,6 +367,7 @@ function VolumeCapability() {
                 icon={c.icon}
                 title={c.title}
                 description={c.desc}
+                noArrow
               />
             </div>
           ))}
@@ -414,6 +417,7 @@ function WhatYouGet() {
                 icon={item.icon}
                 title={item.title}
                 description={item.desc}
+                noArrow
               />
             </div>
           ))}
@@ -428,21 +432,19 @@ function CaseStudies() {
   const cases = [
     {
       name: "InPost UK",
+      tag: "Logistics",
       desc: "Crisis call on Friday. 55 workers deployed by Monday. Preferred supplier within 17 days.",
-      stats: [
-        { value: "55", label: "Workers in 72hrs" },
-        { value: "4,200+", label: "Shifts delivered" },
-        { value: "98%", label: "Attendance" },
-      ],
+      stats: "55 Workers in 72hrs · 4,200+ Shifts · 98% Attendance",
+      href: "/case-studies/inpost",
+      icon: IconTrendingUp,
     },
     {
       name: "Vistry Group",
+      tag: "Production",
       desc: "Doubled workforce capacity in 10 weeks. On-site model transformed their temp management.",
-      stats: [
-        { value: "7,000+", label: "Shifts delivered" },
-        { value: "94.2%", label: "Fulfilment rate" },
-        { value: "42", label: "Converted to perm" },
-      ],
+      stats: "7,000+ Shifts · 94.2% Fulfilment · 42 Converted to perm",
+      href: "/case-studies/vistry",
+      icon: IconChartLine,
     },
   ];
 
@@ -466,25 +468,16 @@ function CaseStudies() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {cases.map((c, i) => (
-            <motion.div
-              key={i}
-              className="group bg-[#161b28] border border-white/5 rounded-3xl p-8 hover:border-teal-5/30 transition-all"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <div className="text-3xl font-bold text-white mb-2 group-hover:text-teal-5 transition-colors">{c.name}</div>
-              <p className="text-white/60 mb-8 leading-relaxed">{c.desc}</p>
-              <div className="flex gap-8">
-                {c.stats.map((s, j) => (
-                  <div key={j}>
-                    <div className="text-2xl font-bold text-teal-5">{s.value}</div>
-                    <div className="text-white/50 text-sm">{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+            <div key={i} className="h-full">
+              <BentoCard
+                href={c.href}
+                icon={c.icon}
+                title={c.name}
+                description={c.desc}
+              >
+                <p className="text-[13px] text-teal-5/70 font-medium mt-4 pt-4 border-t border-white/5">{c.stats}</p>
+              </BentoCard>
+            </div>
           ))}
         </div>
       </div>

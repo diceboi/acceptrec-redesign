@@ -1,25 +1,28 @@
 "use client";
 
+import { motion } from "framer-motion";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
-import { Footer } from "@/components/sections/Footer";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { Footer } from "@/components/sections/Footer";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { Button } from "@/components/ui/Button";
-import { motion } from "framer-motion";
-import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import {
   IconCheck,
-  IconPackage,
-  IconBox,
-  IconForklift,
-  IconTruckLoading,
-  IconTruckDelivery,
-  IconUsersGroup,
   IconMapPin,
-  IconArrowRight,
+  IconTool,
+  IconMicroscope,
+  IconCpu,
+  IconFlask,
+  IconShoppingBag,
+  IconCar,
+  IconSettings,
+  IconClipboardCheck,
+  IconLayersSubtract,
+  IconWash,
 } from "@tabler/icons-react";
-import Link from "next/link";
 
+// ─── Inner Hero ────────────────────────────────────────────────────────────
 function InnerHero() {
   return (
     <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden bg-[#0d1522] pt-32 pb-16">
@@ -50,12 +53,7 @@ function InnerHero() {
             filter: "blur(100px)",
           }}
           animate={{ scale: [1, 1.3, 1], x: [0, -40, 0], y: [0, 50, 0] }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
       </div>
 
@@ -69,7 +67,7 @@ function InnerHero() {
           className="mb-8 inline-flex items-center gap-2"
         >
           <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">
-            Warehouse Staffing
+            Industrial Staffing
           </span>
         </motion.div>
 
@@ -79,7 +77,7 @@ function InnerHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Warehouse Staff <span className="text-teal-5">Who Show Up</span>
+          Production Staff That Keep <span className="text-teal-5">Lines Running</span>
         </motion.h1>
 
         <motion.p
@@ -88,7 +86,7 @@ function InnerHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Real-time visibility. Verified attendance. Workers you can rely on across the Midlands.
+          Reliable workers for manufacturing, production, and assembly. Matched to your specific processes.
         </motion.p>
 
         <motion.div
@@ -97,8 +95,8 @@ function InnerHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <Button variant="primary" size="lg">Find Warehouse Staff</Button>
-          <Button variant="secondary" size="lg">View Current Jobs</Button>
+          <Button variant="primary" size="lg">Get Started Today</Button>
+          <Button variant="secondary" size="lg">Call Us Now</Button>
         </motion.div>
       </div>
 
@@ -107,44 +105,20 @@ function InnerHero() {
   );
 }
 
-// ─── Hero Stats ────────────────────────────────────────────────────────────
-function HeroStats() {
-  const stats = [
-    { value: "500+", label: "Warehouse workers daily", desc: "Across the Midlands" },
-    { value: "98%", label: "Fill rate", desc: "Consistent delivery" },
-    { value: "99%", label: "Attendance rate", desc: "Workers who show up" },
-    { value: "4hrs", label: "Average response time", desc: "Emergency cover" },
-  ];
-  return (
-    <section className="relative w-full bg-[#0d1522] py-12 md:py-16 font-sans text-white border-b border-white/5 z-20">
-      <div className="mx-auto max-w-[1140px] px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
-        {stats.map((s, i) => (
-          <div key={i} className="flex flex-col items-center justify-center pt-8 md:pt-0">
-            <div className="text-4xl lg:text-5xl font-bold text-teal-4 mb-2 tracking-tight">
-              <AnimatedNumber value={s.value} />
-            </div>
-            <div className="font-semibold text-white/90 text-lg leading-snug mb-1">{s.label}</div>
-            <div className="text-[14px] font-medium text-white/50">{s.desc}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
+// ─── Problem & Solution ────────────────────────────────────────────────────
 function ProblemSolution() {
   const fixes = [
-    "Real-time check-in - know who's on site the moment they arrive",
-    "Geo-verified attendance - proof they're actually at your location",
-    "Pre-screened workers - trained, inducted, ready to work",
-    "Rapid response - emergency cover within hours, not days",
+    "Workers matched to your specific processes and requirements",
+    "Pre-trained on health & safety, manual handling, basic PPE",
+    "Same faces where possible — we build site-specific pools",
+    "Real-time attendance alerts — know instantly if someone's not coming",
   ];
 
   return (
     <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -154,11 +128,11 @@ function ProblemSolution() {
             <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-red-400">
               THE PAIN POINT
             </span>
-            <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight leading-tight mb-8">
-              You suffer from unpredictable warehouse labour.
+            <h2 className="text-4xl font-semibold text-white md:text-5xl tracking-tight leading-tight mb-8">
+              You suffer from production line gaps.
             </h2>
             <p className="text-lg leading-relaxed text-white/60">
-              Peak season hits and you can&apos;t get enough bodies. Workers don&apos;t show up. The ones that do aren&apos;t trained. Your permanent team is burning out covering the gaps.
+              One no-show and the whole line stops. Untrained temps make mistakes that cost you in waste and rework. Your supervisors spend more time managing temps than managing production.
             </p>
           </motion.div>
 
@@ -169,7 +143,7 @@ function ProblemSolution() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold text-teal-4 mb-8">We give you certainty.</h3>
+            <h3 className="text-2xl font-bold text-teal-4 mb-8">We give you continuity.</h3>
             <ul className="space-y-6">
               {fixes.map((f, i) => (
                 <li key={i} className="flex items-start gap-4">
@@ -188,14 +162,15 @@ function ProblemSolution() {
   );
 }
 
+// ─── Roles We Supply ──────────────────────────────────────────────────────
 function RolesWeSupply() {
   const roles = [
-    { title: "Warehouse Operatives", desc: "General warehouse duties, goods handling, stock management", icon: IconPackage },
-    { title: "Pickers & Packers", desc: "Order picking, packing, dispatch preparation", icon: IconBox },
-    { title: "Forklift Drivers", desc: "Counterbalance, reach, PPT, VNA - all licences", icon: IconForklift },
-    { title: "Goods-In Operatives", desc: "Receiving, checking, putting away stock", icon: IconTruckLoading },
-    { title: "Loading & Unloading", desc: "Container stripping, loading trailers, manual handling", icon: IconTruckDelivery },
-    { title: "Team Leaders", desc: "Shift supervision, team coordination, reporting", icon: IconUsersGroup },
+    { title: "Production Operatives", desc: "Line work, assembly, machine operation", icon: IconSettings },
+    { title: "Machine Operators", desc: "CNC, injection moulding, press operation", icon: IconCpu },
+    { title: "Quality Control", desc: "Inspection, testing, quality assurance", icon: IconClipboardCheck },
+    { title: "Assembly Workers", desc: "Component assembly, sub-assembly, finishing", icon: IconLayersSubtract },
+    { title: "Process Operatives", desc: "Chemical, pharmaceutical, food production", icon: IconFlask },
+    { title: "Maintenance Support", desc: "Cleaning, equipment prep, basic maintenance", icon: IconTool },
   ];
 
   return (
@@ -215,14 +190,14 @@ function RolesWeSupply() {
             Roles We Supply
           </h2>
           <p className="max-w-xl mx-auto text-lg text-white/50">
-            Across all warehouse functions
+            Across all manufacturing functions
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {roles.map((r, i) => (
             <div key={i} className="h-full">
-              <BentoCard icon={r.icon} title={r.title} description={r.desc} href="#" />
+              <BentoCard icon={r.icon} title={r.title} description={r.desc} href="#" noArrow />
             </div>
           ))}
         </div>
@@ -231,15 +206,55 @@ function RolesWeSupply() {
   );
 }
 
-function CoverageLocations() {
-  const locations = [
-    { name: "Leicester", sub: "Our headquarters. Deep pool of warehouse-experienced workers." },
-    { name: "Coventry", sub: "Strong coverage across automotive and logistics sectors." },
-    { name: "Tamworth", sub: "Central location serving major distribution hubs." },
+// ─── Sectors We Serve ─────────────────────────────────────────────────────
+function SectorsWeServe() {
+  const sectors = [
+    { name: "Automotive", desc: "Parts, components, assembly", icon: IconCar },
+    { name: "Food Production", desc: "Processing, packing, hygiene-trained", icon: IconWash },
+    { name: "Pharmaceutical", desc: "Clean room, GMP-aware workers", icon: IconMicroscope },
+    { name: "FMCG", desc: "Fast-moving consumer goods production", icon: IconShoppingBag },
   ];
 
   return (
     <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6">
+        <motion.div
+          className="mb-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">
+            INDUSTRIES
+          </span>
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
+            Sectors We Serve
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {sectors.map((s, i) => (
+            <div key={i} className="h-full">
+              <BentoCard icon={s.icon} title={s.name} description={s.desc} href="#" noArrow />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Coverage ─────────────────────────────────────────────────────────────
+function CoverageLocations() {
+  const locations = [
+    { name: "Leicester", sub: "Our headquarters. Deep pool of industrial-experienced workers." },
+    { name: "Coventry", sub: "Strong coverage across automotive and manufacturing sectors." },
+    { name: "Tamworth", sub: "Central location serving major production and FMCG hubs." },
+  ];
+
+  return (
+    <section className="relative w-full bg-[#0d1522] py-24 md:py-32 font-sans border-b border-white/5">
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
         <motion.div
           className="mb-16 text-center"
@@ -283,30 +298,30 @@ function CoverageLocations() {
             </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
 }
 
-export default function WarehouseStaffing() {
+// ─── Main Page ─────────────────────────────────────────────────────────────
+export default function IndustrialStaffing() {
   return (
     <main className="bg-[#0d1522] min-h-screen">
       <Navbar />
-      
+
       <InnerHero />
-      <HeroStats />
       <ProblemSolution />
       <RolesWeSupply />
+      <SectorsWeServe />
       <CoverageLocations />
-      
+
       <CtaBanner
         badge="GET STARTED"
-        title="Need warehouse"
+        title="Need production"
         titleHighlight="staff?"
-        subtitle="Tell us what you need. We'll have workers ready."
-        primaryButtonText="Find Warehouse Staff"
-        secondaryButtonText="Call Our Team"
+        subtitle="Tell us your requirements. We'll match workers to your processes."
+        primaryButtonText="Get Started Today"
+        secondaryButtonText="Call Us Now"
       />
 
       <Footer />
