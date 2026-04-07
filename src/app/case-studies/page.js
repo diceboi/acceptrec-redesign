@@ -65,7 +65,7 @@ const caseStudies = [
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function InnerHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden bg-[#0d1522] pt-40 pb-16">
+    <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden bg-[#0D1520] pt-40 pb-16">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <motion.div
            className="absolute rounded-full"
@@ -114,7 +114,7 @@ function HeroStats() {
     { value: "100%", label: "Partner Retention Rate" },
   ];
   return (
-    <section className="relative w-full bg-[#0d1522] py-12 md:py-16 font-sans text-white border-b border-white/5 z-20">
+    <section className="relative w-full bg-[#0D1520] py-12 md:py-16 font-sans text-white border-b border-white/5 z-20">
       <div className="mx-auto max-w-[1140px] px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
         {stats.map((s, i) => (
           <div key={i} className="flex flex-col items-center justify-center pt-8 md:pt-0">
@@ -137,13 +137,13 @@ function StudyCard({ study }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="group relative h-full flex flex-col bg-[#161b28] border border-white/5 rounded-3xl overflow-hidden hover:border-teal-5/20 transition-all duration-500 hover:shadow-2xl hover:shadow-teal-5/5"
+            className="group relative h-full flex flex-col bg-[#161B28] border border-white/5 rounded-3xl overflow-hidden hover:border-teal-5/20 transition-all duration-500 hover:shadow-2xl hover:shadow-teal-5/5"
         >
             <div className="relative h-64 overflow-hidden bg-white/5">
                 {/* Image Placeholder - In production use actual images */}
                 <div className="absolute inset-0 bg-linear-to-br from-teal-5/20 to-purple-5/20 group-hover:scale-110 transition-transform duration-700 ease-out" />
                 <div className="absolute top-6 left-6 z-10">
-                    <span className="px-4 py-1.5 rounded-full bg-[#0d1522]/80 backdrop-blur-md border border-white/10 text-[10px] font-bold text-teal-5 uppercase tracking-widest leading-none">
+                    <span className="px-4 py-1.5 rounded-full bg-[#0D1520]/80 backdrop-blur-md border border-white/10 text-[10px] font-bold text-teal-5 uppercase tracking-widest leading-none">
                         {study.category}
                     </span>
                 </div>
@@ -192,13 +192,13 @@ export default function CaseStudiesPage() {
     : caseStudies.filter(s => s.category === activeCategory);
 
   return (
-    <main className="bg-[#0d1522] min-h-screen">
+    <main className="bg-[#0D1520] min-h-screen selection:bg-teal-5 selection:text-black dark">
       <Navbar />
 
       <InnerHero />
       <HeroStats />
 
-      <section className="py-24 bg-[#0d111a]">
+      <section className="py-24 bg-[#121926]">
         <div className="mx-auto max-w-[1140px] px-6">
           <div className="flex flex-wrap items-center justify-center gap-2 mb-16">
             {categories.map(cat => (

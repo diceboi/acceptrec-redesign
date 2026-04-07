@@ -7,28 +7,34 @@ import { FaLinkedin, FaFacebook, FaTiktok, FaInstagram } from "react-icons/fa6";
 
 const footerLinks = {
   "Industry Sectors": [
-    "Warehousing & Industrial",
-    "Manufacturing",
-    "Food Production",
-    "Driving & Logistics",
-    "Technical",
-    "Commercial",
+    { label: "Warehousing & Industrial", href: "/warehouse-staffing" },
+    { label: "Manufacturing", href: "/industries/manufacturing" },
+    { label: "Food Production", href: "/industries/food-production" },
+    { label: "Driving & Logistics", href: "/driving-recruitment" },
+    { label: "Technical", href: "/industries" },
+    { label: "Commercial", href: "/industries" },
   ],
-  Candidates: ["Register Now", "Find Jobs", "Download App", "FAQ", "Support"],
+  Candidates: [
+    { label: "Register Now", href: "https://accept.iqxanywhere.net/xregister" },
+    { label: "Find Jobs", href: "/jobs" },
+    { label: "Download App", href: "/technology/acceptrewards" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Support", href: "/candidates" },
+  ],
   Clients: [
-    "Find Workers",
-    "Case Studies",
-    "Our Locations",
-    "Managed Services",
-    "Book a Demo",
+    { label: "Find Workers", href: "/employers" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "Our Locations", href: "/offices" },
+    { label: "Managed Services", href: "/on-site-managed-services" },
+    { label: "Book a Demo", href: "/get-started" },
   ],
   Company: [
-    "About Us",
-    "Meet the Team",
-    "Blogs",
-    "Contact Us",
-    "Work for Us",
-    "Privacy Policy",
+    { label: "About Us", href: "/about" },
+    { label: "Meet the Team", href: "/team" },
+    { label: "Blogs", href: "/blog" },
+    { label: "Contact Us", href: "/get-started" },
+    { label: "Work for Us", href: "/join-our-team" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
   ],
 };
 
@@ -127,13 +133,13 @@ export function Footer() {
                   {section}
                 </h3>
                 <div className="flex flex-col gap-2.5">
-                  {links.map((label) => (
+                  {links.map((link) => (
                     <Link
-                      key={label}
-                      href="#"
+                      key={link.label}
+                      href={link.href}
                       className="text-sm text-white/35 transition-colors hover:text-white"
                     >
-                      {label}
+                      {link.label}
                     </Link>
                   ))}
                 </div>

@@ -161,27 +161,28 @@ const menuData = {
     featured: {
       title: "How We Work Different",
       desc: "Technology that transforms temporary staffing →",
-      href: "#",
+      href: "/technology",
     },
     sections: [
       {
         heading: "Client Tools",
         items: [
-          { label: "AcceptPulse", href: "#" },
-          { label: "Client Portal", href: "#" },
-          { label: "Rate Calculator", href: "#" },
-          { label: "Quote Builder", href: "#" },
-          { label: "Daily Hours", href: "#" },
-          { label: "Client Feedback", href: "#" },
+          { label: "AcceptPulse", href: "/technology/acceptpulse" },
+          { label: "Client Portal", href: "/technology/client-portal" },
+          { label: "Rate Calculator", href: "/tools/rate-calculator" },
+          { label: "Quote Builder", href: "/tools/quote-builder" },
+          { label: "Daily Hours", href: "/technology/daily-hours" },
+          { label: "Client Feedback", href: "/technology/client-feedback" },
         ],
       },
       {
         heading: "How We Operate",
         items: [
-          { label: "AcceptConnect", href: "#" },
-          { label: "AcceptMatch", href: "#" },
-          { label: "Performance Coach", href: "#" },
-          { label: "AcceptRate", href: "#" },
+          { label: "AcceptConnect", href: "/technology/acceptconnect" },
+          { label: "AcceptMatch", href: "/technology/smart-matching" },
+          { label: "AcceptMentor", href: "/technology/acceptmentor" },
+          { label: "AcceptRate", href: "/technology/worker-ratings" },
+          { label: "AcceptRewards", href: "/technology/acceptrewards" },
         ],
       },
     ],
@@ -189,7 +190,34 @@ const menuData = {
       label: "Innovation Partners",
       badge: "New",
       desc: "Get early access to new features",
-      href: "#",
+      href: "/innovation-partners",
+    },
+  },
+
+  employers: {
+    id: "employers",
+    title: "Employers",
+    width: "w-[320px]",
+    featured: {
+      title: "Why Accept",
+      desc: "Better temps, not just more temps",
+      href: "/employers",
+    },
+    sections: [
+      {
+        heading: "Solutions",
+        items: [
+          { label: "AcceptRewards", desc: "Why our workers perform better", href: "/employers/rewards" },
+          { label: "On-Site Management", href: "/on-site-managed-services" },
+          { label: "Case Studies", href: "/case-studies" },
+          { label: "Client Tools", href: "/clients/intelligence" },
+        ],
+      },
+    ],
+    footer: {
+      label: "Get Started →",
+      desc: "Ready to transform your workforce?",
+      href: "/get-started",
     },
   },
 
@@ -203,27 +231,27 @@ const menuData = {
         items: [
           {
             icon: IconBook2,
-            label: "Our Story",
-            desc: "How Accept started",
-            href: "#",
+            label: "About Us",
+            desc: "Our story and mission",
+            href: "/about",
           },
           {
             icon: IconCircleCheck,
             label: "Why Accept",
             desc: "What makes us different",
-            href: "#",
+            href: "/why-accept",
           },
           {
             icon: IconUsers,
             label: "Our Team",
             desc: "The people behind the brand",
-            href: "#",
+            href: "/team",
           },
           {
             icon: IconPencil,
             label: "Blog",
             desc: "Insights & industry news",
-            href: "#",
+            href: "/blog",
           },
         ],
       },
@@ -234,25 +262,25 @@ const menuData = {
             icon: IconMapPin,
             label: "Leicester",
             desc: "0116 319 4493",
-            href: "#",
+            href: "/offices/leicester",
           },
           {
             icon: IconMapPin,
             label: "Coventry",
             desc: "024 7610 0211",
-            href: "#",
+            href: "/offices/coventry",
           },
           {
             icon: IconMapPin,
             label: "Tamworth",
             desc: "01827 700 300",
-            href: "#",
+            href: "/offices/tamworth",
           },
           {
             icon: IconMail,
             label: "Contact Us",
             desc: "Get in touch",
-            href: "#",
+            href: "/contact",
           },
         ],
       },
@@ -671,7 +699,7 @@ export function Navbar() {
                           animate="center"
                           exit="exit"
                         >
-                          {menuData[activeDropdown].id === "technology" ? (
+                          {activeDropdown === "technology" || activeDropdown === "employers" ? (
                             <TechnologyPanel
                               menu={menuData[activeDropdown]}
                               isSolid={false}
