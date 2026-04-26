@@ -62,7 +62,7 @@ function ContactHero() {
                         <span className="w-2 h-2 rounded-full bg-teal-5 animate-pulse" />
                         24/7 Availability
                     </div>
-                    <h1 className="text-white text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-none">
+                    <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]">
                         Let&apos;s Talk
                     </h1>
                     <p className="text-white/40 text-xl md:text-2xl leading-relaxed font-medium max-w-2xl mx-auto">

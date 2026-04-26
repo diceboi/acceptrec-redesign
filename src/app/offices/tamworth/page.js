@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/sections/Navbar';
 import { Footer } from '@/components/sections/Footer';
@@ -10,76 +11,79 @@ import {
     IconMapPin, 
     IconPhone, 
     IconMail,
-    IconPackage,
-    IconTruckLoading,
+    IconTruck,
     IconShoppingCart,
-    IconFlame,
-    IconMoon,
-    IconUserCircle,
+    IconPackage,
+    IconBuilding,
+    IconCertificate,
     IconSearch,
-    IconChevronRight,
     IconUsers
 } from '@tabler/icons-react';
 
 // ─── Data ──────────────────────────────────────────────────────────
 
-const roles = [
+const sectors = [
     {
-        title: "Warehouse Operatives",
-        icon: IconPackage,
-        desc: "Pickers, packers, goods-in, goods-out, and general warehouse support."
-    },
-    {
-        title: "FLT Drivers",
-        icon: IconTruckLoading,
-        desc: "Certified Counterbalance, Reach, VNA, and PPT operators."
+        title: "Distribution & Logistics",
+        icon: IconTruck,
+        desc: "Major DCs, 3PLs, national distribution operations."
     },
     {
         title: "E-commerce Fulfilment",
         icon: IconShoppingCart,
-        desc: "High-volume picking and packing specialists for peak online retail operations."
+        desc: "Online retail, pick & pack, returns processing."
     },
     {
-        title: "Peak Volume Specialists",
-        icon: IconFlame,
-        desc: "Rapid deployment teams for seasonal spikes and Black Friday surges."
+        title: "Retail Supply Chain",
+        icon: IconPackage,
+        desc: "Supermarket RDCs, fashion logistics, FMCG."
+    },
+    {
+        title: "Manufacturing",
+        icon: IconBuilding,
+        desc: "Production facilities feeding the supply chain."
     }
 ];
 
-const expertiseHighlights = [
-    {
-        icon: IconMoon,
-        title: "Night Shifts & 24/7",
-        desc: "We understand that logistics never sleeps. Dedicated recruitment for unconventional hours."
-    },
-    {
-        icon: IconUserCircle,
-        title: "Permanent Placements",
-        desc: "Finding the leaders that keep your operation running smoothly, from Supervisors to Operations Managers."
-    }
+const roles = [
+    "Warehouse Operatives",
+    "FLT Drivers",
+    "E-commerce Fulfilment",
+    "Volume Recruitment",
+    "Night Shifts",
+    "Permanent Placements"
 ];
 
-// ─── Components ────────────────────────────────────────────────────────
+const roleDescs = {
+    "Warehouse Operatives": "Pickers, packers, goods-in, goods-out—the backbone of every DC.",
+    "FLT Drivers": "Counterbalance, reach, VNA, PPT—fully licensed and experienced.",
+    "E-commerce Fulfilment": "Fast-paced picking and packing for online retail.",
+    "Volume Recruitment": "Ramp up for peak, scale back in quiet periods, no long-term lock-in.",
+    "Night Shifts": "We've got a bench of workers who actually prefer nights—properly.",
+    "Permanent Placements": "When you find a good one, we'll help you keep them."
+};
 
-function RoleCard({ role }) {
-    const Icon = role.icon;
+// ─── Components ────────────────────────────────────────────────────
+
+function SectorCard({ sector }) {
+    const Icon = sector.icon;
     return (
         <motion.div 
             whileHover={{ y: -8 }}
-            className="p-8 md:p-10 rounded-[40px] bg-white/[0.03] border border-white/5 hover:border-teal-5/30 transition-all duration-300 group flex flex-col items-center text-center h-full"
+            className="p-8 md:p-10 rounded-[40px] bg-white/[0.03] border border-white/5 hover:border-teal-5/30 transition-all duration-300 group"
         >
-            <div className="w-16 h-16 rounded-2xl bg-teal-5/10 flex items-center justify-center mb-6 border border-teal-5/20 group-hover:bg-teal-5 group-hover:text-black transition-all shadow-[0_0_20px_rgba(20,184,166,0.1)] group-hover:shadow-[0_0_30px_rgba(20,184,166,0.3)]">
+            <div className="w-16 h-16 rounded-2xl bg-teal-5/10 flex items-center justify-center mb-8 border border-teal-5/20 group-hover:bg-teal-5 group-hover:text-black transition-all">
                 <Icon size={32} />
             </div>
-            <h3 className="text-white text-xl font-bold mb-4 tracking-tight">{role.title}</h3>
-            <p className="text-white/40 text-sm leading-relaxed font-medium">
-                {role.desc}
+            <h3 className="text-white text-2xl font-bold mb-4 tracking-tight">{sector.title}</h3>
+            <p className="text-white/40 leading-relaxed font-medium">
+                {sector.desc}
             </p>
         </motion.div>
     );
 }
 
-// ─── Sections ────────────────────────────────────────────────────────────
+// ─── Sections ────────────────────────────────────────────────────────
 
 function TamworthHero() {
     return (
@@ -95,12 +99,12 @@ function TamworthHero() {
                         className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-teal-5/10 border border-teal-5/20 text-teal-4 text-[10px] font-black uppercase tracking-widest mb-10"
                     >
                         <span className="w-2 h-2 rounded-full bg-teal-5 animate-pulse" />
-                        Staffordshire&apos;s Logistics Hub
+                        Staffordshire
                     </motion.div>
                     <motion.h1 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-white text-6xl md:text-9xl font-black mb-8 tracking-tighter leading-[0.9]"
+                        className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
                     >
                         Tamworth<br />Office
                     </motion.h1>
@@ -108,9 +112,10 @@ function TamworthHero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
-                        className="text-white/40 text-xl md:text-2xl leading-relaxed font-medium max-w-2xl mx-auto md:mx-0 mb-12"
+                        className="text-white/40 text-xl md:text-2xl leading-relaxed font-medium max-w-xl mx-auto md:mx-0 mb-12"
                     >
-                        The heartbeat of UK logistics recruitment. Serving Birch Coppice, Hams Hall, and the M42 distribution corridor.
+                        The heartbeat of UK logistics recruitment. 
+                        Serving Birch Coppice, Hams Hall, and the M42 distribution corridor.
                     </motion.p>
                     <motion.div 
                         initial={{ opacity: 0 }}
@@ -118,7 +123,7 @@ function TamworthHero() {
                         transition={{ delay: 0.2 }}
                         className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start"
                     >
-                        <a href="https://wa.me/447932787550" className="w-full sm:w-auto px-10 py-6 rounded-2xl bg-teal-5 text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-3">
+                        <a href="https://wa.me/447932787550?text=Hi%20Accept%20Recruitment%20Tamworth%2C%20I%27d%20like%20to%20get%20in%20touch%20about..." className="w-full sm:w-auto px-10 py-6 rounded-2xl bg-teal-5 text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-3">
                             <IconBrandWhatsapp size={20} />
                             Message WhatsApp
                         </a>
@@ -135,7 +140,7 @@ function TamworthHero() {
                     className="flex-1 relative"
                 >
                     <div className="relative aspect-square max-w-[500px] mx-auto">
-                        <div className="absolute inset-0 bg-gradient-to-br from-teal-5/20 to-transparent rounded-[60px] blur-3xl opacity-50" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-teal-5/20 to-transparent rounded-[60px] blur-3xl" />
                         <div className="relative h-full bg-[#161B28] rounded-[60px] border border-white/10 overflow-hidden shadow-2xl p-12 flex flex-col justify-center gap-8">
                              <div className="space-y-2">
                                  <div className="text-[10px] font-black uppercase tracking-widest text-white/30">Location:</div>
@@ -144,9 +149,9 @@ function TamworthHero() {
                              <div className="space-y-2">
                                  <div className="text-[10px] font-black uppercase tracking-widest text-white/30">Connect:</div>
                                  <div className="space-y-3">
-                                     <a href="tel:01827438334" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-bold">
+                                     <a href="tel:01827700300" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-bold">
                                          <IconPhone size={20} className="text-teal-5" />
-                                         01827 438 334
+                                         01827 700 300
                                      </a>
                                      <a href="mailto:tamworth@acceptrec.co.uk" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-bold">
                                          <IconMail size={20} className="text-teal-5" />
@@ -155,11 +160,12 @@ function TamworthHero() {
                                  </div>
                              </div>
                              <div className="pt-8 border-t border-white/5">
-                                 <div className="text-white/20 text-[10px] font-black uppercase tracking-widest mb-4">Strategic Fast-Access:</div>
+                                 <div className="text-white/20 text-[10px] font-black uppercase tracking-widest mb-4">Coverage:</div>
                                  <div className="flex flex-wrap gap-2 text-white/50 text-xs font-bold uppercase tracking-widest">
-                                     <span className="px-3 py-1 bg-white/5 rounded-full border border-teal-5/10 text-teal-4">Birch Coppice</span>
-                                     <span className="px-3 py-1 bg-white/5 rounded-full border border-teal-5/10 text-teal-4">Hams Hall</span>
-                                     <span className="px-3 py-1 bg-white/5 rounded-full border border-teal-5/10 text-teal-4">M42 Corridor</span>
+                                     <span className="px-3 py-1 bg-white/5 rounded-full">Birch Coppice</span>
+                                     <span className="px-3 py-1 bg-white/5 rounded-full">Hams Hall</span>
+                                     <span className="px-3 py-1 bg-white/5 rounded-full">Atherstone</span>
+                                     <span className="px-3 py-1 bg-white/5 rounded-full">Dordon</span>
                                  </div>
                              </div>
                         </div>
@@ -170,37 +176,109 @@ function TamworthHero() {
     );
 }
 
-function LocationAdvantageSection() {
+function WeKnowTamworth() {
     return (
-        <section className="py-32 bg-[#0D1520] relative overflow-hidden border-t border-white/5">
+        <section className="py-32 bg-[#0D1520] relative overflow-hidden">
             <div className="mx-auto max-w-7xl px-6 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <div>
-                        <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE LOGISTICS HUB</h2>
+                        <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">LOCAL EXPERTISE</h2>
                         <h3 className="text-white text-4xl md:text-6xl font-black mb-10 tracking-tighter leading-none">
-                            The Heartbeat of<br />UK Distribution
+                            We Know<br />Tamworth
                         </h3>
                         <div className="space-y-6 text-white/40 text-lg leading-relaxed font-medium">
                             <p>
-                                Positioned perfectly in the &quot;Golden Triangle&quot;, our Tamworth office powers the logistics operations that keep the UK moving. 
-                                We are just 5 minutes from Birch Coppice and 10 minutes from Hams Hall.
+                                Tamworth sits at the centre of the UK&apos;s logistics golden triangle. Within a 4-hour drive of 90% of the UK population, this area has become the nation&apos;s distribution backbone. Birch Coppice. Hams Hall. Kingsbury Link. The industrial parks along the A5 and M42. If a parcel&apos;s getting delivered tomorrow, there&apos;s a good chance it&apos;s passing through somewhere near our office.
                             </p>
                             <p>
-                                With over 9 years of local experience, we understand the fast-paced, high-volume demands of modern e-commerce and retail distribution.
+                                We opened here because this is where the work is—and where the workers are. Massive distribution centres running 24/7. E-commerce fulfilment operations that surge at Black Friday and don&apos;t slow down until January. Retailers, 3PLs, and manufacturers all competing for the same pool of warehouse operatives, FLT drivers, and pickers.
+                            </p>
+                            <p>
+                                When you&apos;re running a 500,000 sq ft warehouse with three shifts and your agency tells you they can&apos;t fill your weekend requirement, you&apos;ve got a problem. When your peak season hits and you suddenly need 50 extra pairs of hands, you need someone who can deliver. That&apos;s why we&apos;re here.
                             </p>
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         {[
-                            { label: "Experience", val: "9+", desc: "Years Locally" },
-                            { label: "Availability", val: "24/7", desc: "Support Model" },
-                            { label: "Fill Rate", val: "97%", desc: "Volume Fulfillment" },
-                            { label: "Coverage", val: "M42", desc: "Primary Route" }
+                            { label: "Fill Rate", val: "98%", desc: "Local reliability" },
+                            { label: "Attendance", val: "99%", desc: "Daily uptime" },
+                            { label: "Compliance", val: "100%", desc: "Ethical standards" },
+                            { label: "Response", val: "24/7", desc: "Always online" }
                         ].map((s, i) => (
-                            <div key={i} className="p-8 rounded-[32px] bg-[#161B28] border border-white/5 text-center flex flex-col justify-center">
+                            <div key={i} className="p-8 rounded-[32px] bg-white/[0.03] border border-white/5 text-center">
                                 <div className="text-teal-5 text-4xl font-black mb-2 tracking-tighter">{s.val}</div>
-                                <div className="text-white text-xs font-bold uppercase tracking-widest mb-1">{s.label}</div>
+                                <div className="text-white text-xs font-bold uppercase tracking-widest mb-2">{s.label}</div>
                                 <div className="text-white/20 text-[10px] uppercase font-black">{s.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Recruitment Challenge sub-section */}
+                <div className="mt-24 max-w-4xl">
+                    <h3 className="text-white text-3xl font-bold mb-6 tracking-tight">The Tamworth Recruitment Challenge</h3>
+                    <div className="space-y-6 text-white/40 text-lg leading-relaxed font-medium">
+                        <p>
+                            Every logistics park around here is fighting for the same workers. The big names—Amazon, Ocado, Aldi, Next—they&apos;ve got the brand recognition. But they also churn through workers at industrial rates. That creates opportunity if you know where to look.
+                        </p>
+                        <p>
+                            We&apos;ve spent years building relationships with reliable warehouse workers across Tamworth, Atherstone, Polesworth, Dordon, and into Burton and Lichfield. We know who&apos;s FLT trained. Who&apos;s worked chilled environments. Who can handle the pace of e-commerce picking. And crucially—who actually shows up when they say they will.
+                        </p>
+                        <p>
+                            Our Tamworth team understands shift patterns, warehouse culture, and the reality of running high-volume operations. We&apos;re not going to send you someone who&apos;s going to clock in late, work half-pace, and disappear after two shifts. We&apos;ve built our reputation on reliability—and in logistics, that&apos;s everything.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function IndustriesGrid() {
+    return (
+        <section className="py-32 bg-[#121926] relative">
+            <div className="mx-auto max-w-7xl px-6">
+                <div className="text-center mb-20">
+                    <h2 className="text-white text-4xl md:text-6xl font-black mb-8 tracking-tighter">
+                        Tamworth Industries We Serve
+                    </h2>
+                    <p className="text-white/40 text-xl font-medium max-w-2xl mx-auto">
+                        Specialised recruitment for the logistics and distribution sector driving Tamworth&apos;s economy.
+                    </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {sectors.map((s, i) => (
+                        <SectorCard key={i} sector={s} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function RoleExpertise() {
+    return (
+        <section className="py-32 bg-[#0D1520]">
+            <div className="mx-auto max-w-5xl px-6">
+                <div className="bg-gradient-to-br from-[#161B28] to-[#0D1520] border border-white/10 rounded-[60px] p-12 md:p-20 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-teal-5/5 blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                    
+                    <h2 className="text-white text-3xl md:text-5xl font-black mb-4 tracking-tighter text-center">
+                        What We Actually Do
+                    </h2>
+                    <p className="text-white/40 text-center mb-12 text-lg font-medium max-w-xl mx-auto">
+                        Logistics and warehouse recruitment built for Tamworth&apos;s golden triangle.
+                    </p>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                        {roles.map((r, i) => (
+                            <div key={i} className="flex items-start gap-4">
+                                <IconCertificate size={24} className="text-teal-5 shrink-0 mt-1" />
+                                <div>
+                                    <span className="text-white text-lg font-bold block mb-1">{r}</span>
+                                    <span className="text-white/40 text-sm font-medium">{roleDescs[r]}</span>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -210,85 +288,14 @@ function LocationAdvantageSection() {
     );
 }
 
-function SpecializedRoles() {
-    return (
-        <section className="py-32 bg-[#121926] relative border-t border-white/5">
-            <div className="mx-auto max-w-7xl px-6">
-                <div className="text-center mb-20">
-                    <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">WHAT WE DELIVER</h2>
-                    <h3 className="text-white text-4xl md:text-6xl font-black mb-8 tracking-tighter">
-                        Warehouse & Logistics Experts
-                    </h3>
-                    <p className="text-white/40 text-xl font-medium max-w-2xl mx-auto">
-                        Dedicated recruitment solutions scaled for the demands of the Midlands&apos; largest distribution centres.
-                    </p>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {roles.map((r, i) => (
-                        <RoleCard key={i} role={r} />
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function ServiceCapacity() {
-    return (
-        <section className="py-32 bg-[#0D1520]">
-            <div className="mx-auto max-w-5xl px-6">
-                <div className="bg-gradient-to-br from-[#161B28] to-[#0D1520] border border-white/10 rounded-[60px] p-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row gap-16 items-center">
-                    <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-teal-5/5 blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                    
-                    <div className="md:w-1/2 space-y-12 relative z-10">
-                        {expertiseHighlights.map((eh, i) => {
-                            const Icon = eh.icon;
-                            return (
-                                <div key={i} className="flex gap-6">
-                                    <div className="shrink-0 mt-1">
-                                        <div className="w-12 h-12 rounded-xl bg-teal-5/10 border border-teal-5/20 text-teal-5 flex items-center justify-center">
-                                            <Icon size={24} />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-white text-2xl font-bold mb-3">{eh.title}</h4>
-                                        <p className="text-white/40 leading-relaxed font-medium text-sm">
-                                            {eh.desc}
-                                        </p>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                    
-                    <div className="md:w-1/2 relative z-10 flex flex-col justify-center items-center md:items-start">
-                        <h3 className="text-white text-3xl font-black mb-6 tracking-tight text-center md:text-left">
-                            We don&apos;t just fill shifts. We optimize your workforce.
-                        </h3>
-                        <p className="text-white/40 text-lg mb-8 text-center md:text-left">
-                            Talk to our Tamworth team about managed services and volume recruitment strategies.
-                        </p>
-                        <button className="flex items-center gap-3 text-teal-5 text-sm font-black uppercase tracking-[0.2em] group">
-                            Book a Consultation
-                            <IconChevronRight size={18} className="transition-transform group-hover:translate-x-2" />
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function MapSection() {
+function CoverageSection() {
     return (
         <section className="py-32 bg-[#0D1520] border-t border-white/5">
             <div className="mx-auto max-w-7xl px-6">
-                <div className="flex flex-col lg:flex-row-reverse gap-16 items-stretch">
+                <div className="flex flex-col lg:flex-row gap-16 items-stretch">
                     <div className="flex-1 rounded-[40px] overflow-hidden border border-white/10 h-[500px] relative">
-                         {/* High-fidelity Map Placeholder/Iframe - Centered on Tamworth Office */}
                          <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2417.84852230113!2d-1.705822384669527!3d52.6335198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a0b5b2db8d4bb%3A0xe6ab1e48398e6c43!2s95%20Lichfield%20St%2C%20Tamworth%20B79%207QF%2C%20UK!5e0!3m2!1sen!2suk!4v1712490000000!5m2!1sen!2suk" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2421.0!2d-1.6924!3d52.6343!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870a50e7c8f7a07%3A0x1234567890abcdef!2s95%20Lichfield%20St%2C%20Tamworth%20B79%207QF%2C%20UK!5e0!3m2!1sen!2suk!4v1712490000000!5m2!1sen!2suk" 
                             width="100%" 
                             height="100%" 
                             style={{ border: 0, filter: 'grayscale(1) invert(0.9) contrast(1.2)' }} 
@@ -299,9 +306,9 @@ function MapSection() {
                     </div>
                     <div className="lg:w-96 flex flex-col justify-center space-y-10">
                         <div>
-                             <h4 className="text-white text-2xl font-bold mb-4">Visit Us</h4>
+                             <h4 className="text-white text-2xl font-bold mb-4">Covering the Golden Triangle</h4>
                              <p className="text-white/40 leading-relaxed font-medium">
-                                 Conveniently located in Tamworth with direct links to the region&apos;s major logistics hubs and road networks.
+                                 From Tamworth, we serve the whole M42 logistics corridor and beyond: Birch Coppice Business Park, Hams Hall, Kingsbury Link, the A5 retail parks, and the industrial estates spreading into South Derbyshire and North Warwickshire. Whether you&apos;re in a mega-DC or a smaller operation on a trading estate, if you need warehouse staff, we can help.
                              </p>
                         </div>
                         <div className="space-y-6">
@@ -310,16 +317,16 @@ function MapSection() {
                                      <IconMapPin size={24} />
                                  </div>
                                  <div className="text-white/60 text-sm font-medium">
-                                     Unit 2, Manor Court<br />95 Lichfield Street<br />Tamworth, B79 7QF
+                                     95 Lichfield Street, Tamworth<br />United Kingdom
                                  </div>
                              </div>
                              <div className="flex items-center gap-4 group">
                                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-5">
                                      <IconUsers size={24} />
                                  </div>
-                                 <div className="text-white/60 text-sm font-medium hover:text-white transition-colors cursor-pointer">
-                                     Drop in Mon-Fri, 08:00 - 17:30
-                                 </div>
+                                 <Link href="/contact" className="text-white/60 text-sm font-medium hover:text-white transition-colors">
+                                     Book a Local Consultation
+                                 </Link>
                              </div>
                         </div>
                     </div>
@@ -334,18 +341,19 @@ function BottomCTA() {
         <section className="py-32 bg-teal-5">
              <div className="mx-auto max-w-5xl px-6 text-center">
                  <h2 className="text-black text-5xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                     Scale Your<br />Logistics Teams
+                     Short-staffed<br />in Tamworth?
                  </h2>
                  <p className="text-black/60 text-xl md:text-2xl font-bold max-w-2xl mx-auto mb-16">
-                     Whether you need 50 pickers for Black Friday or a permanent Ops Manager, our Tamworth team delivers.
+                     WhatsApp our Tamworth team. We understand peak season doesn&apos;t wait—and neither do we.
                  </p>
                  <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                     <button className="w-full md:w-auto px-12 py-7 rounded-2xl bg-black text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-2xl">
-                         Request Warehouse Staff
-                     </button>
-                     <button className="w-full md:w-auto px-12 py-7 rounded-2xl border border-black/20 text-black font-black uppercase tracking-widest text-xs hover:bg-black/5 transition-all">
-                         Find Driving Jobs
-                     </button>
+                     <a href="https://wa.me/447932787550?text=Hi%20Accept%20Recruitment%20Tamworth%2C%20I%27d%20like%20to%20get%20in%20touch%20about..." className="w-full md:w-auto px-12 py-7 rounded-2xl bg-black text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-2xl flex items-center justify-center gap-3">
+                         <IconBrandWhatsapp size={20} />
+                         Message on WhatsApp
+                     </a>
+                     <Link href="/contact" className="w-full md:w-auto px-12 py-7 rounded-2xl border border-black/20 text-black font-black uppercase tracking-widest text-xs hover:bg-black/5 transition-all">
+                         Contact Us
+                     </Link>
                  </div>
              </div>
         </section>
@@ -358,10 +366,10 @@ export default function TamworthOfficePage() {
             <AnnouncementBanner />
             <Navbar />
             <TamworthHero />
-            <LocationAdvantageSection />
-            <SpecializedRoles />
-            <ServiceCapacity />
-            <MapSection />
+            <WeKnowTamworth />
+            <IndustriesGrid />
+            <RoleExpertise />
+            <CoverageSection />
             <BottomCTA />
             <Footer />
         </main>

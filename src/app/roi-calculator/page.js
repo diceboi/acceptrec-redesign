@@ -117,7 +117,7 @@ export default function RoiCalculator() {
                 <span className="text-[10px] font-bold uppercase tracking-widest text-teal-5">FINANCIAL ANALYZER</span>
             </motion.div>
             <motion.h1 
-                className="text-5xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-[72px] mb-6"
+                className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tighter leading-[0.95]"
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
             >
                 Calculate Your <span className="text-teal-5">Hidden Staffing Costs.</span>

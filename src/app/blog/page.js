@@ -142,7 +142,7 @@ function BlogHero() {
                     transition={{ duration: 0.5 }}
                 >
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">RECRUITMENT INSIGHTS</h2>
-                    <h1 className="text-white text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-none">
+                    <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]">
                         Knowledge Hub
                     </h1>
                     <p className="text-white/40 text-xl md:text-2xl leading-relaxed font-medium max-w-2xl mx-auto">

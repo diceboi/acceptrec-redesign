@@ -48,7 +48,7 @@ function InnerHero() {
         </motion.div>
 
         <motion.h1
-          className="font-sans text-5xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-[76px] mb-8"
+          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
         >
           We Know <span className="text-teal-5">Your Sector</span>

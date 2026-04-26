@@ -280,7 +280,7 @@ function TeamHero() {
                     transition={{ duration: 0.6 }}
                 >
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE SQUAD</h2>
-                    <h1 className="text-white text-5xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.95]">
+                    <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]">
                         Meet the Humans<br />Behind the Headsets
                     </h1>
                     <p className="text-white/40 text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed font-medium mb-6">
