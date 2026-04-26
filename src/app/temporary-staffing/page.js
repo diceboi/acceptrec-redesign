@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
-import { BentoCard } from "@/components/ui/BentoCard";
 import { Button } from "@/components/ui/Button";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import {
@@ -27,40 +26,51 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function InnerHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden bg-[#0d1522] pt-32 pb-16">
+    <section className="relative flex min-h-[80vh] w-full items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-20">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <motion.div
            className="absolute rounded-full"
-           style={{ height: "60%", width: "50%", left: "5%", top: "10%", background: "var(--color-teal-5)", opacity: 0.1, filter: "blur(100px)" }}
-           animate={{ scale: [1, 1.2, 1], x: [0, 40, 0], y: [0, 30, 0] }}
-           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+           style={{ height: "70%", width: "55%", left: "-10%", top: "-10%", background: "var(--color-teal-5)", opacity: 0.13, filter: "blur(90px)" }}
+           animate={{ scale: [1, 1.3, 1], x: [0, 80, 0], y: [0, 50, 0] }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
            className="absolute rounded-full"
-           style={{ height: "50%", width: "45%", right: "5%", top: "20%", background: "var(--color-purple-5)", opacity: 0.1, filter: "blur(100px)" }}
-           animate={{ scale: [1, 1.3, 1], x: [0, -40, 0], y: [0, 50, 0] }}
-           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+           style={{ height: "60%", width: "55%", right: "-10%", top: "-5%", background: "var(--color-purple-5)", opacity: 0.18, filter: "blur(100px)" }}
+           animate={{ scale: [1, 1.4, 1], x: [0, -80, 0], y: [0, 100, 0] }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-10" />
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
 
       <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-8 inline-flex items-center gap-2">
-          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">Temporary Staffing</span>
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-8 inline-flex items-center gap-2 rounded-full border border-teal-5/30 bg-teal-5/10 px-4 py-2">
+          <span className="h-2 w-2 rounded-full bg-teal-5 animate-pulse" />
+          <span className="text-sm font-semibold text-teal-4">Temporary Staffing</span>
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
         >
           Better <span className="text-teal-5">Workers.</span>
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-2xl text-xl font-medium leading-relaxed text-white/70 mb-10"
+          className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
         >
           Right now, 1,200+ of our workers are on site. They aren&apos;t just filling gaps — they&apos;re hitting targets.
@@ -72,7 +82,51 @@ function InnerHero() {
         </motion.div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-linear-to-t from-[#0d1522] to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-900 to-transparent" />
+    </section>
+  );
+}
+
+// ─── Stats Section ─────────────────────────────────────────────────────────
+function HeroStats() {
+  const stats = [
+    { value: "100%", label: "Workers Rated", sub: "Every worker, every shift" },
+    { value: "4.2", label: "Avg Worker Score", sub: "Tracked and improving" },
+    { value: "98%", label: "Fill Rate", sub: "Quality workers, not just bodies" },
+    { value: "1,200", label: "Daily Workers", sub: "Rated, coached, rewarded" },
+  ];
+  return (
+    <section className="relative w-full bg-navy-700 py-20 md:py-28 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6">
+        <motion.div
+          className="grid grid-cols-2 gap-4 md:grid-cols-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {stats.map((s, i) => (
+            <motion.div
+              key={i}
+              variants={cardVariants}
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 text-center transition-all duration-300 hover:teal-glow-sm hover:border-teal-5/30"
+            >
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative text-4xl font-semibold text-white md:text-5xl flex items-center justify-center gap-1">
+                <AnimatedNumber value={s.value} />
+                {s.label === "Avg Worker Score" && <IconStarFilled className="text-yellow-4" size={28} />}
+              </div>
+              <div className="relative mt-2 text-[13px] font-semibold uppercase tracking-wider text-teal-5">
+                {s.label}
+              </div>
+              <div className="relative mt-1 text-xs text-white/40">
+                {s.sub}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </section>
   );
 }
@@ -107,70 +161,52 @@ function TechHighlights() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 overflow-hidden font-sans">
+      <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <motion.div className="mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">THE ACCEPT DIFFERENCE</span>
-          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight mb-4">
+        <motion.div className="mb-14 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">THE ACCEPT DIFFERENCE</span>
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
              Workers who get better, not just bodies.
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-white/50 leading-relaxed">
+          <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">
             Other agencies send whoever&apos;s available. We send rated, coached workers who earn their place.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {cards.map((card, i) => (
             <motion.div
               key={i}
-              className="bg-[#161b28] border border-white/5 rounded-3xl p-10 hover:border-teal-5/20 transition-colors group"
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              variants={cardVariants}
+              className="glass-card group relative overflow-hidden rounded-2xl p-10 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
             >
-              <div className="flex items-start gap-4 mb-6">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#00A99D] text-white">
-                  <card.icon size={24} />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative flex items-start gap-5 mb-6">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#00A99D] text-white">
+                  <card.icon size={28} stroke={1.5} />
                 </div>
                 <div>
-                  <h3 className="text-teal-5 text-sm font-bold tracking-widest uppercase mb-1">{card.title}</h3>
-                  <p className="text-white font-bold text-xl">{card.subtitle}</p>
+                  <h3 className="text-teal-5 text-[10px] font-bold tracking-widest uppercase mb-1.5">{card.title}</h3>
+                  <p className="text-white font-semibold text-[22px] leading-tight">{card.subtitle}</p>
                 </div>
               </div>
-              <p className="text-white/50 text-[15px] leading-relaxed mb-6">{card.desc}</p>
+              <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">{card.desc}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="mt-12 text-center">
             <Link href="/technology" className="text-teal-5 font-bold hover:gap-3 transition-all inline-flex items-center gap-2">
                 Explore all our technology <IconArrowRight size={18} />
             </Link>
         </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Stats Bar ─────────────────────────────────────────────────────────────
-function HeroStats() {
-  const stats = [
-    { value: "100%", label: "Workers rated", sub: "Every worker, every shift" },
-    { value: "4.2", label: "Average worker score", sub: "Tracked and improving", type: "stars" },
-    { value: "98%", label: "Fill rate", sub: "Quality workers, not just bodies" },
-    { value: "1,200", label: "Daily workers", sub: "Rated, coached, rewarded" },
-  ];
-  return (
-    <section className="relative w-full bg-[#00A99D] py-16 md:py-20 font-sans text-white z-20">
-      <div className="mx-auto max-w-[1140px] px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-        {stats.map((s, i) => (
-          <div key={i} className="flex flex-col items-center justify-center">
-            <div className="text-4xl lg:text-6xl font-bold text-white mb-2 tracking-tight flex items-center gap-1">
-              <AnimatedNumber value={s.value} />
-              {s.type === "stars" && <IconStarFilled className="text-white" size={32} />}
-            </div>
-            <div className="text-lg font-bold text-white mb-1">{s.label}</div>
-            <div className="text-sm font-medium text-white/70">{s.sub}</div>
-          </div>
-        ))}
       </div>
     </section>
   );
@@ -188,31 +224,40 @@ function ProblemSection() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d1522] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-navy-700 py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute -left-48 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-purple-6/15 blur-[100px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <motion.div className="mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight mb-4">
+        <motion.div className="mb-14 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">COMMON FRUSTRATIONS</span>
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
              Tired of mediocre temps?
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-white/50 leading-relaxed">
+          <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">
             Workers show up. But are they any good? We solved that.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {problems.map((item, i) => (
             <motion.div
               key={i}
-              className="bg-[#161b28] border border-white/5 rounded-3xl p-10 hover:border-teal-5/20 transition-colors h-full"
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              variants={cardVariants}
+              className="glass-card group relative overflow-hidden rounded-2xl p-10 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm h-full"
             >
-               <span className="text-red-400 text-[10px] font-bold uppercase tracking-widest mb-1 block">THE PROBLEM</span>
-               <h3 className="text-white font-bold text-xl mb-4 leading-tight">{item.p}</h3>
-               <span className="text-teal-5 text-[10px] font-bold uppercase tracking-widest mb-2 block">HOW WE FIX IT</span>
-               <p className="text-white/50 text-[14px] leading-relaxed">{item.s}</p>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+               <span className="relative text-red-400 text-[10px] font-bold uppercase tracking-widest mb-1 block">THE PROBLEM</span>
+               <h3 className="relative text-white font-semibold text-[22px] mb-5 leading-tight">{item.p}</h3>
+               <span className="relative text-teal-5 text-[10px] font-bold uppercase tracking-widest mb-2 block">HOW WE FIX IT</span>
+               <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">{item.s}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -221,16 +266,17 @@ function ProblemSection() {
 // ─── Divider Section ───────────────────────────────────────────────────────
 function TechPeopleSection() {
     return (
-        <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5 overflow-hidden">
+        <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans overflow-hidden">
+            <div className="pointer-events-none absolute left-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 -translate-x-1/2 rounded-full mix-blend-screen opacity-20 blur-[120px] bg-teal-5" />
              <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
                 <motion.h2 
-                    className="text-4xl font-semibold text-white md:text-5xl lg:text-[64px] tracking-tight mb-8"
+                    className="text-4xl font-semibold text-white md:text-5xl lg:text-6xl tracking-tight mb-8"
                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 >
                     Technology helps. <span className="text-teal-5">People deliver.</span>
                 </motion.h2>
                 <motion.p 
-                    className="max-w-3xl mx-auto text-xl text-white/60 mb-10 leading-relaxed"
+                    className="max-w-3xl mx-auto text-lg text-white/60 mb-10 leading-relaxed"
                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
                 >
                     All the tech in the world doesn&apos;t matter if no one answers the phone at 6am. We&apos;re recruiters first. We know what it takes to fill a shift, solve a problem, and keep an operation running. The technology just makes us faster and more reliable.
@@ -250,39 +296,48 @@ function TechPeopleSection() {
 // ─── Sectors We Cover ───────────────────────────────────────────────────────
 function SectorsWeCover() {
   const sectors = [
-    { title: "Warehousing", desc: "Pickers, packers, forklift", icon: IconPackage },
-    { title: "Manufacturing", desc: "Production, assembly, QC", icon: IconBuildingFactory },
-    { title: "Driving", desc: "HGV, van, forklift", icon: IconTruck },
-    { title: "Food Production", desc: "GLA licensed (PEAR0003)", icon: IconToolsKitchen2 },
+    { title: "Warehousing", desc: "Pickers, packers, forklift drivers — the backbone of distribution.", icon: IconPackage },
+    { title: "Manufacturing", desc: "Production, assembly, QC operatives for every line.", icon: IconBuildingFactory },
+    { title: "Driving", desc: "HGV Class 1 & 2, van, forklift — fully licensed.", icon: IconTruck },
+    { title: "Food Production", desc: "GLA licensed (PEAR0003). Compliant from day one.", icon: IconToolsKitchen2 },
   ];
 
   return (
-    <section className="relative w-full bg-[#0d1522] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-navy-700 py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <motion.div className="mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight mb-4">
+        <motion.div className="mb-14 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">INDUSTRIES</span>
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
              Sectors We Cover
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-white/50 leading-relaxed">
-            A decade of experience in these industries
+          <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">
+            A decade of experience across these core industries.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {sectors.map((s, i) => (
             <motion.div
               key={i}
-              className="bg-[#161b28] border border-white/5 rounded-3xl p-10 text-center hover:border-teal-5/20 transition-colors group"
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              variants={cardVariants}
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 text-center transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
             >
-               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-5/10 text-teal-5 mx-auto mb-6 group-hover:bg-teal-5 group-hover:text-white transition-colors">
-                  <s.icon size={28} />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+               <div className="relative flex h-14 w-14 items-center justify-center rounded-xl bg-[#00A99D] text-white mx-auto mb-6 group-hover:shadow-[0_0_15px_rgba(45,212,191,0.2)] transition-shadow">
+                  <s.icon size={28} stroke={1.5} />
                 </div>
-               <h3 className="text-white font-bold text-xl mb-1">{s.title}</h3>
-               <p className="text-white/40 text-sm leading-relaxed">{s.desc}</p>
+               <h3 className="relative text-white font-semibold text-[22px] mb-2">{s.title}</h3>
+               <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">{s.desc}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -298,30 +353,33 @@ function HowItWorks() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <motion.div className="mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight mb-4">
+        <motion.div className="mb-14 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">PROCESS</span>
+          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
              How It Works
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-white/50 leading-relaxed">
+          <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">
             Simple process. Reliable results.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
-             <div className="hidden lg:block absolute top-[100px] left-[50px] right-[50px] h-0.5 border-t-2 border-dashed border-white/5 z-0" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 relative">
+             <div className="hidden lg:block absolute top-[72px] left-[80px] right-[80px] h-0.5 border-t-2 border-dashed border-white/5 z-0" />
           {steps.map((step, i) => (
             <motion.div
               key={i}
-              className="relative z-10 text-center"
+              className="glass-card group relative z-10 overflow-hidden rounded-2xl p-8 text-center transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-               <div className="w-16 h-16 rounded-full bg-teal-5 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-8 shadow-xl shadow-teal-5/20 border-4 border-[#0d111a]">
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+               <div className="relative w-14 h-14 rounded-full bg-teal-5 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg shadow-teal-5/20">
                   {step.num}
                </div>
-               <h3 className="text-white font-bold text-lg mb-2">{step.title}</h3>
-               <p className="text-white/40 text-sm leading-relaxed px-4">{step.desc}</p>
+               <h3 className="relative text-white font-semibold text-lg mb-2">{step.title}</h3>
+               <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">{step.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -333,7 +391,7 @@ function HowItWorks() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function TemporaryStaffing() {
   return (
-    <main className="bg-[#0d1522] min-h-screen">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
 
       <InnerHero />

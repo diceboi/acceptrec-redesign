@@ -290,7 +290,7 @@ function PhoneModel({ mouseRef }) {
           position={[-0.49, 0.45, 0.4]} // <--- Az X és az Y tolja a helyére, a Z pedig milliméterre van az üvegtől
           transform
           distanceFactor={0}
-          scale={1.33} // <--- A scale-t kell a pontosságig reszelni
+          scale={1.33}
           style={{ pointerEvents: "none" }}
         >
           <ClockInScreen />

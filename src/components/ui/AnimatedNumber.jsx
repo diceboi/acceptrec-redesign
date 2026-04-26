@@ -26,8 +26,15 @@ export function AnimatedNumber({ value }) {
     }
   }, [isInView, numValue, spring, match]);
 
+  // Determine decimal places from original value
+  const decimalPlaces = match && match[2].includes('.')
+    ? match[2].split('.')[1].length
+    : 0;
+
   const animatedText = useTransform(spring, (current) => {
-    return Math.floor(current);
+    return decimalPlaces > 0
+      ? current.toFixed(decimalPlaces)
+      : Math.floor(current);
   });
 
   if (!match) return <span>{value}</span>;
