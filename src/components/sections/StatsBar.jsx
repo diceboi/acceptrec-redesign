@@ -114,7 +114,7 @@ export function StatsBar() {
           </div>
           <div className="mt-16 flex justify-center">
             <Link
-              href="#"
+              href="/get-started"
               className="group inline-flex items-center gap-2 rounded-xl bg-teal-5 px-7 py-3.5 text-base font-bold text-white shadow-lg shadow-teal-5/20 transition-all duration-300 hover:bg-teal-6"
             >
               <span>Let&apos;s Talk</span>

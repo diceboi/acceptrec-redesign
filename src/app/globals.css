@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
 
 @theme {
   /* ======================
@@ -278,10 +280,14 @@ html:not(.dark) [class*="bg-white\/"] {
   background-color: transparent !important;
 }
 
-/* ── Hero bottom gradient: swap to-black -> to-bg-page ── */
-html:not(.dark) [class*="from-black"],
+/* ── Hero bottom gradient: swap dark gradients in light mode ── */
+html:not(.dark) [class*="from-navy"],
+html:not(.dark) [class*="from-black"] {
+  --tw-gradient-from: #f0f4f8 !important;
+  --tw-gradient-to: transparent !important;
+}
 html:not(.dark) [class*="to-black"] {
-  --tw-gradient-stops: unset;
+  --tw-gradient-to: transparent !important;
 }
 
 /* ── StatsBar company boxes: give them a pale purple tint + border ── */
@@ -306,4 +312,23 @@ html:not(.dark) [class*="border-teal"] {
 /* ── Announcement banner stays dark ── */
 html:not(.dark) .announcement-banner {
   background-color: #111827 !important;
+}
+
+/* ── CTA Banner overlays ── */
+.cta-overlay {
+  background-color: rgba(10, 13, 20, 0.80);
+}
+.cta-gradient {
+  background: linear-gradient(to right, rgba(10,13,20,0.90), rgba(10,13,20,0.70), rgba(10,13,20,0.40));
+}
+html:not(.dark) .cta-overlay {
+  background-color: rgba(240, 244, 248, 0.75) !important;
+}
+html:not(.dark) .cta-gradient {
+  background: linear-gradient(to right, rgba(240,244,248,0.90), rgba(240,244,248,0.65), rgba(240,244,248,0.30)) !important;
+}
+
+/* ── Keep CTA banner section unstyled by global section override ── */
+html:not(.dark) .cta-banner-section {
+  background-color: transparent !important;
 }

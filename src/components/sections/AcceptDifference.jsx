@@ -595,7 +595,7 @@ export function AcceptDifference() {
 
         {/* Global CTA button below the whole grid */}
         <div className="mt-12 text-center">
-          <Button variant="primary" size="lg">
+          <Button variant="primary" size="lg" href="/technology">
             Explore All Technology
           </Button>
         </div>

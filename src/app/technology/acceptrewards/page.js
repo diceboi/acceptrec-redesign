@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -32,31 +32,31 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function RewardsHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0d111a] pt-48 pb-16 border-b border-white/5">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0d111a] pt-32 pb-16">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute -top-24 left-1/3 h-[500px] w-[500px] rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
       
-      <div className="relative z-10 mx-auto max-w-285 px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }} 
           animate={{ opacity: 1, scale: 1 }} 
           className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-5/10 border border-teal-5/20 backdrop-blur-sm"
         >
           <IconTrophy className="text-teal-5" size={16} />
-          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5 text-glow-teal">AcceptRewards — Loyalty Program</span>
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">AcceptRewards — Loyalty Program</span>
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Work Hard. <br /><span className="text-teal-5 text-glow-teal">Get Rewarded.</span>
+          Work Hard. <br /><span className="text-teal-5">Get Rewarded.</span>
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/50 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -71,20 +71,20 @@ function RewardsHero() {
 // ─── Why Section ───────────────────────────────────────────────────────────
 function PhilosophySection() {
     return (
-        <section className="py-24 bg-[#0d111a] border-b border-white/5 relative overflow-hidden">
-             <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-[#0d111a] relative overflow-hidden">
+             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">WHY REWARDS?</h2>
-                        <h3 className="text-white text-4xl font-bold mb-8 tracking-tight leading-tight italic">Because good work <br /><span className="text-white/30">deserves recognition.</span></h3>
+                        <h3 className="text-white text-4xl font-bold mb-8 tracking-tight leading-tight italic">Because good work <br /><span className="text-[#8B98AB]/70">deserves recognition.</span></h3>
                         <p className="text-white/60 text-lg leading-relaxed mb-10">
                             Most agencies treat temps as interchangeable. We don't. We track who's reliable, who goes the extra mile, who we can count on — and we reward them for it. 
                         </p>
-                        <p className="text-white/40 text-base leading-relaxed">
+                        <p className="text-[#8B98AB] text-base leading-relaxed">
                             The more you put in, the more you get back. It's a deal built on respect and performance. No more anonymous workers. Real rewards for real people.
                         </p>
                     </div>
-                    <div className="p-12 rounded-[40px] bg-white/5 border border-white/5 relative overflow-hidden h-full flex flex-col justify-center text-center">
+                    <div className="p-12 rounded-2xl bg-white/5 border border-white/5 relative overflow-hidden h-full flex flex-col justify-center text-center">
                         <motion.div 
                             initial={{ scale: 0.8, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
@@ -93,7 +93,7 @@ function PhilosophySection() {
                             <IconHeart size={48} className="animate-pulse" />
                         </motion.div>
                         <h4 className="text-white text-2xl font-bold mb-4 tracking-tight leading-snug">The Recognition Deal.</h4>
-                        <p className="text-white/40 text-sm leading-relaxed max-w-md mx-auto">
+                        <p className="text-[#8B98AB] text-sm leading-relaxed max-w-md mx-auto">
                             Transforming temporary work from a "stop-gap" into a performance-driven career path.
                         </p>
                     </div>
@@ -115,23 +115,23 @@ function PointsEconomy() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522] border-b border-white/5">
-             <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-20">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">POINTS ECONOMY</h2>
                     <h3 className="text-white text-4xl font-bold tracking-tight">How You Earn</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {methods.map((m, i) => (
-                        <div key={i} className="p-10 rounded-[32px] bg-[#161b28] border border-white/5 hover:border-teal-5/20 transition-all group">
+                        <div key={i} className="p-10 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-teal-5/20 transition-all group">
                              <div className="flex justify-between items-start mb-8">
                                 <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 group-hover:scale-110 transition-transform">
                                     <m.i size={28} />
                                 </div>
-                                <div className="text-teal-5 font-black text-xs tracking-widest px-3 py-1.5 rounded-full bg-teal-5/10 border border-teal-5/20">{m.pts}</div>
+                                <div className="text-teal-5 font-semibold text-xs tracking-widest px-3 py-1.5 rounded-full bg-teal-5/10 border border-teal-5/20">{m.pts}</div>
                              </div>
                             <h4 className="text-white font-bold text-xl mb-4">{m.t}</h4>
-                            <p className="text-white/40 text-sm leading-relaxed">{m.d}</p>
+                            <p className="text-[#8B98AB] text-sm leading-relaxed">{m.d}</p>
                         </div>
                     ))}
                 </div>
@@ -151,13 +151,13 @@ function TierSystem() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d111a] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-[#0d111a]">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                     <div className="lg:col-span-5">
                          <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">TIER MULTIPLIERS</h2>
                          <h3 className="text-white text-4xl font-bold mb-8 tracking-tight">The More You Play. <br />The More You Earn.</h3>
-                         <p className="text-white/40 text-lg leading-relaxed mb-10 italic pr-8">
+                         <p className="text-[#8B98AB] text-lg leading-relaxed mb-10 italic pr-8">
                             Climb the tiers by working consistently. Every tier unlocks a global multiplier on every single point you earn. Total transparency. Maximum growth.
                          </p>
                     </div>
@@ -171,12 +171,12 @@ function TierSystem() {
                                 className={`flex items-center justify-between p-6 rounded-2xl ${t.bg} border ${t.border} backdrop-blur-sm group hover:scale-[1.02] transition-all`}
                             >
                                 <div className="flex items-center gap-6">
-                                    <div className={`text-2xl font-black uppercase tracking-[0.1em] ${t.color}`}>{t.name}</div>
-                                    <div className="text-white/20 text-[10px] font-black tracking-widest uppercase">Threshold: {t.limit} PTS</div>
+                                    <div className={`text-2xl font-semibold uppercase tracking-[0.1em] ${t.color}`}>{t.name}</div>
+                                    <div className="text-white/20 text-[10px] font-semibold tracking-widest uppercase">Threshold: {t.limit} PTS</div>
                                 </div>
                                 <div className="text-right">
                                     <div className={`text-2xl font-mono font-bold tracking-tighter ${t.color}`}>{t.multiplier}</div>
-                                    <div className="text-white/30 text-[9px] font-black uppercase tracking-widest">Global Multiplier</div>
+                                    <div className="text-[#8B98AB]/70 text-[9px] font-semibold uppercase tracking-widest">Global Multiplier</div>
                                 </div>
                             </motion.div>
                         ))}
@@ -199,14 +199,14 @@ function RewardsCatalog() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {items.map((item, i) => (
-                    <div key={i} className="p-8 rounded-3xl bg-[#161b28] border border-white/5 hover:border-white/10 transition-all group relative overflow-hidden">
+                    <div key={i} className="p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all group relative overflow-hidden">
                         <div className="flex justify-between items-start mb-4">
                             <h5 className="text-white font-bold text-lg pr-4">{item.t}</h5>
-                            <span className="text-[11px] font-black tracking-widest text-[#2dd4bf] px-3 py-1 rounded bg-teal-5/10 border border-teal-5/20 shrink-0">
+                            <span className="text-[11px] font-semibold tracking-widest text-[#2dd4bf] px-3 py-1 rounded bg-teal-5/10 border border-teal-5/20 shrink-0">
                                 {item.pts}
                             </span>
                         </div>
-                        <p className="text-white/30 text-sm leading-relaxed mb-0">{item.d}</p>
+                        <p className="text-[#8B98AB]/70 text-sm leading-relaxed mb-0">{item.d}</p>
                     </div>
                 ))}
             </div>
@@ -259,12 +259,12 @@ function RewardsCatalog() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522] border-t border-white/5">
-             <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-24">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">REWARDS</h2>
                     <h3 className="text-white text-5xl font-bold tracking-tight mb-6">Spend Your Points</h3>
-                    <p className="text-white/40 text-lg leading-relaxed max-w-2xl mx-auto">
+                    <p className="text-[#8B98AB] text-lg leading-relaxed max-w-2xl mx-auto">
                         Gift cards, experiences, products, and more. Turn your hard work into real rewards.
                     </p>
                 </div>
@@ -280,7 +280,7 @@ function RewardsCatalog() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function AcceptRewardsPage() {
   return (
-    <main className="bg-[#0d1522] min-h-screen font-sans">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
 
       <RewardsHero />

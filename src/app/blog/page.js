@@ -1,291 +1,145 @@
-"use client";
+import Link from "next/link";
+import { getPublicPosts, getPublicCategories } from "@/lib/blog-data";
+import { Navbar } from "@/components/sections/Navbar";
+import { Footer } from "@/components/sections/Footer";
+import { CtaBanner } from "@/components/sections/CtaBanner";
+import { BlogCard } from "@/components/blog/BlogCard";
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Navbar } from '@/components/sections/Navbar';
-import { Footer } from '@/components/sections/Footer';
-import { AnnouncementBanner } from '@/components/sections/AnnouncementBanner';
-import { 
-    IconSearch, 
-    IconChevronRight, 
-    IconArrowLeft, 
-    IconArrowRight 
-} from '@tabler/icons-react';
+export const metadata = {
+  title: "Insights & Resources | Accept Recruitment",
+  description: "Stay up to date with the latest news, insights, and resources from Accept Recruitment.",
+};
 
-// ─── Placeholder Blog Data ──────────────────────────────────────────────
+export default async function BlogPage({ searchParams }) {
+  const category = (await searchParams).category || null;
+  const page = parseInt((await searchParams).page) || 1;
+  const limit = 15; // Jelenítsünk meg 15 posztot egy oldalon
 
-const blogPosts = [
-    {
-        title: "Coventry Agencies Recruitment: Find Your Talent - Accept Recruitment",
-        categories: ["Coventry", "Employer Guides"],
-        slug: "coventry-agencies-recruitment"
-    },
-    {
-        title: "Coventry Warehouse Recruitment Specialists - Accept Recruitment",
-        categories: ["Coventry", "Warehouse & Industrial"],
-        slug: "coventry-warehouse-recruitment-specialists"
-    },
-    {
-        title: "Delivery Driver Jobs Tamworth | Van & Multi-Drop Roles",
-        categories: ["Tamworth", "Driving & Logistics"],
-        slug: "delivery-driver-jobs-tamworth"
-    },
-    {
-        title: "Leicester Jobs: Temporary to Permanent Career Paths",
-        categories: ["Leicester", "Career Guides"],
-        slug: "leicester-jobs-career-paths"
-    },
-    {
-        title: "Supply Chain Resilience in the Midlands - Industry Insight",
-        categories: ["Midlands", "Industry News"],
-        slug: "supply-chain-resilience-midlands"
-    },
-    {
-        title: "How to Ace Your Warehouse Interview",
-        categories: ["Career Guides", "Warehouse & Industrial"],
-        slug: "ace-warehouse-interview"
-    },
-    {
-        title: "Why Retention Matters More Than Hiring in 2024",
-        categories: ["Employer Guides", "HR Tips"],
-        slug: "retention-matters-2024"
-    },
-    {
-        title: "The Future of Logistics Automation",
-        categories: ["Industry News", "Automation"],
-        slug: "future-of-logistics-automation"
-    },
-    {
-        title: "Midlands Manufacturing Hub: A Growth Story",
-        categories: ["Midlands", "Manufacturing"],
-        slug: "midlands-manufacturing-growth"
-    },
-    {
-        title: "Essential Compliance in Temporary Staffing",
-        categories: ["Compliance", "Employer Guides"],
-        slug: "essential-compliance-staffing"
-    },
-    {
-        title: "Top 5 Benefits of Working and Living in Coventry",
-        categories: ["Coventry", "Career Guides"],
-        slug: "benefits-working-coventry"
-    },
-    {
-        title: "Recruiting for Peak Season: A Guide for Employers",
-        categories: ["Employer Guides", "Peak Season"],
-        slug: "recruiting-peak-season"
-    }
-];
+  const [{ posts, count }, categories] = await Promise.all([
+    getPublicPosts(page, limit, category),
+    getPublicCategories()
+  ]);
 
-const categories = [
-    "All Topics",
-    "Career Guides",
-    "Employer Guides",
-    "Warehouse & Industrial",
-    "Driving & Logistics",
-    "Industry News"
-];
+  const totalPages = Math.ceil(count / limit);
 
-const locations = [
-    "Coventry",
-    "Leicester",
-    "Tamworth",
-    "Midlands"
-];
+  return (
+    <div className="min-h-screen selection:bg-teal-5/30 selection:text-teal-3 transition-colors duration-300">
+      <Navbar />
 
-// ─── Components ──────────────────────────────────────────────────────────
+      {/* Hero Section */}
+      <section className="relative pt-40 pb-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal-5/10 via-gray-50 dark:via-navy-900 to-gray-50 dark:to-navy-900 pointer-events-none" />
+        <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-5/20 to-transparent blur-sm" />
+        
+        <div className="mx-auto max-w-[1140px] px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-navy-900 dark:text-white tracking-tight mb-6">
+              Insights & <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-5 to-teal-4 dark:from-teal-3 dark:to-teal-5">Resources</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-white/60 mb-12 max-w-2xl mx-auto">
+              Stay up to date with the latest industry news, recruitment insights, and company updates from our team of experts.
+            </p>
 
-function BlogCard({ title, categories, slug }) {
-    return (
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.02 }}
-            className="group relative bg-white/[0.03] border border-white/5 rounded-[32px] p-8 md:p-10 transition-all duration-300 hover:border-teal-5/30 hover:bg-white/[0.05] shadow-xl h-full flex flex-col"
-        >
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-6">
-                {categories.map((cat, i) => (
-                    <span key={i} className="px-3 py-1 rounded-full bg-teal-5/10 border border-teal-5/20 text-[10px] font-black uppercase tracking-widest text-teal-4">
-                        {cat}
-                    </span>
-                ))}
-            </div>
-
-            {/* Title */}
-            <h3 className="text-white text-2xl md:text-2xl font-bold mb-8 tracking-tight leading-tight group-hover:text-teal-5 transition-colors flex-grow">
-                {title}
-            </h3>
-
-            {/* Link */}
-            <div className="flex items-center gap-2 text-teal-5 text-sm font-black uppercase tracking-widest mt-auto pt-4 border-t border-white/5">
-                <span>Read Article</span>
-                <IconChevronRight size={18} className="translate-x-0 group-hover:translate-x-1 transition-transform" />
-            </div>
-        </motion.div>
-    );
-}
-
-// ─── Sections ──────────────────────────────────────────────────────────
-
-function BlogHero() {
-    return (
-        <section className="relative pt-40 pb-20 bg-[#0D1520] overflow-hidden text-center">
-            {/* Background Grain/Fog */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-teal-5/[0.03] to-transparent pointer-events-none" />
-            
-            <div className="mx-auto max-w-4xl px-6 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center items-center gap-3">
+              <Link
+                href="/blog"
+                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  !category
+                    ? "bg-teal-5 text-navy-900 shadow-[0_0_20px_rgba(51,193,191,0.3)]"
+                    : "bg-black/5 text-gray-600 hover:bg-black/10 hover:text-navy-900 dark:bg-white/5 dark:text-white/60 dark:hover:bg-white/10 dark:hover:text-white border border-black/10 dark:border-white/10"
+                }`}
+              >
+                All Articles
+              </Link>
+              {categories.map((cat) => (
+                <Link
+                  key={cat.slug}
+                  href={`/blog?category=${cat.slug}`}
+                  className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
+                    category === cat.slug
+                      ? "bg-teal-5 text-navy-900 shadow-[0_0_20px_rgba(51,193,191,0.3)]"
+                      : "bg-black/5 text-gray-600 hover:bg-black/10 hover:text-navy-900 dark:bg-white/5 dark:text-white/60 dark:hover:bg-white/10 dark:hover:text-white border border-black/10 dark:border-white/10"
+                  }`}
                 >
-                    <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">RECRUITMENT INSIGHTS</h2>
-                    <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]">
-                        Knowledge Hub
-                    </h1>
-                    <p className="text-white/40 text-xl md:text-2xl leading-relaxed font-medium max-w-2xl mx-auto">
-                        Expert guidance on job searching, recruitment, and career development in the Midlands.
-                    </p>
-                </motion.div>
+                  {cat.name}
+                </Link>
+              ))}
             </div>
-        </section>
-    );
-}
+          </div>
+        </div>
+      </section>
 
-function SearchAndFilterSection() {
-    const [activeCategory, setActiveCategory] = useState("All Topics");
-    const [activeLocation, setActiveLocation] = useState(null);
+      {/* Blog Grid */}
+      <section className="py-20 relative z-10">
+        <div className="mx-auto max-w-[1140px] px-6">
+          {posts.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                {posts.map((post, index) => (
+                  <BlogCard key={post.id} post={post} index={index} />
+                ))}
+              </div>
 
-    return (
-        <section className="pb-16 bg-[#0D1520]">
-            <div className="mx-auto max-w-5xl px-6">
-                {/* Search Bar */}
-                <div className="relative max-w-2xl mx-auto mb-16">
-                    <IconSearch className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" size={24} />
-                    <input 
-                        type="text" 
-                        placeholder="Search articles..."
-                        className="w-full bg-white/[0.05] border border-white/10 rounded-2xl py-6 pl-16 pr-8 text-white focus:outline-none focus:border-teal-5/50 transition-all text-lg font-medium"
-                    />
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex justify-center items-center gap-2">
+                  {page > 1 && (
+                    <Link
+                      href={`/blog?page=${page - 1}${category ? `&category=${category}` : ""}`}
+                      className="px-4 py-2 rounded-lg bg-black/5 dark:bg-white/5 text-gray-600 dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/10 hover:text-navy-900 dark:hover:text-white border border-black/10 dark:border-white/10 transition-colors font-semibold text-sm"
+                    >
+                      Previous
+                    </Link>
+                  )}
+                  
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: totalPages }).map((_, i) => {
+                      const pageNum = i + 1;
+                      // Csak az aktív körüli oldalakat mutassuk, vagy az elsőt/utolsót (egyszerűsítve)
+                      if (pageNum === 1 || pageNum === totalPages || (pageNum >= page - 1 && pageNum <= page + 1)) {
+                        return (
+                          <Link
+                            key={pageNum}
+                            href={`/blog?page=${pageNum}${category ? `&category=${category}` : ""}`}
+                            className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
+                              page === pageNum
+                                ? "bg-teal-5 text-navy-900"
+                                : "text-gray-600 dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/10 hover:text-navy-900 dark:hover:text-white"
+                            }`}
+                          >
+                            {pageNum}
+                          </Link>
+                        );
+                      } else if (pageNum === page - 2 || pageNum === page + 2) {
+                        return <span key={pageNum} className="text-gray-400 dark:text-white/30 px-1">...</span>;
+                      }
+                      return null;
+                    })}
+                  </div>
+
+                  {page < totalPages && (
+                    <Link
+                      href={`/blog?page=${page + 1}${category ? `&category=${category}` : ""}`}
+                      className="px-4 py-2 rounded-lg bg-black/5 dark:bg-white/5 text-gray-600 dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/10 hover:text-navy-900 dark:hover:text-white border border-black/10 dark:border-white/10 transition-colors font-semibold text-sm"
+                    >
+                      Next
+                    </Link>
+                  )}
                 </div>
-
-                {/* Categories */}
-                <div className="flex flex-col gap-8">
-                    <div className="flex flex-wrap justify-center gap-3">
-                        {categories.map((cat, i) => (
-                            <button
-                                key={i}
-                                onClick={() => setActiveCategory(cat)}
-                                className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all
-                                    ${activeCategory === cat 
-                                        ? "bg-teal-5 text-black shadow-[0_0_20px_rgba(20,184,166,0.3)]" 
-                                        : "bg-white/5 text-white/40 hover:text-white hover:bg-white/10"
-                                    }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
-
-                    <div className="flex flex-wrap justify-center gap-3">
-                        {locations.map((loc, i) => (
-                            <button
-                                key={i}
-                                onClick={() => setActiveLocation(loc === activeLocation ? null : loc)}
-                                className={`px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all
-                                    ${activeLocation === loc 
-                                        ? "border-teal-5 text-teal-4 bg-teal-5/5" 
-                                        : "border-white/10 text-white/30 hover:border-white/30 hover:text-white"
-                                    }`}
-                            >
-                                {loc}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-                
-                <div className="text-center mt-12">
-                    <p className="text-white/20 text-xs font-bold uppercase tracking-widest">
-                        Showing 1-12 of 97 articles
-                    </p>
-                </div>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-20 glass-card rounded-3xl border border-black/5 dark:border-white/10">
+              <h3 className="text-2xl text-navy-900 dark:text-white font-semibold mb-2">No articles found</h3>
+              <p className="text-gray-600 dark:text-white/50">There are no articles published in this category yet.</p>
             </div>
-        </section>
-    );
-}
+          )}
+        </div>
+      </section>
 
-function BlogGridSection() {
-    return (
-        <section className="pb-32 bg-[#0D1520]">
-            <div className="mx-auto max-w-7xl px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {blogPosts.map((post, i) => (
-                        <BlogCard key={i} {...post} />
-                    ))}
-                </div>
-
-                {/* Pagination */}
-                <div className="mt-24 flex items-center justify-center gap-3">
-                    <button className="p-4 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10 transition-all">
-                        <IconArrowLeft size={20} />
-                    </button>
-                    {[1, 2, 3, '...', 9].map((p, i) => (
-                        <button 
-                            key={i}
-                            className={`w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-all
-                                ${p === 1 ? 'bg-teal-5 text-black' : 'text-white/40 hover:bg-white/5'}`}
-                        >
-                            {p}
-                        </button>
-                    ))}
-                    <button className="p-4 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:text-white hover:bg-white/10 transition-all">
-                        <IconArrowRight size={20} />
-                    </button>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-function BottomCTA() {
-    return (
-        <section className="py-24 bg-teal-5 relative overflow-hidden">
-             {/* Decorative Background */}
-             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
-             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-black/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
-
-             <div className="mx-auto max-w-5xl px-6 relative z-10 text-center">
-                 <h2 className="text-black text-4xl md:text-6xl font-black mb-8 tracking-tighter leading-[0.95]">
-                     Ready to Find Your Next Role?
-                 </h2>
-                 <p className="text-black/60 text-xl font-bold max-w-2xl mx-auto mb-12">
-                     Accept Recruitment specializes in warehouse, logistics, and industrial recruitment across the Midlands.
-                 </p>
-                 <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                     <button className="w-full md:w-auto px-12 py-6 rounded-2xl bg-black text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-2xl">
-                         Search Jobs →
-                     </button>
-                     <button className="w-full md:w-auto px-12 py-6 rounded-2xl border border-black/20 text-black font-black uppercase tracking-widest text-xs hover:bg-black/5 transition-all">
-                         Register Now
-                     </button>
-                 </div>
-             </div>
-        </section>
-    );
-}
-
-export default function BlogListingPage() {
-    return (
-        <main className="bg-[#0D1520] min-h-screen selection:bg-teal-5 selection:text-black dark">
-            <AnnouncementBanner />
-            <Navbar />
-            <BlogHero />
-            <SearchAndFilterSection />
-            <BlogGridSection />
-            <BottomCTA />
-            <Footer />
-        </main>
-    );
+      <CtaBanner />
+      <Footer />
+    </div>
+  );
 }

@@ -66,7 +66,7 @@ function QuoteHero() {
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -244,7 +244,7 @@ function QuoteBuilderTool() {
                         
                         <div className="flex items-center justify-between mb-10">
                             <h3 className="text-white text-sm font-bold uppercase tracking-widest">Estimated Totals</h3>
-                            <div className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${results.complexity === 'Low' ? 'bg-green-500/20 text-green-400' : 'bg-blue-500/20 text-blue-400'}`}>
+                            <div className={`px-3 py-1 rounded-full text-[9px] font-semibold uppercase tracking-widest ${results.complexity === 'Low' ? 'bg-green-500/20 text-green-400' : 'bg-blue-500/20 text-blue-400'}`}>
                                 {results.complexity} Complexity
                             </div>
                         </div>
@@ -285,12 +285,12 @@ function QuoteBuilderTool() {
                         </div>
 
                         <div className="grid grid-cols-1 gap-3">
-                             <button className="w-full py-5 rounded-[22px] bg-teal-5 hover:bg-teal-6 text-white font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-2 group">
+                             <a href="/get-started" className="w-full py-5 rounded-[22px] bg-teal-5 hover:bg-teal-6 text-white font-semibold text-xs uppercase tracking-widest transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-2 group">
                                 Book Quote Consultation <IconArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                            </button>
-                            <button className="w-full py-5 rounded-[22px] bg-white/5 hover:bg-white/10 text-white font-black text-xs uppercase tracking-widest transition-all border border-white/5 flex items-center justify-center gap-2">
+                            </a>
+                            <a href="https://wa.me/07495995406" target="_blank" rel="noopener noreferrer" className="w-full py-5 rounded-[22px] bg-white/5 hover:bg-white/10 text-white font-semibold text-xs uppercase tracking-widest transition-all border border-white/5 flex items-center justify-center gap-2">
                                 <IconBrandWhatsapp size={18} className="text-teal-5" /> WhatsApp Our Team
-                            </button>
+                            </a>
                         </div>
                     </div>
 

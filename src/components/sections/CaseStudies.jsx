@@ -15,6 +15,7 @@ const caseStudies = [
     title: "InPost UK",
     description: "From crisis call to preferred supplier in 17 days.",
     meta: ["4,200+ shifts", "98% attendance"],
+    href: "/case-studies/inpost",
   },
   {
     theme: "PRODUCTION",
@@ -24,6 +25,7 @@ const caseStudies = [
     title: "Vistry Group",
     description: "Doubled workforce capacity in just 10 weeks.",
     meta: ["94.2% fulfilment", "42 converted"],
+    href: "/case-studies/vistry",
   },
   {
     theme: "RETAIL",
@@ -33,6 +35,7 @@ const caseStudies = [
     title: "Poundstretcher",
     description: "Nine years of consistent delivery. Now sole supplier.",
     meta: ["200 daily", "8+ years"],
+    href: "/case-studies/poundstretcher",
   },
 ];
 
@@ -59,12 +62,13 @@ export function CaseStudies() {
           {caseStudies.map((cs, i) => (
             <motion.div
               key={cs.theme}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#1c2230] transition-all duration-300 hover:border-white/10 hover:bg-[#232938] cursor-pointer"
+              className="h-full"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.12 }}
             >
+              <Link href={cs.href} className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#1c2230] transition-all duration-300 hover:border-white/10 hover:bg-[#232938] cursor-pointer h-full">
               {/* Subtle glow for dark cards on hover (adopted from BentoCard) */}
               <div className="absolute inset-0 bg-linear-to-br from-[#00A99D]/0 to-[#00A99D]/0 transition-all duration-500 group-hover:from-[#00A99D]/3 group-hover:to-transparent pointer-events-none z-0"></div>
 
@@ -126,13 +130,14 @@ export function CaseStudies() {
                   ))}
                 </div>
               </div>
+              </Link>
             </motion.div>
           ))}
         </div>
 
         {/* Global CTA */}
         <div className="mt-14 text-center">
-          <Button variant="primary" size="lg">
+          <Button variant="primary" size="lg" href="/case-studies">
             View all case studies
           </Button>
         </div>

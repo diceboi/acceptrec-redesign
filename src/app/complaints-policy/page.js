@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/sections/Navbar';
 import { Footer } from '@/components/sections/Footer';
-import { AnnouncementBanner } from '@/components/sections/AnnouncementBanner';
 import { IconMapPin, IconMail } from '@tabler/icons-react';
 
 const steps = [
@@ -21,54 +20,43 @@ const steps = [
 
 export default function ComplaintsPolicyPage() {
     return (
-        <main className="bg-[#0D1520] min-h-screen selection:bg-teal-5 selection:text-black dark">
-            <AnnouncementBanner />
+        <main className="bg-navy-900 min-h-screen">
             <Navbar />
-            <section className="relative pt-48 pb-16 bg-[#0D1520] text-center">
-                <div className="mx-auto max-w-4xl px-6">
+            <section className="relative flex min-h-[50vh] w-full items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
+                <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
+                <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                        <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">CUSTOMER SERVICE</h2>
-                        <h1 className="text-white text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-[0.95]">Complaints Policy</h1>
-                        <p className="text-white/40 text-xl leading-relaxed font-medium max-w-2xl mx-auto">
-                            Our commitment to resolving issues and improving service
-                        </p>
+                        <span className="mb-6 inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#00A99D]">CUSTOMER SERVICE</span>
+                        <h1 className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8">Complaints Policy</h1>
+                        <p className="text-[#8B98AB] text-xl leading-relaxed font-medium max-w-2xl mx-auto">Our commitment to resolving issues and improving service</p>
                     </motion.div>
                 </div>
+                <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-700 to-transparent" />
             </section>
 
-            <section className="pb-32 bg-[#0D1520]">
+            <section className="pb-32 bg-navy-700">
                 <div className="mx-auto max-w-4xl px-6">
-                    <div className="bg-[#161B28] border border-white/5 rounded-[40px] p-10 md:p-16 mb-10">
-                        <p className="text-white/50 leading-relaxed font-medium mb-4">
-                            Accept Recruitment Limited is committed to providing a high level service to our customers. If you do not receive satisfaction from us we need you to tell us about it. This will help us to improve our standards.
-                        </p>
-                        <p className="text-white/40 leading-relaxed font-medium">
-                            If you have a complaint, please contact the Senior Recruitment Consultant via our Contact page or WhatsApp in the first instance. If you are not satisfied please contact Mrs M. Loj (Operations Director) at: Accept Recruitment, Unit 4, Oswin Road, Leicester, LE3 1HR.
-                        </p>
+                    <div className="glass-card rounded-2xl p-10 md:p-16 mb-10">
+                        <p className="text-[#8B98AB] leading-relaxed font-medium mb-4">Accept Recruitment Limited is committed to providing a high level service to our customers. If you do not receive satisfaction from us we need you to tell us about it. This will help us to improve our standards.</p>
+                        <p className="text-[#8B98AB]/70 leading-relaxed font-medium">If you have a complaint, please contact the Senior Recruitment Consultant via our Contact page or WhatsApp in the first instance. If you are not satisfied please contact Mrs M. Loj (Operations Director) at: Accept Recruitment, Unit 4, Oswin Road, Leicester, LE3 1HR.</p>
                     </div>
 
-                    <h3 className="text-white text-2xl font-bold mb-8">Our Complaints Process</h3>
+                    <h3 className="text-white text-2xl font-semibold mb-8">Our Complaints Process</h3>
                     <div className="space-y-4 mb-12">
                         {steps.map((s, i) => (
                             <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }} className="flex gap-6 items-start">
-                                <div className="w-10 h-10 rounded-full bg-teal-5 text-black font-black text-sm flex items-center justify-center shrink-0 shadow-lg shadow-teal-5/20">{s.step}</div>
-                                <div className="bg-[#161B28] border border-white/5 rounded-[24px] p-6 flex-grow">
-                                    <h4 className="text-white font-bold mb-2">{s.title}</h4>
-                                    <p className="text-white/40 text-sm leading-relaxed font-medium">{s.desc}</p>
+                                <div className="w-10 h-10 rounded-full bg-teal-5 text-black font-semibold text-sm flex items-center justify-center shrink-0 shadow-lg shadow-teal-5/20">{s.step}</div>
+                                <div className="glass-card rounded-2xl p-6 flex-grow">
+                                    <h4 className="text-white font-semibold mb-2">{s.title}</h4>
+                                    <p className="text-[#8B98AB] text-sm leading-relaxed font-medium">{s.desc}</p>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Link href="/offices" className="px-10 py-6 rounded-2xl bg-teal-5 text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 inline-flex items-center justify-center gap-3">
-                            <IconMapPin size={18} />
-                            Find Your Office
-                        </Link>
-                        <Link href="/contact" className="px-10 py-6 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-white/10 transition-all inline-flex items-center justify-center gap-3">
-                            <IconMail size={18} className="text-teal-5" />
-                            Contact Form
-                        </Link>
+                        <Link href="/offices" className="px-10 py-5 rounded-full bg-teal-5 text-black font-semibold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 inline-flex items-center justify-center gap-3"><IconMapPin size={18} /> Find Your Office</Link>
+                        <Link href="/contact" className="px-10 py-5 rounded-full bg-white/5 border border-white/10 text-white font-semibold uppercase tracking-widest text-xs hover:bg-white/10 transition-all inline-flex items-center justify-center gap-3"><IconMail size={18} className="text-teal-5" /> Contact Form</Link>
                     </div>
                 </div>
             </section>

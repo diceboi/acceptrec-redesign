@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 /**
@@ -8,6 +9,8 @@ import { cn } from "@/lib/utils";
  *
  * Both use rounded-xl (moderate rounding, not fully round).
  * Size: sm | md | lg
+ *
+ * If `href` is provided, renders as a Next.js <Link>.
  */
 export const Button = React.forwardRef(
   (
@@ -15,6 +18,7 @@ export const Button = React.forwardRef(
       className,
       variant = "primary", // primary | secondary
       size = "md", // sm | md | lg
+      href,
       ...props
     },
     ref,
@@ -37,13 +41,28 @@ export const Button = React.forwardRef(
         "border border-white/25 bg-white/8 text-white backdrop-blur-sm hover:border-white/45 hover:bg-white/15",
     };
 
+    const classes = cn(base, sizes[size], variants[variant], className);
+
+    if (href) {
+      const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+      if (isExternal) {
+        return (
+          <a ref={ref} href={href} className={classes} target="_blank" rel="noopener noreferrer" {...props} />
+        );
+      }
+      return (
+        <Link ref={ref} href={href} className={classes} {...props} />
+      );
+    }
+
     return (
       <button
         ref={ref}
-        className={cn(base, sizes[size], variants[variant], className)}
+        className={classes}
         {...props}
       />
     );
   },
 );
 Button.displayName = "Button";
+

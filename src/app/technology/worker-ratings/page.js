@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -22,31 +22,31 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function RatingsHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0d111a] pt-48 pb-16 border-b border-white/5">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0d111a] pt-32 pb-16">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute -top-24 left-1/3 h-[500px] w-[500px] rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
       
-      <div className="relative z-10 mx-auto max-w-285 px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }} 
           animate={{ opacity: 1, scale: 1 }} 
           className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-5/10 border border-teal-5/20 backdrop-blur-sm"
         >
           <IconChartBar className="text-teal-5" size={16} />
-          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5 text-glow-teal">ACCTRATE — Live Performance Tracker</span>
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">ACCTRATE — Live Performance Tracker</span>
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          We Rate Every Worker. <br /><span className="text-teal-5 text-glow-teal">Every Shift.</span>
+          We Rate Every Worker. <br /><span className="text-teal-5">Every Shift.</span>
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/50 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -61,11 +61,11 @@ function RatingsHero() {
 // ─── Pain Points Section ───────────────────────────────────────────────────
 function AgencyProblemSection() {
     return (
-        <section className="py-24 bg-[#0d111a] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-[#0d111a]">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-16">
                     <h3 className="text-white text-4xl font-bold mb-4 tracking-tight leading-tight">Other agencies?</h3>
-                    <p className="text-white/40 text-lg leading-relaxed italic">They keep sending the same useless people. Here's why.</p>
+                    <p className="text-[#8B98AB] text-lg leading-relaxed italic">They keep sending the same useless people. Here's why.</p>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -87,14 +87,14 @@ function AgencyProblemSection() {
                             d: "Ask them who their best warehouse picker is. Watch them fumble. They have names in a database. That's it."
                         }
                     ].map((item, i) => (
-                        <div key={i} className="p-10 rounded-[32px] bg-white/5 border border-white/5 group hover:bg-white/[0.07] transition-all">
+                        <div key={i} className="p-10 rounded-2xl bg-white/5 border border-white/5 group hover:bg-white/[0.07] transition-all">
                              <div className="flex gap-4 mb-6">
                                 <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-500 shrink-0">
                                     <IconAlertTriangle size={20} />
                                 </div>
                                 <h4 className="text-white font-bold text-xl leading-snug">{item.t}</h4>
                              </div>
-                             <p className="text-white/40 text-sm leading-relaxed">{item.d}</p>
+                             <p className="text-[#8B98AB] text-sm leading-relaxed">{item.d}</p>
                         </div>
                     ))}
                 </div>
@@ -113,22 +113,22 @@ function RatingLoopSection() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522] border-b border-white/5 relative overflow-hidden">
+        <section className="py-24 bg-navy-900 relative overflow-hidden">
              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[1px] bg-teal-5/10 hidden lg:block z-0" />
-             <div className="mx-auto max-w-285 px-6 relative z-10 text-center">
+             <div className="mx-auto max-w-[1140px] px-6 relative z-10 text-center">
                 <div className="mb-16 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-5/10 border border-teal-5/20 backdrop-blur-sm">
-                    <span className="text-[10px] font-black tracking-[0.2em] uppercase text-teal-4">THE ACCEPT WAY</span>
+                    <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-teal-4">THE ACCEPT WAY</span>
                 </div>
                 <h3 className="text-white text-4xl font-bold mb-20 tracking-tight">We actually know our workers.</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                     {steps.map((s, i) => (
                         <div key={i} className="relative">
-                            <div className="w-20 h-20 rounded-3xl bg-[#161b28] border border-white/10 flex items-center justify-center text-teal-4 mx-auto mb-8 relative z-10 shadow-2xl group hover:border-teal-5/50 transition-all">
+                            <div className="w-20 h-20 rounded-2xl bg-white/[0.03] border border-white/10 flex items-center justify-center text-teal-4 mx-auto mb-8 relative z-10 shadow-2xl group hover:border-teal-5/50 transition-all">
                                 <s.icon size={32} />
-                                <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-teal-5 text-[#0d1522] text-[10px] font-black flex items-center justify-center">{i + 1}</div>
+                                <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-teal-5 text-[#0d1522] text-[10px] font-semibold flex items-center justify-center">{i + 1}</div>
                             </div>
                             <h4 className="text-white font-bold mb-4">{s.t}</h4>
-                            <p className="text-white/40 text-xs leading-relaxed max-w-[200px] mx-auto">{s.d}</p>
+                            <p className="text-[#8B98AB] text-xs leading-relaxed max-w-[200px] mx-auto">{s.d}</p>
                         </div>
                     ))}
                 </div>
@@ -148,13 +148,13 @@ function LeaderboardSection() {
     const restricted = { name: "Dave Brown", shifts: 3, score: 34, status: "Restricted", color: "text-red-500", bg: "bg-red-500/10", border: "border-red-500/20" };
 
     return (
-        <section className="py-24 bg-[#0d111a] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-[#0d111a]">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                     <div className="lg:col-span-6">
                          <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">DATA-DRIVEN SELECTION</h2>
                          <h3 className="text-white text-4xl md:text-5xl font-bold mb-8 tracking-tight">Not guesswork. <br />Real knowledge.</h3>
-                         <p className="text-white/50 text-xl leading-relaxed mb-10">
+                         <p className="text-white/60 text-xl leading-relaxed mb-10">
                             Every worker has a score. Built from real feedback, real performance, real shifts. When you ask for good workers, we don't guess. We know.
                          </p>
                          <p className="text-teal-5 font-bold p-6 rounded-2xl bg-teal-5/5 border border-teal-5/10 italic">
@@ -163,10 +163,10 @@ function LeaderboardSection() {
                     </div>
                     <div className="lg:col-span-6 relative">
                          <div className="absolute inset-0 bg-teal-5/5 blur-[100px] rounded-full pointer-events-none" />
-                         <div className="bg-[#161b28] rounded-[40px] border border-white/10 p-10 shadow-2xl relative z-10">
+                         <div className="bg-white/[0.03] rounded-2xl border border-white/10 p-10 shadow-2xl relative z-10">
                             <div className="flex items-center justify-between mb-8">
                                 <h4 className="text-white font-bold opacity-40 uppercase tracking-widest text-[10px]">Worker Scoreboard</h4>
-                                <div className="text-teal-4 text-[10px] font-black tracking-widest uppercase animate-pulse">● LIVE UPDATES</div>
+                                <div className="text-teal-4 text-[10px] font-semibold tracking-widest uppercase animate-pulse">● LIVE UPDATES</div>
                             </div>
                             
                             <div className="space-y-4">
@@ -182,12 +182,12 @@ function LeaderboardSection() {
                                             <div className="w-10 h-10 rounded-full bg-teal-5/10 flex items-center justify-center text-teal-4 font-bold text-xs">{i + 1}</div>
                                             <div>
                                                 <div className="text-white font-bold">{w.name}</div>
-                                                <div className="text-[10px] text-white/30 uppercase font-black tracking-widest">{w.shifts} shifts completed</div>
+                                                <div className="text-[10px] text-[#8B98AB]/70 uppercase font-semibold tracking-widest">{w.shifts} shifts completed</div>
                                             </div>
                                         </div>
                                         <div className="text-right">
                                             <div className={`text-2xl font-mono font-bold tracking-tighter ${w.color}`}>{w.score}</div>
-                                            <div className={`text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ${w.bg} ${w.color} border ${w.border}`}>{w.status}</div>
+                                            <div className={`text-[9px] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded ${w.bg} ${w.color} border ${w.border}`}>{w.status}</div>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -203,12 +203,12 @@ function LeaderboardSection() {
                                         <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 font-bold text-xs">!</div>
                                         <div>
                                             <div className="text-white font-bold">{restricted.name}</div>
-                                            <div className="text-[10px] text-white/30 uppercase font-black tracking-widest">{restricted.shifts} shifts completed</div>
+                                            <div className="text-[10px] text-[#8B98AB]/70 uppercase font-semibold tracking-widest">{restricted.shifts} shifts completed</div>
                                         </div>
                                     </div>
                                     <div className="text-right">
                                         <div className={`text-2xl font-mono font-bold tracking-tighter ${restricted.color}`}>{restricted.score}</div>
-                                        <div className={`text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ${restricted.bg} ${restricted.color} border ${restricted.border}`}>{restricted.status}</div>
+                                        <div className={`text-[9px] font-semibold uppercase tracking-widest px-1.5 py-0.5 rounded ${restricted.bg} ${restricted.color} border ${restricted.border}`}>{restricted.status}</div>
                                     </div>
                                 </motion.div>
                             </div>
@@ -232,19 +232,19 @@ function FeatureGrid() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522]">
-             <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-20">
                     <h3 className="text-white text-4xl font-bold tracking-tight">System Capabilities</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((f, i) => (
-                        <div key={i} className="p-10 rounded-[32px] bg-[#161b28] border border-white/5 hover:border-teal-5/20 transition-all group">
+                        <div key={i} className="p-10 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-teal-5/20 transition-all group">
                              <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-8">
                                 <f.i size={28} />
                             </div>
                             <h4 className="text-white font-bold text-xl mb-4">{f.t}</h4>
-                            <p className="text-white/40 text-sm leading-relaxed">{f.d}</p>
+                            <p className="text-[#8B98AB] text-sm leading-relaxed">{f.d}</p>
                         </div>
                     ))}
                 </div>
@@ -256,7 +256,7 @@ function FeatureGrid() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function WorkerRatingsPage() {
   return (
-    <main className="bg-[#0d1522] min-h-screen font-sans">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
 
       <RatingsHero />

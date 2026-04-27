@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/Button";
 
 export function CtaBanner({
@@ -11,12 +10,12 @@ export function CtaBanner({
   titleHighlight = "Started?",
   subtitle = "Whether you're looking for staff or looking for work, we're here to help. Speak to our team today.",
   primaryButtonText = "I Need Staff",
-  secondaryButtonText = "I Need Work"
+  secondaryButtonText = "I Need Work",
+  primaryButtonHref = "/get-started",
+  secondaryButtonHref = "/jobs",
 } = {}) {
-  const { resolvedTheme } = useTheme();
-  const isLight = resolvedTheme === "light";
   return (
-    <section className="relative w-full overflow-hidden font-sans">
+    <section className="relative w-full overflow-hidden font-sans cta-banner-section">
       {/* Team background image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -26,23 +25,9 @@ export function CtaBanner({
           className="object-cover object-center"
           priority
         />
-        {/* Overlay — inline style to bypass global bg-navy-* override */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundColor: isLight
-              ? "rgba(240,244,248,0.75)"
-              : "rgba(10,13,20,0.80)",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background: isLight
-              ? "linear-gradient(to right, rgba(240,244,248,0.90), rgba(240,244,248,0.65), rgba(240,244,248,0.30))"
-              : "linear-gradient(to right, rgba(10,13,20,0.90), rgba(10,13,20,0.70), rgba(10,13,20,0.40))",
-          }}
-        />
+        {/* Overlay */}
+        <div className="absolute inset-0 cta-overlay" />
+        <div className="absolute inset-0 cta-gradient" />
       </div>
 
       {/* Content */}
@@ -67,11 +52,11 @@ export function CtaBanner({
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
-            <Button variant="primary" size="lg">
+            <Button variant="primary" size="lg" href={primaryButtonHref}>
               {primaryButtonText}
             </Button>
             {secondaryButtonText && (
-              <Button variant="secondary" size="lg">
+              <Button variant="secondary" size="lg" href={secondaryButtonHref}>
                 {secondaryButtonText}
               </Button>
             )}
@@ -81,3 +66,4 @@ export function CtaBanner({
     </section>
   );
 }
+

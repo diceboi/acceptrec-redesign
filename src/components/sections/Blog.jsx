@@ -17,7 +17,7 @@ const posts = [
     date: "Mar 5, 2026",
     readTime: "4 min read",
     image: "/blog/no-shows.jpg",
-    href: "#",
+    href: "/blog",
   },
   {
     category: "Client Success",
@@ -30,7 +30,7 @@ const posts = [
     date: "Feb 28, 2026",
     readTime: "6 min read",
     image: "/blog/inpost-story.jpg",
-    href: "#",
+    href: "/blog",
   },
   {
     category: "Industry Insight",
@@ -43,7 +43,7 @@ const posts = [
     date: "Feb 18, 2026",
     readTime: "5 min read",
     image: "/blog/fill-rate.jpg",
-    href: "#",
+    href: "/blog",
   },
 ];
 
@@ -165,7 +165,7 @@ export function Blog() {
 
         {/* CTA */}
         <div className="mt-14 text-center">
-          <Button variant="primary" size="lg">
+          <Button variant="primary" size="lg" href="/blog">
             View all articles
           </Button>
         </div>

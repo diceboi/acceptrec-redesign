@@ -5,28 +5,15 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/sections/Navbar';
 import { Footer } from '@/components/sections/Footer';
-import { AnnouncementBanner } from '@/components/sections/AnnouncementBanner';
-import { 
-    IconCurrencyPound,
-    IconCalendarCheck,
-    IconMapPin,
-    IconCheck,
-    IconArrowRight,
-    IconUserPlus,
-    IconTargetArrow,
-    IconBriefcase,
-    IconStar,
-    IconPackage,
-    IconBuildingFactory2,
-    IconMeat,
-    IconDots,
-    IconId,
-    IconFileText,
-    IconHome,
-    IconCertificate
+import { CtaBanner } from '@/components/sections/CtaBanner';
+import {
+    IconCurrencyPound, IconCalendarCheck, IconMapPin, IconCheck, IconArrowRight,
+    IconUserPlus, IconTargetArrow, IconBriefcase, IconStar, IconPackage,
+    IconBuildingFactory2, IconMeat, IconDots, IconId, IconFileText, IconHome, IconCertificate
 } from '@tabler/icons-react';
 
-// ─── Data ──────────────────────────────────────────────────────────
+const containerVariants = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
+const cardVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
 const whyUs = [
     { icon: IconCurrencyPound, title: "Reliable Pay", desc: "Weekly pay, always on time. No hassle, no excuses. We've never missed a payroll since 2015." },
@@ -35,26 +22,10 @@ const whyUs = [
 ];
 
 const opportunities = [
-    {
-        icon: IconPackage,
-        title: "Warehousing & Logistics",
-        roles: ["Warehouse operatives", "Forklift drivers (all licenses)", "Pickers & packers", "Loading/unloading", "Goods in/out"]
-    },
-    {
-        icon: IconBuildingFactory2,
-        title: "Manufacturing",
-        roles: ["Production operatives", "Machine operators", "Assembly line workers", "Quality control", "General labour"]
-    },
-    {
-        icon: IconMeat,
-        title: "Food Production",
-        roles: ["Food production staff", "Packing & labelling", "Line operatives", "Food prep", "Hygiene roles"]
-    },
-    {
-        icon: IconDots,
-        title: "Other Roles",
-        roles: ["Cleaning operatives", "Catering assistants", "Site labour", "Delivery drivers", "And more..."]
-    }
+    { icon: IconPackage, title: "Warehousing & Logistics", roles: ["Warehouse operatives", "Forklift drivers (all licenses)", "Pickers & packers", "Loading/unloading", "Goods in/out"] },
+    { icon: IconBuildingFactory2, title: "Manufacturing", roles: ["Production operatives", "Machine operators", "Assembly line workers", "Quality control", "General labour"] },
+    { icon: IconMeat, title: "Food Production", roles: ["Food production staff", "Packing & labelling", "Line operatives", "Food prep", "Hygiene roles"] },
+    { icon: IconDots, title: "Other Roles", roles: ["Cleaning operatives", "Catering assistants", "Site labour", "Delivery drivers", "And more..."] }
 ];
 
 const steps = [
@@ -71,72 +42,52 @@ const requirements = [
     { icon: IconCertificate, label: "National Insurance", desc: "Your NI number" }
 ];
 
-// ─── Sections ────────────────────────────────────────────────────────
-
 function CandidatesHero() {
     return (
-        <section className="relative pt-48 pb-24 bg-[#0D1520] overflow-hidden text-center">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-teal-5/[0.03] to-transparent pointer-events-none" />
-            
-            <div className="mx-auto max-w-4xl px-6 relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">FOR WORKERS</h2>
-                    <h1 className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-10 tracking-tighter leading-[0.95]">
-                        Why Work<br />With Us
-                    </h1>
-                    <p className="text-white/40 text-xl md:text-2xl leading-relaxed font-medium max-w-2xl mx-auto mb-12">
-                        Consistent shifts, weekly pay, and opportunities across Leicester. Warehouse, manufacturing, and logistics roles available.
-                    </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <Link href="/registration" className="w-full sm:w-auto px-10 py-6 rounded-2xl bg-teal-5 text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-3">
-                            Register Now
-                            <IconArrowRight size={18} />
-                        </Link>
-                        <Link href="/jobs" className="w-full sm:w-auto px-10 py-6 rounded-2xl bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:bg-white/10 transition-all flex items-center justify-center gap-3">
-                            Browse Jobs
-                        </Link>
-                    </div>
+        <section className="relative flex min-h-[70vh] w-full items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-24">
+            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+                <motion.div className="absolute rounded-full" style={{ height: "70%", width: "55%", left: "-10%", top: "-10%", background: "var(--color-teal-5)", opacity: 0.13, filter: "blur(90px)" }} animate={{ scale: [1, 1.3, 1], x: [0, 80, 0], y: [0, 50, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+                <motion.div className="absolute rounded-full" style={{ height: "60%", width: "55%", right: "-10%", top: "-5%", background: "var(--color-purple-5)", opacity: 0.18, filter: "blur(100px)" }} animate={{ scale: [1, 1.4, 1], x: [0, -80, 0], y: [0, 100, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }} />
+            </div>
+            <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
+            <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
+                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 inline-flex items-center gap-2 rounded-full border border-teal-5/30 bg-teal-5/10 px-4 py-2">
+                    <span className="w-2 h-2 rounded-full bg-teal-5 animate-pulse" />
+                    <span className="text-sm font-semibold text-teal-4">For Workers</span>
+                </motion.div>
+                <motion.h1 className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>Why Work<br />With Us</motion.h1>
+                <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-12" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>Consistent shifts, weekly pay, and opportunities across Leicester. Warehouse, manufacturing, and logistics roles available.</motion.p>
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Link href="/registration" className="w-full sm:w-auto px-10 py-5 rounded-full bg-teal-5 text-black font-semibold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-3">Register Now <IconArrowRight size={18} /></Link>
+                    <Link href="/jobs" className="w-full sm:w-auto px-10 py-5 rounded-full bg-white/5 border border-white/10 text-white font-semibold uppercase tracking-widest text-xs hover:bg-white/10 transition-all flex items-center justify-center gap-3">Browse Jobs</Link>
                 </motion.div>
             </div>
+            <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-700 to-transparent" />
         </section>
     );
 }
 
 function WhyUsSection() {
     return (
-        <section className="py-24 bg-[#0D1520]">
-            <div className="mx-auto max-w-7xl px-6">
+        <section className="py-24 bg-navy-700">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-16">
-                    <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-4">WHY US</h2>
-                    <h3 className="text-white text-4xl md:text-6xl font-black tracking-tighter mb-6">
-                        Delivering Since 2015
-                    </h3>
-                    <p className="text-white/40 text-xl font-medium">
-                        We&apos;ve been delivering for our temps since 2015
-                    </p>
+                    <span className="mb-4 inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#00A99D]">WHY US</span>
+                    <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">Delivering Since 2015</h2>
+                    <p className="text-[#8B98AB] text-xl font-medium">We&apos;ve been delivering for our temps since 2015</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-5" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                     {whyUs.map((item, i) => {
                         const Icon = item.icon;
                         return (
-                            <motion.div
-                                key={i}
-                                whileHover={{ y: -8 }}
-                                className="p-10 rounded-[40px] bg-white/[0.03] border border-white/5 hover:border-teal-5/30 transition-all duration-300 group text-center"
-                            >
-                                <div className="w-16 h-16 rounded-2xl bg-teal-5/10 flex items-center justify-center mx-auto mb-8 border border-teal-5/20 group-hover:bg-teal-5 group-hover:text-black transition-all text-teal-5">
-                                    <Icon size={32} />
-                                </div>
-                                <h4 className="text-white text-2xl font-bold mb-4 tracking-tight">{item.title}</h4>
-                                <p className="text-white/40 leading-relaxed font-medium">{item.desc}</p>
+                            <motion.div key={i} variants={cardVariants} className="glass-card group relative overflow-hidden rounded-2xl p-10 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm text-center">
+                                <div className="w-16 h-16 rounded-2xl bg-teal-5/10 flex items-center justify-center mx-auto mb-8 group-hover:bg-[#00A99D] group-hover:text-white transition-all text-teal-5"><Icon size={32} /></div>
+                                <h4 className="text-white text-2xl font-semibold mb-4 tracking-tight">{item.title}</h4>
+                                <p className="text-[#8B98AB] leading-relaxed font-medium">{item.desc}</p>
                             </motion.div>
                         );
                     })}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
@@ -144,47 +95,31 @@ function WhyUsSection() {
 
 function OpportunitiesSection() {
     return (
-        <section className="py-32 bg-[#121926]">
-            <div className="mx-auto max-w-7xl px-6">
+        <section className="py-32 bg-[#0d111a]">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-20">
-                    <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-4">OPPORTUNITIES</h2>
-                    <h3 className="text-white text-4xl md:text-6xl font-black tracking-tighter mb-6">
-                        Find Your Fit
-                    </h3>
-                    <p className="text-white/40 text-xl font-medium">
-                        Find the right opportunity for your skills
-                    </p>
+                    <span className="mb-4 inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#00A99D]">OPPORTUNITIES</span>
+                    <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">Find Your Fit</h2>
+                    <p className="text-[#8B98AB] text-xl font-medium">Find the right opportunity for your skills</p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-5" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
                     {opportunities.map((opp, i) => {
                         const Icon = opp.icon;
                         return (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="bg-white/[0.03] border border-white/5 rounded-[40px] p-10 hover:border-teal-5/30 transition-all group"
-                            >
+                            <motion.div key={i} variants={cardVariants} className="glass-card group relative overflow-hidden rounded-2xl p-10 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm">
                                 <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-14 h-14 rounded-2xl bg-teal-5/10 border border-teal-5/20 flex items-center justify-center text-teal-5 group-hover:bg-teal-5 group-hover:text-black transition-all">
-                                        <Icon size={28} />
-                                    </div>
-                                    <h4 className="text-white text-2xl font-bold tracking-tight">{opp.title}</h4>
+                                    <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-5 group-hover:bg-[#00A99D] group-hover:text-white transition-all"><Icon size={28} /></div>
+                                    <h4 className="text-white text-2xl font-semibold tracking-tight">{opp.title}</h4>
                                 </div>
                                 <div className="space-y-3">
                                     {opp.roles.map((role, j) => (
-                                        <div key={j} className="flex items-center gap-3">
-                                            <IconCheck size={16} className="text-teal-5 shrink-0" strokeWidth={3} />
-                                            <span className="text-white/50 font-medium">{role}</span>
-                                        </div>
+                                        <div key={j} className="flex items-center gap-3"><IconCheck size={16} className="text-teal-5 shrink-0" strokeWidth={3} /><span className="text-[#8B98AB] font-medium">{role}</span></div>
                                     ))}
                                 </div>
                             </motion.div>
                         );
                     })}
-                </div>
+                </motion.div>
             </div>
         </section>
     );
@@ -192,44 +127,25 @@ function OpportunitiesSection() {
 
 function GettingStartedSection() {
     return (
-        <section className="py-32 bg-[#0D1520]">
+        <section className="py-32 bg-navy-700">
             <div className="mx-auto max-w-5xl px-6">
                 <div className="text-center mb-20">
-                    <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-4">GETTING STARTED</h2>
-                    <h3 className="text-white text-4xl md:text-6xl font-black tracking-tighter mb-6">
-                        Four Simple Steps
-                    </h3>
-                    <p className="text-white/40 text-xl font-medium">
-                        Four simple steps to getting started
-                    </p>
+                    <span className="mb-4 inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#00A99D]">GETTING STARTED</span>
+                    <h2 className="text-4xl md:text-5xl font-semibold text-white mb-6 tracking-tight">Four Simple Steps</h2>
+                    <p className="text-[#8B98AB] text-xl font-medium">Four simple steps to getting started</p>
                 </div>
-
                 <div className="space-y-6">
                     {steps.map((step, i) => {
                         const Icon = step.icon;
                         return (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.1 }}
-                                className="flex gap-8 items-start"
-                            >
+                            <motion.div key={i} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="flex gap-8 items-start">
                                 <div className="flex flex-col items-center shrink-0">
-                                    <div className="w-14 h-14 rounded-full bg-teal-5 text-black font-black text-lg flex items-center justify-center shadow-lg shadow-teal-5/20">
-                                        {i + 1}
-                                    </div>
-                                    {i < steps.length - 1 && (
-                                        <div className="w-0.5 h-16 bg-white/10 mt-2" />
-                                    )}
+                                    <div className="w-14 h-14 rounded-full bg-teal-5 text-black font-semibold text-lg flex items-center justify-center shadow-lg shadow-teal-5/20">{i + 1}</div>
+                                    {i < steps.length - 1 && <div className="w-0.5 h-16 bg-white/10 mt-2" />}
                                 </div>
-                                <div className="bg-[#161B28] border border-white/5 rounded-[32px] p-8 flex-grow hover:border-teal-5/30 transition-all">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        <Icon size={20} className="text-teal-5" />
-                                        <h4 className="text-white text-xl font-bold">{step.title}</h4>
-                                    </div>
-                                    <p className="text-white/40 leading-relaxed font-medium">{step.desc}</p>
+                                <div className="glass-card rounded-2xl p-8 flex-grow hover:border-teal-5/30 transition-all">
+                                    <div className="flex items-center gap-3 mb-3"><Icon size={20} className="text-teal-5" /><h4 className="text-white text-xl font-semibold">{step.title}</h4></div>
+                                    <p className="text-[#8B98AB] leading-relaxed font-medium">{step.desc}</p>
                                 </div>
                             </motion.div>
                         );
@@ -242,79 +158,41 @@ function GettingStartedSection() {
 
 function RequirementsSection() {
     return (
-        <section className="py-24 bg-[#0D1520] border-t border-white/5">
+        <section className="py-24 bg-[#0d111a]">
             <div className="mx-auto max-w-5xl px-6">
-                <div className="bg-gradient-to-br from-[#161B28] to-[#0D1520] border border-white/10 rounded-[60px] p-12 md:p-20 relative overflow-hidden">
+                <div className="glass-card rounded-2xl p-12 md:p-20 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-teal-5/5 blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                    
-                    <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-4">REQUIREMENTS</h2>
-                    <h3 className="text-white text-3xl md:text-5xl font-black mb-4 tracking-tighter">
-                        What You Need to Register
-                    </h3>
-                    <p className="text-white/40 text-lg font-medium mb-12">
-                        Bring these documents and you&apos;ll be registered in 30 minutes
-                    </p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                    <span className="relative mb-4 inline-block text-[11px] font-semibold uppercase tracking-[0.2em] text-[#00A99D]">REQUIREMENTS</span>
+                    <h3 className="relative text-white text-3xl md:text-5xl font-semibold mb-4 tracking-tight">What You Need to Register</h3>
+                    <p className="relative text-[#8B98AB] text-lg font-medium mb-12">Bring these documents and you&apos;ll be registered in 30 minutes</p>
+                    <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
                         {requirements.map((req, i) => {
                             const Icon = req.icon;
                             return (
                                 <div key={i} className="flex items-start gap-4 bg-white/[0.03] border border-white/5 rounded-2xl p-6">
-                                    <div className="w-10 h-10 rounded-xl bg-teal-5/10 border border-teal-5/20 flex items-center justify-center text-teal-5 shrink-0">
-                                        <Icon size={20} />
-                                    </div>
-                                    <div>
-                                        <div className="text-white font-bold mb-1">{req.label}</div>
-                                        <div className="text-white/40 text-sm font-medium">{req.desc}</div>
-                                    </div>
+                                    <div className="w-10 h-10 rounded-xl bg-teal-5/10 border border-teal-5/20 flex items-center justify-center text-teal-5 shrink-0"><Icon size={20} /></div>
+                                    <div><div className="text-white font-semibold mb-1">{req.label}</div><div className="text-[#8B98AB] text-sm font-medium">{req.desc}</div></div>
                                 </div>
                             );
                         })}
                     </div>
-
-                    <p className="text-white/30 text-sm font-medium italic">
-                        Additional for specific roles: Forklift license, food safety certificate, or DBS check (we&apos;ll advise based on the role)
-                    </p>
+                    <p className="relative text-[#8B98AB]/50 text-sm font-medium italic">Additional for specific roles: Forklift license, food safety certificate, or DBS check (we&apos;ll advise based on the role)</p>
                 </div>
             </div>
         </section>
     );
 }
 
-function BottomCTA() {
-    return (
-        <section className="py-32 bg-teal-5">
-             <div className="mx-auto max-w-5xl px-6 text-center">
-                 <h2 className="text-black text-5xl md:text-8xl font-black mb-10 tracking-tighter leading-[0.85]">
-                     Ready to Get<br />Started?
-                 </h2>
-                 <p className="text-black/60 text-xl md:text-2xl font-bold max-w-2xl mx-auto mb-16">
-                     Register today and start getting shifts this week.
-                 </p>
-                 <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                     <Link href="/registration" className="w-full md:w-auto px-12 py-7 rounded-2xl bg-black text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-2xl">
-                         Register Now →
-                     </Link>
-                     <Link href="/contact" className="w-full md:w-auto px-12 py-7 rounded-2xl border border-black/20 text-black font-black uppercase tracking-widest text-xs hover:bg-black/5 transition-all">
-                         Get in Touch
-                     </Link>
-                 </div>
-             </div>
-        </section>
-    );
-}
-
 export default function CandidatesPage() {
     return (
-        <main className="bg-[#0D1520] min-h-screen selection:bg-teal-5 selection:text-black dark">
-            <AnnouncementBanner />
+        <main className="bg-navy-900 min-h-screen">
             <Navbar />
             <CandidatesHero />
             <WhyUsSection />
             <OpportunitiesSection />
             <GettingStartedSection />
             <RequirementsSection />
-            <BottomCTA />
+            <CtaBanner badge="READY?" title="Ready to get" titleHighlight="started?" subtitle="Register today and start getting shifts this week." primaryButtonText="Register Now" secondaryButtonText="Get in Touch" />
             <Footer />
         </main>
     );

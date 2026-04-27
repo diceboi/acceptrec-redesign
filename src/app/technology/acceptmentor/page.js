@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -24,31 +24,31 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function MentorHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0d1522] pt-48 pb-16 border-b border-white/5">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute -top-24 left-1/4 h-[500px] w-[500px] rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
       
-      <div className="relative z-10 mx-auto max-w-285 px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }} 
           animate={{ opacity: 1, scale: 1 }} 
           className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-5/10 border border-teal-5/20 backdrop-blur-sm"
         >
           <IconSchool className="text-teal-5" size={16} />
-          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5 text-glow-teal">AcceptMentor — Building Better Workforces</span>
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">AcceptMentor — Building Better Workforces</span>
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Good Workers <br /><span className="text-teal-5 text-glow-teal">Get Better.</span>
+          Good Workers <br /><span className="text-teal-5">Get Better.</span>
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/50 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -63,12 +63,12 @@ function MentorHero() {
 // ─── Problem Section ───────────────────────────────────────────────────────
 function MotivationSection() {
     return (
-        <section className="py-24 bg-[#0d1522] border-b border-white/5 relative overflow-hidden">
-             <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900 relative overflow-hidden">
+             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     <div>
                         <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE PHILOSOPHY</h2>
-                        <h3 className="text-white text-4xl font-bold mb-8 tracking-tight leading-tight">Workers Want to Do Well <br/><span className="text-white/30 text-2xl">(Most just don't know how.)</span></h3>
+                        <h3 className="text-white text-4xl font-bold mb-8 tracking-tight leading-tight">Workers Want to Do Well <br/><span className="text-[#8B98AB]/70 text-2xl">(Most just don't know how.)</span></h3>
                         <p className="text-white/60 text-lg leading-relaxed mb-10">
                             Most agencies treat workers as interchangeable bodies. Churn is just accepted. But we know workers improve when they get real feedback and recognition.
                         </p>
@@ -79,19 +79,19 @@ function MotivationSection() {
                                 "Struggling workers declining without coaching.",
                                 "High turnover leading to inconsistent client service."
                             ].map((text, i) => (
-                                <div key={i} className="flex items-center gap-3 text-white/50 text-sm font-medium">
+                                <div key={i} className="flex items-center gap-3 text-white/60 text-sm font-medium">
                                     <div className="w-1.5 h-1.5 rounded-full bg-red-400 shrink-0" />
                                     {text}
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="p-12 rounded-[40px] bg-linear-to-br from-[#161b28] to-[#0d1522] border border-white/5 relative overflow-hidden h-full flex flex-col justify-center">
+                    <div className="p-12 rounded-2xl bg-gradient-to-br from-[#161b28] to-[#0d1522] border border-white/5 relative overflow-hidden h-full flex flex-col justify-center">
                         <div className="absolute top-0 right-0 p-8 opacity-10">
                             <IconTrendingUp size={64} />
                         </div>
                         <h4 className="text-white text-2xl font-bold mb-6 tracking-tight leading-snug">Feedback is the <br/>catalyst for growth.</h4>
-                        <p className="text-white/40 text-lg leading-relaxed">
+                        <p className="text-[#8B98AB] text-lg leading-relaxed">
                             AcceptMentor provides the data needed to move recruitment from "filling gaps" to "building careers." It identifies coaching triggers before performance becomes chronic.
                         </p>
                         <div className="mt-8 flex items-center gap-4 p-4 rounded-2xl bg-teal-5/5 border border-teal-5/10">
@@ -116,20 +116,20 @@ function MentorProcess() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d111a] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-[#0d111a]">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE LOOP</h2>
                     <h3 className="text-white text-4xl font-bold mb-4 tracking-tight">The 3 Pillars of Elevation</h3>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {steps.map((s, i) => (
-                        <div key={i} className="p-10 rounded-[40px] bg-[#161b28] border border-white/5 group hover:border-teal-5/20 transition-all text-center">
+                        <div key={i} className="p-10 rounded-2xl bg-white/[0.03] border border-white/5 group hover:border-teal-5/20 transition-all text-center">
                             <div className="w-16 h-16 rounded-full bg-teal-5/10 flex items-center justify-center text-teal-4 mx-auto mb-8 group-hover:bg-teal-5 group-hover:text-white transition-all shadow-lg">
                                 <s.icon size={32} />
                             </div>
                             <h4 className="text-white text-xl font-bold mb-4 uppercase tracking-wide">{s.t}</h4>
-                            <p className="text-white/40 text-sm leading-relaxed">{s.d}</p>
+                            <p className="text-[#8B98AB] text-sm leading-relaxed">{s.d}</p>
                         </div>
                     ))}
                 </div>
@@ -147,42 +147,42 @@ function WorkerDashboard() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                     <div className="lg:col-span-5">
                          <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE WORKER EXPERIENCE</h2>
                          <h3 className="text-white text-4xl font-bold mb-8 tracking-tight leading-tight">Transparency <br />Breeds Results.</h3>
-                         <p className="text-white/40 text-lg leading-relaxed mb-10">
+                         <p className="text-[#8B98AB] text-lg leading-relaxed mb-10">
                             Workers see what you see. We provide them with a detailed performance dashboard that highlights their successes and pinpoint areas for growth.
                          </p>
-                         <div className="p-8 rounded-[32px] bg-[#161b28] border border-white/5 relative overflow-hidden">
+                         <div className="p-8 rounded-2xl bg-white/[0.03] border border-white/5 relative overflow-hidden">
                              <div className="absolute top-0 right-0 p-8 opacity-10">
                                 <IconMessage2 size={48} />
                              </div>
                              <div className="flex items-center gap-2 mb-4">
                                 <IconStar size={16} className="text-amber-500 fill-amber-500" />
-                                <span className="text-white/40 uppercase font-black tracking-widest text-[10px]">RECENT FEEDBACK</span>
+                                <span className="text-[#8B98AB] uppercase font-semibold tracking-widest text-[10px]">RECENT FEEDBACK</span>
                              </div>
                              <p className="text-white text-base leading-relaxed italic pr-12">
                                 "Great worker. Reliable and works hard. Would request again."
                              </p>
-                             <div className="mt-4 text-[11px] font-bold text-white/30 uppercase tracking-[0.2em]">Amazon LBA3, 24 Feb 2026</div>
+                             <div className="mt-4 text-[11px] font-bold text-[#8B98AB]/70 uppercase tracking-[0.2em]">Amazon LBA3, 24 Feb 2026</div>
                          </div>
                     </div>
                     <div className="lg:col-span-7 relative">
                          <div className="absolute inset-0 bg-teal-5/5 blur-[100px] rounded-full pointer-events-none" />
-                         <div className="bg-[#161b28] rounded-[48px] border border-white/10 p-12 shadow-2xl relative z-10">
+                         <div className="bg-white/[0.03] rounded-2xl border border-white/10 p-12 shadow-2xl relative z-10">
                             
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-12">
                                 <div>
                                     <h4 className="text-white font-bold opacity-40 uppercase tracking-widest text-[10px] mb-2">My Performance Profile</h4>
                                     <p className="text-white text-2xl font-bold">Good Morning, Peter!</p>
                                 </div>
-                                <div className="p-6 rounded-[28px] bg-teal-5/10 border border-teal-5/20 text-center min-w-[200px]">
-                                    <div className="text-white/40 text-[10px] font-black uppercase tracking-widest mb-1">Overall Rating</div>
-                                    <div className="text-teal-4 text-4xl font-mono font-black tabular-nums">4.7<span className="text-teal-4/30">/5.0</span></div>
-                                    <p className="text-teal-4/60 text-[9px] font-black uppercase tracking-wider mt-2">Top 20% of Workforce</p>
+                                <div className="p-6 rounded-xl bg-teal-5/10 border border-teal-5/20 text-center min-w-[200px]">
+                                    <div className="text-[#8B98AB] text-[10px] font-semibold uppercase tracking-widest mb-1">Overall Rating</div>
+                                    <div className="text-teal-4 text-4xl font-mono font-semibold tabular-nums">4.7<span className="text-teal-4/30">/5.0</span></div>
+                                    <p className="text-teal-4/60 text-[9px] font-semibold uppercase tracking-wider mt-2">Top 20% of Workforce</p>
                                 </div>
                             </div>
 
@@ -201,13 +201,13 @@ function WorkerDashboard() {
                                                 className={`h-full ${b.color} relative shadow-[0_0_15px_rgba(45,212,191,0.3)]`}
                                             />
                                         </div>
-                                        <p className="text-white/40 text-[11px] font-medium italic">{b.text}</p>
+                                        <p className="text-[#8B98AB] text-[11px] font-medium italic">{b.text}</p>
                                     </div>
                                 ))}
                             </div>
 
                             <div className="mt-12 text-center">
-                                <div className="text-white/20 text-[11px] font-black tracking-widest uppercase flex items-center justify-center gap-2">
+                                <div className="text-white/20 text-[11px] font-semibold tracking-widest uppercase flex items-center justify-center gap-2">
                                     <IconShieldCheck size={14} className="text-teal-5" /> Secured by ACCTRATE Intelligence
                                 </div>
                             </div>
@@ -249,27 +249,27 @@ function CoachingScenarios() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d111a] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-[#0d111a]">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-20">
                      <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">COACHING IN ACTION</h2>
                      <h3 className="text-white text-4xl font-bold tracking-tight">Real Scenarios. Proven Impact.</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {scenarios.map((s, i) => (
-                        <div key={i} className="p-10 rounded-[40px] bg-[#161b28] border border-white/5 hover:border-white/10 transition-all flex flex-col h-full">
+                        <div key={i} className="p-10 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-all flex flex-col h-full">
                             <div className={`mb-8 inline-flex items-center gap-2 px-3 py-1 rounded bg-teal-5/10 border border-teal-5/20`}>
-                                 <span className={`text-[9px] font-black tracking-widest uppercase ${s.tagColor.split(' ')[1]}`}>{s.tag}</span>
+                                 <span className={`text-[9px] font-semibold tracking-widest uppercase ${s.tagColor.split(' ')[1]}`}>{s.tag}</span>
                             </div>
                             <h4 className="text-white text-xl font-bold mb-6 pr-8">{s.title}</h4>
                             <div className="mb-6 space-y-4 flex-grow">
-                                <div className="text-white/20 text-[10px] font-black uppercase tracking-widest">Scenario</div>
+                                <div className="text-white/20 text-[10px] font-semibold uppercase tracking-widest">Scenario</div>
                                 <p className="text-white/60 text-sm leading-relaxed">{s.scenario}</p>
                                 <div className="w-8 h-px bg-white/5" />
-                                <div className="text-teal-4/30 text-[10px] font-black uppercase tracking-widest">Accept Impact</div>
+                                <div className="text-teal-4/30 text-[10px] font-semibold uppercase tracking-widest">Accept Impact</div>
                                 <p className="text-white text-sm leading-relaxed font-bold">{s.solution}</p>
                             </div>
-                            <div className="mt-auto pt-8 border-t border-white/5 opacity-10">
+                            <div className="mt-auto pt-8 opacity-10">
                                 <s.icon size={48} />
                             </div>
                         </div>
@@ -283,7 +283,7 @@ function CoachingScenarios() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function AcceptMentorPage() {
   return (
-    <main className="bg-[#0d1522] min-h-screen font-sans">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
 
       <MentorHero />
@@ -292,8 +292,8 @@ export default function AcceptMentorPage() {
       <WorkerDashboard />
 
       {/* Value Pillars Section (Lower Turnover, Better Performance, etc.) */}
-      <section className="py-24 bg-[#0d1522] border-b border-white/5">
-        <div className="mx-auto max-w-285 px-6">
+      <section className="py-24 bg-navy-900">
+        <div className="mx-auto max-w-[1140px] px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
                 {[
                     { t: "Lower Turnover", d: "Supported workers stay longer, reducing recruitment costs.", i: IconHeart },
@@ -302,11 +302,11 @@ export default function AcceptMentorPage() {
                     { t: "Top Talent Retention", d: "Best workers stay for recognition and progression.", i: IconStar }
                 ].map((item, i) => (
                     <div key={i} className="text-center group">
-                        <div className="w-16 h-16 rounded-3xl bg-teal-5/10 flex items-center justify-center text-teal-4 mx-auto mb-8 group-hover:scale-110 transition-transform">
+                        <div className="w-16 h-16 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mx-auto mb-8 group-hover:scale-110 transition-transform">
                             <item.i size={28} />
                         </div>
                         <h4 className="text-white font-bold mb-4">{item.t}</h4>
-                        <p className="text-white/40 text-sm leading-relaxed">{item.d}</p>
+                        <p className="text-[#8B98AB] text-sm leading-relaxed">{item.d}</p>
                     </div>
                 ))}
             </div>

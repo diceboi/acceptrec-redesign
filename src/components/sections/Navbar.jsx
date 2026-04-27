@@ -169,8 +169,8 @@ const menuData = {
         items: [
           { label: "AcceptPulse", href: "/technology/acceptpulse" },
           { label: "Client Portal", href: "/technology/client-portal" },
-          { label: "Rate Calculator", href: "/tools/rate-calculator" },
-          { label: "Quote Builder", href: "/tools/quote-builder" },
+          { label: "Rate Calculator", href: "/technology/rate-calculator" },
+          { label: "Quote Builder", href: "/technology/quote-builder" },
           { label: "Daily Hours", href: "/technology/daily-hours" },
           { label: "Client Feedback", href: "/technology/client-feedback" },
         ],
@@ -626,9 +626,8 @@ export function Navbar() {
               className="h-full flex items-center px-1"
               onMouseEnter={() => handleMouseEnter(menu.id)}
             >
-              <Link
-                href="#"
-                className={`flex items-center gap-1 rounded-lg px-3 py-1.5 text-[14px] font-semibold transition-colors duration-150
+              <button
+                className={`flex items-center gap-1 rounded-lg px-3 py-1.5 text-[14px] font-semibold transition-colors duration-150 cursor-pointer
                   ${
                     activeDropdown === menu.id
                       ? "text-teal-4 bg-white/8"
@@ -649,7 +648,7 @@ export function Navbar() {
                     d="M19 9l-7 7-7-7"
                   />
                 </svg>
-              </Link>
+              </button>
             </div>
           ))}
         </nav>
@@ -726,12 +725,14 @@ export function Navbar() {
           <Button
             variant="secondary"
             size="md"
+            href="/jobs"
           >
             Find Work
           </Button>
           <Button
             variant="primary"
             size="md"
+            href="/get-started"
           >
             Get Started
           </Button>

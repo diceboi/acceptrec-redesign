@@ -18,7 +18,7 @@ export function AnnouncementBanner() {
         <span>
           See how InPost hit 98% fill rate with Accept.{" "}
           <Link
-            href="#"
+            href="/case-studies/inpost"
             className="font-semibold text-white underline underline-offset-2 hover:text-teal-4 transition-colors"
           >
             Read case study →

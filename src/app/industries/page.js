@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
-import { BentoCard } from "@/components/ui/BentoCard";
 import { Button } from "@/components/ui/Button";
 import {
   IconPackage,
@@ -19,55 +18,66 @@ import {
   IconClock,
   IconBuildingFactory,
   IconChartLine,
-  IconPhone,
+  IconArrowRight,
 } from "@tabler/icons-react";
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function InnerHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full items-center justify-center overflow-hidden bg-[#0d1522] pt-32 pb-16">
+    <section className="relative flex min-h-[80vh] w-full items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-20">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <motion.div
-          className="absolute rounded-full"
-          style={{ height: "60%", width: "50%", left: "5%", top: "10%", background: "var(--color-teal-5)", opacity: 0.1, filter: "blur(100px)" }}
-          animate={{ scale: [1, 1.2, 1], x: [0, 40, 0], y: [0, 30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+           className="absolute rounded-full"
+           style={{ height: "70%", width: "55%", left: "-10%", top: "-10%", background: "var(--color-teal-5)", opacity: 0.13, filter: "blur(90px)" }}
+           animate={{ scale: [1, 1.3, 1], x: [0, 80, 0], y: [0, 50, 0] }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute rounded-full"
-          style={{ height: "50%", width: "45%", right: "5%", top: "20%", background: "var(--color-purple-5)", opacity: 0.1, filter: "blur(100px)" }}
-          animate={{ scale: [1, 1.3, 1], x: [0, -40, 0], y: [0, 50, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+           className="absolute rounded-full"
+           style={{ height: "60%", width: "55%", right: "-10%", top: "-5%", background: "var(--color-purple-5)", opacity: 0.18, filter: "blur(100px)" }}
+           animate={{ scale: [1, 1.4, 1], x: [0, -80, 0], y: [0, 100, 0] }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
       </div>
-      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-10" />
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
 
       <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-8 inline-flex items-center gap-2">
-          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">Industries</span>
+        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-8 inline-flex items-center gap-2 rounded-full border border-teal-5/30 bg-teal-5/10 px-4 py-2">
+          <span className="h-2 w-2 rounded-full bg-teal-5 animate-pulse" />
+          <span className="text-sm font-semibold text-teal-4">Industries</span>
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
         >
           We Know <span className="text-teal-5">Your Sector</span>
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-2xl text-xl font-medium leading-relaxed text-white/70 mb-10"
+          className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
         >
           Not generic staffing. Specialist knowledge in logistics, manufacturing, e-commerce, and food production.
         </motion.p>
 
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-          <Button variant="primary" size="lg">Find Staff Now</Button>
-          <Button variant="secondary" size="lg">View Case Studies</Button>
+          <Button variant="primary" size="lg" href="/get-started">Find Staff Now</Button>
+          <Button variant="secondary" size="lg" href="/case-studies">View Case Studies</Button>
         </motion.div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-linear-to-t from-[#0d1522] to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-900 to-transparent" />
     </section>
   );
 }
@@ -81,11 +91,12 @@ function WarehouseSection() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">WAREHOUSE STAFFING</span>
+            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">WAREHOUSE STAFFING</span>
             <h2 className="text-4xl font-semibold text-white md:text-5xl tracking-tight leading-tight mb-6">
               Peak Season Chaos?<br />We&apos;ve Got You.
             </h2>
@@ -95,33 +106,35 @@ function WarehouseSection() {
             <p className="text-lg leading-relaxed text-white/60 mb-10">
               99% attendance rate — because a warehouse can&apos;t pick orders with empty stations. Our people turn up, trained, with the right PPE, ready to work.
             </p>
-            <Link href="/warehouse-staffing">
-              <Button variant="secondary" size="md">Warehouse Staffing →</Button>
+            <Link href="/warehouse-staffing" className="text-teal-5 font-bold hover:gap-3 transition-all inline-flex items-center gap-2">
+              Warehouse Staffing <IconArrowRight size={18} />
             </Link>
           </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-5">
             <motion.div
-              className="bg-[#161b28] border border-white/5 rounded-3xl p-8 hover:border-teal-5/20 transition-colors"
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:border-teal-5/30"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
             >
-              <h3 className="text-lg font-bold text-white mb-4">The warehouse pain points we solve:</h3>
-              <ul className="space-y-3">
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <h3 className="relative text-white font-semibold text-[22px] mb-4">The warehouse pain points we solve:</h3>
+              <ul className="relative space-y-3">
                 {points.map((p, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <IconCheck size={18} className="text-teal-5 mt-0.5 shrink-0" />
-                    <span className="text-white/70 text-[15px] leading-relaxed">{p}</span>
+                    <IconCheck size={16} className="text-teal-5 mt-1 shrink-0" />
+                    <span className="text-[15px] leading-relaxed text-[#8B98AB]">{p}</span>
                   </li>
                 ))}
               </ul>
             </motion.div>
 
             <motion.div
-              className="bg-teal-5/8 border border-teal-5/20 rounded-3xl p-8"
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-teal-5 mb-2">Case Study: InPost Peak Season</p>
-              <p className="text-white/80 text-[15px] leading-relaxed">
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="relative text-teal-5 text-[10px] font-bold tracking-widest uppercase mb-2 block">Case Study: InPost Peak Season</span>
+              <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">
                 50 trained operatives deployed in 3 weeks. 99% fill rate maintained through the busiest period. Zero disruption to their parcel locker network.
               </p>
             </motion.div>
@@ -135,41 +148,45 @@ function WarehouseSection() {
 // ─── Manufacturing ─────────────────────────────────────────────────────────
 function ManufacturingSection() {
   return (
-    <section className="relative w-full bg-[#0d1522] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-navy-700 py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
+      <div className="pointer-events-none absolute -left-48 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-purple-6/15 blur-[100px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div className="space-y-6 order-2 lg:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="space-y-5 order-2 lg:order-1">
             <motion.div
-              className="bg-[#161b28] border border-white/5 rounded-3xl p-8 hover:border-teal-5/20 transition-colors"
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:border-teal-5/30"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
             >
-              <h3 className="text-lg font-bold text-white mb-4">The manufacturing reality we understand:</h3>
-              <p className="text-white/70 text-[15px] leading-relaxed">
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <h3 className="relative text-white font-semibold text-[22px] mb-4">The manufacturing reality we understand:</h3>
+              <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">
                 That&apos;s why we&apos;ve built relationships with production operatives, machine operators, and quality inspectors who actually want to work — not just clock in.
               </p>
             </motion.div>
 
             <motion.div
-              className="bg-teal-5/8 border border-teal-5/20 rounded-3xl p-8"
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-teal-5 mb-2">Case Study: Vistry Group</p>
-              <p className="text-white/80 text-[15px] leading-relaxed">
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span className="relative text-teal-5 text-[10px] font-bold tracking-widest uppercase mb-2 block">Case Study: Vistry Group</span>
+              <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">
                 Supporting one of the UK&apos;s largest housebuilders with reliable labour across multiple sites — scaling up for project deadlines, maintaining quality standards.
               </p>
             </motion.div>
           </div>
 
           <motion.div className="order-1 lg:order-2" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">INDUSTRIAL STAFFING</span>
+            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">INDUSTRIAL STAFFING</span>
             <h2 className="text-4xl font-semibold text-white md:text-5xl tracking-tight leading-tight mb-6">
               Production Lines Wait<br />For No One.
             </h2>
             <p className="text-lg leading-relaxed text-white/60 mb-10">
               Manufacturing is unforgiving. An empty station at 6am means targets missed, overtime costs, and frustrated supervisors. We get it.
             </p>
-            <Link href="/industrial-staffing">
-              <Button variant="secondary" size="md">Industrial Staffing →</Button>
+            <Link href="/industrial-staffing" className="text-teal-5 font-bold hover:gap-3 transition-all inline-flex items-center gap-2">
+              Industrial Staffing <IconArrowRight size={18} />
             </Link>
           </motion.div>
         </div>
@@ -193,11 +210,12 @@ function FoodProductionSection() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">FOOD PRODUCTION</span>
+            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">FOOD PRODUCTION</span>
             <h2 className="text-4xl font-semibold text-white md:text-5xl tracking-tight leading-tight mb-6">
               Compliance-Ready.<br />Audit-Proof.
             </h2>
@@ -209,21 +227,31 @@ function FoodProductionSection() {
             </p>
             <div className="flex flex-wrap gap-2 mb-10">
               {roles.map((r, i) => (
-                <span key={i} className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-sm font-medium">{r}</span>
+                <span key={i} className="px-3 py-1.5 rounded-full bg-teal-5/10 border border-teal-5/20 text-teal-4 text-sm font-medium">{r}</span>
               ))}
             </div>
-            <Link href="/temporary-staffing">
-              <Button variant="secondary" size="md">Food Production Staffing →</Button>
+            <Link href="/temporary-staffing" className="text-teal-5 font-bold hover:gap-3 transition-all inline-flex items-center gap-2">
+              Food Production Staffing <IconArrowRight size={18} />
             </Link>
           </motion.div>
 
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-5">
             {complianceItems.map((item, i) => (
               <motion.div
                 key={i}
+                className="glass-card group relative overflow-hidden rounded-2xl p-10 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <BentoCard icon={item.icon} title={item.title} description={item.desc} href="#" noArrow />
+                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative flex items-start gap-5 mb-4">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#00A99D] text-white">
+                    <item.icon size={28} stroke={1.5} />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold text-[22px] leading-tight mb-1">{item.title}</h3>
+                  </div>
+                </div>
+                <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -246,54 +274,63 @@ function DrivingSection() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d1522] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-navy-700 py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
+      <div className="pointer-events-none absolute -left-48 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-purple-6/15 blur-[100px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          <div className="order-2 lg:order-1 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="order-2 lg:order-1 space-y-5">
             <motion.div
-              className="bg-[#161b28] border border-white/5 rounded-3xl p-8"
+              className="glass-card group relative overflow-hidden rounded-2xl p-8 transition-all duration-300 hover:border-teal-5/30"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
             >
-              <h3 className="text-lg font-bold text-white mb-4">Why our drivers are different:</h3>
-              <ul className="space-y-4">
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <h3 className="relative text-white font-semibold text-[22px] mb-4">Why our drivers are different:</h3>
+              <ul className="relative space-y-4">
                 {points.map((p, i) => (
-                  <li key={i} className="text-white/70 text-[15px] leading-relaxed border-b border-white/5 pb-4 last:border-0 last:pb-0">{p}</li>
+                  <li key={i} className="text-[15px] leading-relaxed text-[#8B98AB] border-b border-white/5 pb-4 last:border-0 last:pb-0">{p}</li>
                 ))}
               </ul>
             </motion.div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-5">
               {stats.map((s, i) => (
                 <motion.div
                   key={i}
-                  className="bg-[#161b28] border border-white/5 rounded-3xl p-6 text-center"
+                  className="glass-card group relative overflow-hidden rounded-2xl p-6 text-center transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
                 >
-                  <div className="text-3xl font-bold text-teal-4 mb-1">{s.value}</div>
-                  <div className="text-white/50 text-sm">{s.label}</div>
+                  <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative text-3xl font-semibold text-white mb-1">{s.value}</div>
+                  <div className="relative text-[13px] font-semibold uppercase tracking-wider text-teal-5">{s.label}</div>
                 </motion.div>
               ))}
             </div>
 
             <motion.div
-              className="bg-teal-5/8 border border-teal-5/20 rounded-3xl p-6 flex items-start gap-4"
+              className="glass-card group relative overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <IconBolt size={22} className="text-teal-5 mt-0.5 shrink-0" />
-              <div>
-                <p className="text-white font-semibold mb-1">Emergency Cover</p>
-                <p className="text-white/60 text-sm">Driver no-show at 5am? Call us. We&apos;ve got backup drivers ready to go — often within hours, not days.</p>
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative flex items-start gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#00A99D] text-white">
+                  <IconBolt size={20} />
+                </div>
+                <div>
+                  <p className="text-white font-semibold mb-1">Emergency Cover</p>
+                  <p className="text-[15px] leading-relaxed text-[#8B98AB]">Driver no-show at 5am? Call us. We&apos;ve got backup drivers ready to go — often within hours, not days.</p>
+                </div>
               </div>
             </motion.div>
           </div>
 
           <motion.div className="order-1 lg:order-2" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">DRIVING RECRUITMENT</span>
+            <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">DRIVING RECRUITMENT</span>
             <h2 className="text-4xl font-semibold text-white md:text-5xl tracking-tight leading-tight mb-10">
               Driver Shortage?<br />Not Your Problem.
             </h2>
-            <Link href="/driving-recruitment">
-              <Button variant="secondary" size="md">Driving Recruitment →</Button>
+            <Link href="/driving-recruitment" className="text-teal-5 font-bold hover:gap-3 transition-all inline-flex items-center gap-2">
+              Driving Recruitment <IconArrowRight size={18} />
             </Link>
           </motion.div>
         </div>
@@ -312,22 +349,42 @@ function WhyAccept() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans border-b border-white/5">
+    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 font-sans overflow-hidden">
+      <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
-        <motion.div className="mb-16 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5">THE ACCEPT DIFFERENCE</span>
+        <motion.div className="mb-14 text-center" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+          <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">THE ACCEPT DIFFERENCE</span>
           <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
-            Why Midlands Businesses<br />Choose Accept
+             Why Midlands Businesses<br />Choose Accept
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-5"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {reasons.map((r, i) => (
-            <div key={i} className="h-full">
-              <BentoCard icon={r.icon} title={r.title} description={r.desc} href="#" noArrow />
-            </div>
+            <motion.div
+              key={i}
+              variants={cardVariants}
+              className="glass-card group relative overflow-hidden rounded-2xl p-10 transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm"
+            >
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative flex items-start gap-5 mb-6">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#00A99D] text-white">
+                  <r.icon size={28} stroke={1.5} />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold text-[22px] leading-tight">{r.title}</h3>
+                </div>
+              </div>
+              <p className="relative text-[15px] leading-relaxed text-[#8B98AB]">{r.desc}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -336,7 +393,7 @@ function WhyAccept() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function Industries() {
   return (
-    <main className="bg-[#0d1522] min-h-screen">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
 
       <InnerHero />

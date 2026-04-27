@@ -465,7 +465,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.35 }}
           >
             <Link
-              href="#"
+              href="/get-started"
               className="group inline-flex items-center gap-2 rounded-xl bg-teal-5 px-7 py-3.5 text-base font-bold text-white shadow-lg shadow-teal-5/20 transition-all duration-300 hover:bg-teal-6"
             >
               <span>Find Staff</span>
@@ -486,7 +486,7 @@ export function Hero() {
               </span>
             </Link>
             <Link
-              href="#"
+              href="/jobs"
               className="group inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/8 px-7 py-3.5 text-base font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/15"
             >
               <span>Find Work</span>

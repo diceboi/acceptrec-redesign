@@ -51,7 +51,7 @@ export function Industries() {
           {/* Card 1: Large Left Card (Warehousing) */}
           <motion.div variants={cardVariants} className="lg:row-span-2">
             <BentoCard
-              href="#"
+              href="/industries/logistics"
               icon={IconPackage}
               title={
                 <>
@@ -86,7 +86,7 @@ export function Industries() {
           {/* Card 2: Top Middle (Manufacturing) */}
           <motion.div variants={cardVariants}>
             <BentoCard
-              href="#"
+              href="/industries/manufacturing"
               icon={IconSettings}
               title="Manufacturing"
               description="Production operatives, machine operators, assembly workers"
@@ -96,7 +96,7 @@ export function Industries() {
           {/* Card 3: Top Right (Food Production) */}
           <motion.div variants={cardVariants}>
             <BentoCard
-              href="#"
+              href="/industries/food-production"
               icon={IconFlask}
               title="Food Production"
               description="Food production staff, packers, line operatives"
@@ -106,7 +106,7 @@ export function Industries() {
           {/* Card 4: Bottom Middle (Transport & Driving) */}
           <motion.div variants={cardVariants}>
             <BentoCard
-              href="#"
+              href="/driving-recruitment"
               icon={IconTruck}
               title="Transport & Driving"
               description="Van drivers, HGV Class 1 & 2, multi-drop specialists"
@@ -116,7 +116,7 @@ export function Industries() {
           {/* Card 5: Bottom Right (Permanent Recruitment - Teal) */}
           <motion.div variants={cardVariants}>
             <BentoCard
-              href="#"
+              href="/permanent-recruitment"
               icon={IconUsersGroup}
               title={
                 <>

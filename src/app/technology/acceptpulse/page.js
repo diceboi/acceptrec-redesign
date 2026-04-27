@@ -1,10 +1,9 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
-import { BentoCard } from "@/components/ui/BentoCard";
 import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 import { 
   IconActivity, 
@@ -26,11 +25,11 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function PulseHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0d1522] pt-48 pb-16 border-b border-white/5">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
       
-      <div className="relative z-10 mx-auto max-w-285 px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
@@ -48,20 +47,20 @@ function PulseHero() {
           transition={{ delay: 0.2 }}
           className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-5/10 border border-teal-5/20 backdrop-blur-sm"
         >
-          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5 text-glow-teal">AcceptPulse</span>
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5">AcceptPulse</span>
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Know Who's On <br /><span className="text-teal-5 text-glow-teal">Site. Live.</span>
+          Know Who's On <br /><span className="text-teal-5">Site. Live.</span>
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/50 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -83,8 +82,8 @@ function ProblemSection() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div>
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE REALITY</h2>
                     <h3 className="text-white text-3xl font-bold mb-10 tracking-tight">The Problem You Know Too Well</h3>
@@ -97,7 +96,7 @@ function ProblemSection() {
                         ))}
                     </div>
                 </div>
-                <div className="flex items-center gap-6 p-8 rounded-3xl bg-linear-to-br from-teal-5/10 to-teal-5/5 border border-teal-5/20">
+                <div className="flex items-center gap-6 p-8 rounded-2xl bg-gradient-to-br from-teal-5/10 to-teal-5/5 border border-teal-5/20">
                     <IconAlertCircle className="text-teal-5 shrink-0" size={32} />
                     <p className="text-white text-xl font-bold tracking-tight">Sound familiar? AcceptPulse ends this.</p>
                 </div>
@@ -128,10 +127,10 @@ function WorkflowSection() {
 
     return (
         <section className="py-24 bg-[#0d111a]">
-            <div className="mx-auto max-w-285 px-6">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-20">
                     <h2 className="text-white text-4xl md:text-5xl font-bold tracking-tight mb-6">How It Works</h2>
-                    <p className="text-white/40 text-lg max-w-2xl mx-auto">Dead simple for workers. Total clarity for you.</p>
+                    <p className="text-[#8B98AB] text-lg max-w-2xl mx-auto">Dead simple for workers. Total clarity for you.</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     {steps.map((step, i) => (
@@ -141,13 +140,13 @@ function WorkflowSection() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="bg-[#161b28] p-10 rounded-3xl border border-white/5 relative group"
+                            className="bg-white/[0.03] p-10 rounded-2xl border border-white/5 relative group"
                         >
                             <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-8 group-hover:bg-teal-5 group-hover:text-white transition-all duration-300">
                                 <step.icon size={28} />
                             </div>
                             <h3 className="text-white text-xl font-bold mb-4">{step.title}</h3>
-                            <p className="text-white/40 text-sm leading-relaxed">{step.desc}</p>
+                            <p className="text-[#8B98AB] text-sm leading-relaxed">{step.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -165,10 +164,10 @@ function DashboardPreview() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522]">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+            <div className="mx-auto max-w-[1140px] px-6">
                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                    <div className="bg-[#161b28] rounded-3xl border border-white/5 p-8 md:p-12 shadow-2xl relative overflow-hidden group">
+                    <div className="bg-white/[0.03] rounded-2xl border border-white/5 p-8 md:p-12 shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-64 h-64 bg-teal-5/5 blur-[100px]" />
                         
                         <div className="flex items-center justify-between mb-10">
@@ -191,27 +190,27 @@ function DashboardPreview() {
                                 >
                                     <div>
                                         <div className="text-white font-bold text-sm mb-1">{site.name}</div>
-                                        <div className="text-white/30 text-[10px] uppercase font-bold tracking-widest leading-tight">{site.scheduled} Workers Scheduled</div>
+                                        <div className="text-[#8B98AB]/70 text-[10px] uppercase font-bold tracking-widest leading-tight">{site.scheduled} Workers Scheduled</div>
                                     </div>
                                     <div className="flex items-center gap-6">
                                         <div className="text-center">
                                             <div className="text-teal-5 font-bold text-sm">{site.onTime}</div>
-                                            <div className="text-[9px] text-white/30 uppercase tracking-widest">On Time</div>
+                                            <div className="text-[9px] text-[#8B98AB]/70 uppercase tracking-widest">On Time</div>
                                         </div>
                                         <div className="text-center">
                                             <div className={site.late > 0 ? "text-yellow-400 font-bold text-sm" : "text-white/20 font-bold text-sm"}>{site.late}</div>
-                                            <div className="text-[9px] text-white/30 uppercase tracking-widest">Late</div>
+                                            <div className="text-[9px] text-[#8B98AB]/70 uppercase tracking-widest">Late</div>
                                         </div>
                                         <div className="text-center">
                                             <div className={site.noShow > 0 ? "text-red-500 font-bold text-sm" : "text-white/20 font-bold text-sm"}>{site.noShow}</div>
-                                            <div className="text-[9px] text-white/30 uppercase tracking-widest">No Show</div>
+                                            <div className="text-[9px] text-[#8B98AB]/70 uppercase tracking-widest">No Show</div>
                                         </div>
                                     </div>
                                 </motion.div>
                             ))}
                         </div>
-                        <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
-                            <p className="text-white/30 text-[11px] font-bold uppercase tracking-widest">Updates in real-time. No refresh needed.</p>
+                        <div className="mt-8 pt-6 flex items-center justify-between">
+                            <p className="text-[#8B98AB]/70 text-[11px] font-bold uppercase tracking-widest">Updates in real-time. No refresh needed.</p>
                             <div className="flex items-center gap-2">
                                 <div className="h-1.5 w-1.5 rounded-full bg-teal-5 animate-ping" />
                                 <span className="text-teal-5 text-[11px] font-bold">Syncing...</span>
@@ -222,7 +221,7 @@ function DashboardPreview() {
                     <div>
                         <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">TRANSPARENCY</h2>
                         <h3 className="text-white text-4xl md:text-5xl font-bold mb-8 tracking-tight">Your Dashboard, Live</h3>
-                        <p className="text-white/40 text-lg leading-relaxed mb-10">
+                        <p className="text-[#8B98AB] text-lg leading-relaxed mb-10">
                             Every site. Every worker. Every shift. One screen. Your clients see who's on site in real-time. They stop calling you. Trust goes up. Complaints go down.
                         </p>
                     </div>
@@ -253,15 +252,15 @@ function TroubleshootingTimeline() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522]">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="max-w-3xl mb-20 text-center mx-auto">
                     <h2 className="text-white text-4xl font-bold tracking-tight mb-6">Automatic No-Show Management</h2>
-                    <p className="text-white/40 text-lg">AcceptPulse doesn't just track attendance. It prevents problems.</p>
+                    <p className="text-[#8B98AB] text-lg">AcceptPulse doesn't just track attendance. It prevents problems.</p>
                 </div>
 
                 <div className="relative space-y-12">
-                    <div className="absolute left-[39px] top-0 bottom-0 w-0.5 bg-linear-to-b from-teal-5/40 via-teal-5/20 to-teal-5/0 hidden md:block" />
+                    <div className="absolute left-[39px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-teal-5/40 via-teal-5/20 to-teal-5/0 hidden md:block" />
                     
                     {events.map((e, i) => (
                         <motion.div 
@@ -283,7 +282,7 @@ function TroubleshootingTimeline() {
                     ))}
                 </div>
                 
-                <div className="mt-20 p-10 rounded-3xl bg-linear-to-r from-teal-5/10 to-transparent border border-white/5">
+                <div className="mt-20 p-10 rounded-2xl bg-gradient-to-r from-teal-5/10 to-transparent border border-white/5">
                     <p className="text-white/60 text-lg italic italic">
                         "This all happens automatically. You find out about problems within minutes, not hours. And we're already fixing it."
                     </p>
@@ -330,17 +329,17 @@ function BenefitsGrid() {
 
     return (
         <section className="py-24 bg-[#0d111a]">
-            <div className="mx-auto max-w-285 px-6 text-center mb-16">
+            <div className="mx-auto max-w-[1140px] px-6 text-center mb-16">
                 <h2 className="text-white text-4xl font-bold tracking-tight mb-4">What This Means For You</h2>
             </div>
-            <div className="mx-auto max-w-285 px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="mx-auto max-w-[1140px] px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {benefits.map((b, i) => (
-                    <div key={i} className="p-8 rounded-3xl bg-[#161b28] border border-white/5 hover:border-teal-5/20 transition-all group">
+                    <div key={i} className="p-8 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-teal-5/20 transition-all group">
                          <div className="w-12 h-12 rounded-xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-6 group-hover:bg-teal-5 group-hover:text-white transition-all">
                                 <b.icon size={24} />
                         </div>
                         <h3 className="text-white font-bold text-lg mb-4">{b.title}</h3>
-                        <p className="text-white/40 text-[14px] leading-relaxed">{b.desc}</p>
+                        <p className="text-[#8B98AB] text-[14px] leading-relaxed">{b.desc}</p>
                     </div>
                 ))}
             </div>
@@ -351,7 +350,7 @@ function BenefitsGrid() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function AcceptPulsePage() {
   return (
-    <main className="bg-[#0d1522] min-h-screen font-sans">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
 
       <PulseHero />

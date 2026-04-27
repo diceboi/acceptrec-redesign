@@ -5,8 +5,11 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Navbar } from '@/components/sections/Navbar';
 import { Footer } from '@/components/sections/Footer';
-import { AnnouncementBanner } from '@/components/sections/AnnouncementBanner';
+import { CtaBanner } from '@/components/sections/CtaBanner';
 import { IconTrendingUp, IconUsers, IconGift, IconShieldCheck, IconMail, IconMapPin, IconArrowRight } from '@tabler/icons-react';
+
+const containerVariants = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
+const cardVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
 const perks = [
     { icon: IconTrendingUp, title: "Growth & Development", desc: "We invest in our people with ongoing training, mentorship, and clear career progression paths." },
@@ -23,78 +26,60 @@ const roles = [
 
 export default function JoinOurTeamPage() {
     return (
-        <main className="bg-[#0D1520] min-h-screen selection:bg-teal-5 selection:text-black dark">
-            <AnnouncementBanner />
+        <main className="bg-navy-900 min-h-screen">
             <Navbar />
-            <section className="relative pt-48 pb-16 bg-[#0D1520] text-center">
-                <div className="mx-auto max-w-4xl px-6">
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                        <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">CAREERS</h2>
-                        <h1 className="text-white text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-[0.95]">Join Our Team</h1>
-                        <p className="text-white/40 text-xl leading-relaxed font-medium max-w-2xl mx-auto">
-                            Be part of a team that&apos;s redefining recruitment excellence.
-                        </p>
+            <section className="relative flex min-h-[60vh] w-full items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
+                <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+                    <motion.div className="absolute rounded-full" style={{ height: "70%", width: "55%", left: "-10%", top: "-10%", background: "var(--color-teal-5)", opacity: 0.13, filter: "blur(90px)" }} animate={{ scale: [1, 1.3, 1], x: [0, 80, 0], y: [0, 50, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+                    <motion.div className="absolute rounded-full" style={{ height: "60%", width: "55%", right: "-10%", top: "-5%", background: "var(--color-purple-5)", opacity: 0.18, filter: "blur(100px)" }} animate={{ scale: [1, 1.4, 1], x: [0, -80, 0], y: [0, 100, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }} />
+                </div>
+                <div className="pointer-events-none absolute inset-0 dot-pattern opacity-20" />
+                <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
+                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="mb-8 inline-flex items-center gap-2 rounded-full border border-teal-5/30 bg-teal-5/10 px-4 py-2">
+                        <span className="w-2 h-2 rounded-full bg-teal-5 animate-pulse" />
+                        <span className="text-sm font-semibold text-teal-4">Careers</span>
+                    </motion.div>
+                    <motion.h1 className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>Join Our Team</motion.h1>
+                    <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>Be part of a team that&apos;s redefining recruitment excellence.</motion.p>
+                </div>
+                <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-700 to-transparent" />
+            </section>
+
+            <section className="pb-24 bg-navy-700">
+                <div className="mx-auto max-w-[1140px] px-6">
+                    <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+                        {perks.map((p, i) => {
+                            const Icon = p.icon;
+                            return (
+                                <motion.div key={i} variants={cardVariants} className="glass-card group relative overflow-hidden rounded-2xl p-8 text-center transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm">
+                                    <div className="w-14 h-14 rounded-2xl bg-teal-5/10 border border-teal-5/20 flex items-center justify-center mx-auto mb-6 text-teal-5 group-hover:bg-[#00A99D] group-hover:text-white transition-all"><Icon size={28} /></div>
+                                    <h4 className="text-white text-lg font-semibold mb-3">{p.title}</h4>
+                                    <p className="text-[#8B98AB] text-sm leading-relaxed font-medium">{p.desc}</p>
+                                </motion.div>
+                            );
+                        })}
                     </motion.div>
                 </div>
             </section>
 
-            {/* Perks */}
-            <section className="pb-24 bg-[#0D1520]">
-                <div className="mx-auto max-w-7xl px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {perks.map((p, i) => {
-                            const Icon = p.icon;
-                            return (
-                                <motion.div key={i} whileHover={{ y: -6 }} className="p-8 rounded-[32px] bg-white/[0.03] border border-white/5 hover:border-teal-5/30 transition-all group text-center">
-                                    <div className="w-14 h-14 rounded-2xl bg-teal-5/10 border border-teal-5/20 flex items-center justify-center mx-auto mb-6 text-teal-5 group-hover:bg-teal-5 group-hover:text-black transition-all">
-                                        <Icon size={28} />
-                                    </div>
-                                    <h4 className="text-white text-lg font-bold mb-3">{p.title}</h4>
-                                    <p className="text-white/40 text-sm leading-relaxed font-medium">{p.desc}</p>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </section>
-
-            {/* Roles */}
-            <section className="py-24 bg-[#121926]">
+            <section className="py-24 bg-[#0d111a]">
                 <div className="mx-auto max-w-5xl px-6">
                     <div className="text-center mb-16">
-                        <h3 className="text-white text-3xl md:text-5xl font-black tracking-tighter mb-4">Open Opportunities</h3>
-                        <p className="text-white/40 text-lg font-medium">We&apos;re always looking for talented individuals to join our team</p>
+                        <h3 className="text-white text-3xl md:text-5xl font-semibold tracking-tight mb-4">Open Opportunities</h3>
+                        <p className="text-[#8B98AB] text-lg font-medium">We&apos;re always looking for talented individuals to join our team</p>
                     </div>
-                    <div className="space-y-6">
+                    <div className="space-y-5">
                         {roles.map((r, i) => (
-                            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-white/[0.03] border border-white/5 rounded-[32px] p-8 md:p-10 hover:border-teal-5/30 transition-all">
-                                <h4 className="text-white text-xl font-bold mb-3">{r.title}</h4>
-                                <p className="text-white/40 leading-relaxed font-medium">{r.desc}</p>
+                            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="glass-card rounded-2xl p-8 md:p-10 hover:border-teal-5/30 transition-all hover:teal-glow-sm">
+                                <h4 className="text-white text-xl font-semibold mb-3">{r.title}</h4>
+                                <p className="text-[#8B98AB] leading-relaxed font-medium">{r.desc}</p>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="py-32 bg-teal-5">
-                <div className="mx-auto max-w-5xl px-6 text-center">
-                    <h2 className="text-black text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-[0.85]">Ready to Join?</h2>
-                    <p className="text-black/60 text-xl font-bold max-w-2xl mx-auto mb-14">
-                        Send us your CV and let&apos;s discuss how you can grow your career with Accept Recruitment.
-                    </p>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                        <a href="mailto:admin@acceptrec.co.uk?subject=Career Opportunity Enquiry" className="w-full sm:w-auto px-12 py-7 rounded-2xl bg-black text-white font-black uppercase tracking-widest text-xs hover:bg-white hover:text-black transition-all shadow-2xl inline-flex items-center justify-center gap-3">
-                            <IconMail size={18} />
-                            Email Your CV
-                        </a>
-                        <Link href="/offices" className="w-full sm:w-auto px-12 py-7 rounded-2xl border border-black/20 text-black font-black uppercase tracking-widest text-xs hover:bg-black/5 transition-all inline-flex items-center justify-center gap-3">
-                            <IconMapPin size={18} />
-                            Find Your Office
-                        </Link>
-                    </div>
-                </div>
-            </section>
+            <CtaBanner badge="CAREERS" title="Ready to" titleHighlight="join?" subtitle="Send us your CV and let's discuss how you can grow your career with Accept Recruitment." primaryButtonText="Email Your CV" secondaryButtonText="Find Your Office" primaryButtonHref="mailto:admin@acceptrec.co.uk?subject=Career Opportunity Enquiry" secondaryButtonHref="/offices" />
             <Footer />
         </main>
     );

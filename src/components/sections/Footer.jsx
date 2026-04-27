@@ -39,31 +39,30 @@ const offices = [
 ];
 
 export function Footer() {
-  const { resolvedTheme } = useTheme();
-  const isLight = resolvedTheme === "light";
   return (
     <footer
-      className={`w-full border-t px-6 py-16 md:px-12 transition-colors duration-300 ${isLight ? "bg-gray-50 border-gray-200" : "bg-black border-white/8"}`}
+      className="w-full border-t px-6 py-16 md:px-12 transition-colors duration-300 bg-gray-50 border-gray-200 dark:bg-black dark:border-white/8"
     >
       <div className="mx-auto max-w-7xl">
         {/* Top: Logo + columns */}
         <div className="flex flex-col gap-12 lg:flex-row">
           {/* Left: Logo, tagline, social, offices */}
           <div className="flex flex-col gap-8 lg:w-72 lg:shrink-0">
-            <Link href="/">
+            <Link href="/" className="relative h-10 w-40">
               <Image
-                src={
-                  isLight
-                    ? "/Accept-Stacked-Logo-with-Strapline-RGB300.webp"
-                    : "/acceptrec-white-logo.webp"
-                }
+                src="/Accept-Stacked-Logo-with-Strapline-RGB300.webp"
                 alt="Accept Recruitment Logo"
-                width={160}
-                height={48}
-                className="h-10 w-auto object-contain"
+                fill
+                className="object-contain dark:hidden"
+              />
+              <Image
+                src="/acceptrec-white-logo.webp"
+                alt="Accept Recruitment Logo"
+                fill
+                className="object-contain hidden dark:block"
               />
             </Link>
-            <p className="text-sm leading-relaxed text-white/40">
+            <p className="text-sm leading-relaxed text-gray-600 dark:text-white/40">
               Dependable temporary and permanent staffing across the Midlands.
               4.8★ rated on Google.
             </p>

@@ -75,8 +75,8 @@ function InnerHero() {
         </motion.p>
 
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
-          <Button variant="primary" size="lg">Find Your Next Hire</Button>
-          <Button variant="secondary" size="lg">Request a Callback</Button>
+          <Button variant="primary" size="lg" href="/get-started">Find Your Next Hire</Button>
+          <Button variant="secondary" size="lg" href="/contact">Request a Callback</Button>
         </motion.div>
       </div>
 

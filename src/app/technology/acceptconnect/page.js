@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -23,30 +23,30 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function ConnectHero() {
   return (
-    <section className="relative flex min-h-[75vh] w-full flex-col items-center justify-center overflow-hidden bg-[#0d1522] pt-48 pb-16 border-b border-white/5">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute top-1/4 right-1/4 h-96 w-96 rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
       
-      <div className="relative z-10 mx-auto max-w-285 px-6 text-center">
+      <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }} 
           animate={{ opacity: 1, scale: 1 }} 
           className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-5/10 border border-teal-5/20 backdrop-blur-sm"
         >
-          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5 text-glow-teal font-sans">Unified Communication Platform</span>
+          <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-teal-5 font-sans">Unified Communication Platform</span>
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-7xl lg:text-8xl font-black mb-8 tracking-tighter leading-[0.95]"
+          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          Your Entire Workforce, <br /><span className="text-teal-5 text-glow-teal">One Platform.</span>
+          Your Entire Workforce, <br /><span className="text-teal-5">One Platform.</span>
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/50 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -68,13 +68,13 @@ function ProblemSection() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     <div>
                         <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE CHALLENGE</h2>
                         <h3 className="text-white text-4xl font-bold mb-10 tracking-tight leading-tight">Communication Shouldn't <br />Be This Hard</h3>
-                        <p className="text-white/40 text-lg leading-relaxed mb-10">
+                        <p className="text-[#8B98AB] text-lg leading-relaxed mb-10">
                             Relying on fragmented messaging apps to manage a high-volume workforce is a recipe for operational failure. It’s messy, it’s unsecure, and it’s costing you time.
                         </p>
                         <div className="space-y-4">
@@ -88,11 +88,11 @@ function ProblemSection() {
                             ))}
                         </div>
                     </div>
-                    <div className="relative h-full min-h-[400px] rounded-[40px] bg-linear-to-br from-[#161b28] to-[#0d1522] border border-white/10 flex flex-col justify-center items-center p-12 overflow-hidden shadow-2xl">
+                    <div className="relative h-full min-h-[400px] rounded-2xl bg-gradient-to-br from-[#161b28] to-[#0d1522] border border-white/10 flex flex-col justify-center items-center p-12 overflow-hidden shadow-2xl">
                          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.1)_0%,transparent_70%)]" />
                          <div className="relative z-10 text-center max-w-sm">
                             <h4 className="text-white text-2xl font-bold mb-6 italic leading-snug">"You need a better way. AcceptConnect is it."</h4>
-                            <p className="text-white/40 leading-relaxed font-medium">
+                            <p className="text-[#8B98AB] leading-relaxed font-medium">
                                 We've built the communication tool that staffing agencies have been waiting for. Direct, secure, and fully integrated with our core database.
                             </p>
                          </div>
@@ -112,20 +112,20 @@ function ProcessSection() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d111a] border-b border-white/5">
-            <div className="mx-auto max-w-285 px-6 text-center">
+        <section className="py-24 bg-[#0d111a]">
+            <div className="mx-auto max-w-[1140px] px-6 text-center">
                 <div className="max-w-3xl mx-auto mb-16">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">HOW IT WORKS</h2>
                     <h3 className="text-white text-4xl font-bold mb-4 tracking-tight">Simple for workers. Powerful for you.</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {steps.map((s, i) => (
-                        <div key={i} className="p-10 rounded-[32px] bg-[#161b28] border border-white/5 transition-all hover:border-teal-5/20 group">
+                        <div key={i} className="p-10 rounded-2xl bg-white/[0.03] border border-white/5 transition-all hover:border-teal-5/20 group">
                             <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-8 group-hover:bg-teal-5 group-hover:text-white transition-all mx-auto">
                                 <s.icon size={28} />
                             </div>
                             <h4 className="text-white text-xl font-bold mb-4">{s.title}</h4>
-                            <p className="text-white/40 text-sm leading-relaxed">{s.desc}</p>
+                            <p className="text-[#8B98AB] text-sm leading-relaxed">{s.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -137,15 +137,15 @@ function ProcessSection() {
 // ─── App Experience Mockup ────────────────────────────────────────────────
 function AppExperience() {
     return (
-        <section className="py-24 bg-[#0d1522]">
-            <div className="mx-auto max-w-285 px-6">
-                <div className="bg-[#161b28] rounded-[40px] border border-white/5 overflow-hidden shadow-2xl relative">
+        <section className="py-24 bg-navy-900">
+            <div className="mx-auto max-w-[1140px] px-6">
+                <div className="bg-white/[0.03] rounded-2xl border border-white/5 overflow-hidden shadow-2xl relative">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
                         {/* Interactive UI Left */}
                         <div className="lg:col-span-7 p-8 md:p-20 relative overflow-hidden">
                              <div className="absolute top-0 right-0 w-64 h-64 bg-teal-5/5 blur-[100px]" />
                              <h3 className="text-white text-3xl font-bold mb-8 tracking-tight">Built for Engagement</h3>
-                             <p className="text-white/40 text-lg leading-relaxed mb-12 max-w-xl">
+                             <p className="text-[#8B98AB] text-lg leading-relaxed mb-12 max-w-xl">
                                 We've designed an app that workers actually want to use. No clutter, no noise—just the information they need to do their job well.
                              </p>
                              
@@ -157,10 +157,10 @@ function AppExperience() {
                                      </div>
                                      <div>
                                         <div className="text-white text-sm font-bold mb-1">Shift Update: Food Production</div>
-                                        <p className="text-white/40 text-xs leading-relaxed">"Reminder: Tomorrow's shift has been moved to 7am start. Please confirm your attendance."</p>
+                                        <p className="text-[#8B98AB] text-xs leading-relaxed">"Reminder: Tomorrow's shift has been moved to 7am start. Please confirm your attendance."</p>
                                         <div className="mt-4 flex gap-2">
-                                            <div className="px-4 py-1.5 rounded-lg bg-teal-5 text-white text-[10px] font-black uppercase tracking-wider cursor-pointer">Confirm</div>
-                                            <div className="px-4 py-1.5 rounded-lg bg-white/10 text-white/40 text-[10px] font-black uppercase tracking-wider cursor-pointer">Decline</div>
+                                            <div className="px-4 py-1.5 rounded-lg bg-teal-5 text-white text-[10px] font-semibold uppercase tracking-wider cursor-pointer">Confirm</div>
+                                            <div className="px-4 py-1.5 rounded-lg bg-white/10 text-[#8B98AB] text-[10px] font-semibold uppercase tracking-wider cursor-pointer">Decline</div>
                                         </div>
                                      </div>
                                 </div>
@@ -170,14 +170,14 @@ function AppExperience() {
                                      <div className="flex gap-1 items-center">
                                         <IconCheck size={14} className="text-teal-4" />
                                         <IconCheck size={14} className="text-teal-4 -ml-1.5" />
-                                        <span className="text-[9px] text-teal-4 font-black ml-1">READ</span>
+                                        <span className="text-[9px] text-teal-4 font-semibold ml-1">READ</span>
                                      </div>
                                 </div>
                              </div>
                         </div>
 
                         {/* Features List Right */}
-                        <div className="lg:col-span-5 bg-linear-to-b from-[#1c2436] to-[#161b28] p-12 lg:p-20 border-l border-white/5">
+                        <div className="lg:col-span-5 bg-gradient-to-b from-[#1c2436] to-[#161b28] p-12 lg:p-20 border-l border-white/5">
                              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-10">What You Can Do</h4>
                              <div className="space-y-8">
                                 {[
@@ -192,7 +192,7 @@ function AppExperience() {
                                         </div>
                                         <div>
                                             <h5 className="text-white font-bold text-sm mb-1">{item.t}</h5>
-                                            <p className="text-white/40 text-xs leading-relaxed">{item.d}</p>
+                                            <p className="text-[#8B98AB] text-xs leading-relaxed">{item.d}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -208,14 +208,14 @@ function AppExperience() {
 // ─── The Coach AI Section ──────────────────────────────────────────────────
 function CoachSection() {
     return (
-        <section className="py-24 bg-[#0d111a] border-y border-white/5 overflow-hidden">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-[#0d111a] overflow-hidden">
+            <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
                     
                     {/* Content Left */}
                     <div className="lg:col-span-7">
                         <div className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 backdrop-blur-sm">
-                            <span className="text-[10px] font-black tracking-[0.2em] uppercase text-amber-500">BUILT-IN INTELLIGENCE</span>
+                            <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-amber-500">BUILT-IN INTELLIGENCE</span>
                         </div>
                         <h3 className="text-white text-4xl md:text-5xl font-bold mb-8 tracking-tight">The Coach: <br />24/7 Support</h3>
                         <p className="text-white/60 text-xl leading-relaxed mb-10">
@@ -236,7 +236,7 @@ function CoachSection() {
                             ))}
                         </div>
 
-                        <p className="text-white/40 text-lg leading-relaxed italic">
+                        <p className="text-[#8B98AB] text-lg leading-relaxed italic">
                             The Coach answers instantly. Your team focuses on real problems, not the same questions 50 times a day.
                         </p>
                     </div>
@@ -244,16 +244,16 @@ function CoachSection() {
                     {/* Chat Mockup Right */}
                     <div className="lg:col-span-5 relative">
                          <div className="absolute inset-0 bg-amber-500/5 blur-[100px] rounded-full pointer-events-none" />
-                         <div className="bg-[#161b28] rounded-[40px] border border-white/5 p-10 shadow-2xl relative z-10">
+                         <div className="bg-white/[0.03] rounded-2xl border border-white/5 p-10 shadow-2xl relative z-10">
                             
                             <div className="space-y-8">
                                 {/* Worker Message */}
                                 <motion.div 
                                     initial={{ opacity: 0, x: 20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
-                                    className="p-6 rounded-3xl bg-[#2a3045] border border-white/5 self-end max-w-[85%] ml-auto"
+                                    className="p-6 rounded-2xl bg-white/[0.07] border border-white/5 self-end max-w-[85%] ml-auto"
                                 >
-                                    <div className="flex items-center gap-2 text-white/40 text-[10px] font-bold uppercase tracking-widest mb-2">
+                                    <div className="flex items-center gap-2 text-[#8B98AB] text-[10px] font-bold uppercase tracking-widest mb-2">
                                         <IconUsers size={12} /> Worker:
                                     </div>
                                     <div className="text-white text-base">"When's payday?"</div>
@@ -264,12 +264,12 @@ function CoachSection() {
                                     initial={{ opacity: 0, x: -20 }}
                                     whileInView={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.4 }}
-                                    className="p-8 rounded-[32px] bg-[#3d3826] border border-amber-500/20 text-white max-w-[95%] relative overflow-hidden"
+                                    className="p-8 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-white max-w-[95%] relative overflow-hidden"
                                 >
                                     <div className="absolute top-0 right-0 p-4 opacity-10">
                                         <IconMessage2 size={40} />
                                     </div>
-                                    <div className="text-amber-500 text-[10px] font-black uppercase tracking-widest mb-4">The Coach:</div>
+                                    <div className="text-amber-500 text-[10px] font-semibold uppercase tracking-widest mb-4">The Coach:</div>
                                     <div className="text-white font-medium leading-relaxed italic">
                                         "Payday is every Friday. Your next payment is this Friday, 1st March. Need anything else?"
                                     </div>
@@ -314,25 +314,25 @@ function ScenariosSection() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d1522] border-t border-white/5">
-            <div className="mx-auto max-w-285 px-6">
+        <section className="py-24 bg-navy-900">
+            <div className="mx-auto max-w-[1140px] px-6">
                  <div className="max-w-3xl mb-16">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">REAL SCENARIOS</h2>
                     <h3 className="text-white text-4xl font-bold mb-6 tracking-tight">Real Solutions.</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {scenarios.map((s, i) => (
-                        <div key={i} className="p-10 rounded-[40px] bg-[#161b28] border border-white/5 relative overflow-hidden group hover:border-teal-5/20 transition-all flex flex-col h-full">
+                        <div key={i} className="p-10 rounded-2xl bg-white/[0.03] border border-white/5 relative overflow-hidden group hover:border-teal-5/20 transition-all flex flex-col h-full">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-teal-5/5 blur-[60px] pointer-events-none" />
                             <div className="mb-8">
-                                <div className="text-teal-5 text-[9px] font-black uppercase tracking-widest mb-4 px-2 py-0.5 bg-teal-5/10 border border-teal-5/20 rounded inline-block">{s.badge}</div>
+                                <div className="text-teal-5 text-[9px] font-semibold uppercase tracking-widest mb-4 px-2 py-0.5 bg-teal-5/10 border border-teal-5/20 rounded inline-block">{s.badge}</div>
                                 <div className="flex items-center gap-3 mb-4">
                                     <s.icon className="text-white/60" size={24} />
                                     <h4 className="text-white font-bold text-xl">{s.title}</h4>
                                 </div>
                             </div>
-                            <p className="text-white/40 text-sm leading-relaxed mb-10 flex-grow italic">{s.text}</p>
-                            <div className="flex items-center gap-2 text-teal-5 text-[10px] font-black uppercase tracking-widest cursor-pointer group-hover:gap-4 transition-all">
+                            <p className="text-[#8B98AB] text-sm leading-relaxed mb-10 flex-grow italic">{s.text}</p>
+                            <div className="flex items-center gap-2 text-teal-5 text-[10px] font-semibold uppercase tracking-widest cursor-pointer group-hover:gap-4 transition-all">
                                 See Full Integration <IconArrowRight size={14} />
                             </div>
                         </div>
@@ -346,7 +346,7 @@ function ScenariosSection() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function AcceptConnectPage() {
   return (
-    <main className="bg-[#0d1522] min-h-screen font-sans">
+    <main className="bg-navy-900 min-h-screen">
       <Navbar />
 
       <ConnectHero />
