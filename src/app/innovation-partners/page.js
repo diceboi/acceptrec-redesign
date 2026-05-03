@@ -19,6 +19,8 @@ import {
   IconTarget,
 } from "@tabler/icons-react";
 import { Button } from "@/components/ui/Button";
+import { useState } from "react";
+import { sendInnovationEmail } from "@/app/actions/email";
 
 const containerVariants = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 const cardVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } };
@@ -211,6 +213,50 @@ function TheAsk() {
 
 // ─── Application Form ──────────────────────────────────────────────────────
 function InnovationForm() {
+    const [status, setStatus] = useState("idle"); // idle, loading, success, error
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        companyName: "",
+        sector: "",
+        message: ""
+    });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("loading");
+        
+        const result = await sendInnovationEmail(formData);
+        
+        if (result.success) {
+            setStatus("success");
+        } else {
+            setStatus("error");
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    if (status === "success") {
+        return (
+            <section className="py-24 bg-navy-900">
+                <div className="mx-auto max-w-[1140px] px-6 text-center">
+                    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="glass-card rounded-2xl p-16 max-w-2xl mx-auto">
+                        <div className="w-20 h-20 bg-teal-5/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                            <IconCircleCheckFilled className="text-teal-5" size={40} />
+                        </div>
+                        <h2 className="text-4xl font-semibold text-white mb-6">Application Received</h2>
+                        <p className="text-[#8B98AB] text-lg mb-10">Thanks for your interest! Our product team will review your application and contact you within 48 hours.</p>
+                        <button onClick={() => setStatus("idle")} className="text-teal-5 font-semibold uppercase tracking-widest text-sm hover:text-white transition-colors">Submit another application</button>
+                    </motion.div>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="py-24 bg-navy-900" id="apply">
              <div className="mx-auto max-w-[1140px] px-6">
@@ -227,33 +273,78 @@ function InnovationForm() {
                             </p>
                         </div>
 
-                        <form className="space-y-8">
+                        <form className="space-y-8" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <label className="text-[11px] font-semibold uppercase tracking-widest text-[#8B98AB] ml-4">Full Name</label>
-                                    <input className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" placeholder="John Doe" />
+                                    <input 
+                                        name="fullName"
+                                        required
+                                        value={formData.fullName}
+                                        onChange={handleChange}
+                                        className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" 
+                                        placeholder="John Doe" 
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[11px] font-semibold uppercase tracking-widest text-[#8B98AB] ml-4">Email Address</label>
-                                    <input className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" placeholder="john@company.com" />
+                                    <input 
+                                        type="email"
+                                        name="email"
+                                        required
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" 
+                                        placeholder="john@company.com" 
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[11px] font-semibold uppercase tracking-widest text-[#8B98AB] ml-4">Company Name</label>
-                                    <input className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" placeholder="Acme Logistics" />
+                                    <input 
+                                        name="companyName"
+                                        required
+                                        value={formData.companyName}
+                                        onChange={handleChange}
+                                        className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" 
+                                        placeholder="Acme Logistics" 
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-[11px] font-semibold uppercase tracking-widest text-[#8B98AB] ml-4">Sector / Operation</label>
-                                    <input className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" placeholder="Warehouse Management" />
+                                    <input 
+                                        name="sector"
+                                        required
+                                        value={formData.sector}
+                                        onChange={handleChange}
+                                        className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all" 
+                                        placeholder="Warehouse Management" 
+                                    />
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <label className="text-[11px] font-semibold uppercase tracking-widest text-[#8B98AB] ml-4">Why do you want to join?</label>
-                                <textarea rows={4} className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all resize-none" placeholder="Briefly describe your interest..." />
+                                <textarea 
+                                    name="message"
+                                    required
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    rows={4} 
+                                    className="w-full bg-navy-900 border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/10 focus:outline-none focus:border-teal-5 transition-all resize-none" 
+                                    placeholder="Briefly describe your interest..." 
+                                />
                             </div>
                             <div className="text-center">
-                                <Button size="lg" className="px-12 py-6 rounded-full group">
-                                    Submit Application <IconArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                                <Button 
+                                    type="submit"
+                                    disabled={status === "loading"}
+                                    size="lg" 
+                                    className="px-12 py-6 rounded-full group disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    {status === "loading" ? "Submitting..." : "Submit Application"} <IconArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                                 </Button>
+                                {status === "error" && (
+                                     <p className="text-red-400 text-xs text-center font-semibold mt-4">Something went wrong. Please try again or contact us directly.</p>
+                                 )}
                                 <p className="mt-6 text-[10px] font-semibold text-[#8B98AB]/70 uppercase tracking-widest">A Senior Product Manager will review your inquiry.</p>
                             </div>
                         </form>

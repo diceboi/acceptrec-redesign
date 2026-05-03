@@ -17,6 +17,8 @@ import {
   IconBuilding,
   IconTarget,
 } from "@tabler/icons-react";
+import { useState } from "react";
+import { sendGetStartedEmail } from "@/app/actions/email";
 
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function GetStartedHero() {
@@ -53,6 +55,59 @@ function GetStartedHero() {
 
 // ─── Intake Form ──────────────────────────────────────────────────────────
 function IntakeForm() {
+    const [status, setStatus] = useState("idle"); // idle, loading, success, error
+    const [formData, setFormData] = useState({
+        challenge: "Poor reliability / No-shows",
+        workersCount: "1-10 workers",
+        industry: "Logistics",
+        companyName: "",
+        department: "Operations",
+        seniority: "Director / Executive",
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: ""
+    });
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setStatus("loading");
+        
+        const result = await sendGetStartedEmail(formData);
+        
+        if (result.success) {
+            setStatus("success");
+        } else {
+            setStatus("error");
+        }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleIndustryChange = (industry) => {
+        setFormData(prev => ({ ...prev, industry }));
+    };
+
+    if (status === "success") {
+        return (
+            <section className="relative w-full bg-navy-700 py-24 md:py-32 overflow-hidden">
+                <div className="relative z-10 mx-auto max-w-[1140px] px-6 text-center">
+                    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="glass-card rounded-2xl p-16 max-w-2xl mx-auto">
+                        <div className="w-20 h-20 bg-teal-5/10 rounded-full flex items-center justify-center mx-auto mb-8">
+                            <IconCheck className="text-teal-5" size={40} />
+                        </div>
+                        <h2 className="text-4xl font-semibold text-white mb-6">Inquiry Received</h2>
+                        <p className="text-[#8B98AB] text-lg mb-10">Thanks for reaching out! One of our senior consultants will contact you within 24 hours to discuss your staffing needs.</p>
+                        <button onClick={() => setStatus("idle")} className="text-teal-5 font-semibold uppercase tracking-widest text-sm hover:text-white transition-colors">Send another inquiry</button>
+                    </motion.div>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="relative w-full bg-navy-700 py-24 md:py-32 overflow-hidden">
             <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
@@ -100,7 +155,7 @@ function IntakeForm() {
                              <p className="text-[#8B98AB] text-lg">Tell us what&apos;s not working. We&apos;ll show you how we&apos;d fix it.</p>
                          </div>
 
-                         <form className="space-y-12">
+                         <form className="space-y-12" onSubmit={handleSubmit}>
                              {/* Section 1 */}
                              <div className="space-y-6">
                                  <div className="flex items-center gap-3 text-teal-5 font-semibold uppercase tracking-widest text-[11px]">
@@ -109,7 +164,12 @@ function IntakeForm() {
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                      <div className="space-y-2">
                                          <label className="text-[#8B98AB]/70 text-[10px] font-semibold uppercase tracking-widest ml-1">Current Challenge*</label>
-                                         <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer">
+                                         <select 
+                                            name="challenge"
+                                            value={formData.challenge}
+                                            onChange={handleChange}
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer"
+                                         >
                                              <option>Poor reliability / No-shows</option>
                                              <option>Insufficient volumes</option>
                                              <option>High cost / Low ROI</option>
@@ -118,7 +178,12 @@ function IntakeForm() {
                                      </div>
                                      <div className="space-y-2">
                                          <label className="text-[#8B98AB]/70 text-[10px] font-semibold uppercase tracking-widest ml-1">Number of Workers*</label>
-                                         <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer">
+                                         <select 
+                                            name="workersCount"
+                                            value={formData.workersCount}
+                                            onChange={handleChange}
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer"
+                                         >
                                              <option>1-10 workers</option>
                                              <option>10-50 workers</option>
                                              <option>50-200 workers</option>
@@ -130,7 +195,12 @@ function IntakeForm() {
                                      <label className="text-[#8B98AB]/70 text-[10px] font-semibold uppercase tracking-widest ml-1 text-center block">Industry Selection*</label>
                                      <div className="flex flex-wrap justify-center gap-3 mt-4">
                                          {["Logistics", "Manufacturing", "Construction", "Retail", "Food Production", "Driving", "Other"].map((tag, i) => (
-                                             <button key={i} type="button" className="px-5 py-2 rounded-full border border-white/10 text-white/60 text-[11px] font-semibold uppercase tracking-widest hover:bg-teal-5 hover:text-black hover:border-teal-5 transition-all">
+                                             <button 
+                                                key={i} 
+                                                type="button" 
+                                                onClick={() => handleIndustryChange(tag)}
+                                                className={`px-5 py-2 rounded-full border text-[11px] font-semibold uppercase tracking-widest transition-all ${formData.industry === tag ? 'bg-teal-5 border-teal-5 text-black' : 'border-white/10 text-white/60 hover:bg-teal-5/10 hover:text-white'}`}
+                                             >
                                                  {tag}
                                              </button>
                                          ))}
@@ -145,12 +215,25 @@ function IntakeForm() {
                                  </div>
                                  <div className="space-y-2">
                                      <label className="text-[#8B98AB]/70 text-[10px] font-semibold uppercase tracking-widest ml-1">Company Name*</label>
-                                     <input type="text" placeholder="e.g. InPost UK" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" />
+                                     <input 
+                                        type="text" 
+                                        name="companyName"
+                                        required
+                                        value={formData.companyName}
+                                        onChange={handleChange}
+                                        placeholder="e.g. InPost UK" 
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" 
+                                     />
                                  </div>
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                                      <div className="space-y-2">
                                          <label className="text-[#8B98AB]/70 text-[10px] font-semibold uppercase tracking-widest ml-1">Your Department</label>
-                                         <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer">
+                                         <select 
+                                            name="department"
+                                            value={formData.department}
+                                            onChange={handleChange}
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer"
+                                         >
                                              <option>Operations</option>
                                              <option>Human Resources</option>
                                              <option>Procurement</option>
@@ -159,7 +242,12 @@ function IntakeForm() {
                                      </div>
                                      <div className="space-y-2">
                                          <label className="text-[#8B98AB]/70 text-[10px] font-semibold uppercase tracking-widest ml-1">Seniority</label>
-                                         <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer">
+                                         <select 
+                                            name="seniority"
+                                            value={formData.seniority}
+                                            onChange={handleChange}
+                                            className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all appearance-none cursor-pointer"
+                                         >
                                              <option>Director / Executive</option>
                                              <option>Manager</option>
                                              <option>Supervisor</option>
@@ -175,17 +263,56 @@ function IntakeForm() {
                                      <IconUserCircle size={18} /> 3. Your Details
                                  </div>
                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                     <input type="text" placeholder="First Name*" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" />
-                                     <input type="text" placeholder="Last Name*" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" />
+                                     <input 
+                                        type="text" 
+                                        name="firstName"
+                                        required
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        placeholder="First Name*" 
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" 
+                                     />
+                                     <input 
+                                        type="text" 
+                                        name="lastName"
+                                        required
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        placeholder="Last Name*" 
+                                        className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" 
+                                     />
                                  </div>
-                                 <input type="email" placeholder="Work Email*" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" />
-                                 <input type="tel" placeholder="Phone Number*" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" />
+                                 <input 
+                                    type="email" 
+                                    name="email"
+                                    required
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder="Work Email*" 
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" 
+                                 />
+                                 <input 
+                                    type="tel" 
+                                    name="phone"
+                                    required
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    placeholder="Phone Number*" 
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all" 
+                                 />
                              </div>
 
                              <div className="pt-8">
-                                 <button className="w-full py-6 bg-teal-5 text-black font-semibold uppercase tracking-[0.2em] rounded-2xl shadow-2xl hover:scale-[1.01] active:scale-[0.98] transition-all group">
-                                     Get in Touch <IconArrowRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={20} />
+                                 <button 
+                                    type="submit"
+                                    disabled={status === "loading"}
+                                    className="w-full py-6 bg-teal-5 text-black font-semibold uppercase tracking-[0.2em] rounded-2xl shadow-2xl hover:scale-[1.01] active:scale-[0.98] transition-all group disabled:opacity-50 disabled:cursor-not-allowed"
+                                 >
+                                     {status === "loading" ? "Sending..." : "Get in Touch"} <IconArrowRight className="inline-block ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                                  </button>
+                                 {status === "error" && (
+                                     <p className="text-red-400 text-xs text-center font-semibold mt-4">Something went wrong. Please try again or call us directly.</p>
+                                 )}
                                  <p className="text-[#8B98AB]/70 text-[10px] text-center font-semibold tracking-widest mt-6 uppercase">
                                      We typically respond within 24 hours. No-obligation fixed pricing.
                                  </p>

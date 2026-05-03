@@ -3,11 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { IconEdit, IconTrash, IconExternalLink, IconSearch } from "@tabler/icons-react";
+import { IconEdit, IconTrash, IconExternalLink, IconSearch, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { deletePost } from "@/lib/blog-data";
 
 export function BlogList({ posts, categories, tags }) {
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 20;
   const router = useRouter();
 
   const filtered = posts.filter((p) => {
@@ -20,6 +22,15 @@ export function BlogList({ posts, categories, tags }) {
       p.author?.toLowerCase().includes(term)
     );
   });
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentItems = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    setCurrentPage(1); // Reset to page 1 on new search
+  };
 
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this post?")) return;
@@ -41,7 +52,7 @@ export function BlogList({ posts, categories, tags }) {
           type="text"
           placeholder="Search posts..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearch}
           className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal-5/50 transition-colors"
         />
       </div>
@@ -60,7 +71,7 @@ export function BlogList({ posts, categories, tags }) {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((post) => (
+            {currentItems.map((post) => (
               <tr key={post.id} className="border-t border-white/5 hover:bg-white/[0.02] transition-colors">
                 <td className="px-4 py-4 align-middle">
                   <div>
@@ -131,7 +142,7 @@ export function BlogList({ posts, categories, tags }) {
 
       {/* Mobile cards */}
       <div className="md:hidden space-y-3 mt-20">
-        {filtered.map((post) => (
+        {currentItems.map((post) => (
           <div key={post.id} className="border border-white/5 bg-white/[0.02] rounded-2xl p-4">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
@@ -160,6 +171,46 @@ export function BlogList({ posts, categories, tags }) {
           </div>
         ))}
       </div>
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-between mt-6 px-2">
+          <div className="text-sm text-white/40">
+            Showing <span className="text-white font-medium">{startIndex + 1}</span> to <span className="text-white font-medium">{Math.min(startIndex + ITEMS_PER_PAGE, filtered.length)}</span> of <span className="text-white font-medium">{filtered.length}</span> posts
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-lg bg-white/5 text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <IconChevronLeft size={18} />
+            </button>
+            <div className="flex items-center gap-1">
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                    currentPage === i + 1
+                      ? "bg-teal-5 text-navy-900"
+                      : "text-white/50 hover:bg-white/10 hover:text-white"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-lg bg-white/5 text-white hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <IconChevronRight size={18} />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

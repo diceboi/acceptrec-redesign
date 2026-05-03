@@ -7,6 +7,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { usePathname } from "next/navigation";
 import {
   IconRefresh,
   IconBriefcase,
@@ -31,6 +32,9 @@ import {
   IconBulb,
   IconStar,
   IconHelp,
+  IconMenu2,
+  IconX,
+  IconChevronDown,
 } from "@tabler/icons-react";
 
 // ─── Mega-menu data ──────────────────────────────────────────────────
@@ -493,10 +497,17 @@ export function Navbar() {
   const [panelSize, setPanelSize] = useState({ width: "auto", height: "auto" });
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   // isLight is false until mounted (avoids SSR mismatch)
   const isLight = mounted && resolvedTheme === "light";
 
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   // Observe the inner content to get its natural size
   useEffect(() => {
@@ -739,26 +750,112 @@ export function Navbar() {
         </div>
 
         {/* Mobile hamburger */}
-        <div className="flex items-center xl:hidden">
+        <div className="flex items-center xl:hidden gap-3">
+          <ThemeToggle />
           <button
-            className={`p-2 transition-colors focus:outline-none text-white`}
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="p-2 transition-colors focus:outline-none text-white hover:bg-white/10 rounded-lg"
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
+            <IconMenu2 size={28} />
           </button>
         </div>
       </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <div className="xl:hidden">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100]"
+            />
+
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+              className="fixed right-0 top-0 h-screen w-[85%] md:w-[60%] bg-[#0d1522] border-l border-white/10 z-[110] shadow-2xl flex flex-col"
+            >
+              {/* Header */}
+              <div className="h-16 flex items-center justify-end px-6 border-b border-white/10 shrink-0">
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <IconX size={24} />
+                </button>
+              </div>
+
+              {/* Content */}
+              <div className="flex-grow overflow-y-auto py-8 px-6 space-y-8">
+                {Object.values(menuData).map((menu) => (
+                  <div key={menu.id} className="space-y-4">
+                    <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5 px-2">
+                      {menu.title}
+                    </h4>
+                    <div className="grid gap-1">
+                      {menu.sections.map((section) => (
+                        <div key={section.heading}>
+                          {section.items.map((item) => (
+                            <Link
+                              key={item.label}
+                              href={item.href}
+                              className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/5 transition-colors group"
+                            >
+                              {item.icon && (
+                                <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-colors">
+                                  <item.icon size={18} strokeWidth={1.5} />
+                                </span>
+                              )}
+                              <div>
+                                <div className="text-sm font-semibold text-white group-hover:text-teal-4 transition-colors">
+                                  {item.label}
+                                </div>
+                                {item.desc && (
+                                  <div className="text-[10px] text-white/40 font-medium">
+                                    {item.desc}
+                                  </div>
+                                )}
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer Actions */}
+              <div className="p-6 border-t border-white/10 bg-black/20 space-y-3">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  href="/jobs"
+                  className="w-full justify-center py-4"
+                >
+                  Find Work
+                </Button>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  href="/get-started"
+                  className="w-full justify-center py-4"
+                >
+                  Get Started
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -8,16 +8,48 @@ import {
   IconCategory,
   IconTag,
   IconArrowLeft,
+  IconBriefcase,
+  IconUsers,
+  IconLogout,
+  IconUser,
 } from "@tabler/icons-react";
+import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
-const menuItems = [
-  { id: "blog", label: "Blog Posts", href: "/admin/blog", icon: IconNotebook },
-  { id: "blog-categories", label: "Categories", href: "/admin/blog-categories", icon: IconCategory },
-  { id: "blog-tags", label: "Tags", href: "/admin/blog-tags", icon: IconTag },
+const menuSections = [
+  {
+    heading: "Jobs",
+    items: [
+      { id: "jobs", label: "Job Vacancies", href: "/admin/jobs", icon: IconBriefcase },
+    ],
+  },
+  {
+    heading: "Blog",
+    items: [
+      { id: "blog", label: "Blog Posts", href: "/admin/blog", icon: IconNotebook },
+      { id: "blog-categories", label: "Categories", href: "/admin/blog-categories", icon: IconCategory },
+      { id: "blog-tags", label: "Tags", href: "/admin/blog-tags", icon: IconTag },
+    ],
+  },
+  {
+    heading: "Admin",
+    roleRequired: "admin",
+    items: [
+      { id: "users", label: "User Management", href: "/admin/users", icon: IconUsers },
+    ],
+  },
 ];
 
-export function AdminSidebar() {
+export function AdminSidebar({ role }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push("/auth/login");
+    router.refresh();
+  };
 
   return (
     <>
@@ -35,32 +67,51 @@ export function AdminSidebar() {
         </div>
 
         {/* Nav items */}
-        <nav className="flex-1 px-3 py-4 space-y-1">
-          <div className="px-3 mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
-            Blog Management
-          </div>
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.id}
-                href={item.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                  isActive
-                    ? "bg-teal-5/15 text-teal-4 border border-teal-5/20"
-                    : "text-white/50 hover:text-white hover:bg-white/5 border border-transparent"
-                }`}
-              >
-                <Icon size={18} strokeWidth={1.5} />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
+        <nav className="flex-1 px-3 py-4 space-y-4">
+          {menuSections
+            .filter((section) => !section.roleRequired || section.roleRequired === role)
+            .map((section) => (
+            <div key={section.heading}>
+              <div className="px-3 mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+                {section.heading}
+              </div>
+              <div className="space-y-1">
+                {section.items.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname.startsWith(item.href);
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? "bg-teal-5/15 text-teal-4 border border-teal-5/20"
+                          : "text-white/50 hover:text-white hover:bg-white/5 border border-transparent"
+                      }`}
+                    >
+                      <Icon size={18} strokeWidth={1.5} />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
-        {/* Back to site */}
-        <div className="px-3 py-4 border-t border-white/5">
+        {/* Back to site / Logout */}
+        <div className="px-3 py-4 border-t border-white/5 space-y-1">
+          <Link
+            href="/admin/profile"
+            className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+              pathname === "/admin/profile"
+                ? "bg-teal-5/15 text-teal-4 border border-teal-5/20"
+                : "text-white/40 hover:text-white hover:bg-white/5 border border-transparent"
+            }`}
+          >
+            <IconUser size={18} strokeWidth={1.5} />
+            <span>My Profile</span>
+          </Link>
           <Link
             href="/"
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/40 hover:text-white hover:bg-white/5 transition-all"
@@ -68,6 +119,13 @@ export function AdminSidebar() {
             <IconArrowLeft size={18} strokeWidth={1.5} />
             <span>Back to Site</span>
           </Link>
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-400/70 hover:text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
+          >
+            <IconLogout size={18} strokeWidth={1.5} />
+            <span>Sign Out</span>
+          </button>
         </div>
       </aside>
 
@@ -83,7 +141,10 @@ export function AdminSidebar() {
           </Link>
         </div>
         <nav className="flex gap-1 px-3 pb-3 overflow-x-auto">
-          {menuItems.map((item) => {
+          {menuSections
+            .filter((section) => !section.roleRequired || section.roleRequired === role)
+            .flatMap((s) => s.items)
+            .map((item) => {
             const isActive = pathname.startsWith(item.href);
             return (
               <Link
