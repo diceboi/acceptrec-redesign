@@ -117,10 +117,11 @@ export function JobList({ jobs }) {
                 <td className="px-4 py-4 align-middle">
                   <div>
                     <div className="font-semibold text-white truncate max-w-[280px]">
-                      {job.title}
+                      {job.internalTitle || job.title}
                     </div>
                     <div className="text-xs text-white/30 mt-0.5">
-                      #{job.id}
+                      {job.ref || `#${job.id}`}
+                      {job.clientName ? ` · ${job.clientName}` : ""}
                       {job.contractType ? ` · ${job.contractType}` : ""}
                       {job.shift ? ` · ${stripHtml(job.shift)}` : ""}
                     </div>
@@ -210,7 +211,7 @@ export function JobList({ jobs }) {
                   {job.title}
                 </div>
                 <div className="text-xs text-white/30 mt-1">
-                  {job.location || "—"} · {salaryLabel(job)}
+                  {job.ref || `#${job.id}`} · {job.location || "—"} · {salaryLabel(job)}
                 </div>
               </div>
               <div className="flex items-center gap-1 shrink-0">

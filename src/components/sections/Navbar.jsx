@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import Image from "next/image";
@@ -509,6 +510,16 @@ export function Navbar() {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [isMobileMenuOpen]);
+
   // Observe the inner content to get its natural size
   useEffect(() => {
     if (!contentRef.current) return;
@@ -753,109 +764,136 @@ export function Navbar() {
         <div className="flex items-center xl:hidden gap-3">
           <ThemeToggle />
           <button
+            type="button"
             onClick={() => setIsMobileMenuOpen(true)}
-            className="p-2 transition-colors focus:outline-none text-white hover:bg-white/10 rounded-lg"
+            onTouchEnd={(e) => { e.preventDefault(); setIsMobileMenuOpen(true); }}
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors focus:outline-none text-white hover:bg-white/10 rounded-lg"
+            style={{ touchAction: "manipulation" }}
+            aria-label="Open menu"
           >
             <IconMenu2 size={28} />
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <div className="xl:hidden">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[100]"
-            />
+      {/* Mobile Menu Drawer — rendered via portal to avoid header stacking context issues on iOS */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <div className="xl:hidden" style={{ position: "fixed", inset: 0, zIndex: 9999 }}>
+              {/* Backdrop — solid overlay instead of backdrop-blur for iOS Safari compatibility */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.75)", zIndex: 9999 }}
+              />
 
-            {/* Drawer */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              onClick={(e) => e.stopPropagation()}
-              className="fixed right-0 top-0 h-screen w-[85%] md:w-[60%] bg-[#0d1522] border-l border-white/10 z-[110] shadow-2xl flex flex-col"
-            >
-              {/* Header */}
-              <div className="h-16 flex items-center justify-end px-6 border-b border-white/10 shrink-0">
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                >
-                  <IconX size={24} />
-                </button>
-              </div>
+              {/* Drawer */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                onClick={(e) => e.stopPropagation()}
+                style={{
+                  position: "fixed",
+                  right: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: "85%",
+                  maxWidth: "400px",
+                  zIndex: 10000,
+                  display: "flex",
+                  flexDirection: "column",
+                  backgroundColor: "#0d1522",
+                  borderLeft: "1px solid rgba(255,255,255,0.1)",
+                  boxShadow: "-8px 0 30px rgba(0,0,0,0.5)",
+                  overscrollBehavior: "contain",
+                  WebkitOverflowScrolling: "touch",
+                }}
+              >
+                {/* Header */}
+                <div style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 24px", borderBottom: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
+                  <button
+                    type="button"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    onTouchEnd={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
+                    className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                    style={{ touchAction: "manipulation" }}
+                    aria-label="Close menu"
+                  >
+                    <IconX size={24} />
+                  </button>
+                </div>
 
-              {/* Content */}
-              <div className="flex-grow overflow-y-auto py-8 px-6 space-y-8">
-                {Object.values(menuData).map((menu) => (
-                  <div key={menu.id} className="space-y-4">
-                    <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5 px-2">
-                      {menu.title}
-                    </h4>
-                    <div className="grid gap-1">
-                      {menu.sections.map((section) => (
-                        <div key={section.heading}>
-                          {section.items.map((item) => (
-                            <Link
-                              key={item.label}
-                              href={item.href}
-                              className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/5 transition-colors group"
-                            >
-                              {item.icon && (
-                                <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-colors">
-                                  <item.icon size={18} strokeWidth={1.5} />
-                                </span>
-                              )}
-                              <div>
-                                <div className="text-sm font-semibold text-white group-hover:text-teal-4 transition-colors">
-                                  {item.label}
-                                </div>
-                                {item.desc && (
-                                  <div className="text-[10px] text-white/40 font-medium">
-                                    {item.desc}
-                                  </div>
+                {/* Content */}
+                <div className="flex-grow overflow-y-auto py-6 px-5 space-y-6" style={{ WebkitOverflowScrolling: "touch", overscrollBehavior: "contain" }}>
+                  {Object.values(menuData).map((menu) => (
+                    <div key={menu.id} className="space-y-3">
+                      <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5 px-2">
+                        {menu.title}
+                      </h4>
+                      <div className="grid gap-0.5">
+                        {menu.sections.map((section) => (
+                          <div key={section.heading}>
+                            {section.items.map((item) => (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
+                              >
+                                {item.icon && (
+                                  <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-colors">
+                                    <item.icon size={18} strokeWidth={1.5} />
+                                  </span>
                                 )}
-                              </div>
-                            </Link>
-                          ))}
-                        </div>
-                      ))}
+                                <div>
+                                  <div className="text-sm font-semibold text-white group-hover:text-teal-4 transition-colors">
+                                    {item.label}
+                                  </div>
+                                  {item.desc && (
+                                    <div className="text-[10px] text-white/40 font-medium">
+                                      {item.desc}
+                                    </div>
+                                  )}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              {/* Footer Actions */}
-              <div className="p-6 border-t border-white/10 bg-black/20 space-y-3">
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  href="/jobs"
-                  className="w-full justify-center py-4"
-                >
-                  Find Work
-                </Button>
-                <Button
-                  variant="primary"
-                  size="lg"
-                  href="/get-started"
-                  className="w-full justify-center py-4"
-                >
-                  Get Started
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+                {/* Footer Actions */}
+                <div className="p-5 border-t border-white/10 bg-black/20 space-y-3" style={{ flexShrink: 0 }}>
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    href="/jobs"
+                    className="w-full justify-center py-4"
+                  >
+                    Find Work
+                  </Button>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    href="/get-started"
+                    className="w-full justify-center py-4"
+                  >
+                    Get Started
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </header>
   );
 }

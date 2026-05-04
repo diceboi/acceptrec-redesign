@@ -20,6 +20,7 @@ export async function getPublicJobs() {
 
   return data.map((job) => ({
     id: job.id,
+    ref: job.ref || "",
     title: job.title,
     slug: job.slug,
     location: job.location || "",
@@ -66,6 +67,7 @@ export async function getJobs() {
 
   return data.map((job) => ({
     id: job.id,
+    ref: job.ref || "",
     title: job.title,
     slug: job.slug,
     location: job.location,
@@ -87,6 +89,8 @@ export async function getJobs() {
     createdAt: job.created_at,
     updatedAt: job.updated_at,
     wpId: job.wp_id,
+    internalTitle: job.internal_title,
+    clientName: job.client_name,
   }));
 }
 
@@ -105,6 +109,7 @@ export async function getJob(id) {
 
   return {
     id: data.id,
+    ref: data.ref || "",
     title: data.title,
     slug: data.slug,
     location: data.location,
@@ -126,6 +131,8 @@ export async function getJob(id) {
     createdAt: data.created_at,
     updatedAt: data.updated_at,
     wpId: data.wp_id,
+    internalTitle: data.internal_title,
+    clientName: data.client_name,
   };
 }
 
@@ -134,6 +141,7 @@ export async function createJob(job) {
   const { data, error } = await supabase
     .from("jobs")
     .insert({
+      ref: job.ref || `AR-${Math.floor(Date.now() / 1000)}`,
       title: job.title,
       slug: job.slug,
       location: job.location,
@@ -152,6 +160,8 @@ export async function createJob(job) {
       whatsapp_number: job.whatsappNumber,
       positions: job.positions ? Number(job.positions) : 1,
       published: job.published,
+      internal_title: job.internalTitle || "",
+      client_name: job.clientName || "",
     })
     .select()
     .single();
@@ -167,6 +177,7 @@ export async function updateJob(id, updates) {
   const { error } = await supabase
     .from("jobs")
     .update({
+      ref: updates.ref || `AR-${Math.floor(Date.now() / 1000)}`,
       title: updates.title,
       slug: updates.slug,
       location: updates.location,
@@ -185,6 +196,8 @@ export async function updateJob(id, updates) {
       whatsapp_number: updates.whatsappNumber,
       positions: updates.positions ? Number(updates.positions) : 1,
       published: updates.published,
+      internal_title: updates.internalTitle || "",
+      client_name: updates.clientName || "",
       updated_at: new Date().toISOString(),
     })
     .eq("id", Number(id));

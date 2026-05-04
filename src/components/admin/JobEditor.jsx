@@ -126,6 +126,7 @@ export function JobEditor({ job, isNew }) {
 
   const [form, setForm] = useState({
     title: job?.title || "",
+    ref: job?.ref || "",
     slug: job?.slug || "",
     location: job?.location || "",
     category: job?.category || "",
@@ -143,6 +144,8 @@ export function JobEditor({ job, isNew }) {
     whatsappNumber: job?.whatsappNumber || "447495995406",
     positions: job?.positions ?? 1,
     published: job?.published ?? true,
+    internalTitle: job?.internalTitle || "",
+    clientName: job?.clientName || "",
   });
 
   const update = (key, value) =>
@@ -231,6 +234,18 @@ export function JobEditor({ job, isNew }) {
             />
           </div>
 
+          {/* Reference ID */}
+          <div>
+            <label className={labelClass}>Reference ID</label>
+            <input
+              type="text"
+              value={form.ref}
+              onChange={(e) => update("ref", e.target.value.toUpperCase())}
+              className={`${inputClass} font-mono text-white/60`}
+              placeholder="AR-1000"
+            />
+          </div>
+
           {/* Short description */}
           <div>
             <label className={labelClass}>Short Description</label>
@@ -281,6 +296,31 @@ export function JobEditor({ job, isNew }) {
 
         {/* Side column */}
         <div className="space-y-6">
+          {/* Internal Info */}
+          <div className={fieldBox}>
+            <label className={labelClass}>Internal Admin Info</label>
+            <div>
+              <label className="block text-[11px] text-white/30 mb-1">Internal Title</label>
+              <input
+                type="text"
+                value={form.internalTitle}
+                onChange={(e) => update("internalTitle", e.target.value)}
+                className={inputClass}
+                placeholder="e.g. Leicester Warehouse Night Shift"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] text-white/30 mb-1">Client Name</label>
+              <input
+                type="text"
+                value={form.clientName}
+                onChange={(e) => update("clientName", e.target.value)}
+                className={inputClass}
+                placeholder="e.g. Logistics UK Ltd"
+              />
+            </div>
+          </div>
+
           {/* Status */}
           <div className={fieldBox}>
             <label className={labelClass}>Status</label>

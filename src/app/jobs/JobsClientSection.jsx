@@ -60,7 +60,7 @@ function JobCard({ job, index }) {
   const cleanLocation = stripHtml(job.location);
 
   const whatsappMsg = encodeURIComponent(
-    `Hi Accept Recruitment ${cleanLocation}! I'm interested in applying for:\n\nJob: ${job.title}\nLocation: ${cleanLocation}\nPay: ${job.pay}\nShift: ${cleanShift}\n\nCan you tell me more about this role?`
+    `Hi Accept Recruitment ${cleanLocation}! I'm interested in applying for:\n\nJob: ${job.title}\nRef: ${job.ref || 'N/A'}\nLocation: ${cleanLocation}\nPay: ${job.pay}\nShift: ${cleanShift}\n\nCan you tell me more about this role?`
   );
 
   // Parse requirements: prefer requiredSkills HTML, fallback to shortDescription
@@ -83,6 +83,11 @@ function JobCard({ job, index }) {
           {job.title}
         </h3>
         <div className="flex flex-wrap gap-3">
+          {job.ref && (
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-[10px] font-mono font-semibold tracking-wider">
+              {job.ref}
+            </span>
+          )}
           {cleanLocation && (
             <span className="inline-flex items-center gap-1.5 text-[#8B98AB] text-xs font-semibold uppercase tracking-widest">
               <IconMapPin size={14} className="text-teal-5" />

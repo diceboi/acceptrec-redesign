@@ -92,6 +92,7 @@ export async function GET(request) {
 
       return {
         wp_id: node.databaseId,
+        ref: `AR-${node.databaseId}`,
         title: node.title,
         slug: generateSlug(node.title, node.databaseId),
         location: j.location || "",
