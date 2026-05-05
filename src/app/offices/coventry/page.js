@@ -50,7 +50,7 @@ function CoventryHero() {
                         <div className="absolute inset-0 bg-gradient-to-br from-teal-5/20 to-transparent rounded-2xl blur-3xl" />
                         <div className="relative h-full glass-card rounded-2xl overflow-hidden p-12 flex flex-col justify-center gap-8">
                              <div className="space-y-2"><div className="text-[10px] font-semibold uppercase tracking-widest text-[#8B98AB]/70">Location:</div><div className="text-white text-xl font-semibold leading-tight">First Floor Office<br />1 Harnall Row<br />Coventry, CV1 5DW</div></div>
-                             <div className="space-y-2"><div className="text-[10px] font-semibold uppercase tracking-widest text-[#8B98AB]/70">Connect:</div><div className="space-y-3"><a href="tel:02476100211" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconPhone size={20} className="text-teal-5" /> 024 7610 0211</a><a href="mailto:coventry@acceptrec.co.uk" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconMail size={20} className="text-teal-5" /> coventry@acceptrec.co.uk</a></div></div>
+                             <div className="space-y-2"><div className="text-[10px] font-semibold uppercase tracking-widest text-[#8B98AB]/70">Connect:</div><div className="space-y-3"><a href="tel:02477180356" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconPhone size={20} className="text-teal-5" /> 024 7718 0356</a><a href="mailto:coventry@acceptrec.co.uk" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconMail size={20} className="text-teal-5" /> coventry@acceptrec.co.uk</a></div></div>
                              <div className="pt-8 border-t border-white/5"><div className="text-[#8B98AB]/50 text-[10px] font-semibold uppercase tracking-widest mb-4">Coverage:</div><div className="flex flex-wrap gap-2 text-[#8B98AB] text-xs font-semibold uppercase tracking-widest">{["Rugby", "Nuneaton", "Ansty Park", "Whitley"].map(c => <span key={c} className="px-3 py-1 bg-white/5 rounded-full">{c}</span>)}</div></div>
                         </div>
                     </div>
@@ -165,7 +165,7 @@ export default function CoventryOfficePage() {
             <IndustriesGrid />
             <RoleExpertise />
             <CoverageSection />
-            <CtaBanner badge="HIRING IN COVENTRY?" title="Your next hire starts in" titleHighlight="Coventry." subtitle="WhatsApp our Coventry team. We understand manufacturing schedules don't wait." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/07833945679" secondaryButtonHref="/contact" />
+            <CtaBanner badge="HIRING IN COVENTRY?" title="Your next hire starts in" titleHighlight="Coventry." subtitle="WhatsApp our Coventry team. We understand manufacturing schedules don't wait." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/447833945679" secondaryButtonHref="/contact" />
             <Footer />
         </main>
     );

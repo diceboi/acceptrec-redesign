@@ -17,9 +17,9 @@ const containerVariants = { hidden: {}, visible: { transition: { staggerChildren
 const cardVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
 const branches = [
-    { name: "Leicester", type: "Head Office", address: "Unit 4, Oswin Road, Leicester, LE3 1HR", whatsapp: "07495 995406", email: "leicester@acceptrec.co.uk", phone: "0116 319 4493" },
-    { name: "Coventry", type: "Branch", address: "First Floor, 1 Harnall Row, Coventry, CV1 5DW", whatsapp: "07833 945679", email: "coventry@acceptrec.co.uk", phone: "024 7610 0211" },
-    { name: "Tamworth", type: "Branch", address: "Unit 2, 95 Lichfield Street, Tamworth, B79 7QF", whatsapp: "07932 787550", email: "tamworth@acceptrec.co.uk", phone: "01827 700 300" }
+    { name: "Leicester", type: "Head Office", address: "Unit 4, Oswin Road, Leicester, LE3 1HR", whatsapp: "+44 7495 995406", email: "leicester@acceptrec.co.uk", phone: "0116 218 2133" },
+    { name: "Coventry", type: "Branch", address: "First Floor, 1 Harnall Row, Coventry, CV1 5DW", whatsapp: "+44 7833 945679", email: "coventry@acceptrec.co.uk", phone: "024 7718 0356" },
+    { name: "Tamworth", type: "Branch", address: "Unit 2, 95 Lichfield Street, Tamworth, B79 7QF", whatsapp: "+44 7932 787550", email: "tamworth@acceptrec.co.uk", phone: "01827 438 334" }
 ];
 
 function ContactHero() {

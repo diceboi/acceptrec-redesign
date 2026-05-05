@@ -33,9 +33,9 @@ const footerLinks = {
 };
 
 const offices = [
-  { city: "Leicester", phone: "07495 995406", whatsapp: "447495995406", address: "Unit 4, Oswin Road, LE3 1HR", href: "/offices/leicester" },
-  { city: "Coventry", phone: "07833 945679", whatsapp: "447833945679", address: "1 Harnall Row, CV1 5DW", href: "/offices/coventry" },
-  { city: "Tamworth", phone: "07932 787550", whatsapp: "447932787550", address: "95 Lichfield St, B79 7QF", href: "/offices/tamworth" },
+  { city: "Leicester", phone: "+44 7495 995406", whatsapp: "447495995406", address: "Unit 4, Oswin Road, LE3 1HR", href: "/offices/leicester" },
+  { city: "Coventry", phone: "+44 7833 945679", whatsapp: "447833945679", address: "1 Harnall Row, CV1 5DW", href: "/offices/coventry" },
+  { city: "Tamworth", phone: "+44 7932 787550", whatsapp: "447932787550", address: "95 Lichfield St, B79 7QF", href: "/offices/tamworth" },
 ];
 
 export function Footer() {

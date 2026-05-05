@@ -213,7 +213,7 @@ export default function LeicesterOfficePage() {
             <IndustriesGrid />
             <RoleExpertise />
             <CoverageSection />
-            <CtaBanner badge="SHORT-STAFFED?" title="Short-staffed in" titleHighlight="Leicester?" subtitle="Message your nearest office on WhatsApp or send an enquiry. We'll get back to you within the hour." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/07495995406" secondaryButtonHref="/contact" />
+            <CtaBanner badge="SHORT-STAFFED?" title="Short-staffed in" titleHighlight="Leicester?" subtitle="Message your nearest office on WhatsApp or send an enquiry. We'll get back to you within the hour." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/447495995406" secondaryButtonHref="/contact" />
             <Footer />
         </main>
     );

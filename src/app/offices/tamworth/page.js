@@ -51,7 +51,7 @@ function TamworthHero() {
                         <div className="absolute inset-0 bg-gradient-to-br from-teal-5/20 to-transparent rounded-2xl blur-3xl" />
                         <div className="relative h-full glass-card rounded-2xl overflow-hidden p-12 flex flex-col justify-center gap-8">
                              <div className="space-y-2"><div className="text-[10px] font-semibold uppercase tracking-widest text-[#8B98AB]/70">Location:</div><div className="text-white text-xl font-semibold leading-tight">Unit 2, Manor Court<br />95 Lichfield Street<br />Tamworth, B79 7QF</div></div>
-                             <div className="space-y-2"><div className="text-[10px] font-semibold uppercase tracking-widest text-[#8B98AB]/70">Connect:</div><div className="space-y-3"><a href="tel:01827700300" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconPhone size={20} className="text-teal-5" /> 01827 700 300</a><a href="mailto:tamworth@acceptrec.co.uk" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconMail size={20} className="text-teal-5" /> tamworth@acceptrec.co.uk</a></div></div>
+                             <div className="space-y-2"><div className="text-[10px] font-semibold uppercase tracking-widest text-[#8B98AB]/70">Connect:</div><div className="space-y-3"><a href="tel:01827438334" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconPhone size={20} className="text-teal-5" /> 01827 438 334</a><a href="mailto:tamworth@acceptrec.co.uk" className="flex items-center gap-3 text-white hover:text-teal-5 transition-colors text-lg font-semibold"><IconMail size={20} className="text-teal-5" /> tamworth@acceptrec.co.uk</a></div></div>
                              <div className="pt-8 border-t border-white/5"><div className="text-[#8B98AB]/50 text-[10px] font-semibold uppercase tracking-widest mb-4">Coverage:</div><div className="flex flex-wrap gap-2 text-[#8B98AB] text-xs font-semibold uppercase tracking-widest">{["Birch Coppice", "Hams Hall", "Atherstone", "Dordon"].map(c => <span key={c} className="px-3 py-1 bg-white/5 rounded-full">{c}</span>)}</div></div>
                         </div>
                     </div>
@@ -166,7 +166,7 @@ export default function TamworthOfficePage() {
             <IndustriesGrid />
             <RoleExpertise />
             <CoverageSection />
-            <CtaBanner badge="SHORT-STAFFED?" title="Short-staffed in" titleHighlight="Tamworth?" subtitle="WhatsApp our Tamworth team. We understand peak season doesn't wait—and neither do we." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/07932787550" secondaryButtonHref="/contact" />
+            <CtaBanner badge="SHORT-STAFFED?" title="Short-staffed in" titleHighlight="Tamworth?" subtitle="WhatsApp our Tamworth team. We understand peak season doesn't wait—and neither do we." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/447932787550" secondaryButtonHref="/contact" />
             <Footer />
         </main>
     );
