@@ -70,6 +70,11 @@ export async function getPostBySlug(slug) {
     author: data.author,
     createdAt: data.created_at,
     tags: data.tags?.map((t) => t.blog_tags).filter(Boolean) || [],
+    seoTitle: data.seo_title,
+    seoDescription: data.seo_description,
+    seoKeywords: data.seo_keywords,
+    ogImage: data.og_image,
+    canonicalUrl: data.canonical_url,
   };
 }
 
@@ -111,7 +116,12 @@ export async function getPosts() {
     published: post.published,
     createdAt: post.created_at,
     updatedAt: post.updated_at,
-    tags: post.tags?.map(t => t.blog_tags?.slug).filter(Boolean) || []
+    tags: post.tags?.map(t => t.blog_tags?.slug).filter(Boolean) || [],
+    seoTitle: post.seo_title,
+    seoDescription: post.seo_description,
+    seoKeywords: post.seo_keywords,
+    ogImage: post.og_image,
+    canonicalUrl: post.canonical_url,
   }));
 }
 
@@ -140,7 +150,12 @@ export async function getPost(id) {
     published: data.published,
     createdAt: data.created_at,
     updatedAt: data.updated_at,
-    tags: data.tags?.map(t => t.blog_tags?.slug).filter(Boolean) || []
+    tags: data.tags?.map(t => t.blog_tags?.slug).filter(Boolean) || [],
+    seoTitle: data.seo_title,
+    seoDescription: data.seo_description,
+    seoKeywords: data.seo_keywords,
+    ogImage: data.og_image,
+    canonicalUrl: data.canonical_url,
   };
 }
 
@@ -159,6 +174,11 @@ export async function createPost(post) {
       category_slug: post.category,
       author: post.author,
       published: post.published,
+      seo_title: post.seoTitle,
+      seo_description: post.seoDescription,
+      seo_keywords: post.seoKeywords,
+      og_image: post.ogImage,
+      canonical_url: post.canonicalUrl,
     })
     .select()
     .single();
@@ -193,7 +213,12 @@ export async function updatePost(id, updates) {
       category_slug: updates.category,
       author: updates.author,
       published: updates.published,
-      updated_at: new Date().toISOString()
+      updated_at: new Date().toISOString(),
+      seo_title: updates.seoTitle,
+      seo_description: updates.seoDescription,
+      seo_keywords: updates.seoKeywords,
+      og_image: updates.ogImage,
+      canonical_url: updates.canonicalUrl,
     })
     .eq("id", Number(id));
 

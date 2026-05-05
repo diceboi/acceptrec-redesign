@@ -483,12 +483,12 @@ function TechnologyPanel({ menu, isSolid }) {
 }
 
 // ─── Navbar banner height ─────────────────────────────────────────────
-const BANNER_HEIGHT = 40;
+const BANNER_HEIGHT = 0;
 
 // ─── Main Navbar component ────────────────────────────────────────────
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [navTop, setNavTop] = useState(BANNER_HEIGHT);
+  const [navTop, setNavTop] = useState(0);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [prevDropdown, setPrevDropdown] = useState(null);
   const [navRect, setNavRect] = useState({ left: 0, width: 600 });
@@ -546,16 +546,15 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scroll = window.scrollY;
-      setNavTop(Math.max(0, BANNER_HEIGHT - scroll));
-      setScrolled(scroll > BANNER_HEIGHT);
+      setNavTop(0);
+      setScrolled(true);
     };
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isSolid = scrolled;
+  const isSolid = true;
 
   const handleMouseEnter = (menuId) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -611,13 +610,13 @@ export function Navbar() {
 
   return (
     <header
-      style={{ top: navTop }}
+      style={{ top: 0 }}
       className={`fixed z-50 flex w-full items-center justify-between transition-[background,box-shadow,height] duration-300 px-4 xl:px-8
-                ${isSolid ? "bg-[#0d1522]/95 backdrop-blur-md shadow-lg shadow-black/20 h-16" : "bg-transparent h-25"}`}
+                bg-[#0d1522]/95 backdrop-blur-md shadow-lg shadow-black/20 h-16`}
       onMouseLeave={handleMouseLeave}
     >
       <div
-        className={`w-full flex justify-between items-center h-25 ${isSolid ? "border-b-0" : "border-b border-white/20"}`}
+        className={`w-full flex justify-between items-center h-16 border-b-0`}
       >
         {/* Logo */}
         <div className="flex items-center">

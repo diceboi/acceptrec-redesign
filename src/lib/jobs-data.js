@@ -91,7 +91,39 @@ export async function getJobs() {
     wpId: job.wp_id,
     internalTitle: job.internal_title,
     clientName: job.client_name,
+    clientId: job.client_id,
   }));
+}
+
+export async function getNextJobSequence(roleCode, locationCode) {
+  const supabase = await createClient();
+  const pattern = `JOB-${roleCode}-${locationCode}-%`;
+  
+  const { data, error } = await supabase
+    .from("jobs")
+    .select("ref")
+    .ilike("ref", pattern)
+    .order("ref", { ascending: false })
+    .limit(1);
+
+  if (error) {
+    console.error("Error fetching next sequence:", error);
+    return "001";
+  }
+
+  if (!data || data.length === 0) {
+    return "001";
+  }
+
+  // Extract sequence number from e.g. "JOB-WH-LEI-005"
+  const lastRef = data[0].ref;
+  const parts = lastRef.split("-");
+  const lastSeq = parseInt(parts[parts.length - 1]);
+  
+  if (isNaN(lastSeq)) return "001";
+  
+  const nextSeq = lastSeq + 1;
+  return nextSeq.toString().padStart(3, "0");
 }
 
 export async function getJob(id) {
@@ -133,6 +165,7 @@ export async function getJob(id) {
     wpId: data.wp_id,
     internalTitle: data.internal_title,
     clientName: data.client_name,
+    clientId: data.client_id,
   };
 }
 
@@ -162,6 +195,7 @@ export async function createJob(job) {
       published: job.published,
       internal_title: job.internalTitle || "",
       client_name: job.clientName || "",
+      client_id: job.clientId || "",
     })
     .select()
     .single();
@@ -198,6 +232,7 @@ export async function updateJob(id, updates) {
       published: updates.published,
       internal_title: updates.internalTitle || "",
       client_name: updates.clientName || "",
+      client_id: updates.clientId || "",
       updated_at: new Date().toISOString(),
     })
     .eq("id", Number(id));

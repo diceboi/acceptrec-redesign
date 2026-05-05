@@ -4,8 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { RichTextEditor } from "./RichTextEditor";
 import { createPost, updatePost } from "@/lib/blog-data";
-import { IconDeviceFloppy, IconArrowLeft } from "@tabler/icons-react";
+import { IconDeviceFloppy, IconArrowLeft, IconRefresh, IconUpload, IconPhoto } from "@tabler/icons-react";
 import Link from "next/link";
+import Image from "next/image";
+import { createClient } from "@/utils/supabase/client";
+import { useEffect } from "react";
 
 function slugify(text) {
   return text
@@ -18,7 +21,9 @@ function slugify(text) {
 
 export function BlogEditor({ post, categories, tags, isNew }) {
   const router = useRouter();
+  const supabase = createClient();
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState({ coverImage: false, ogImage: false });
 
   const [form, setForm] = useState({
     title: post?.title || "",
@@ -30,9 +35,32 @@ export function BlogEditor({ post, categories, tags, isNew }) {
     tags: post?.tags || [],
     author: post?.author || "",
     published: post?.published ?? false,
+    seoTitle: post?.seoTitle || "",
+    seoDescription: post?.seoDescription || "",
+    seoKeywords: post?.seoKeywords || "",
+    ogImage: post?.ogImage || "",
+    canonicalUrl: post?.canonicalUrl || "",
   });
 
   const update = (key, value) => setForm((prev) => ({ ...prev, [key]: value }));
+
+  // Auto-sync SEO Title
+  useEffect(() => {
+    if (isNew && form.title && !form.seoTitle) {
+      update("seoTitle", form.title);
+    }
+  }, [form.title, isNew]);
+
+  // Auto-sync Canonical URL
+  useEffect(() => {
+    if (form.slug) {
+      const baseUrl = "https://acceptrec.co.uk";
+      const fullUrl = `${baseUrl}/blog/${form.slug}`;
+      if (isNew || !form.canonicalUrl) {
+        update("canonicalUrl", fullUrl);
+      }
+    }
+  }, [form.slug, isNew]);
 
   const handleTitleChange = (val) => {
     update("title", val);
@@ -48,6 +76,46 @@ export function BlogEditor({ post, categories, tags, isNew }) {
         ? prev.tags.filter((t) => t !== tagSlug)
         : [...prev.tags, tagSlug],
     }));
+  };
+
+  const handleFileUpload = async (e, type) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading((prev) => ({ ...prev, [type]: true }));
+    try {
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from("blog")
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from("blog")
+        .getPublicUrl(filePath);
+
+      update(type, publicUrl);
+      
+      // Auto-sync cover image to OG image if OG image is empty
+      if (type === "coverImage" && !form.ogImage) {
+        update("ogImage", publicUrl);
+      }
+    } catch (err) {
+      alert("Error uploading image: " + err.message);
+    } finally {
+      setUploading((prev) => ({ ...prev, [type]: false }));
+    }
+  };
+
+  const refreshSeoTitle = () => update("seoTitle", form.title);
+  const refreshCanonical = () => {
+    if (form.slug) {
+      update("canonicalUrl", `https://acceptrec.co.uk/blog/${form.slug}`);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -162,14 +230,40 @@ export function BlogEditor({ post, categories, tags, isNew }) {
 
           {/* Cover Image */}
           <div className="border border-white/5 rounded-2xl p-5 bg-white/[0.02]">
-            <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Cover Image URL</label>
-            <input
-              type="text"
-              value={form.coverImage}
-              onChange={(e) => update("coverImage", e.target.value)}
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal-5/50 transition-colors"
-              placeholder="/blog/my-image.jpg"
-            />
+            <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Cover Image</label>
+            <div className="space-y-3">
+              <div className="relative aspect-video rounded-xl overflow-hidden bg-white/5 border border-dashed border-white/20 flex flex-col items-center justify-center group">
+                {form.coverImage ? (
+                  <>
+                    <Image src={form.coverImage} alt="Cover" fill className="object-cover" />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <label className="cursor-pointer p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all">
+                        <IconUpload size={20} />
+                        <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, "coverImage")} />
+                      </label>
+                    </div>
+                  </>
+                ) : (
+                  <label className="cursor-pointer flex flex-col items-center gap-2 text-white/30 hover:text-white transition-all">
+                    <IconPhoto size={32} strokeWidth={1} />
+                    <span className="text-[10px] font-medium uppercase tracking-widest">Upload Cover</span>
+                    <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, "coverImage")} />
+                  </label>
+                )}
+                {uploading.coverImage && (
+                  <div className="absolute inset-0 bg-navy-900/80 flex items-center justify-center">
+                    <div className="w-6 h-6 border-2 border-teal-5 border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+              </div>
+              <input
+                type="text"
+                value={form.coverImage}
+                onChange={(e) => update("coverImage", e.target.value)}
+                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal-5/50 transition-colors"
+                placeholder="/blog/my-image.jpg"
+              />
+            </div>
           </div>
 
           {/* Author */}
@@ -199,6 +293,102 @@ export function BlogEditor({ post, categories, tags, isNew }) {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* SEO Settings */}
+          <div className="border border-white/5 rounded-2xl p-5 bg-white/[0.02] space-y-4">
+            <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-1">SEO Settings</label>
+            
+            <div>
+              <label className="block text-[10px] text-white/30 uppercase tracking-widest mb-1.5 flex items-center justify-between">
+                Meta Title
+                <button type="button" onClick={refreshSeoTitle} className="text-teal-5/50 hover:text-teal-4 transition-colors">
+                  <IconRefresh size={12} />
+                </button>
+              </label>
+              <input
+                type="text"
+                value={form.seoTitle}
+                onChange={(e) => update("seoTitle", e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-teal-5/50 transition-colors"
+                placeholder="SEO Browser Title"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] text-white/30 uppercase tracking-widest mb-1.5">Meta Description</label>
+              <textarea
+                value={form.seoDescription}
+                onChange={(e) => update("seoDescription", e.target.value)}
+                rows={4}
+                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-teal-5/50 transition-colors resize-none"
+                placeholder="Meta description for search results..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] text-white/30 uppercase tracking-widest mb-1.5">Keywords</label>
+              <input
+                type="text"
+                value={form.seoKeywords}
+                onChange={(e) => update("seoKeywords", e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-teal-5/50 transition-colors"
+                placeholder="word1, word2, word3"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[10px] text-white/30 uppercase tracking-widest mb-1.5">OG Image</label>
+              <div className="space-y-3">
+                <div className="relative aspect-video rounded-xl overflow-hidden bg-white/5 border border-dashed border-white/20 flex flex-col items-center justify-center group">
+                  {form.ogImage ? (
+                    <>
+                      <Image src={form.ogImage} alt="OG" fill className="object-cover" />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <label className="cursor-pointer p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all">
+                          <IconUpload size={20} />
+                          <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, "ogImage")} />
+                        </label>
+                      </div>
+                    </>
+                  ) : (
+                    <label className="cursor-pointer flex flex-col items-center gap-2 text-white/30 hover:text-white transition-all">
+                      <IconPhoto size={32} strokeWidth={1} />
+                      <span className="text-[10px] font-medium uppercase tracking-widest">Upload OG Image</span>
+                      <input type="file" className="hidden" accept="image/*" onChange={(e) => handleFileUpload(e, "ogImage")} />
+                    </label>
+                  )}
+                  {uploading.ogImage && (
+                    <div className="absolute inset-0 bg-navy-900/80 flex items-center justify-center">
+                      <div className="w-6 h-6 border-2 border-teal-5 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  )}
+                </div>
+                <input
+                  type="text"
+                  value={form.ogImage}
+                  onChange={(e) => update("ogImage", e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-teal-5/50 transition-colors"
+                  placeholder="/blog/social-share.jpg"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[10px] text-white/30 uppercase tracking-widest mb-1.5 flex items-center justify-between">
+                Canonical URL
+                <button type="button" onClick={refreshCanonical} className="text-teal-5/50 hover:text-teal-4 transition-colors">
+                  <IconRefresh size={12} />
+                </button>
+              </label>
+              <input
+                type="text"
+                value={form.canonicalUrl}
+                onChange={(e) => update("canonicalUrl", e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-xs placeholder:text-white/20 focus:outline-none focus:border-teal-5/50 transition-colors"
+                placeholder="https://..."
+              />
+            </div>
           </div>
 
           {/* Tags */}

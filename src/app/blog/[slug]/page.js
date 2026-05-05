@@ -15,11 +15,28 @@ export async function generateMetadata({ params }) {
     return { title: "Post Not Found" };
   }
 
+  const title = post.seoTitle || `${post.title} | Accept Recruitment Insights`;
+  const description = post.seoDescription || post.excerpt?.replace(/<[^>]+>/g, '').substring(0, 160) || "Read the latest insights from Accept Recruitment.";
+  const ogImage = post.ogImage || post.coverImage || "/assets/images/about/about-hero.webp";
+
   return {
-    title: `${post.title} | Accept Recruitment Insights`,
-    description: post.excerpt?.replace(/<[^>]+>/g, '').substring(0, 160) || "Read the latest insights from Accept Recruitment.",
+    title,
+    description,
+    keywords: post.seoKeywords,
+    alternates: {
+      canonical: post.canonicalUrl,
+    },
     openGraph: {
-      images: [post.coverImage || "/assets/images/about/about-hero.webp"],
+      title,
+      description,
+      type: "article",
+      images: [ogImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
     },
   };
 }

@@ -17,167 +17,7 @@ import {
   IconArrowRight,
 } from "@tabler/icons-react";
 
-
-
-// ─── Team Data ──────────────────────────────────────────────────────────
-const teamMembers = [
-  {
-    name: "Mark Pearce",
-    role: "Managing Director",
-    location: "Leicester",
-    quote:
-      "Big sports fan - you'll find me on the golf course or cricket pitch when I'm not filling shifts!",
-    superpower: "Turning chaos into order (and dad jokes into groans)",
-    motto: "Every storm eventually gives way to a beautiful rainbow",
-    loves: ["Golf", "Cricket", "Building Empires"],
-    image: "/Mark-front.webp",
-    disneyImage: "/mark-funny.webp",
-  },
-  {
-    name: "Monika Loj",
-    role: "Operations Director",
-    location: "Leicester",
-    quote:
-      "I keep the whole operation running smoothly - think of me as the engine room!",
-    superpower: "Making 100 temps appear out of thin air",
-    motto: "Excellence in execution",
-    loves: ["Organization", "Coffee", "Efficiency"],
-    image: "/Monika-Beldycka-f.webp",
-    disneyImage: "/Monika-Beldycka-f.webp",
-  },
-  {
-    name: "Kevin Highet",
-    role: "Commercial Director",
-    location: "Leicester",
-    quote:
-      "I'm the numbers guy who makes sure we're not just busy, but profitable!",
-    superpower: "Turning opportunities into partnerships",
-    motto: "Commercial success comes from smart decisions",
-    loves: ["Strategy", "Growth", "Good Data"],
-    image: "/kevin-highet.webp",
-    disneyImage: "/team-1.webp",
-  },
-  {
-    name: "Elly Clow",
-    role: "Head of Sales",
-    location: "Leicester",
-    quote:
-      "I lead our sales team and make sure we're winning the right clients - not just any clients!",
-    superpower: "Building relationships that last",
-    motto: "Sales is about helping, not selling",
-    loves: ["New Business", "Networking", "Winning"],
-    image: "/team-2.webp",
-    disneyImage: "/kevin-highet.webp",
-  },
-  {
-    name: "Agnieszka Jasinska",
-    role: "Head of Operations",
-    location: "Leicester",
-    quote:
-      "I manage the big accounts and make sure everything runs like clockwork!",
-    superpower: "Keeping complex operations simple",
-    motto: "Consistency is key",
-    loves: ["Problem Solving", "Big Logistics", "Sunsets"],
-    image: "/Aggie-Jasinska-f.webp",
-    disneyImage: "/Aggie-Jasinska-f.webp",
-  },
-  {
-    name: "Natalia Wielgosz",
-    role: "Head of Accounts & Payroll",
-    location: "Leicester",
-    quote:
-      "I make sure everyone gets paid on time, every time. It's what I do!",
-    superpower: "Friday payroll runs smoother than butter",
-    motto: "Accuracy matters",
-    loves: ["Spreadsheets", "Smooth Fridays", "Accuracy"],
-    image: "/Talki_New.webp",
-    disneyImage: "/Talki_New.webp",
-  },
-  {
-    name: "Peter Czinderi",
-    role: "IT Manager",
-    location: "Leicester",
-    quote:
-      "I keep all our systems running and make sure technology works FOR us, not against us!",
-    superpower: "Making tech simple",
-    motto: "If it's not automated, it should be",
-    loves: ["Automation", "Latest Gadgets", "Zero Downtime"],
-    image: "/Peter-turkus.webp",
-    disneyImage: "/Peter-turkus.webp",
-  },
-  {
-    name: "Monika Cyrson",
-    role: "Resourcing Manager",
-    location: "Leicester",
-    quote:
-      "I find the right people for the right roles. It's like matchmaking, but for work!",
-    superpower: "Knowing exactly who to call",
-    motto: "The right person in the right place",
-    loves: ["Interviews", "Finding Talent", "Career Stories"],
-    image: "/Monika_Cyrson_f.jpg",
-    disneyImage: "/Monika_Cyrson_f.jpg",
-  },
-  {
-    name: "Magdalena Walker",
-    role: "Branch Manager",
-    location: "Leicester",
-    quote:
-      "I run our branch like a well-oiled machine. Everyone knows where they stand!",
-    superpower: "Keeping everyone on track",
-    motto: "Lead by example",
-    loves: ["Leadership", "Teamwork", "Morning Huddles"],
-    image: "/Magda-Obraczka.webp",
-    disneyImage: "/Magda-Obraczka.webp",
-  },
-  {
-    name: "Radoslaw Plewa",
-    role: "Managed Services Manager",
-    location: "Leicester",
-    quote:
-      "I manage our biggest client accounts and make sure they get exactly what they need!",
-    superpower: "Calm under pressure",
-    motto: "Consistency wins clients",
-    loves: ["Big Projects", "Client Satisfaction", "Resilience"],
-    image: "/Radoslaw-Plewa.webp",
-    disneyImage: "/Radoslaw-Plewa.webp",
-  },
-  {
-    name: "Jamie Ellis",
-    role: "Marketing Team Leader",
-    location: "Leicester",
-    quote:
-      "Started as a Digital Marketing Apprentice in 2020 and now lead all our marketing efforts!",
-    superpower: "Crafting social content that actually engages people",
-    motto: "Excellence through creativity",
-    loves: ["Branding", "Creative Ads", "Analytics"],
-    image: "/Jamie-Ellis.webp",
-    disneyImage: "/Jamie-Ellis.webp",
-  },
-  {
-    name: "Maja Wojtaszko",
-    role: "Senior Driving Account Manager",
-    location: "Bristol",
-    quote:
-      "I specialize in driver recruitment - from HGV to delivery, I know the roads!",
-    superpower: "Finding drivers who actually show up",
-    motto: "Keep on trucking",
-    loves: ["Driving Logistics", "Road Trips", "Happy Drivers"],
-    image: "/maja.webp",
-    disneyImage: "/maja.webp",
-  },
-  {
-    name: "Joanna Antecka",
-    role: "Branch Manager",
-    location: "Leicester",
-    quote:
-      "I keep our branch running smoothly and make sure every client and candidate feels valued!",
-    superpower: "Making everyone feel heard",
-    motto: "People make the difference",
-    loves: ["Interviews", "Community", "Branch Growth"],
-    image: "/Joanna-Antecka.webp",
-    disneyImage: "/Joanna-Antecka.webp",
-  },
-];
+// Data is now fetched from Supabase and passed via initialMembers prop
 
 // ─── Team Card ──────────────────────────────────────────────────────────
 function TeamCard({ member }) {
@@ -189,15 +29,24 @@ function TeamCard({ member }) {
       className="group relative glass-card rounded-2xl p-8 overflow-hidden hover:border-teal-5/30 transition-all duration-500 hover:teal-glow-sm"
     >
       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-8">
+      <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-8 group/photo">
         <Image
-          src={member.image}
+          src={member.image_url || member.image}
           alt={member.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className={`object-cover transition-all duration-500 group-hover/photo:scale-110 ${member.disney_image_url || member.disneyImage ? "group-hover/photo:opacity-0" : ""}`}
           sizes="(max-width: 768px) 100vw, 33vw"
         />
-        <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2">
+        {(member.disney_image_url || member.disneyImage) && (
+          <Image
+            src={member.disney_image_url || member.disneyImage}
+            alt={`${member.name} Disney`}
+            fill
+            className="object-cover transition-all duration-500 scale-110 opacity-0 group-hover/photo:opacity-100 group-hover/photo:scale-100"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        )}
+        <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2 z-10">
           <IconMapPin size={14} className="text-teal-5" />
           <span className="text-[10px] font-semibold uppercase tracking-widest text-white">
             {member.location}
@@ -386,14 +235,14 @@ function TeamHero() {
 }
 
 // ─── Team Grid ──────────────────────────────────────────────────────────
-function TeamGridSection() {
+function TeamGridSection({ members }) {
   return (
     <section className="relative w-full bg-navy-700 py-24 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
       <div className="relative z-10 mx-auto max-w-[1400px] px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {teamMembers.map((member, i) => (
-            <TeamCard key={i} member={member} />
+          {members.map((member, i) => (
+            <TeamCard key={member.id || i} member={member} />
           ))}
         </div>
       </div>
@@ -490,12 +339,12 @@ function TrustedSection() {
 }
 
 // ─── Main ───────────────────────────────────────────────────────────────
-export default function OurTeamPageClient() {
+export default function OurTeamPageClient({ initialMembers = [] }) {
   return (
     <main className="bg-navy-900 min-h-screen">
       <Navbar />
       <TeamHero />
-      <TeamGridSection />
+      <TeamGridSection members={initialMembers} />
       <CultureSection />
       <TrustedSection />
       <CtaBanner

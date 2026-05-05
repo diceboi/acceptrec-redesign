@@ -12,6 +12,7 @@ import {
   IconCurrencyPound,
   IconChevronLeft,
   IconChevronRight,
+  IconRefresh,
 } from "@tabler/icons-react";
 import { deleteJob } from "@/lib/jobs-data";
 
@@ -26,11 +27,28 @@ function stripHtml(html) {
 }
 
 
+import { updateAllJobRefs } from "@/lib/update-refs";
+
 export function JobList({ jobs }) {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isUpdating, setIsUpdating] = useState(false);
   const ITEMS_PER_PAGE = 20;
   const router = useRouter();
+
+  const handleRegenerateRefs = async () => {
+    if (!confirm("Are you sure you want to regenerate ALL Reference IDs? This will overwrite existing IDs with the new format (JOB-ROLE-LOC-SEQ).")) return;
+    setIsUpdating(true);
+    try {
+      await updateAllJobRefs();
+      router.refresh();
+      alert("All Reference IDs have been updated!");
+    } catch (err) {
+      alert("Error: " + err.message);
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   const filtered = jobs.filter((j) => {
     if (!search) return true;

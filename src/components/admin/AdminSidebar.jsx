@@ -12,6 +12,7 @@ import {
   IconUsers,
   IconLogout,
   IconUser,
+  IconBuildingCommunity,
 } from "@tabler/icons-react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,8 @@ const menuSections = [
     heading: "Jobs",
     items: [
       { id: "jobs", label: "Job Vacancies", href: "/admin/jobs", icon: IconBriefcase },
+      { id: "clients", label: "Clients", href: "/admin/clients", icon: IconBuildingCommunity },
+      { id: "team", label: "Our Team", href: "/admin/team", icon: IconUsers },
     ],
   },
   {

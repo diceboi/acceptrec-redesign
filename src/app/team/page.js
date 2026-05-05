@@ -1,4 +1,5 @@
 import OurTeamPageClient from "./OurTeamPageClient";
+import { getTeamMembers } from "@/lib/team-data";
 
 export const metadata = {
   title: "Meet the team - Accept Recruitment",
@@ -9,6 +10,7 @@ export const metadata = {
   }
 };
 
-export default function OurTeamPage() {
-  return <OurTeamPageClient />;
+export default async function OurTeamPage() {
+  const members = await getTeamMembers();
+  return <OurTeamPageClient initialMembers={members} />;
 }

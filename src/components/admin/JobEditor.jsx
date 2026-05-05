@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createJob, updateJob } from "@/lib/jobs-data";
-import { IconDeviceFloppy, IconArrowLeft, IconPlus, IconX } from "@tabler/icons-react";
+import { createJob, updateJob, getNextJobSequence } from "@/lib/jobs-data";
+import { getClients } from "@/lib/clients-data";
+import { IconDeviceFloppy, IconArrowLeft, IconPlus, IconX, IconSearch, IconRefresh } from "@tabler/icons-react";
+import { useEffect, useCallback } from "react";
 import Link from "next/link";
 import { RichTextEditor } from "./RichTextEditor";
 
@@ -113,6 +115,53 @@ function slugify(text) {
     .trim();
 }
 
+const ROLE_CODES = [
+  { keywords: ["hgv 1", "class 1", "c1"], code: "C1" },
+  { keywords: ["hgv 2", "class 2", "c2"], code: "C2" },
+  { keywords: ["7.5t", "7.5 tonne"], code: "75T" },
+  { keywords: ["van driver"], code: "VAN" },
+  { keywords: ["multi-drop", "multidrop"], code: "MD" },
+  { keywords: ["counterbalance", "flt cb"], code: "FLTCB" },
+  { keywords: ["reach truck", "flt reach"], code: "FLTR" },
+  { keywords: ["bendi", "flexi"], code: "FLTB" },
+  { keywords: ["flt"], code: "FLT" },
+  { keywords: ["warehouse", "wh "], code: "WH" },
+  { keywords: ["picker", "packer", "pk "], code: "PK" },
+  { keywords: ["production"], code: "PROD" },
+  { keywords: ["general", "gen "], code: "GEN" },
+  { keywords: ["admin", "office"], code: "ADM" },
+];
+
+const LOCATION_CODES = {
+  "leicester": "LEI",
+  "coventry": "COV",
+  "tamworth": "TAM",
+  "northampton": "NTH",
+  "nottingham": "NOT",
+  "derby": "DER",
+  "birmingham": "BIR",
+  "milton keynes": "MK",
+  "mk": "MK"
+};
+
+function getRoleCode(text) {
+  if (!text) return "GEN";
+  const t = text.toLowerCase();
+  for (const mapping of ROLE_CODES) {
+    if (mapping.keywords.some(k => t.includes(k))) return mapping.code;
+  }
+  return "GEN";
+}
+
+function getLocationCode(text) {
+  if (!text) return "LEI";
+  const t = text.toLowerCase();
+  for (const [name, code] of Object.entries(LOCATION_CODES)) {
+    if (t.includes(name)) return code;
+  }
+  return "LEI";
+}
+
 const inputClass =
   "w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal-5/50 transition-colors";
 const labelClass =
@@ -146,7 +195,51 @@ export function JobEditor({ job, isNew }) {
     published: job?.published ?? true,
     internalTitle: job?.internalTitle || "",
     clientName: job?.clientName || "",
+    clientId: job?.clientId || "",
   });
+
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    getClients().then(setClients);
+  }, []);
+
+  const handleClientSelect = (e) => {
+    const val = e.target.value;
+    const client = clients.find(c => c.name === val || c.client_code === val);
+    if (client) {
+      setForm(prev => ({
+        ...prev,
+        clientName: client.name,
+        clientId: client.client_code
+      }));
+    } else {
+      update("clientName", val);
+    }
+  };
+
+  const handleClientIdChange = (val) => {
+    const client = clients.find(c => c.client_code === val.toUpperCase());
+    if (client) {
+      setForm(prev => ({
+        ...prev,
+        clientId: val.toUpperCase(),
+        clientName: client.name
+      }));
+    } else {
+      update("clientId", val.toUpperCase());
+    }
+  };
+
+  const generateRefId = useCallback(async () => {
+    const roleText = form.internalTitle || form.title;
+    const roleCode = getRoleCode(roleText);
+    const locCode = getLocationCode(form.location);
+    
+    const seq = await getNextJobSequence(roleCode, locCode);
+    const newRef = `JOB-${roleCode}-${locCode}-${seq}`;
+    update("ref", newRef);
+  }, [form.internalTitle, form.title, form.location]);
 
   const update = (key, value) =>
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -237,13 +330,24 @@ export function JobEditor({ job, isNew }) {
           {/* Reference ID */}
           <div>
             <label className={labelClass}>Reference ID</label>
-            <input
-              type="text"
-              value={form.ref}
-              onChange={(e) => update("ref", e.target.value.toUpperCase())}
-              className={`${inputClass} font-mono text-white/60`}
-              placeholder="AR-1000"
-            />
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={form.ref}
+                onChange={(e) => update("ref", e.target.value.toUpperCase())}
+                className={`${inputClass} font-mono text-white/60`}
+                placeholder="JOB-WH-LEI-001"
+              />
+              <button
+                type="button"
+                onClick={generateRefId}
+                className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/60 hover:text-teal-4 hover:border-teal-5/50 transition-all cursor-pointer"
+                title="Generate from Role & Location"
+              >
+                <IconRefresh size={20} />
+              </button>
+            </div>
+            <p className="text-[10px] text-white/20 mt-2">Format: JOB-[ROLE]-[LOC]-[SEQ]</p>
           </div>
 
           {/* Short description */}
@@ -311,13 +415,39 @@ export function JobEditor({ job, isNew }) {
             </div>
             <div>
               <label className="block text-[11px] text-white/30 mb-1">Client Name</label>
-              <input
-                type="text"
-                value={form.clientName}
-                onChange={(e) => update("clientName", e.target.value)}
-                className={inputClass}
-                placeholder="e.g. Logistics UK Ltd"
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  list="client-names"
+                  value={form.clientName}
+                  onChange={(e) => handleClientSelect(e)}
+                  className={inputClass}
+                  placeholder="e.g. Logistics UK Ltd"
+                />
+                <datalist id="client-names">
+                  {clients.map(c => (
+                    <option key={c.id} value={c.name}>{c.client_code}</option>
+                  ))}
+                </datalist>
+              </div>
+            </div>
+            <div>
+              <label className="block text-[11px] text-white/30 mb-1">Client ID (Internal Code)</label>
+              <div className="relative">
+                <input
+                  type="text"
+                  list="client-codes"
+                  value={form.clientId}
+                  onChange={(e) => handleClientIdChange(e.target.value)}
+                  className={`${inputClass} font-mono`}
+                  placeholder="e.g. API001"
+                />
+                <datalist id="client-codes">
+                  {clients.map(c => (
+                    <option key={c.id} value={c.client_code}>{c.name}</option>
+                  ))}
+                </datalist>
+              </div>
             </div>
           </div>
 
