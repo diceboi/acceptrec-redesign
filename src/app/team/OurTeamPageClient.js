@@ -19,13 +19,20 @@ import {
 
 // Data is now fetched from Supabase and passed via initialMembers prop
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  },
+};
+
 // ─── Team Card ──────────────────────────────────────────────────────────
 function TeamCard({ member }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      variants={cardVariants}
       className="group relative glass-card rounded-2xl p-8 overflow-hidden hover:border-teal-5/30 transition-all duration-500 hover:teal-glow-sm"
     >
       <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -234,17 +241,33 @@ function TeamHero() {
   );
 }
 
+const gridVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
 // ─── Team Grid ──────────────────────────────────────────────────────────
 function TeamGridSection({ members }) {
   return (
     <section className="relative w-full bg-navy-700 py-24 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
       <div className="relative z-10 mx-auto max-w-[1400px] px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {members.map((member, i) => (
             <TeamCard key={member.id || i} member={member} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

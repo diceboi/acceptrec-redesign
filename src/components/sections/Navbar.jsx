@@ -765,8 +765,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(true)}
-            onTouchEnd={(e) => { e.preventDefault(); setIsMobileMenuOpen(true); }}
-            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors focus:outline-none text-white hover:bg-white/10 rounded-lg"
+            className="relative z-[60] p-2 min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors focus:outline-none text-white hover:bg-white/10 rounded-lg cursor-pointer"
             style={{ touchAction: "manipulation" }}
             aria-label="Open menu"
           >
@@ -819,8 +818,7 @@ export function Navbar() {
                   <button
                     type="button"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    onTouchEnd={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); }}
-                    className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                    className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
                     style={{ touchAction: "manipulation" }}
                     aria-label="Close menu"
                   >
