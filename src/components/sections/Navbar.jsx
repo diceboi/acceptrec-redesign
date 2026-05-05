@@ -610,9 +610,9 @@ export function Navbar() {
 
   return (
     <header
-      style={{ top: 0 }}
-      className={`fixed z-50 flex w-full items-center justify-between transition-[background,box-shadow,height] duration-300 px-4 xl:px-8
-                bg-[#0d1522]/95 backdrop-blur-md shadow-lg shadow-black/20 h-16`}
+      style={{ top: 0, transform: "translateZ(0)", WebkitTransform: "translateZ(0)" }}
+      className={`fixed z-[100] flex w-full items-center justify-between transition-all duration-300 px-4 xl:px-8
+                bg-[#0d1522]/95 backdrop-blur-md shadow-lg shadow-black/20 h-16 pointer-events-auto`}
       onMouseLeave={handleMouseLeave}
     >
       <div
@@ -774,19 +774,18 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Drawer — rendered via portal to avoid header stacking context issues on iOS */}
+      {/* Mobile Menu Drawer */}
       {mounted && createPortal(
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <div className="xl:hidden" style={{ position: "fixed", inset: 0, zIndex: 9999 }}>
-              {/* Backdrop — solid overlay instead of backdrop-blur for iOS Safari compatibility */}
+            <div className="xl:hidden fixed inset-0 z-[99999]">
+              {/* Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.75)", zIndex: 9999 }}
+                className="fixed inset-0 bg-black/80 backdrop-blur-sm"
               />
 
               {/* Drawer */}
@@ -794,65 +793,48 @@ export function Navbar() {
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                onClick={(e) => e.stopPropagation()}
-                style={{
-                  position: "fixed",
-                  right: 0,
-                  top: 0,
-                  bottom: 0,
-                  width: "85%",
-                  maxWidth: "400px",
-                  zIndex: 10000,
-                  display: "flex",
-                  flexDirection: "column",
-                  backgroundColor: "#0d1522",
-                  borderLeft: "1px solid rgba(255,255,255,0.1)",
-                  boxShadow: "-8px 0 30px rgba(0,0,0,0.5)",
-                  overscrollBehavior: "contain",
-                  WebkitOverflowScrolling: "touch",
-                }}
+                transition={{ type: "spring", damping: 30, stiffness: 300 }}
+                className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] bg-navy-900 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden"
               >
                 {/* Header */}
-                <div style={{ height: 64, display: "flex", alignItems: "center", justifyContent: "flex-end", padding: "0 24px", borderBottom: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }}>
+                <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
+                  <span className="text-teal-5 font-bold tracking-tight">Menu</span>
                   <button
-                    type="button"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
-                    style={{ touchAction: "manipulation" }}
-                    aria-label="Close menu"
+                    className="p-2 -mr-2 text-white/70 hover:text-white transition-colors cursor-pointer"
                   >
                     <IconX size={24} />
                   </button>
                 </div>
 
                 {/* Content */}
-                <div className="flex-grow overflow-y-auto py-6 px-5 space-y-6" style={{ WebkitOverflowScrolling: "touch", overscrollBehavior: "contain" }}>
+                <div className="flex-grow overflow-y-auto py-6 px-6 space-y-8 scrollbar-hide">
                   {Object.values(menuData).map((menu) => (
-                    <div key={menu.id} className="space-y-3">
-                      <h4 className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5 px-2">
+                    <div key={menu.id} className="space-y-4">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-5/60 px-2">
                         {menu.title}
                       </h4>
-                      <div className="grid gap-0.5">
+                      <div className="grid grid-cols-1 gap-1">
                         {menu.sections.map((section) => (
-                          <div key={section.heading}>
+                          <div key={section.heading} className="space-y-1">
                             {section.items.map((item) => (
                               <Link
                                 key={item.label}
                                 href={item.href}
-                                className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
                               >
                                 {item.icon && (
-                                  <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-colors">
-                                    <item.icon size={18} strokeWidth={1.5} />
+                                  <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
+                                    <item.icon size={18} />
                                   </span>
                                 )}
                                 <div>
-                                  <div className="text-sm font-semibold text-white group-hover:text-teal-4 transition-colors">
+                                  <div className="text-[15px] font-semibold text-white group-hover:text-teal-4 transition-colors">
                                     {item.label}
                                   </div>
                                   {item.desc && (
-                                    <div className="text-[10px] text-white/40 font-medium">
+                                    <div className="text-[11px] text-white/40 font-medium line-clamp-1">
                                       {item.desc}
                                     </div>
                                   )}
@@ -866,22 +848,12 @@ export function Navbar() {
                   ))}
                 </div>
 
-                {/* Footer Actions */}
-                <div className="p-5 border-t border-white/10 bg-black/20 space-y-3" style={{ flexShrink: 0 }}>
-                  <Button
-                    variant="secondary"
-                    size="lg"
-                    href="/jobs"
-                    className="w-full justify-center py-4"
-                  >
+                {/* Footer */}
+                <div className="p-6 border-t border-white/10 bg-black/40 space-y-3 shrink-0">
+                  <Button variant="secondary" size="lg" href="/jobs" className="w-full justify-center py-4 rounded-xl">
                     Find Work
                   </Button>
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    href="/get-started"
-                    className="w-full justify-center py-4"
-                  >
+                  <Button variant="primary" size="lg" href="/get-started" className="w-full justify-center py-4 rounded-xl">
                     Get Started
                   </Button>
                 </div>

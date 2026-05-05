@@ -16,7 +16,7 @@ const posts = [
     authorImage: "/blog/author-james.jpg",
     date: "Mar 5, 2026",
     readTime: "4 min read",
-    image: "/blog/no-shows.jpg",
+    image: "/blog/attracting-the-right-talent.webp",
     href: "/blog",
   },
   {
@@ -29,7 +29,7 @@ const posts = [
     authorImage: "/blog/author-sarah.jpg",
     date: "Feb 28, 2026",
     readTime: "6 min read",
-    image: "/blog/inpost-story.jpg",
+    image: "/blog/national-temporary-worker-day.webp",
     href: "/blog",
   },
   {
@@ -42,7 +42,7 @@ const posts = [
     authorImage: "/blog/author-tom.jpg",
     date: "Feb 18, 2026",
     readTime: "5 min read",
-    image: "/blog/fill-rate.jpg",
+    image: "/blog/permanent-recruitment.webp",
     href: "/blog",
   },
 ];

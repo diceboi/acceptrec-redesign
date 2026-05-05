@@ -542,13 +542,13 @@ function TeamTeaser() {
             </Link>
           </div>
           <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 relative z-10">
-            {[1, 2, 4, 5].map((i) => (
+            {["team-1.webp", "team-2.webp", "Jamie-Ellis.webp", "Magda-Obraczka.webp"].map((img, i) => (
               <div
                 key={i}
                 className="aspect-[4/5] rounded-2xl bg-white/5 overflow-hidden border border-white/5 hover:border-teal-5/20 transition-all grayscale opacity-60 hover:grayscale-0 hover:opacity-100 group"
               >
                 <img
-                  src={`/team-${i}.webp`}
+                  src={`/${img}`}
                   alt="Team Member"
                   className="w-full h-full object-cover transition-transform group-hover:scale-105"
                 />

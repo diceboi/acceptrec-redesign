@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
 
   const title = post.seoTitle || `${post.title} | Accept Recruitment Insights`;
   const description = post.seoDescription || post.excerpt?.replace(/<[^>]+>/g, '').substring(0, 160) || "Read the latest insights from Accept Recruitment.";
-  const ogImage = post.ogImage || post.coverImage || "/assets/images/about/about-hero.webp";
+  const ogImage = post.ogImage || post.coverImage || "/blogheader.webp";
 
   return {
     title,
@@ -49,7 +49,7 @@ export default async function BlogPostPage({ params }) {
     notFound();
   }
 
-  const coverImage = post.coverImage || "/assets/images/about/about-hero.webp";
+  const coverImage = post.coverImage || "/blogheader.webp";
 
   return (
     <div className="min-h-screen selection:bg-teal-5/30 selection:text-teal-3 transition-colors duration-300">

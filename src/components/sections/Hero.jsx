@@ -1,18 +1,65 @@
 "use client";
 
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense, useMemo } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import {
   useGLTF,
-  Html,
   Environment,
   ContactShadows,
   Bounds,
-  Center,
 } from "@react-three/drei";
 import * as THREE from "three";
+
+function drawRoundedRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function drawCameraIcon(ctx, x, y, size, color) {
+  ctx.save();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = size * 0.08;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  const w = size;
+  const h = size * 0.72;
+  const bodyX = x - w / 2;
+  const bodyY = y - h / 2 + size * 0.08;
+
+  ctx.beginPath();
+  ctx.moveTo(bodyX + w * 0.16, bodyY);
+  ctx.lineTo(bodyX + w * 0.34, bodyY);
+  ctx.lineTo(bodyX + w * 0.44, bodyY - h * 0.22);
+  ctx.lineTo(bodyX + w * 0.66, bodyY - h * 0.22);
+  ctx.lineTo(bodyX + w * 0.76, bodyY);
+  ctx.lineTo(bodyX + w * 0.84, bodyY);
+  ctx.quadraticCurveTo(bodyX + w, bodyY, bodyX + w, bodyY + h * 0.16);
+  ctx.lineTo(bodyX + w, bodyY + h * 0.84);
+  ctx.quadraticCurveTo(bodyX + w, bodyY + h, bodyX + w * 0.84, bodyY + h);
+  ctx.lineTo(bodyX + w * 0.16, bodyY + h);
+  ctx.quadraticCurveTo(bodyX, bodyY + h, bodyX, bodyY + h * 0.84);
+  ctx.lineTo(bodyX, bodyY + h * 0.16);
+  ctx.quadraticCurveTo(bodyX, bodyY, bodyX + w * 0.16, bodyY);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(x, y + size * 0.08, size * 0.16, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.restore();
+}
 
 // ─── Google Rating hook ────────────────────────────────────────────────────
 function useGoogleRating() {
@@ -33,218 +80,283 @@ function useGoogleRating() {
 
 const delay = (ms) => new Promise((r) => setTimeout(r, ms));
 
-// ─── Animated Clock-In Screen ────────────────────────────────────────────
-function ClockInScreen() {
-  const [step, setStep] = useState(0);
-  const [time, setTime] = useState("06:58");
+function PhoneScreenPlane() {
+  const textureRef = useRef(null);
+  const canvasRef = useRef(null);
+  const materialRef = useRef(null);
+  const timeRef = useRef("06:58");
+
+  const drawScreen = (ctx, w, h, step, time, elapsed = 0, stepProgress = 0) => {
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.save();
+
+    // rounded screen mask
+    drawRoundedRect(ctx, 0, 0, w, h, 100);
+    ctx.clip();
+
+    // screen background
+    ctx.fillStyle = "#0d1120";
+    ctx.fillRect(0, 0, w, h);
+
+    // status bar
+    ctx.fillStyle = "rgba(255,255,255,0.42)";
+    ctx.font = "600 26px Arial";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "alphabetic";
+    ctx.fillText("09:41", 54, 60);
+
+    ctx.textAlign = "right";
+    ctx.fillText("▶▶ ⊡", w - 54, 60);
+
+    // header
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#2dd4bf";
+    ctx.font = "800 25px Arial";
+    ctx.fillText("ACCEPTPULSE", w / 2, 130);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "800 44px Arial";
+    ctx.fillText("Clock In", w / 2, 180);
+
+    ctx.fillStyle = "rgba(255,255,255,0.42)";
+    ctx.font = "500 25px Arial";
+    ctx.fillText("Your Business! • Morning Shift", w / 2, 220);
+
+    const cx = w / 2;
+    const cy = h / 2 - 20;
+
+    // animated pulse / glow
+    const idleGlow = 0.16 + Math.sin(elapsed * 2.4) * 0.035;
+
+    if (step === 1) {
+      const pulseProgress = (elapsed * 1.25) % 1;
+      const pulseRadius = 125 + pulseProgress * 65;
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, pulseRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(45,212,191,${0.55 * (1 - pulseProgress)})`;
+      ctx.lineWidth = 7;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, pulseRadius + 22, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(45,212,191,${0.25 * (1 - pulseProgress)})`;
+      ctx.lineWidth = 4;
+      ctx.stroke();
+    }
+
+    // main circle
+    ctx.beginPath();
+    ctx.arc(cx, cy, 125, 0, Math.PI * 2);
+    ctx.fillStyle =
+      step === 2
+        ? "#0d9488"
+        : step === 1
+          ? "rgba(45,212,191,0.24)"
+          : `rgba(45,212,191,${idleGlow})`;
+    ctx.fill();
+
+    // inner glow
+    ctx.beginPath();
+    ctx.arc(cx, cy, 96 + Math.sin(elapsed * 3) * 3, 0, Math.PI * 2);
+    ctx.fillStyle =
+      step === 2 ? "rgba(255,255,255,0.08)" : "rgba(45,212,191,0.08)";
+    ctx.fill();
+
+    if (step === 2) {
+      // success check animation style
+      const checkProgress = Math.min(1, stepProgress / 0.18);
+
+      ctx.strokeStyle = "#ffffff";
+      ctx.lineWidth = 16;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+
+      ctx.beginPath();
+
+      if (checkProgress < 0.45) {
+        const p = checkProgress / 0.45;
+        ctx.moveTo(cx - 48, cy + 4);
+        ctx.lineTo(cx - 48 + 36 * p, cy + 4 + 38 * p);
+      } else {
+        const p = (checkProgress - 0.45) / 0.55;
+        ctx.moveTo(cx - 48, cy + 4);
+        ctx.lineTo(cx - 12, cy + 42);
+        ctx.lineTo(cx - 12 + 74 * p, cy + 42 - 94 * p);
+      }
+
+      ctx.stroke();
+    } else {
+      drawCameraIcon(ctx, cx, cy, 150, "#2dd4bf");
+
+      // scanning line
+      if (step === 1) {
+        const scanY = cy - 76 + ((elapsed * 170) % 152);
+
+        ctx.strokeStyle = "rgba(45,212,191,0.9)";
+        ctx.lineWidth = 5;
+        ctx.lineCap = "round";
+
+        ctx.beginPath();
+        ctx.moveTo(cx - 72, scanY);
+        ctx.lineTo(cx + 72, scanY);
+        ctx.stroke();
+
+        ctx.strokeStyle = "rgba(45,212,191,0.18)";
+        ctx.lineWidth = 18;
+
+        ctx.beginPath();
+        ctx.moveTo(cx - 68, scanY);
+        ctx.lineTo(cx + 68, scanY);
+        ctx.stroke();
+      }
+    }
+
+    ctx.textAlign = "center";
+    ctx.fillStyle = "rgba(255,255,255,0.5)";
+    ctx.font = "500 25px Arial";
+
+    if (step === 0) ctx.fillText("Take selfie to clock in", w / 2, h - 260);
+    if (step === 1) ctx.fillText("Scanning face…", w / 2, h - 260);
+    if (step === 2) ctx.fillText("✓ Clocked in successfully!", w / 2, h - 260);
+
+    const cardX = 48;
+    const cardY = h - 210;
+    const cardW = w - 96;
+    const cardH = 145;
+
+    drawRoundedRect(ctx, cardX, cardY, cardW, cardH, 34);
+    ctx.fillStyle = "rgba(255,255,255,0.055)";
+    ctx.fill();
+
+    ctx.fillStyle = "rgba(255,255,255,0.42)";
+    ctx.font = "600 25px Arial";
+    ctx.textAlign = "left";
+    ctx.fillText("Location", cardX + 34, cardY + 55);
+
+    ctx.fillStyle = "#2dd4bf";
+    ctx.textAlign = "right";
+    ctx.fillText("✓ Verified", cardX + cardW - 34, cardY + 55);
+
+    ctx.strokeStyle = "rgba(255,255,255,0.08)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(cardX + 34, cardY + 82);
+    ctx.lineTo(cardX + cardW - 34, cardY + 82);
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(255,255,255,0.42)";
+    ctx.textAlign = "left";
+    ctx.fillText("Time", cardX + 34, cardY + 122);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "right";
+    ctx.fillText(time, cardX + cardW - 34, cardY + 122);
+    ctx.restore();
+  };
+
+  const texture = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 600;
+    canvas.height = 1300;
+
+    const ctx = canvas.getContext("2d");
+
+    // fontos: legyen tartalom a canvas-on MIELŐTT texture lesz belőle
+    drawScreen(ctx, canvas.width, canvas.height, 0, "06:58", 0);
+
+    canvasRef.current = canvas;
+
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.minFilter = THREE.LinearFilter;
+    tex.magFilter = THREE.LinearFilter;
+    tex.generateMipmaps = false;
+    tex.flipY = true;
+    tex.needsUpdate = true;
+
+    textureRef.current = tex;
+
+    return tex;
+  }, []);
 
   useEffect(() => {
-    const iv = setInterval(() => {
-      setTime((t) => {
-        const [h, m] = t.split(":").map(Number);
-        const nm = (m + 1) % 60;
-        const nh = m + 1 >= 60 ? h + 1 : h;
-        return `${String(nh).padStart(2, "0")}:${String(nm).padStart(2, "0")}`;
-      });
+    const timeLoop = setInterval(() => {
+      const [h, m] = timeRef.current.split(":").map(Number);
+      const nm = (m + 1) % 60;
+      const nh = m + 1 >= 60 ? h + 1 : h;
+
+      timeRef.current = `${String(nh).padStart(2, "0")}:${String(nm).padStart(
+        2,
+        "0",
+      )}`;
     }, 3000);
-    return () => clearInterval(iv);
+
+    return () => {
+      clearInterval(timeLoop);
+    };
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-    const seq = async () => {
-      await delay(1200);
-      if (!cancelled) setStep(1);
-      await delay(2000);
-      if (!cancelled) setStep(2);
-      await delay(2200);
-      if (!cancelled) setStep(0);
-    };
-    seq();
-    const loop = setInterval(seq, 6000);
-    return () => {
-      cancelled = true;
-      clearInterval(loop);
-    };
-  }, []);
+  useFrame(({ clock }) => {
+    const canvas = canvasRef.current;
+    const texture = textureRef.current;
+    const material = materialRef.current;
+
+    if (!canvas || !texture) return;
+
+    const ctx = canvas.getContext("2d");
+    const elapsed = clock.getElapsedTime();
+
+    const cycle = elapsed % 7.8;
+
+    let step = 0;
+    let stepProgress = 0;
+
+    if (cycle < 2.6) {
+      step = 0;
+      stepProgress = cycle / 2.6;
+    } else if (cycle < 5.2) {
+      step = 1;
+      stepProgress = (cycle - 2.6) / 2.6;
+    } else {
+      step = 2;
+      stepProgress = (cycle - 5.2) / 2.6;
+    }
+
+    drawScreen(
+      ctx,
+      canvas.width,
+      canvas.height,
+      step,
+      timeRef.current,
+      elapsed,
+      stepProgress,
+    );
+
+    texture.needsUpdate = true;
+
+    if (material) {
+      material.map = texture;
+      material.needsUpdate = true;
+    }
+  });
 
   return (
-    <div
-      style={{
-        width: 200, // Base width
-        height: 433.33, // 200 * (19.5 / 9) exact ratio
-        background: "#0d1120",
-        borderRadius: 30, // More rounded corners typical for iPhone
-        overflow: "hidden",
-        fontFamily: "system-ui, sans-serif",
-        color: "white",
-        display: "flex",
-        flexDirection: "column",
-        userSelect: "none",
-        pointerEvents: "none",
-      }}
-    >
-      {/* Status bar */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "12px 18px 4px",
-          fontSize: 9,
-          opacity: 0.4,
-        }}
-      >
-        <span>09:41</span>
-        <span>▶▶ ⊡</span>
-      </div>
+    <mesh position={[0, -0, 0.4]} renderOrder={999}>
+      <planeGeometry args={[6.6, 14.1]} />
 
-      {/* Header */}
-      <div style={{ textAlign: "center", padding: "4px 12px 8px" }}>
-        <div
-          style={{
-            fontSize: 9,
-            fontWeight: 700,
-            letterSpacing: "0.15em",
-            color: "#2dd4bf",
-            textTransform: "uppercase",
-          }}
-        >
-          AcceptPulse
-        </div>
-        <div style={{ fontSize: 15, fontWeight: 700, marginTop: 3 }}>
-          Clock In
-        </div>
-        <div style={{ fontSize: 10, opacity: 0.4, marginTop: 2 }}>
-          Your Business! • Morning Shift
-        </div>
-      </div>
-
-      {/* Camera area */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            position: "relative",
-            width: 96,
-            height: 96,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {/* Pulse ring */}
-          {step === 1 && (
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "50%",
-                border: "2px solid #2dd4bf",
-                animation: "pulse-ring 1s ease-out infinite",
-              }}
-            />
-          )}
-          <div
-            style={{
-              width: 80,
-              height: 80,
-              borderRadius: "50%",
-              background: step === 2 ? "#0d9488" : "rgba(45,212,191,0.18)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "background 0.3s",
-            }}
-          >
-            {step === 2 ? (
-              <svg
-                viewBox="0 0 24 24"
-                width="34"
-                height="34"
-                fill="none"
-                stroke="white"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 13l4 4L19 7" />
-              </svg>
-            ) : (
-              <svg
-                viewBox="0 0 24 24"
-                width="36"
-                height="36"
-                fill="none"
-                stroke="#2dd4bf"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                <circle cx="12" cy="13" r="4" />
-              </svg>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Caption */}
-      <div
-        style={{
-          textAlign: "center",
-          fontSize: 10,
-          opacity: 0.5,
-          paddingBottom: 8,
-        }}
-      >
-        {step === 0 && "Take selfie to clock in"}
-        {step === 1 && "Scanning face…"}
-        {step === 2 && "✓ Clocked in successfully!"}
-      </div>
-
-      {/* Info rows */}
-      <div
-        style={{
-          margin: "0 12px 16px",
-          background: "rgba(255,255,255,0.05)",
-          borderRadius: 12,
-          padding: "10px 14px",
-          fontSize: 10,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            paddingBottom: 8,
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
-            marginBottom: 8,
-          }}
-        >
-          <span style={{ opacity: 0.4 }}>Location</span>
-          <span style={{ color: "#2dd4bf", fontWeight: 600 }}>✓ Verified</span>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span style={{ opacity: 0.4 }}>Time</span>
-          <span style={{ fontWeight: 600, fontVariantNumeric: "tabular-nums" }}>
-            {time}
-          </span>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes pulse-ring {
-          0% { transform: scale(1); opacity: 1; }
-          100% { transform: scale(1.5); opacity: 0; }
-        }
-      `}</style>
-    </div>
+      <meshBasicMaterial
+        ref={materialRef}
+        map={texture}
+        toneMapped={false}
+        transparent
+        alphaTest={0.01}
+        side={THREE.DoubleSide}
+        depthTest={false}
+        depthWrite={false}
+      />
+    </mesh>
   );
 }
 
@@ -252,7 +364,6 @@ function PhoneModel({ mouseRef }) {
   const { scene } = useGLTF("/models/phone.glb");
   const groupRef = useRef();
 
-  // Clone and prepare materials to look sleek/dark
   useEffect(() => {
     scene.traverse((obj) => {
       if (obj.isMesh) {
@@ -262,40 +373,39 @@ function PhoneModel({ mouseRef }) {
     });
   }, [scene]);
 
-  useFrame(() => {
+  useFrame(({ clock }) => {
     if (!groupRef.current) return;
+
     const { x, y } = mouseRef.current;
-    // Smooth lerp towards target rotation
+    const t = clock.getElapsedTime();
+
+    const autoY = Math.sin(t * 0.8) * 0.12;
+    const autoX = Math.sin(t * 0.55) * 0.045;
+    const floatY = Math.sin(t * 1.1) * 0.08;
+
     groupRef.current.rotation.y = THREE.MathUtils.lerp(
       groupRef.current.rotation.y,
-      x * 0.35,
+      x * 0.35 + autoY,
       0.06,
     );
+
     groupRef.current.rotation.x = THREE.MathUtils.lerp(
       groupRef.current.rotation.x,
-      -y * 0.22,
+      -y * 0.22 + autoX,
+      0.06,
+    );
+
+    groupRef.current.position.y = THREE.MathUtils.lerp(
+      groupRef.current.position.y,
+      floatY,
       0.06,
     );
   });
 
-  // We position the Html slightly in front of the model center
-  // The mouse effect rotation is applied to the outermost group so everything inside rotates as a single rigid body
   return (
     <group ref={groupRef}>
-      {/* Inner group aligns the children into the exact same local space */}
-      <group>
-        <primitive object={scene} />
-        {/* HTML screen overlay */}
-        <Html
-          position={[-0.49, 0.45, 0.4]} // <--- Az X és az Y tolja a helyére, a Z pedig milliméterre van az üvegtől
-          transform
-          distanceFactor={0}
-          scale={1.33}
-          style={{ pointerEvents: "none" }}
-        >
-          <ClockInScreen />
-        </Html>
-      </group>
+      <primitive object={scene} />
+      <PhoneScreenPlane scene={scene} />
     </group>
   );
 }
@@ -311,11 +421,14 @@ function PhoneScene() {
         y: (e.clientY / window.innerHeight - 0.5) * 2,
       };
     };
+
     const onLeave = () => {
       mouseRef.current = { x: 0, y: 0 };
     };
+
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseleave", onLeave);
+
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
@@ -324,17 +437,31 @@ function PhoneScene() {
 
   return (
     <Canvas
-      camera={{ position: [0, 0, 5], fov: 38 }}
-      gl={{ antialias: true, alpha: true }}
-      style={{ background: "transparent" }}
+      frameloop="always"
+      camera={{
+        position: [0, 0, 5],
+        fov: 38,
+      }}
+      gl={{
+        antialias: true,
+        alpha: true,
+      }}
+      style={{
+        width: "100%",
+        height: "100%",
+        background: "transparent",
+        display: "block",
+      }}
     >
       <ambientLight intensity={0.4} />
+
       <spotLight
         position={[5, 10, 5]}
         intensity={1.2}
         castShadow
         penumbra={1}
       />
+
       <pointLight position={[-4, -2, 3]} intensity={0.5} color="#2dd4bf" />
       <pointLight position={[4, 4, -2]} intensity={0.3} color="#7c3aed" />
 
@@ -342,7 +469,9 @@ function PhoneScene() {
         <Bounds fit clip observe margin={1.2}>
           <PhoneModel mouseRef={mouseRef} />
         </Bounds>
+
         <Environment preset="city" />
+
         <ContactShadows
           position={[0, -3.5, 0]}
           opacity={0.4}
@@ -530,13 +659,20 @@ export function Hero() {
 
         {/* RIGHT — Three.js Phone */}
         <motion.div
-          className="hidden lg:block"
-          style={{ height: 600 }}
+          className="relative w-full mt-12 lg:mt-0"
+          style={{
+            height: 500, // Reduced slightly from 600 for mobile, will be responsive in CSS if needed
+            width: "100%",
+            minWidth: 0,
+            position: "relative",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
         >
-          <PhoneScene />
+          <div className="absolute inset-0 lg:h-[600px] h-[400px] -translate-y-10 lg:translate-y-0">
+            <PhoneScene />
+          </div>
         </motion.div>
       </div>
 

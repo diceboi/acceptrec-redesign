@@ -1,13 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { IconCalendar, IconUser, IconChevronRight } from "@tabler/icons-react";
 import { motion } from "framer-motion";
 
 export function BlogCard({ post, index }) {
-  // Use generic image if no cover provided
-  const coverImage = post.coverImage || "/assets/images/about/about-hero.webp";
+  const [imgSrc, setImgSrc] = useState(post.coverImage || "/blogheader.webp");
 
   return (
     <motion.div
@@ -25,11 +25,12 @@ export function BlogCard({ post, index }) {
       
       <div className="relative aspect-video w-full overflow-hidden shrink-0">
         <Image
-          src={coverImage}
+          src={imgSrc}
           alt={post.title}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          onError={() => setImgSrc("/blogheader.webp")}
         />
         {post.category && (
           <div className="absolute top-4 left-4 bg-teal-5/90 backdrop-blur-md px-3 py-1.5 rounded-lg flex items-center">
