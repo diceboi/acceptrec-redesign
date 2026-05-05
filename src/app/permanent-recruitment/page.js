@@ -338,6 +338,8 @@ export default function PermanentRecruitment() {
         subtitle="Success-based fees. 12-week guarantee. Operations talent that sticks."
         primaryButtonText="Find Your Next Hire"
         secondaryButtonText="Call Our Team"
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

@@ -207,7 +207,16 @@ export default function FoodProductionIndustry() {
       <PainPoints />
       <ComplianceSection />
       <RolesWeSupply />
-      <CtaBanner badge="FOOD PRODUCTION" title="Need compliant" titleHighlight="food industry workers?" subtitle="GLA licensed. Fully trained. Ready to work. Get in touch." primaryButtonText="Get Compliant Staff" secondaryButtonText="Call Our Team" />
+      <CtaBanner 
+        badge="FOOD PRODUCTION" 
+        title="Need compliant" 
+        titleHighlight="food industry workers?" 
+        subtitle="GLA licensed. Fully trained. Ready to work. Get in touch." 
+        primaryButtonText="Get Compliant Staff" 
+        secondaryButtonText="Call Our Team" 
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
+      />
       <Footer />
     </main>
   );

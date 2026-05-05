@@ -207,6 +207,8 @@ export default function VistryCaseStudy() {
         subtitle="Let us prove our worth. We start with data, lead with people, and deliver with technology."
         primaryButtonText="Request a Callback"
         secondaryButtonText="Our Onsite Model"
+        primaryButtonHref="/contact"
+        secondaryButtonHref="/on-site-managed-services"
       />
 
       <Footer />

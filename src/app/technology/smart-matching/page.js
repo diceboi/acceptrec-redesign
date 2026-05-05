@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -367,6 +367,8 @@ export default function SmartMatchingPage() {
         subtitle="Slash your no-show rate and increase productivity by using our AI-powered AcceptMatch engine. The right worker, every single time."
         primaryButtonText="Request a Demo"
         secondaryButtonText="Read Case Study"
+        primaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true"
+        secondaryButtonHref="/case-studies"
       />
 
       <Footer />

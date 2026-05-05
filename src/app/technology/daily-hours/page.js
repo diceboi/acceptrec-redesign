@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -356,6 +356,8 @@ export default function DailyHoursPage() {
         subtitle="Eliminate disputes and budget surprises. Move to our Daily Hours confirmation system and gain 100% payroll clarity."
         primaryButtonText="Get a Demo"
         secondaryButtonText="Talk to an Expert"
+        primaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

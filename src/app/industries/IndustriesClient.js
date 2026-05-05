@@ -413,6 +413,8 @@ export default function IndustriesClient() {
         subtitle="Whether it's warehouse, manufacturing, or driving — tell us what you're dealing with. No generic pitch, just a real conversation about how we can help."
         primaryButtonText="Find Staff Now"
         secondaryButtonText="Prefer to talk now?"
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

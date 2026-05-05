@@ -353,6 +353,8 @@ export default function QuoteBuilderPage() {
         subtitle="Ballpark numbers are a great start, but we need to talk to give you a definitive price. We need to see your site, understand your workflow, and agree on service levels."
         primaryButtonText="Request Site Visit"
         secondaryButtonText="Send Full RFP"
+        primaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true"
+        secondaryButtonHref="/contact"
       />
       <Footer />
     </main>

@@ -204,6 +204,8 @@ export default function PoundstretcherCaseStudy() {
         subtitle="We build relationships that last. Let's start the first day of yours today."
         primaryButtonText="Book Initial Audit"
         secondaryButtonText="Our Services"
+        primaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true"
+        secondaryButtonHref="/get-started"
       />
 
       <Footer />

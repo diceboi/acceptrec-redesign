@@ -273,6 +273,8 @@ export default function RoiCalculator() {
         subtitle="The calculator show what's possible. Let's make it a reality for your business."
         primaryButtonText="Find Out More"
         secondaryButtonText="Call Our Team"
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

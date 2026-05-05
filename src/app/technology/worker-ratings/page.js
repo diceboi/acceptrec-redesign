@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -273,6 +273,8 @@ export default function WorkerRatingsPage() {
         subtitle="Get workers with proven track records. Your feedback actually matters. No more repeat offenders, only proven performers."
         primaryButtonText="Get Better Workers"
         secondaryButtonText="Talk to Our Team"
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

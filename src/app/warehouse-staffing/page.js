@@ -295,6 +295,8 @@ export default function WarehouseStaffing() {
         subtitle="Tell us what you need. We'll have workers ready."
         primaryButtonText="Find Warehouse Staff"
         secondaryButtonText="Call Our Team"
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

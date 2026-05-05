@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -368,6 +368,8 @@ export default function AcceptPulsePage() {
         subtitle="AcceptPulse is launching soon. Be one of the first agencies to eliminate timesheet disputes forever."
         primaryButtonText="Join Waitlist"
         secondaryButtonText="Book Demo"
+        primaryButtonHref="/contact"
+        secondaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true"
       />
 
       <Footer />

@@ -198,7 +198,16 @@ export default function EcommerceIndustry() {
       <PainPoints />
       <RolesWeSupply />
       <ScalingProcess />
-      <CtaBanner badge="PEAK PLANNING" title="Peak season" titleHighlight="coming?" subtitle="Start planning now. We'll show you exactly how we'd scale your operation." primaryButtonText="Start Planning Now" secondaryButtonText="Call Our Team" />
+      <CtaBanner 
+        badge="PEAK PLANNING" 
+        title="Peak season" 
+        titleHighlight="coming?" 
+        subtitle="Start planning now. We'll show you exactly how we'd scale your operation." 
+        primaryButtonText="Start Planning Now" 
+        secondaryButtonText="Call Our Team" 
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
+      />
       <Footer />
     </main>
   );

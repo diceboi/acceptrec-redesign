@@ -256,7 +256,16 @@ export default function TechnologyPage() {
       <ProductGrid />
       <AutomationWorkflow />
       <ResultsSection />
-      <CtaBanner badge="INNOVATION DRIVEN" title="Want to see it" titleHighlight="in action?" subtitle="The tools are ready. The visibility is waiting. Book a 15-minute tech demo today." primaryButtonText="Book Demo" secondaryButtonText="View Portal" primaryButtonHref="/get-started" secondaryButtonHref="/technology/client-portal" />
+      <CtaBanner 
+        badge="INNOVATION DRIVEN" 
+        title="Want to see it" 
+        titleHighlight="in action?" 
+        subtitle="The tools are ready. The visibility is waiting. Book a 15-minute tech demo today." 
+        primaryButtonText="Book Demo" 
+        secondaryButtonText="View Portal" 
+        primaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true" 
+        secondaryButtonHref="/technology/client-portal" 
+      />
       <Footer />
     </main>
   );

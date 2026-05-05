@@ -206,6 +206,8 @@ export default function InPostCaseStudy() {
         subtitle="100% of our workers are rated every shift. Hire with confidence."
         primaryButtonText="Request a Callback"
         secondaryButtonText="Our Services"
+        primaryButtonHref="/contact"
+        secondaryButtonHref="/temporary-staffing"
       />
 
       <Footer />

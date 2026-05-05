@@ -301,6 +301,8 @@ export default function IndustrialStaffing() {
         subtitle="Tell us your requirements. We'll match workers to your processes."
         primaryButtonText="Get Started Today"
         secondaryButtonText="Call Us Now"
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

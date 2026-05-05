@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -284,6 +284,8 @@ export default function ClientFeedbackPage() {
         subtitle="Be the first to gain access to our Site Intelligence platform. Partner with us to optimize your environment and slash worker turnover."
         primaryButtonText="Join the Waitlist"
         secondaryButtonText="Learn More"
+        primaryButtonHref="/contact"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

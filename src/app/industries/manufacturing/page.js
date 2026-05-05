@@ -199,7 +199,16 @@ export default function ManufacturingIndustry() {
       <PainPoints />
       <RolesWeSupply />
       <WhyAccept />
-      <CtaBanner badge="MANUFACTURING STAFFING" title="Keep your production" titleHighlight="running" subtitle="Tell us your requirements. We'll have a plan within 24 hours." primaryButtonText="Keep Your Line Running" secondaryButtonText="Call Our Team" />
+      <CtaBanner 
+        badge="MANUFACTURING STAFFING" 
+        title="Keep your production" 
+        titleHighlight="running" 
+        subtitle="Tell us your requirements. We'll have a plan within 24 hours." 
+        primaryButtonText="Keep Your Line Running" 
+        secondaryButtonText="Call Our Team" 
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
+      />
       <Footer />
     </main>
   );

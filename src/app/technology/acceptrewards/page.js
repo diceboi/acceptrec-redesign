@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -291,12 +291,14 @@ export default function AcceptRewardsPage() {
 
       {/* CTA Section - Innovation Partner style */}
       <CtaBanner
-        badge="THE FUTURE IS HERE"
-        title="The future is being built."
-        titleHighlight="Will you help shape it?"
-        subtitle="Most companies will wait until this technology is mainstream. Innovation Partners will have mastered it by then. Apply to the program today."
-        primaryButtonText="Apply Now"
+        badge="REWARDS PROGRAM"
+        title="Want to see the"
+        titleHighlight="full list?"
+        subtitle="Our rewards catalog changes monthly. Speak to our team to find out how AcceptRewards can help you retain your best workers."
+        primaryButtonText="Request Demo"
         secondaryButtonText="Learn More"
+        primaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

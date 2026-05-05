@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
@@ -317,12 +317,14 @@ export default function AcceptMentorPage() {
 
       {/* CTA Section */}
       <CtaBanner
-        badge="LAUNCHING SOON"
-        title="Ready to Build a"
-        titleHighlight="Better Workforce?"
-        subtitle="AcceptMentor is launching soon. Be one of the first to invest in worker development, not just replacement."
-        primaryButtonText="Get Early Access →"
-        secondaryButtonText="Ask Questions"
+        badge="MENTOR PROGRAM"
+        title="Help Your Team"
+        titleHighlight="Level Up."
+        subtitle="AcceptMentor is more than just training. It's about career progression and real-world skills. Book a session for your team today."
+        primaryButtonText="Book Session"
+        secondaryButtonText="Our Services"
+        primaryButtonHref="https://bookings.cloud.microsoft/book/ACCEPTECH@acceptrec.co.uk/?ismsaljsauthenabled=true"
+        secondaryButtonHref="/temporary-staffing"
       />
 
       <Footer />

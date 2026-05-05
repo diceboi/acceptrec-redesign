@@ -462,6 +462,8 @@ export default function ClientPortalPage() {
         subtitle="Be first in line when the Client Portal launches. Stop chasing. Start knowing."
         primaryButtonText="Get Early Access"
         secondaryButtonText="Ask Us Anything"
+        primaryButtonHref="/contact"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />

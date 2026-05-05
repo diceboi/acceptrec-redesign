@@ -13,7 +13,8 @@ export function CtaBanner({
   secondaryButtonText = "I Need Work",
   primaryButtonHref = "/get-started",
   secondaryButtonHref = "/jobs",
-} = {}) {
+  className = "",
+}) {
   return (
     <section className="relative w-full overflow-hidden font-sans cta-banner-section">
       {/* Team background image */}

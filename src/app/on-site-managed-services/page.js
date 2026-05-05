@@ -609,6 +609,8 @@ export default function OnSiteManagedServices() {
         subtitle="Data-driven forecasting. Volume capability. One trusted partner."
         primaryButtonText="Get Started"
         secondaryButtonText="Call Our Team"
+        primaryButtonHref="/get-started"
+        secondaryButtonHref="/contact"
       />
 
       <Footer />
