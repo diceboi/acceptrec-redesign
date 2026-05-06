@@ -520,13 +520,17 @@ export function Navbar() {
 
     const scrollY = window.scrollY;
 
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
+    const frame = requestAnimationFrame(() => {
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+    });
 
     return () => {
+      cancelAnimationFrame(frame);
+
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.left = "";
@@ -781,6 +785,7 @@ export function Navbar() {
           <ThemeToggle />
           <button
             type="button"
+            onTouchStart={() => {}}
             onClick={() => setIsMobileMenuOpen(true)}
             className="relative z-[60] p-2 min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors focus:outline-none text-white hover:bg-white/10 rounded-lg cursor-pointer"
             style={{ touchAction: "manipulation" }}
@@ -794,104 +799,113 @@ export function Navbar() {
       {/* Mobile Menu Drawer */}
       {mounted &&
         createPortal(
-          <AnimatePresence>
-            {isMobileMenuOpen && (
-              <div className="xl:hidden fixed inset-0 z-[99999]">
-                {/* Backdrop */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.18 }}
+          <div
+            className={`xl:hidden fixed inset-0 z-[99999] ${
+              isMobileMenuOpen ? "pointer-events-auto" : "pointer-events-none"
+            }`}
+            aria-hidden={!isMobileMenuOpen}
+          >
+            {/* Backdrop */}
+            <motion.div
+              initial={false}
+              animate={{ opacity: isMobileMenuOpen ? 1 : 0 }}
+              transition={{ duration: 0.18 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 bg-black/80 will-change-opacity"
+            />
+
+            {/* Drawer */}
+            <motion.div
+              initial={false}
+              animate={{ x: isMobileMenuOpen ? 0 : "100%" }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] bg-navy-900 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden will-change-transform [transform:translateZ(0)]"
+            >
+              {/* Header */}
+              <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
+                <span className="text-teal-5 font-bold tracking-tight">
+                  Menu
+                </span>
+
+                <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="fixed inset-0 bg-black/80 will-change-opacity"
-                />
-
-                {/* Drawer */}
-                <motion.div
-                  initial={{ x: "100%" }}
-                  animate={{ x: 0 }}
-                  exit={{ x: "100%" }}
-                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                  className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] bg-navy-900 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden will-change-transform [transform:translateZ(0)]"
+                  className="p-2 -mr-2 text-white/70 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Close menu"
                 >
-                  {/* Header */}
-                  <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
-                    <span className="text-teal-5 font-bold tracking-tight">
-                      Menu
-                    </span>
-                    <button
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="p-2 -mr-2 text-white/70 hover:text-white transition-colors cursor-pointer"
-                    >
-                      <IconX size={24} />
-                    </button>
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-grow overflow-y-auto py-6 px-6 space-y-8 scrollbar-hide">
-                    {Object.values(menuData).map((menu) => (
-                      <div key={menu.id} className="space-y-4">
-                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-5/60 px-2">
-                          {menu.title}
-                        </h4>
-                        <div className="grid grid-cols-1 gap-1">
-                          {menu.sections.map((section) => (
-                            <div key={section.heading} className="space-y-1">
-                              {section.items.map((item) => (
-                                <Link
-                                  key={item.label}
-                                  href={item.href}
-                                  onClick={() => setIsMobileMenuOpen(false)}
-                                  className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
-                                >
-                                  {item.icon && (
-                                    <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
-                                      <item.icon size={18} />
-                                    </span>
-                                  )}
-                                  <div>
-                                    <div className="text-[15px] font-semibold text-white group-hover:text-teal-4 transition-colors">
-                                      {item.label}
-                                    </div>
-                                    {item.desc && (
-                                      <div className="text-[11px] text-white/40 font-medium line-clamp-1">
-                                        {item.desc}
-                                      </div>
-                                    )}
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Footer */}
-                  <div className="p-6 border-t border-white/10 bg-black/40 space-y-3 shrink-0">
-                    <Button
-                      variant="secondary"
-                      size="lg"
-                      href="/jobs"
-                      className="w-full justify-center py-4 rounded-xl"
-                    >
-                      Find Work
-                    </Button>
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      href="/get-started"
-                      className="w-full justify-center py-4 rounded-xl"
-                    >
-                      Get Started
-                    </Button>
-                  </div>
-                </motion.div>
+                  <IconX size={24} />
+                </button>
               </div>
-            )}
-          </AnimatePresence>,
+
+              {/* Content */}
+              <div className="flex-grow overflow-y-auto py-6 px-6 space-y-8 scrollbar-hide">
+                {Object.values(menuData).map((menu) => (
+                  <div key={menu.id} className="space-y-4">
+                    <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-5/60 px-2">
+                      {menu.title}
+                    </h4>
+
+                    <div className="grid grid-cols-1 gap-1">
+                      {menu.sections.map((section) => (
+                        <div key={section.heading} className="space-y-1">
+                          {section.items.map((item) => {
+                            const Icon = item.icon;
+
+                            return (
+                              <Link
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
+                              >
+                                {Icon && (
+                                  <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
+                                    <Icon size={18} />
+                                  </span>
+                                )}
+
+                                <div>
+                                  <div className="text-[15px] font-semibold text-white group-hover:text-teal-4 transition-colors">
+                                    {item.label}
+                                  </div>
+
+                                  {item.desc && (
+                                    <div className="text-[11px] text-white/40 font-medium line-clamp-1">
+                                      {item.desc}
+                                    </div>
+                                  )}
+                                </div>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer */}
+              <div className="p-6 border-t border-white/10 bg-black/40 space-y-3 shrink-0">
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  href="/jobs"
+                  className="w-full justify-center py-4 rounded-xl"
+                >
+                  Find Work
+                </Button>
+
+                <Button
+                  variant="primary"
+                  size="lg"
+                  href="/get-started"
+                  className="w-full justify-center py-4 rounded-xl"
+                >
+                  Get Started
+                </Button>
+              </div>
+            </motion.div>
+          </div>,
           document.body,
         )}
     </header>
