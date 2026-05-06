@@ -212,7 +212,11 @@ const menuData = {
       {
         heading: "Solutions",
         items: [
-          { label: "AcceptRewards", desc: "Why our workers perform better", href: "/employers/rewards" },
+          {
+            label: "AcceptRewards",
+            desc: "Why our workers perform better",
+            href: "/employers/rewards",
+          },
           { label: "On-Site Management", href: "/on-site-managed-services" },
           { label: "Case Studies", href: "/case-studies" },
           { label: "Client Tools", href: "/clients/intelligence" },
@@ -512,24 +516,40 @@ export function Navbar() {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
+    if (!isMobileMenuOpen) return;
+
+    const scrollY = window.scrollY;
+
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+
+    return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+
+      window.scrollTo(0, scrollY);
+    };
   }, [isMobileMenuOpen]);
 
   // Observe the inner content to get its natural size
   useEffect(() => {
     if (!contentRef.current) return;
+
     const observer = new ResizeObserver(([entry]) => {
       const { width, height } = entry.contentRect;
       setPanelSize({ width, height });
     });
+
     observer.observe(contentRef.current);
+
     return () => observer.disconnect();
-  });
+  }, [activeDropdown]);
 
   // Measure nav element bounds so the dropdown can match its width/position
   useEffect(() => {
@@ -610,9 +630,13 @@ export function Navbar() {
 
   return (
     <header
-      style={{ top: 0, transform: "translateZ(0)", WebkitTransform: "translateZ(0)" }}
+      style={{
+        top: 0,
+        transform: "translateZ(0)",
+        WebkitTransform: "translateZ(0)",
+      }}
       className={`fixed z-[100] flex w-full items-center justify-between transition-all duration-300 px-4 xl:px-8
-                bg-[#0d1522]/95 backdrop-blur-md shadow-lg shadow-black/20 h-16 pointer-events-auto`}
+  bg-[#0d1522]/95 xl:backdrop-blur-md shadow-lg shadow-black/20 h-16 pointer-events-auto`}
       onMouseLeave={handleMouseLeave}
     >
       <div
@@ -719,7 +743,8 @@ export function Navbar() {
                           animate="center"
                           exit="exit"
                         >
-                          {activeDropdown === "technology" || activeDropdown === "employers" ? (
+                          {activeDropdown === "technology" ||
+                          activeDropdown === "employers" ? (
                             <TechnologyPanel
                               menu={menuData[activeDropdown]}
                               isSolid={false}
@@ -743,18 +768,10 @@ export function Navbar() {
         {/* Action Buttons */}
         <div className="hidden xl:flex items-center gap-3">
           <ThemeToggle />
-          <Button
-            variant="secondary"
-            size="md"
-            href="/jobs"
-          >
+          <Button variant="secondary" size="md" href="/jobs">
             Find Work
           </Button>
-          <Button
-            variant="primary"
-            size="md"
-            href="/get-started"
-          >
+          <Button variant="primary" size="md" href="/get-started">
             Get Started
           </Button>
         </div>
@@ -775,94 +792,108 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu Drawer */}
-      {mounted && createPortal(
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <div className="xl:hidden fixed inset-0 z-[99999]">
-              {/* Backdrop */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="fixed inset-0 bg-black/80 backdrop-blur-sm"
-              />
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <div className="xl:hidden fixed inset-0 z-[99999]">
+                {/* Backdrop */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="fixed inset-0 bg-black/80 will-change-opacity"
+                />
 
-              {/* Drawer */}
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 30, stiffness: 300 }}
-                className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] bg-navy-900 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden"
-              >
-                {/* Header */}
-                <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
-                  <span className="text-teal-5 font-bold tracking-tight">Menu</span>
-                  <button
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 -mr-2 text-white/70 hover:text-white transition-colors cursor-pointer"
-                  >
-                    <IconX size={24} />
-                  </button>
-                </div>
+                {/* Drawer */}
+                <motion.div
+                  initial={{ x: "100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "100%" }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] bg-navy-900 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden will-change-transform [transform:translateZ(0)]"
+                >
+                  {/* Header */}
+                  <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
+                    <span className="text-teal-5 font-bold tracking-tight">
+                      Menu
+                    </span>
+                    <button
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="p-2 -mr-2 text-white/70 hover:text-white transition-colors cursor-pointer"
+                    >
+                      <IconX size={24} />
+                    </button>
+                  </div>
 
-                {/* Content */}
-                <div className="flex-grow overflow-y-auto py-6 px-6 space-y-8 scrollbar-hide">
-                  {Object.values(menuData).map((menu) => (
-                    <div key={menu.id} className="space-y-4">
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-5/60 px-2">
-                        {menu.title}
-                      </h4>
-                      <div className="grid grid-cols-1 gap-1">
-                        {menu.sections.map((section) => (
-                          <div key={section.heading} className="space-y-1">
-                            {section.items.map((item) => (
-                              <Link
-                                key={item.label}
-                                href={item.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
-                              >
-                                {item.icon && (
-                                  <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
-                                    <item.icon size={18} />
-                                  </span>
-                                )}
-                                <div>
-                                  <div className="text-[15px] font-semibold text-white group-hover:text-teal-4 transition-colors">
-                                    {item.label}
-                                  </div>
-                                  {item.desc && (
-                                    <div className="text-[11px] text-white/40 font-medium line-clamp-1">
-                                      {item.desc}
-                                    </div>
+                  {/* Content */}
+                  <div className="flex-grow overflow-y-auto py-6 px-6 space-y-8 scrollbar-hide">
+                    {Object.values(menuData).map((menu) => (
+                      <div key={menu.id} className="space-y-4">
+                        <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-teal-5/60 px-2">
+                          {menu.title}
+                        </h4>
+                        <div className="grid grid-cols-1 gap-1">
+                          {menu.sections.map((section) => (
+                            <div key={section.heading} className="space-y-1">
+                              {section.items.map((item) => (
+                                <Link
+                                  key={item.label}
+                                  href={item.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
+                                >
+                                  {item.icon && (
+                                    <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
+                                      <item.icon size={18} />
+                                    </span>
                                   )}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                        ))}
+                                  <div>
+                                    <div className="text-[15px] font-semibold text-white group-hover:text-teal-4 transition-colors">
+                                      {item.label}
+                                    </div>
+                                    {item.desc && (
+                                      <div className="text-[11px] text-white/40 font-medium line-clamp-1">
+                                        {item.desc}
+                                      </div>
+                                    )}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
 
-                {/* Footer */}
-                <div className="p-6 border-t border-white/10 bg-black/40 space-y-3 shrink-0">
-                  <Button variant="secondary" size="lg" href="/jobs" className="w-full justify-center py-4 rounded-xl">
-                    Find Work
-                  </Button>
-                  <Button variant="primary" size="lg" href="/get-started" className="w-full justify-center py-4 rounded-xl">
-                    Get Started
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>,
-        document.body
-      )}
+                  {/* Footer */}
+                  <div className="p-6 border-t border-white/10 bg-black/40 space-y-3 shrink-0">
+                    <Button
+                      variant="secondary"
+                      size="lg"
+                      href="/jobs"
+                      className="w-full justify-center py-4 rounded-xl"
+                    >
+                      Find Work
+                    </Button>
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      href="/get-started"
+                      className="w-full justify-center py-4 rounded-xl"
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                </motion.div>
+              </div>
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
     </header>
   );
 }
