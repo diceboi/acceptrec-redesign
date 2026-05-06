@@ -776,7 +776,7 @@ export function Navbar() {
             Find Work
           </Button>
           <Button variant="primary" size="md" href="/get-started">
-            Get Started
+            Find Staff
           </Button>
         </div>
 
@@ -901,7 +901,7 @@ export function Navbar() {
                   href="/get-started"
                   className="w-full justify-center py-4 rounded-xl"
                 >
-                  Get Started
+                  Find Staff
                 </Button>
               </div>
             </motion.div>

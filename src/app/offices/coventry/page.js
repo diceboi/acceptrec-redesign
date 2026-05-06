@@ -41,7 +41,7 @@ function CoventryHero() {
                     <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8">Coventry<br />Office</motion.h1>
                     <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-white/60 text-xl md:text-2xl leading-relaxed font-medium max-w-xl mx-auto md:mx-0 mb-12">Automotive heritage meets advanced manufacturing recruitment. Serving Coventry, Rugby, Nuneaton, and Warwickshire.</motion.p>
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-                        <a href="https://wa.me/447833945679?text=Hi%20Accept%20Recruitment%20Coventry%2C%20I%27d%20like%20to%20get%20in%20touch%20about..." className="w-full sm:w-auto px-10 py-5 rounded-full bg-teal-5 text-black font-semibold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-3"><IconBrandWhatsapp size={20} /> Message WhatsApp</a>
+                        <a href="https://wa.me/447833945679?text=Hi%20Accept%20Recruitment%20Coventry%2C%20I%27d%20like%20to%20get%20in%20touch%20about..." className="w-full sm:w-auto px-10 py-5 rounded-full bg-teal-5 text-black font-semibold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-3"><IconBrandWhatsapp size={20} /> Message on WhatsApp</a>
                         <a href="/jobs" className="w-full sm:w-auto px-10 py-5 rounded-full bg-white/5 border border-white/10 text-white font-semibold uppercase tracking-widest text-xs hover:bg-white/10 transition-all flex items-center justify-center gap-3"><IconSearch size={20} className="text-teal-5" /> Search Local Jobs</a>
                     </motion.div>
                 </div>
@@ -165,7 +165,7 @@ export default function CoventryOfficePage() {
             <IndustriesGrid />
             <RoleExpertise />
             <CoverageSection />
-            <CtaBanner badge="HIRING IN COVENTRY?" title="Your next hire starts in" titleHighlight="Coventry." subtitle="WhatsApp our Coventry team. We understand manufacturing schedules don't wait." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/447833945679" secondaryButtonHref="/contact" />
+            <CtaBanner badge="HIRING IN COVENTRY?" title="Your next hire starts in" titleHighlight="Coventry." subtitle="WhatsApp our Coventry team. We understand manufacturing schedules don't wait." primaryButtonText="Message on WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/447833945679" secondaryButtonHref="/contact" />
             <Footer />
         </main>
     );

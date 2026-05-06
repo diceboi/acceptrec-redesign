@@ -61,7 +61,7 @@ function LeicesterHero() {
                     </motion.p>
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
                         <a href="https://wa.me/447495995406?text=Hi%20Accept%20Recruitment%20Leicester%2C%20I%27d%20like%20to%20get%20in%20touch%20about..." className="w-full sm:w-auto px-10 py-5 rounded-full bg-teal-5 text-black font-semibold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/20 flex items-center justify-center gap-3">
-                            <IconBrandWhatsapp size={20} /> Message WhatsApp
+                            <IconBrandWhatsapp size={20} /> Message on WhatsApp
                         </a>
                         <a href="/jobs" className="w-full sm:w-auto px-10 py-5 rounded-full bg-white/5 border border-white/10 text-white font-semibold uppercase tracking-widest text-xs hover:bg-white/10 transition-all flex items-center justify-center gap-3">
                             <IconSearch size={20} className="text-teal-5" /> Search Local Jobs
@@ -213,7 +213,7 @@ export default function LeicesterOfficePage() {
             <IndustriesGrid />
             <RoleExpertise />
             <CoverageSection />
-            <CtaBanner badge="SHORT-STAFFED?" title="Short-staffed in" titleHighlight="Leicester?" subtitle="Message your nearest office on WhatsApp or send an enquiry. We'll get back to you within the hour." primaryButtonText="Message WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/447495995406" secondaryButtonHref="/contact" />
+            <CtaBanner badge="SHORT-STAFFED?" title="Short-staffed in" titleHighlight="Leicester?" subtitle="Message your nearest office on WhatsApp or send an enquiry. We'll get back to you within the hour." primaryButtonText="Message on WhatsApp" secondaryButtonText="Contact Us" primaryButtonHref="https://wa.me/447495995406" secondaryButtonHref="/contact" />
             <Footer />
         </main>
     );

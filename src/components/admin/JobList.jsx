@@ -77,10 +77,14 @@ export function JobList({ jobs }) {
   };
 
   const salaryLabel = (job) => {
-    if (job.salaryFix) return `£${job.salaryFix}`;
+    const isPermanent = job.contractType?.toLowerCase() === 'permanent';
+    const suffix = isPermanent ? '/annum' : '/hour';
+    const formatSal = (num) => isPermanent ? Number(num).toLocaleString('en-GB') : num.toString();
+
+    if (job.salaryFix) return `£${formatSal(job.salaryFix)}${suffix}`;
     if (job.salaryFrom && job.salaryTo)
-      return `£${job.salaryFrom}–£${job.salaryTo}`;
-    if (job.salaryFrom) return `£${job.salaryFrom}+`;
+      return `£${formatSal(job.salaryFrom)}–£${formatSal(job.salaryTo)}${suffix}`;
+    if (job.salaryFrom) return `£${formatSal(job.salaryFrom)}+${suffix}`;
     return "—";
   };
 

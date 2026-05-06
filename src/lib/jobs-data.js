@@ -18,37 +18,45 @@ export async function getPublicJobs() {
     return [];
   }
 
-  return data.map((job) => ({
-    id: job.id,
-    ref: job.ref || "",
-    title: job.title,
-    slug: job.slug,
-    location: job.location || "",
-    category: job.category || "",
-    jobType: job.job_type || "",
-    contractType: job.contract_type || "",
-    salaryFrom: job.salary_from,
-    salaryTo: job.salary_to,
-    salaryFix: job.salary_fix,
-    shortDescription: job.short_description || "",
-    longDescription: job.long_description || "",
-    requiredSkills: job.required_skills || "",
-    dailyDuties: job.daily_duties || "",
-    benefits: job.benefits || "",
-    shift: job.shift || "",
-    whatsappNumber: job.whatsapp_number || "447495995406",
-    positions: job.positions || 1,
-    // Derived pay label for display
-    pay: job.salary_fix
-      ? `£${job.salary_fix}/hour`
-      : job.salary_from && job.salary_to
-      ? `£${job.salary_from}–£${job.salary_to}/hour`
-      : job.salary_from
-      ? `£${job.salary_from}/hour`
-      : "",
-    // Numeric rate for filter slider (use fix or from)
-    payRate: job.salary_fix ?? job.salary_from ?? 0,
-  }));
+  return data.map((job) => {
+    const isPermanent = job.contract_type?.toLowerCase() === 'permanent';
+    const suffix = isPermanent ? '/annum' : '/hour';
+    const formatSal = (num) => isPermanent ? Number(num).toLocaleString('en-GB') : num.toString();
+
+    return {
+      id: job.id,
+      ref: job.ref || "",
+      title: job.title,
+      slug: job.slug,
+      location: job.location || "",
+      category: job.category || "",
+      jobType: job.job_type || "",
+      contractType: job.contract_type || "",
+      salaryFrom: job.salary_from,
+      salaryTo: job.salary_to,
+      salaryFix: job.salary_fix,
+      shortDescription: job.short_description || "",
+      longDescription: job.long_description || "",
+      requiredSkills: job.required_skills || "",
+      dailyDuties: job.daily_duties || "",
+      benefits: job.benefits || "",
+      shift: job.shift || "",
+      whatsappNumber: job.whatsapp_number || "447495995406",
+      positions: job.positions || 1,
+      // Derived pay label for display
+      pay: job.salary_fix
+        ? `£${formatSal(job.salary_fix)}${suffix}`
+        : job.salary_from && job.salary_to
+        ? `£${formatSal(job.salary_from)}–£${formatSal(job.salary_to)}${suffix}`
+        : job.salary_from
+        ? `£${formatSal(job.salary_from)}${suffix}`
+        : "",
+      // Numeric rate for filter slider (use fix or from)
+      payRate: isPermanent 
+        ? (job.salary_fix ?? job.salary_from ?? 0) / 2080
+        : (job.salary_fix ?? job.salary_from ?? 0),
+    };
+  });
 }
 
 // ─── Admin Queries ────────────────────────────────────────────────────────────

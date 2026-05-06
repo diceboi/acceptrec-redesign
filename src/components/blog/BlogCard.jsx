@@ -59,7 +59,7 @@ export function BlogCard({ post, index }) {
 
         <div 
           className="text-gray-600 dark:text-white/60 text-sm md:text-base leading-relaxed line-clamp-3 mb-6 flex-1"
-          dangerouslySetInnerHTML={{ __html: post.excerpt || "" }}
+          dangerouslySetInnerHTML={{ __html: (post.excerpt || "").replace(/<\/?p[^>]*>/g, '') }}
         />
 
         <div className="flex items-center gap-2 text-teal-6 dark:text-teal-4 text-sm font-semibold uppercase tracking-widest group-hover:text-teal-7 dark:group-hover:text-teal-3 transition-colors mt-auto">

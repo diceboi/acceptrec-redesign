@@ -10,8 +10,6 @@ export default async function AdminTeamPage() {
       <AdminHeader
         title="Team Management"
         subtitle="Manage the humans behind the headsets"
-        actionLabel="Add Member"
-        actionHref="/admin/team/new"
       />
       <TeamList members={members} />
     </div>

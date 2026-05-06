@@ -30,7 +30,7 @@ export function BlogEditor({ post, categories, tags, isNew }) {
   const [form, setForm] = useState({
     title: post?.title || "",
     slug: post?.slug || "",
-    excerpt: post?.excerpt || "",
+    excerpt: (post?.excerpt || "").replace(/<[^>]*>/g, ""),
     content: post?.content || "",
     coverImage: post?.coverImage || "",
     category: post?.category || "",
@@ -225,7 +225,7 @@ export function BlogEditor({ post, categories, tags, isNew }) {
             <label className="block text-xs font-semibold text-white/50 uppercase tracking-wider mb-2">Excerpt</label>
             <textarea
               value={form.excerpt}
-              onChange={(e) => update("excerpt", e.target.value)}
+              onChange={(e) => update("excerpt", e.target.value.replace(/<[^>]*>/g, ""))}
               rows={3}
               className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal-5/50 transition-colors resize-none"
               placeholder="Brief description of the post..."

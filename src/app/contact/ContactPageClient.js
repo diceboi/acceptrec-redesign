@@ -81,7 +81,7 @@ function BranchGrid() {
                             </div>
                             <div className="p-4 bg-white dark:bg-black/20 border-t border-black/5 dark:border-white/5 relative z-10 transition-colors">
                                 <a href={`https://wa.me/${branch.whatsapp.replace(/\s/g, "")}`} className="w-full py-4 rounded-full bg-teal-5 text-black font-semibold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/10 flex items-center justify-center gap-3">
-                                    <IconBrandWhatsapp size={18} /> Message WhatsApp
+                                    <IconBrandWhatsapp size={18} /> Message on WhatsApp
                                 </a>
                             </div>
                         </motion.div>

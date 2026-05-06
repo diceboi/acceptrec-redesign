@@ -10,8 +10,6 @@ export default async function AdminClientsPage() {
       <AdminHeader
         title="Clients"
         subtitle="Manage client codes and names"
-        actionLabel="Add Client"
-        actionHref="/admin/clients/new"
       />
       <ClientList clients={clients} />
     </div>
