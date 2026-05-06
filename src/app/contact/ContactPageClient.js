@@ -24,7 +24,7 @@ const branches = [
 
 function ContactHero() {
     return (
-        <section className="relative flex min-h-[60vh] w-full items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-20">
+        <section className="relative flex min-h-[60vh] w-full items-center justify-center overflow-hidden bg-white dark:bg-navy-900 pt-32 pb-20 transition-colors duration-300">
             <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
                 <motion.div className="absolute rounded-full" style={{ height: "70%", width: "55%", left: "-10%", top: "-10%", background: "var(--color-teal-5)", opacity: 0.13, filter: "blur(90px)" }} animate={{ scale: [1, 1.3, 1], x: [0, 80, 0], y: [0, 50, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
                 <motion.div className="absolute rounded-full" style={{ height: "60%", width: "55%", right: "-10%", top: "-5%", background: "var(--color-purple-5)", opacity: 0.18, filter: "blur(100px)" }} animate={{ scale: [1, 1.4, 1], x: [0, -80, 0], y: [0, 100, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }} />
@@ -45,7 +45,7 @@ function ContactHero() {
 
 function BranchGrid() {
     return (
-        <section className="pb-32 bg-navy-700 relative">
+        <section className="pb-32 bg-gray-50 dark:bg-navy-700 relative transition-colors duration-300">
             <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
             <div className="relative z-10 mx-auto max-w-[1400px] px-6">
                 <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-5" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -56,12 +56,30 @@ function BranchGrid() {
                                 <div className="text-teal-4 text-[10px] font-semibold uppercase tracking-[0.2em] mb-4">{branch.type}</div>
                                 <h3 className="text-white text-4xl font-semibold tracking-tight mb-8">{branch.name}</h3>
                                 <div className="space-y-6">
-                                    <div className="flex items-start gap-4 text-[#8B98AB]"><IconMapPin size={20} className="shrink-0 mt-1" /><span className="text-sm font-medium leading-relaxed">{branch.address}</span></div>
-                                    <div className="flex items-center gap-4 text-[#8B98AB]"><IconPhone size={20} className="shrink-0" /><span className="text-sm font-medium">{branch.phone}</span></div>
+                                    <div className="flex items-start gap-4 text-[#8B98AB]">
+                                        <IconMapPin size={20} className="shrink-0 mt-1" />
+                                        <a 
+                                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(branch.address)}`} 
+                                            target="_blank" 
+                                            rel="noopener noreferrer" 
+                                            className="text-sm font-medium leading-relaxed hover:text-white transition-colors"
+                                        >
+                                            {branch.address}
+                                        </a>
+                                    </div>
+                                    <div className="flex items-center gap-4 text-[#8B98AB]">
+                                        <IconPhone size={20} className="shrink-0" />
+                                        <a 
+                                            href={`tel:${branch.phone.replace(/\s/g, "")}`} 
+                                            className="text-sm font-medium hover:text-white transition-colors"
+                                        >
+                                            {branch.phone}
+                                        </a>
+                                    </div>
                                     <div className="flex items-center gap-4 text-[#8B98AB]"><IconMail size={20} className="shrink-0" /><a href={`mailto:${branch.email}`} className="text-sm font-medium hover:text-white transition-colors">{branch.email}</a></div>
                                 </div>
                             </div>
-                            <div className="p-4 bg-black/20 border-t border-white/5 relative z-10">
+                            <div className="p-4 bg-white dark:bg-black/20 border-t border-black/5 dark:border-white/5 relative z-10 transition-colors">
                                 <a href={`https://wa.me/${branch.whatsapp.replace(/\s/g, "")}`} className="w-full py-4 rounded-full bg-teal-5 text-black font-semibold uppercase tracking-widest text-xs hover:bg-white transition-all shadow-xl shadow-teal-5/10 flex items-center justify-center gap-3">
                                     <IconBrandWhatsapp size={18} /> Message WhatsApp
                                 </a>
@@ -76,7 +94,7 @@ function BranchGrid() {
 
 function ValueProposition() {
     return (
-        <section className="py-32 bg-[#0d111a] relative overflow-hidden">
+        <section className="py-32 bg-white dark:bg-[#0d111a] relative overflow-hidden transition-colors duration-300">
             <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
             <div className="relative z-10 mx-auto max-w-[1140px] px-6">
                 <div className="text-center mb-20">
@@ -106,7 +124,7 @@ function ValueProposition() {
 
 function AlternativeContact() {
     return (
-        <section className="py-24 bg-navy-700 relative">
+        <section className="py-24 bg-gray-50 dark:bg-navy-700 relative transition-colors duration-300">
             <div className="mx-auto max-w-5xl px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="glass-card rounded-2xl p-10 flex flex-col md:flex-row items-center gap-8 group hover:border-teal-5/30 transition-all hover:teal-glow-sm">
@@ -133,7 +151,7 @@ function AlternativeContact() {
 
 export default function ContactPageClient() {
     return (
-        <main className="bg-navy-900 min-h-screen">
+        <main className="bg-white dark:bg-navy-900 min-h-screen transition-colors duration-300">
             <Navbar />
             <ContactHero />
             <BranchGrid />

@@ -239,7 +239,7 @@ function QuoteBuilderTool() {
             {/* Live Results Card */}
             <div className="xl:col-span-5">
                 <div className="sticky top-32 space-y-8">
-                    <div className="bg-linear-to-b from-[#1c2436] to-[#161b28] rounded-[40px] border border-white/10 p-10 shadow-3xl relative overflow-hidden">
+                    <div className="bg-gradient-to-b from-[#1c2436] to-[#161b28] rounded-[40px] border border-white/10 p-10 shadow-3xl relative overflow-hidden">
                         <div className="absolute -top-24 -right-24 w-64 h-64 bg-teal-5/10 blur-[80px] rounded-full" />
                         
                         <div className="flex items-center justify-between mb-10">

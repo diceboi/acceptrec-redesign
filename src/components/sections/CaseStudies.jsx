@@ -70,7 +70,7 @@ export function CaseStudies() {
             >
               <Link href={cs.href} className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/5 bg-[#1c2230] transition-all duration-300 hover:border-white/10 hover:bg-[#232938] cursor-pointer h-full">
               {/* Subtle glow for dark cards on hover (adopted from BentoCard) */}
-              <div className="absolute inset-0 bg-linear-to-br from-[#00A99D]/0 to-[#00A99D]/0 transition-all duration-500 group-hover:from-[#00A99D]/3 group-hover:to-transparent pointer-events-none z-0"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-[#00A99D]/0 to-[#00A99D]/0 transition-all duration-500 group-hover:from-[#00A99D]/3 group-hover:to-transparent pointer-events-none z-0"></div>
 
               {/* Media Container (Top Half) */}
               <div className="relative h-56 w-full overflow-hidden shrink-0 z-10">

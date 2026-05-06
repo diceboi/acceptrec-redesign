@@ -9,7 +9,7 @@ export function CtaBanner({
   title = "Ready to Get",
   titleHighlight = "Started?",
   subtitle = "Whether you're looking for staff or looking for work, we're here to help. Speak to our team today.",
-  primaryButtonText = "I Need Staff",
+  primaryButtonText = "Find Staff",
   secondaryButtonText = "I Need Work",
   primaryButtonHref = "/get-started",
   secondaryButtonHref = "/jobs",
@@ -67,4 +67,3 @@ export function CtaBanner({
     </section>
   );
 }
-

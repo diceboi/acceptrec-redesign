@@ -33,9 +33,9 @@ const footerLinks = {
 };
 
 const offices = [
-  { city: "Leicester", phone: "+44 7495 995406", whatsapp: "447495995406", address: "Unit 4, Oswin Road, LE3 1HR", href: "/offices/leicester" },
-  { city: "Coventry", phone: "+44 7833 945679", whatsapp: "447833945679", address: "1 Harnall Row, CV1 5DW", href: "/offices/coventry" },
-  { city: "Tamworth", phone: "+44 7932 787550", whatsapp: "447932787550", address: "95 Lichfield St, B79 7QF", href: "/offices/tamworth" },
+  { city: "Leicester", phone: "0116 218 2133", mobile: "+44 7495 995406", whatsapp: "447495995406", address: "Unit 4, Oswin Road, LE3 1HR", href: "/offices/leicester" },
+  { city: "Coventry", phone: "024 7718 0356", mobile: "+44 7833 945679", whatsapp: "447833945679", address: "1 Harnall Row, CV1 5DW", href: "/offices/coventry" },
+  { city: "Tamworth", phone: "01827 438 334", mobile: "+44 7932 787550", whatsapp: "447932787550", address: "95 Lichfield St, B79 7QF", href: "/offices/tamworth" },
 ];
 
 export function Footer() {
@@ -68,7 +68,7 @@ export function Footer() {
             </p>
 
             {/* Social icons */}
-            <div className="flex gap-4 text-white/50">
+            <div className="flex gap-4 text-gray-400 dark:text-white/50">
               <a
                 href="https://www.linkedin.com/company/accept-recruitment"
                 target="_blank"
@@ -111,16 +111,29 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               {offices.map((o) => (
                 <div key={o.city} className="text-sm">
-                  <Link href={o.href} className="font-semibold text-white/60 hover:text-white transition-colors">{o.city}</Link>
-                  <div className="flex items-center gap-2 mt-1">
+                  <Link href={o.href} className="font-semibold text-gray-900 dark:text-white/60 hover:text-teal-6 dark:hover:text-white transition-colors">{o.city}</Link>
+                  <div className="flex flex-col gap-1 mt-2">
+                    <a
+                      href={`tel:${o.phone.replace(/\s/g, "")}`}
+                      className="text-gray-600 dark:text-white/40 transition-colors hover:text-teal-6 dark:hover:text-teal-4 flex items-center gap-1.5"
+                    >
+                      <span className="text-[10px] text-gray-400 dark:text-white/20 font-bold">T:</span> {o.phone}
+                    </a>
                     <a
                       href={`https://wa.me/${o.whatsapp}`}
-                      className="text-white/40 transition-colors hover:text-teal-4"
+                      className="text-gray-600 dark:text-white/40 transition-colors hover:text-teal-6 dark:hover:text-teal-4 flex items-center gap-1.5"
                     >
-                      {o.phone}
+                      <span className="text-[10px] text-gray-400 dark:text-white/20 font-bold">WA:</span> {o.mobile}
+                    </a>
+                    <a 
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(o.address + ", " + o.city)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 dark:text-white/25 text-[11px] hover:text-gray-900 dark:hover:text-white transition-colors mt-0.5"
+                    >
+                      {o.address}
                     </a>
                   </div>
-                  <div className="text-white/25 text-xs mt-0.5">{o.address}</div>
                 </div>
               ))}
             </div>
@@ -130,7 +143,7 @@ export function Footer() {
           <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-3">
             {Object.entries(footerLinks).map(([section, links]) => (
               <div key={section} className="flex flex-col gap-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-white/60">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-gray-900 dark:text-white/60">
                   {section}
                 </h3>
                 <div className="flex flex-col gap-2.5">
@@ -138,7 +151,7 @@ export function Footer() {
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="text-sm text-white/35 transition-colors hover:text-white"
+                      className="text-sm text-gray-600 dark:text-white/35 transition-colors hover:text-teal-6 dark:hover:text-white"
                     >
                       {link.label}
                     </Link>
@@ -150,19 +163,19 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-8 text-sm text-white/30 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-black/5 dark:border-white/8 pt-8 text-sm text-gray-500 dark:text-white/30 sm:flex-row">
           <span>
             &copy; {new Date().getFullYear()} Accept Recruitment. All rights
             reserved.
           </span>
           <div className="flex gap-5">
-            <Link href="/complaints-policy" className="hover:text-white transition-colors">
+            <Link href="/complaints-policy" className="hover:text-teal-6 dark:hover:text-white transition-colors">
               Complaints
             </Link>
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
+            <Link href="/privacy-policy" className="hover:text-teal-6 dark:hover:text-white transition-colors">
               Privacy
             </Link>
-            <Link href="/gdpr" className="hover:text-white transition-colors">
+            <Link href="/gdpr" className="hover:text-teal-6 dark:hover:text-white transition-colors">
               GDPR
             </Link>
           </div>

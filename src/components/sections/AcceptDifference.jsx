@@ -56,7 +56,7 @@ function PulseAnim() {
             <div className="text-[10px] text-white/40 mb-1 uppercase tracking-widest">
               Live Radar
             </div>
-            <div className="text-xl font-bold text-white">Unit 4 Warehouse</div>
+            <div className="text-xl font-bold text-navy-900 dark:text-white">Unit 4 Warehouse</div>
           </div>
           <div className="w-2.5 h-2.5 rounded-full bg-teal-4 animate-pulse shadow-[0_0_10px_rgba(45,212,191,0.5)]"></div>
         </div>
@@ -88,18 +88,18 @@ function PulseAnim() {
           </div>
 
           <motion.div
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-[#1A1F2E]/90 backdrop-blur-md border border-white/10 rounded-xl px-5 py-4 flex flex-col gap-1 w-64 shadow-2xl"
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-white/90 dark:bg-[#1A1F2E]/90 backdrop-blur-md border border-black/5 dark:border-white/10 rounded-xl px-5 py-4 flex flex-col gap-1 w-64 shadow-2xl"
             initial={{ opacity: 0, scale: 0.8, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 1 }}
           >
             <div className="flex justify-between items-center mb-1.5">
-              <span className="text-white font-medium">John Doe</span>
+              <span className="text-navy-900 dark:text-white font-medium">John Doe</span>
               <span className="text-[9px] font-bold tracking-wider text-teal-4 border border-teal-5/30 bg-teal-5/10 rounded px-1.5 py-0.5">
                 VERIFIED
               </span>
             </div>
-            <span className="text-white/50 text-xs">Clocked in: 05:45 AM</span>
+            <span className="text-navy-900/50 dark:text-white/50 text-xs">Clocked in: 05:45 AM</span>
           </motion.div>
         </div>
       </div>
@@ -121,12 +121,12 @@ function RateAnim() {
   ];
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,rgba(20,26,39,0.5)_0%,transparent_100%)]">
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.05)_0%,transparent_100%)] dark:bg-[radial-gradient(ellipse_at_center,rgba(20,26,39,0.5)_0%,transparent_100%)]">
       {/* Feed Container */}
       <div className="relative w-72 h-[350px] overflow-hidden rounded-2xl">
         {/* Fading edges to simulate scroll window */}
-        <div className="absolute top-0 left-0 w-full h-12 bg-linear-to-b from-[#0F1320] to-transparent z-20 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-full h-12 bg-linear-to-t from-[#0F1320] to-transparent z-20 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-12 bg-linear-to-b from-gray-50 dark:from-[#0F1320] to-gray-50/0 dark:to-[#0F1320]/0 z-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-full h-12 bg-linear-to-t from-gray-50 dark:from-[#0F1320] to-gray-50/0 dark:to-[#0F1320]/0 z-20 pointer-events-none" />
 
         <motion.div
           className="flex flex-col gap-3 py-10"
@@ -136,8 +136,8 @@ function RateAnim() {
           {workers.map((w, i) => (
             <motion.div
               key={i}
-              className={`bg-[#1A1F2E] border ${
-                w.bad ? "border-red-500/20" : "border-white/5"
+              className={`bg-white dark:bg-[#1A1F2E] border ${
+                w.bad ? "border-red-500/20" : "border-black/5 dark:border-white/5"
               } rounded-xl p-3 shadow-lg flex items-center justify-between w-full relative z-10`}
               animate={
                 w.bad
@@ -171,7 +171,7 @@ function RateAnim() {
                     .join("")}
                 </div>
                 <div>
-                  <div className="text-[13px] font-semibold text-white">
+                  <div className="text-[13px] font-semibold text-navy-900 dark:text-white">
                     {w.name}
                   </div>
                   <div className="flex items-center gap-0.5 mt-0.5">
@@ -268,7 +268,7 @@ function MatchAnim() {
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="w-28 h-28 mb-16 bg-[#1A1F2E] border border-white/10 rounded-2xl flex flex-col items-center justify-center z-10 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+          className="w-28 h-28 mb-16 bg-white dark:bg-[#1A1F2E] border border-black/5 dark:border-white/10 rounded-2xl flex flex-col items-center justify-center z-10 shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(0,0,0,0.5)]"
         >
           <IconNetwork size={32} className="text-white/30 mb-2" />
           <span className="text-[10px] text-white/40 mb-1">REQ:</span>
@@ -280,8 +280,8 @@ function MatchAnim() {
         {/* Bottom: Horizontal Candidate Carousel */}
         <div className="relative w-full h-32 flex items-center justify-center overflow-hidden z-10 box-border border-white/0">
           {/* Fading Edge Masks */}
-          <div className="absolute top-0 left-0 w-24 h-full bg-linear-to-r from-[#0F1320] to-transparent z-20 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-24 h-full bg-linear-to-l from-[#0F1320] to-transparent z-20 pointer-events-none" />
+          <div className="absolute top-0 left-0 w-24 h-full bg-linear-to-r from-gray-50 dark:from-[#0F1320] to-gray-50/0 dark:to-[#0F1320]/0 z-20 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-24 h-full bg-linear-to-l from-gray-50 dark:from-[#0F1320] to-gray-50/0 dark:to-[#0F1320]/0 z-20 pointer-events-none" />
 
           {/* Scrolling Track based on candidateIdx */}
           {/* Instead of absolute left-1/2, if we use flex center on the parent, we just translate from 0! */}
@@ -326,12 +326,12 @@ function MatchAnim() {
                   <div
                     className={`w-14 h-14 rounded-full flex items-center justify-center relative transition-colors duration-300 ${
                       isSelected
-                        ? "bg-[#0A0D14] border-2 border-teal-5 shadow-[0_0_20px_rgba(45,212,191,0.5)] z-20"
-                        : "bg-[#1A1F2E] border border-white/10 z-10"
+                        ? "bg-white dark:bg-[#0A0D14] border-2 border-teal-5 shadow-[0_0_20px_rgba(45,212,191,0.5)] z-20"
+                        : "bg-white dark:bg-[#1A1F2E] border border-black/5 dark:border-white/10 z-10"
                     }`}
                   >
                     <span
-                      className={`text-lg font-bold ${isSelected ? "text-white" : "text-white/40"}`}
+                      className={`text-lg font-bold ${isSelected ? "text-navy-900 dark:text-white" : "text-navy-900/40 dark:text-white/40"}`}
                     >
                       {c.initials}
                     </span>
@@ -366,7 +366,7 @@ function ConnectAnim() {
             A
           </div>
           <div>
-            <div className="text-base font-bold text-white">Accept Rec</div>
+            <div className="text-base font-bold text-navy-900 dark:text-white">Accept Rec</div>
             <div className="text-[10px] text-teal-4 border border-teal-5/20 bg-teal-5/10 inline-block px-2 py-0.5 rounded mt-1 font-bold tracking-wider uppercase">
               Active Broadcast
             </div>
@@ -381,7 +381,7 @@ function ConnectAnim() {
             transition={{ duration: 0.4 }}
             className="self-start rounded-2xl rounded-tl-sm bg-[#1A1F2E] border border-white/5 p-4 sm:p-5 max-w-[85%] sm:max-w-[75%] shadow-lg"
           >
-            <p className="text-sm sm:text-base leading-relaxed text-white/90">
+            <p className="text-sm sm:text-base leading-relaxed text-navy-900/90 dark:text-white/90">
               Shift starting at 06:00 tomorrow at Unit 4. Confirm attendance?
             </p>
             <span className="block mt-2 text-[10px] sm:text-xs text-white/30 text-right">
@@ -409,14 +409,14 @@ function ConnectAnim() {
             transition={{ duration: 0.4, delay: 1.6 }}
             className="self-start rounded-2xl rounded-tl-sm bg-[#1A1F2E] border border-white/5 p-4 sm:p-5 max-w-[85%] sm:max-w-[75%] shadow-lg"
           >
-            <p className="text-sm sm:text-base leading-relaxed text-white/90 mb-3">
+            <p className="text-sm sm:text-base leading-relaxed text-navy-900/90 dark:text-white/90 mb-3">
               Excellent. PPE requirements document attached.
             </p>
             <div className="flex items-center gap-3 rounded-lg bg-white/5 p-3 border border-white/10 overflow-hidden">
               <div className="px-2 py-1 shrink-0 bg-red-500/20 text-red-400 rounded text-xs font-bold">
                 PDF
               </div>
-              <span className="text-xs sm:text-sm text-white/80 truncate">
+              <span className="text-xs sm:text-sm text-navy-900/80 dark:text-white/80 truncate">
                 PPE_Guidelines_2025.pdf
               </span>
             </div>
@@ -433,7 +433,7 @@ export function AcceptDifference() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section className="relative w-full bg-[#0d111a] py-24 md:py-32 overflow-hidden font-sans">
+    <section className="relative w-full bg-white dark:bg-[#0d111a] py-24 md:py-32 overflow-hidden font-sans transition-colors duration-300">
       {/* Dynamic Background Glow Based on Active Tab */}
       <div className="pointer-events-none absolute left-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 -translate-x-1/2 rounded-full mix-blend-screen opacity-20 blur-[120px] transition-colors duration-1000 bg-teal-5" />
       <div className="pointer-events-none absolute right-1/4 top-1/2 h-[600px] w-[600px] -translate-y-1/2 translate-x-1/2 rounded-full mix-blend-screen opacity-10 blur-[150px] transition-colors duration-1000 bg-purple-6" />
@@ -450,10 +450,10 @@ export function AcceptDifference() {
           <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">
             THE ACCEPT DIFFERENCE
           </span>
-          <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">
+          <h2 className="text-4xl font-semibold text-navy-900 dark:text-white md:text-5xl lg:text-[54px] tracking-tight">
             Built different. Works better.
           </h2>
-          <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-6 text-lg text-gray-600 dark:text-white/60 leading-relaxed max-w-2xl mx-auto">
             While other agencies use phones and spreadsheets, we built
             technology that actually solves problems. Fast, precise, and
             transparent.
@@ -461,18 +461,18 @@ export function AcceptDifference() {
         </motion.div>
 
         {/* 2-Column interactive layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 bg-[#0A0D14] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 bg-gray-50 dark:bg-[#0A0D14] border border-gray-200 dark:border-white/10 rounded-3xl overflow-hidden shadow-2xl">
           {/* Left Column - List of Features */}
-          <div className="flex flex-col border-r border-white/5 relative z-20 bg-[#1c2230]">
+          <div className="flex flex-col border-r border-gray-200 dark:border-white/5 relative z-20 bg-white dark:bg-[#1c2230]">
             {features.map((feat, i) => (
               <div
                 key={feat.id}
                 onMouseEnter={() => setActiveTab(i)}
                 onClick={() => setActiveTab(i)}
-                className={`group cursor-pointer transition-all duration-300 relative border-b border-white/5 last:border-b-0 ${
+                className={`group cursor-pointer transition-all duration-300 relative border-b border-gray-200 dark:border-white/5 last:border-b-0 ${
                   activeTab === i
-                    ? "bg-[#232938]"
-                    : "bg-[#1c2230] hover:bg-[#232938]"
+                    ? "bg-gray-100 dark:bg-[#232938]"
+                    : "bg-white dark:bg-[#1c2230] hover:bg-gray-50 dark:hover:bg-[#232938]"
                 }`}
               >
                 <div className="p-8 md:p-10 flex gap-6">
@@ -505,8 +505,8 @@ export function AcceptDifference() {
                     <h3
                       className={`text-[22px] font-semibold transition-colors duration-300 ${
                         activeTab === i
-                          ? "text-white"
-                          : "text-white/70 group-hover:text-white/90"
+                          ? "text-navy-900 dark:text-white"
+                          : "text-gray-500 dark:text-white/70 group-hover:text-navy-800 dark:group-hover:text-white/90"
                       }`}
                     >
                       {feat.heading}
@@ -518,7 +518,7 @@ export function AcceptDifference() {
           </div>
 
           {/* Right Column - Dynamic Container Area */}
-          <div className="hidden lg:flex w-full h-full bg-[#0F1320] flex-col">
+          <div className="hidden lg:flex w-full h-full bg-gray-50 dark:bg-[#0F1320] flex-col">
             {/* Dynamic Animation Area */}
             <div className="relative flex-1 min-h-[400px] flex items-center justify-center overflow-hidden">
               <AnimatePresence mode="wait">
@@ -574,7 +574,7 @@ export function AcceptDifference() {
             </div>
 
             {/* Dynamic Description Area */}
-            <div className="relative border-t border-white/5 bg-white/[0.02] p-8 md:px-12 md:py-8 min-h-[140px] flex items-center">
+            <div className="relative border-t border-gray-200 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02] p-8 md:px-12 md:py-8 min-h-[140px] flex items-center">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeTab}
@@ -584,7 +584,7 @@ export function AcceptDifference() {
                   transition={{ duration: 0.3 }}
                   className="w-full"
                 >
-                  <p className="text-lg leading-relaxed text-white/80">
+                  <p className="text-lg leading-relaxed text-gray-700 dark:text-white/80">
                     {features[activeTab].desc}
                   </p>
                 </motion.div>

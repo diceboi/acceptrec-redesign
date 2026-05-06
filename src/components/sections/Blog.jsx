@@ -96,12 +96,12 @@ export function Blog() {
                 className={`group relative overflow-hidden rounded-3xl p-0 flex flex-col transition-all duration-300 w-full h-full border border-white/5 bg-[#1c2230] hover:border-white/10 hover:bg-[#232938]`}
               >
                 {/* Subtle glow for dark cards on hover */}
-                <div className="absolute inset-0 bg-linear-to-br from-[#00A99D]/0 to-[#00A99D]/0 transition-all duration-500 group-hover:from-[#00A99D]/3 group-hover:to-transparent pointer-events-none z-0" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#00A99D]/0 to-[#00A99D]/0 transition-all duration-500 group-hover:from-[#00A99D]/3 group-hover:to-transparent pointer-events-none z-0" />
 
                 {/* Cover image */}
                 <div className="relative h-48 w-full overflow-hidden shrink-0 rounded-t-3xl z-10">
                   {/* Fallback gradient in case image doesn't load */}
-                  <div className="absolute inset-0 bg-linear-to-br from-teal-8/60 to-navy-900/80" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-8/60 to-navy-900/80" />
                   <div className="absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:opacity-0" />
                   {/* Category tag */}
                   <div className="absolute top-4 left-4 z-10">

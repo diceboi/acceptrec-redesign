@@ -164,7 +164,7 @@ function ContentSection() {
 
                     {/* Sidebar / Impact Card */}
                     <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
-                        <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-linear-to-br from-[#00A99D] to-[#161b28] p-1 rounded-3xl">
+                        <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-[#00A99D] to-[#161b28] p-1 rounded-3xl">
                             <div className="bg-[#0d1522] rounded-[calc(2.5rem-2px)] p-8">
                                 <h2 className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-5 mb-8">THE IMPACT</h2>
                                 <p className="text-white text-3xl font-bold tracking-tight mb-8">

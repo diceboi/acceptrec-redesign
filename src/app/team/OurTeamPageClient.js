@@ -55,7 +55,7 @@ function TeamCard({ member }) {
         )}
         <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full flex items-center gap-2 z-10">
           <IconMapPin size={14} className="text-teal-5" />
-          <span className="text-[10px] font-semibold uppercase tracking-widest text-white">
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-[#fff]">
             {member.location}
           </span>
         </div>
@@ -138,7 +138,7 @@ function CultureCard({ icon, title, text }) {
 // ─── Hero ────────────────────────────────────────────────────────────────
 function TeamHero() {
   return (
-    <section className="relative flex min-h-[80vh] w-full items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-20">
+    <section className="relative flex min-h-[80vh] w-full items-center justify-center overflow-hidden bg-white dark:bg-navy-900 pt-32 pb-20 transition-colors duration-300">
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <motion.div
           className="absolute rounded-full"
@@ -185,7 +185,7 @@ function TeamHero() {
           <span className="text-sm font-semibold text-teal-4">The Squad</span>
         </motion.div>
         <motion.h1
-          className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8"
+          className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-navy-900 dark:text-white md:text-6xl lg:text-7xl mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -195,7 +195,7 @@ function TeamHero() {
           Behind the Headsets
         </motion.h1>
         <motion.p
-          className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-6"
+          className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-white/60 mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -236,7 +236,7 @@ function TeamHero() {
           </div>
         </motion.div>
       </div>
-      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-700 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-gray-50 dark:from-navy-700 to-transparent" />
     </section>
   );
 }
@@ -254,7 +254,7 @@ const gridVariants = {
 // ─── Team Grid ──────────────────────────────────────────────────────────
 function TeamGridSection({ members }) {
   return (
-    <section className="relative w-full bg-navy-700 py-24 overflow-hidden">
+    <section className="relative w-full bg-gray-50 dark:bg-navy-700 py-24 overflow-hidden">
       <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
       <div className="relative z-10 mx-auto max-w-[1400px] px-6">
         <motion.div 
@@ -294,7 +294,7 @@ function CultureSection() {
   ];
 
   return (
-    <section className="relative w-full bg-[#0d111a] py-32 overflow-hidden">
+    <section className="relative w-full bg-white dark:bg-[#0d111a] py-32 overflow-hidden">
       <div className="pointer-events-none absolute -right-64 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-teal-5/10 blur-[130px]" />
       <div className="relative z-10 mx-auto max-w-[1140px] px-6">
         <motion.div
@@ -306,7 +306,7 @@ function CultureSection() {
           <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">
             CULTURE
           </span>
-          <h2 className="text-4xl md:text-5xl font-semibold text-white tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-semibold text-navy-900 dark:text-white tracking-tight">
             What It&apos;s Actually Like
             <br />
             to Work Here
@@ -325,18 +325,18 @@ function CultureSection() {
 // ─── Trusted Section ────────────────────────────────────────────────────
 function TrustedSection() {
   return (
-    <section className="py-24 bg-navy-900">
+    <section className="py-24 bg-white dark:bg-navy-900">
       <div className="mx-auto max-w-5xl px-6">
         <div className="glass-card rounded-2xl p-12 md:p-20 text-center relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-teal-5/5 blur-[120px] pointer-events-none" />
-          <h2 className="relative text-white text-3xl font-semibold mb-4 tracking-tight">
+          <h2 className="relative text-navy-900 dark:text-white text-3xl font-semibold mb-4 tracking-tight">
             Trusted by 1500+ People
           </h2>
           <p className="relative text-[#8B98AB] text-lg mb-10 font-medium tracking-tight">
             See what our clients and candidates say about us
           </p>
           <div className="relative flex flex-col items-center gap-6">
-            <div className="flex items-center gap-2 text-4xl font-semibold text-white">
+            <div className="flex items-center gap-2 text-4xl font-semibold text-navy-900 dark:text-white">
               <span>4.8</span>
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
@@ -364,7 +364,7 @@ function TrustedSection() {
 // ─── Main ───────────────────────────────────────────────────────────────
 export default function OurTeamPageClient({ initialMembers = [] }) {
   return (
-    <main className="bg-navy-900 min-h-screen">
+    <main className="bg-white dark:bg-navy-900 min-h-screen transition-colors duration-300">
       <Navbar />
       <TeamHero />
       <TeamGridSection members={initialMembers} />

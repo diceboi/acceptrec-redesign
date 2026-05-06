@@ -405,7 +405,7 @@ function DayInTheLife() {
                     animate={{
                       width: `${((active + 1) / times.length) * 100}%`,
                     }}
-                    className="h-full bg-linear-to-r from-teal-5 to-purple-5"
+                    className="h-full bg-gradient-to-r from-teal-5 to-purple-5"
                   />
                 </div>
               </motion.div>

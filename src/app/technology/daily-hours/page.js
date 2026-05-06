@@ -21,7 +21,7 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function HoursHero() {
   return (
-    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-white dark:bg-navy-900 pt-32 pb-16 transition-colors duration-300">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
       
@@ -47,7 +47,7 @@ function HoursHero() {
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
+          className="text-navy-900 dark:text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.3 }}
@@ -56,7 +56,7 @@ function HoursHero() {
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-gray-600 dark:text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -71,12 +71,12 @@ function HoursHero() {
 // ─── Problem/Reality Section ───────────────────────────────────────────────
 function RealitySection() {
     return (
-        <section className="py-24 bg-navy-900">
+        <section className="py-24 bg-white dark:bg-navy-900">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                     <div>
                         <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE PROBLEM</h2>
-                        <h3 className="text-white text-3xl font-bold mb-10 tracking-tight">Sound familiar?</h3>
+                        <h3 className="text-navy-900 dark:text-white text-3xl font-bold mb-10 tracking-tight">Sound familiar?</h3>
                         <div className="space-y-6">
                             {[
                                 "Discrepancies found weeks later when the invoice arrives.",
@@ -84,16 +84,16 @@ function RealitySection() {
                                 "Flying blind on your recruitment budget until it's too late.",
                                 "Manual data entry errors causing payroll headaches."
                             ].map((text, i) => (
-                                <div key={i} className="flex gap-4 p-6 rounded-2xl bg-white/5 border border-white/5">
+                                <div key={i} className="flex gap-4 p-6 rounded-2xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5">
                                     <IconAlertTriangle className="text-amber-500 shrink-0" size={20} />
-                                    <p className="text-white/70 font-medium">{text}</p>
+                                    <p className="text-gray-700 dark:text-white/70 font-medium">{text}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="p-10 rounded-2xl bg-teal-5/5 border border-teal-5/10 relative overflow-hidden h-full flex flex-col justify-center">
+                    <div className="p-10 rounded-2xl bg-teal-5/5 dark:bg-teal-5/5 border border-teal-5/10 relative overflow-hidden h-full flex flex-col justify-center">
                         <div className="relative z-10">
-                            <h3 className="text-white text-3xl font-bold mb-6 italic">"The weekly timesheet is a nightmare."</h3>
+                            <h3 className="text-navy-900 dark:text-white text-3xl font-bold mb-6 italic">"The weekly timesheet is a nightmare."</h3>
                             <p className="text-white/60 text-lg leading-relaxed">
                                 Waiting until the end of the week to confirm hours is a recipe for errors. Memories fade, disputes arise, and your budget stays a mystery. Our system fixes this by making confirmation a daily, real-time habit.
                             </p>
@@ -115,19 +115,19 @@ function WorkflowSection() {
     ];
 
     return (
-        <section className="py-24 bg-navy-900">
+        <section className="py-24 bg-gray-50 dark:bg-navy-900">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE PROCESS</h2>
-                    <h3 className="text-white text-4xl font-bold mb-6 tracking-tight">How It Works</h3>
+                    <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-6 tracking-tight">How It Works</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {steps.map((s, i) => (
-                        <div key={i} className="relative p-10 rounded-2xl bg-white/[0.03] border border-white/5 transition-all hover:border-teal-5/20 group">
+                        <div key={i} className="relative p-10 rounded-2xl bg-gray-50 dark:bg-white/[0.03] border border-black/5 dark:border-white/5 transition-all hover:border-teal-5/20 group">
                             <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-8 group-hover:bg-teal-5 group-hover:text-white transition-all">
                                 <s.icon size={28} />
                             </div>
-                            <h4 className="text-white text-xl font-bold mb-4">{s.title}</h4>
+                            <h4 className="text-navy-900 dark:text-white text-xl font-bold mb-4">{s.title}</h4>
                             <p className="text-[#8B98AB] text-sm leading-relaxed">{s.desc}</p>
                             {i < 3 && (
                                 <div className="hidden lg:block absolute top-1/2 -right-4 -translate-y-1/2 z-20">
@@ -152,26 +152,26 @@ function DailyTrackerMockup() {
     ];
 
     return (
-        <section className="py-24 bg-[#0d111a]">
+        <section className="py-24 bg-gray-50 dark:bg-[#0d111a]">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="bg-white/[0.03] rounded-2xl border border-white/5 overflow-hidden shadow-2xl">
                     <div className="grid grid-cols-1 lg:grid-cols-12">
                         {/* Header/Info */}
-                        <div className="lg:col-span-5 p-12 lg:p-20 bg-gradient-to-b from-[#1c2436] to-[#161b28] border-r border-white/5">
+                        <div className="lg:col-span-5 p-12 lg:p-20 bg-gradient-to-b from-gray-100 to-white dark:from-[#1c2436] dark:to-[#161b28] border-r border-black/5 dark:border-white/5">
                             <div className="px-4 py-2 rounded-full bg-teal-5/10 border border-teal-5/20 text-teal-5 text-[10px] font-bold uppercase tracking-widest inline-flex items-center gap-2 mb-8">
                                 <span className="h-1.5 w-1.5 rounded-full bg-teal-5 animate-pulse" />
                                 Live Summary Data
                             </div>
-                            <h3 className="text-white text-3xl font-bold mb-6 tracking-tight">Real-Time Clarity</h3>
+                            <h3 className="text-navy-900 dark:text-white text-3xl font-bold mb-6 tracking-tight">Real-Time Clarity</h3>
                             <p className="text-[#8B98AB] text-lg leading-relaxed mb-10">
                                 See which hours are confirmed and which are still pending the moment they happen.
                             </p>
                             <div className="space-y-6">
-                                <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                                <div className="p-6 rounded-2xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5">
                                     <div className="text-[#8B98AB]/70 text-[10px] font-bold uppercase tracking-widest mb-1">Today's Confirmed Hours</div>
-                                    <div className="text-white text-3xl font-mono font-bold tracking-tighter">23.5h</div>
+                                    <div className="text-navy-900 dark:text-white text-3xl font-mono font-bold tracking-tighter">23.5h</div>
                                 </div>
-                                <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                                <div className="p-6 rounded-2xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5">
                                     <div className="text-[#8B98AB]/70 text-[10px] font-bold uppercase tracking-widest mb-1">Running Cost</div>
                                     <div className="text-teal-5 text-3xl font-mono font-bold tracking-tighter">£352.50</div>
                                 </div>
@@ -179,10 +179,10 @@ function DailyTrackerMockup() {
                         </div>
 
                         {/* List Mockup */}
-                        <div className="lg:col-span-7 p-8 md:p-16">
-                            <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-10 flex items-center justify-between">
+                        <div className="lg:col-span-7 p-8 md:p-16 bg-white dark:bg-transparent">
+                            <h4 className="text-navy-900 dark:text-white text-sm font-bold uppercase tracking-widest mb-10 flex items-center justify-between">
                                 Daily Attendance List
-                                <span className="text-[10px] text-white/20">Updated: Just Now</span>
+                                <span className="text-[10px] text-gray-400 dark:text-white/20">Updated: Just Now</span>
                             </h4>
                             <div className="space-y-4">
                                 {workers.map((w, i) => (
@@ -191,19 +191,19 @@ function DailyTrackerMockup() {
                                         initial={{ opacity: 0, x: 20 }}
                                         whileInView={{ opacity: 1, x: 0 }}
                                         transition={{ delay: i * 0.1 }}
-                                        className="flex items-center justify-between p-6 rounded-2xl bg-white/5 border border-white/5 group hover:bg-white/[0.07] transition-all"
+                                        className="flex items-center justify-between p-6 rounded-2xl bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/5 group hover:bg-gray-100 dark:hover:bg-white/[0.07] transition-all"
                                     >
                                         <div className="flex items-center gap-4">
                                             <div className="w-10 h-10 rounded-xl bg-teal-5/10 flex items-center justify-center text-teal-4">
                                                 <IconUsers size={20} />
                                             </div>
                                             <div>
-                                                <div className="text-white font-bold">{w.name}</div>
+                                                <div className="text-navy-900 dark:text-white font-bold">{w.name}</div>
                                                 <div className="text-[10px] text-[#8B98AB]/70 uppercase font-bold tracking-widest">Shift: Morning 6am</div>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-8">
-                                            <div className="hidden md:block text-white font-mono font-bold text-lg">{w.hours}</div>
+                                            <div className="hidden md:block text-navy-900 dark:text-white font-mono font-bold text-lg">{w.hours}</div>
                                             <div className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest border border-white/5 ${w.status === 'Confirmed' ? 'text-green-400 bg-green-500/10' : 'text-amber-500 bg-amber-500/10'}`}>
                                                 <w.icon size={14} />
                                                 {w.status}
@@ -223,11 +223,11 @@ function DailyTrackerMockup() {
 // ─── Comparison Section ────────────────────────────────────────────────────
 function ComparisonSection() {
     return (
-        <section className="py-24 bg-navy-900">
+        <section className="py-24 bg-white dark:bg-navy-900">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE DIFFERENCE</h2>
-                    <h3 className="text-white text-4xl font-bold mb-6 tracking-tight">Night and Day</h3>
+                    <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-6 tracking-tight">Night and Day</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/10">
                     <div className="bg-white/[0.03] p-12">
@@ -317,7 +317,7 @@ function BenefitsGrid() {
     ];
 
     return (
-        <section className="py-24 bg-navy-900">
+        <section className="py-24 bg-white dark:bg-navy-900">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {benefits.map((b, i) => (
@@ -325,7 +325,7 @@ function BenefitsGrid() {
                              <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-8 group-hover:bg-teal-5 group-hover:text-white transition-all">
                                 <b.icon size={28} />
                             </div>
-                            <h3 className="text-white text-xl font-bold mb-4">{b.title}</h3>
+                            <h3 className="text-navy-900 dark:text-white text-xl font-bold mb-4">{b.title}</h3>
                             <p className="text-[#8B98AB] text-sm leading-relaxed">{b.desc}</p>
                         </div>
                     ))}
@@ -338,7 +338,7 @@ function BenefitsGrid() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function DailyHoursPage() {
   return (
-    <main className="bg-navy-900 min-h-screen">
+    <main className="bg-white dark:bg-navy-900 min-h-screen transition-colors duration-300">
       <Navbar />
 
       <HoursHero />

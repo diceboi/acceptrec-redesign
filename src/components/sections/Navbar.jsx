@@ -270,19 +270,19 @@ const menuData = {
           {
             icon: IconMapPin,
             label: "Leicester",
-            desc: "0116 319 4493",
+            desc: "0116 218 2133",
             href: "/offices/leicester",
           },
           {
             icon: IconMapPin,
             label: "Coventry",
-            desc: "024 7610 0211",
+            desc: "024 7718 0356",
             href: "/offices/coventry",
           },
           {
             icon: IconMapPin,
             label: "Tamworth",
-            desc: "01827 700 300",
+            desc: "01827 438 334",
             href: "/offices/tamworth",
           },
           {
@@ -819,17 +819,17 @@ export function Navbar() {
               initial={false}
               animate={{ x: isMobileMenuOpen ? 0 : "100%" }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] bg-navy-900 border-l border-white/10 flex flex-col shadow-2xl overflow-hidden will-change-transform [transform:translateZ(0)]"
+              className="fixed right-0 top-0 bottom-0 w-[85%] max-w-[400px] bg-white dark:bg-navy-900 border-l border-black/5 dark:border-white/10 flex flex-col shadow-2xl overflow-hidden transition-colors duration-300"
             >
               {/* Header */}
-              <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
-                <span className="text-teal-5 font-bold tracking-tight">
+              <div className="h-16 flex items-center justify-between px-6 border-b border-black/5 dark:border-white/10 shrink-0">
+                <span className="text-teal-6 dark:text-teal-5 font-bold tracking-tight">
                   Menu
                 </span>
 
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 -mr-2 text-white/70 hover:text-white transition-colors cursor-pointer"
+                  className="p-2 -mr-2 text-gray-400 dark:text-white/70 hover:text-navy-900 dark:hover:text-white transition-colors cursor-pointer"
                   aria-label="Close menu"
                 >
                   <IconX size={24} />
@@ -855,21 +855,21 @@ export function Navbar() {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-white/5 active:bg-white/10 transition-colors group"
+                                className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 active:bg-gray-200 dark:active:bg-white/10 transition-colors group"
                               >
                                 {Icon && (
-                                  <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
+                                  <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-gray-100 dark:bg-white/5 text-teal-6 dark:text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
                                     <Icon size={18} />
                                   </span>
                                 )}
 
                                 <div>
-                                  <div className="text-[15px] font-semibold text-white group-hover:text-teal-4 transition-colors">
+                                  <div className="text-[15px] font-semibold text-gray-900 dark:text-white group-hover:text-teal-6 dark:group-hover:text-teal-4 transition-colors">
                                     {item.label}
                                   </div>
 
                                   {item.desc && (
-                                    <div className="text-[11px] text-white/40 font-medium line-clamp-1">
+                                    <div className="text-[11px] text-gray-500 dark:text-white/40 font-medium line-clamp-1">
                                       {item.desc}
                                     </div>
                                   )}
@@ -885,7 +885,7 @@ export function Navbar() {
               </div>
 
               {/* Footer */}
-              <div className="p-6 border-t border-white/10 bg-black/40 space-y-3 shrink-0">
+              <div className="p-6 border-t border-black/5 dark:border-white/10 bg-white dark:bg-black/40 space-y-3 shrink-0 transition-colors">
                 <Button
                   variant="secondary"
                   size="lg"

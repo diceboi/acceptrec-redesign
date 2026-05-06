@@ -24,10 +24,10 @@ export function BentoCard({
     >
       {/* Background elements if teal */}
       {isTeal ? (
-        <div className="absolute inset-0 bg-linear-to-br from-white/10 to-transparent opacity-30 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-30 pointer-events-none"></div>
       ) : (
         /* Subtle glow for dark cards on hover */
-        <div className="absolute inset-0 bg-linear-to-br from-[#00A99D]/0 to-[#00A99D]/0 transition-all duration-500 group-hover:from-[#00A99D]/3 group-hover:to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00A99D]/0 to-[#00A99D]/0 transition-all duration-500 group-hover:from-[#00A99D]/3 group-hover:to-transparent pointer-events-none"></div>
       )}
 
       {/* Content wrapper - top aligned */}

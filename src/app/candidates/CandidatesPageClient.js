@@ -199,9 +199,7 @@ function CandidatesHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          Why Work
-          <br />
-          With Us
+          Why Work With Us
         </motion.h1>
         <motion.p
           className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-12"

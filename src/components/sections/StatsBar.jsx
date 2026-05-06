@@ -18,8 +18,6 @@ const logos = [
   { name: "InPost", src: "/partner-logos/InPost_logo.png" },
   { name: "Vistry Group", src: "/partner-logos/vistry-group.webp" },
   { name: "Poundstretcher", src: "/partner-logos/Poundstretcher_Logo.png" },
-  { name: "Pharmacy2U", src: "/partner-logos/pharmacy2u-logo.svg" },
-  { name: "Rhenus Logistics", src: "/partner-logos/rhenus-logistics-logo.png" },
   { name: "Howard Tenens", src: "/partner-logos/howard-tenens.png" },
 ];
 
@@ -72,7 +70,7 @@ export function StatsBar() {
               variants={itemVariants}
               className="glass-card group relative overflow-hidden rounded-2xl p-8 text-center transition-all duration-300 hover:teal-glow-sm hover:border-teal-5/30"
             >
-              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-linear-to-br from-teal-5/5 to-teal-5/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative text-4xl font-semibold text-white md:text-5xl">
                 <AnimatedNumber value={stat.value} />
               </div>

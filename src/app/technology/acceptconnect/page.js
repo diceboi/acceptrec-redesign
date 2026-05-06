@@ -23,7 +23,7 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function ConnectHero() {
   return (
-    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-white dark:bg-navy-900 pt-32 pb-16 transition-colors duration-300">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute top-1/4 right-1/4 h-96 w-96 rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
 
@@ -39,7 +39,7 @@ function ConnectHero() {
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
+          className="text-navy-900 dark:text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -49,7 +49,7 @@ function ConnectHero() {
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-gray-600 dark:text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -72,14 +72,14 @@ function ProblemSection() {
   ];
 
   return (
-    <section className="py-24 bg-navy-900">
+    <section className="py-24 bg-gray-50 dark:bg-navy-900">
       <div className="mx-auto max-w-[1140px] px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div>
             <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">
               THE CHALLENGE
             </h2>
-            <h3 className="text-white text-4xl font-bold mb-10 tracking-tight leading-tight">
+            <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-10 tracking-tight leading-tight">
               Communication Shouldn't <br />
               Be This Hard
             </h3>
@@ -97,17 +97,17 @@ function ProblemSection() {
                   <div className="w-8 h-8 rounded-lg bg-teal-5/10 flex items-center justify-center text-teal-5/40 shrink-0">
                     <IconBroadcast size={16} />
                   </div>
-                  <p className="text-white/70 font-medium text-sm leading-relaxed">
+                  <p className="text-gray-700 dark:text-white/70 font-medium text-sm leading-relaxed">
                     {p}
                   </p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="relative h-full min-h-[400px] rounded-2xl bg-gradient-to-br from-[#161b28] to-[#0d1522] border border-white/10 flex flex-col justify-center items-center p-12 overflow-hidden shadow-2xl">
+          <div className="relative h-full min-h-[400px] rounded-2xl bg-gradient-to-br from-gray-100 to-white dark:from-[#161b28] dark:to-[#0d1522] border border-black/5 dark:border-white/10 flex flex-col justify-center items-center p-12 overflow-hidden shadow-2xl">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,184,166,0.1)_0%,transparent_70%)]" />
             <div className="relative z-10 text-center max-w-sm">
-              <h4 className="text-white text-2xl font-bold mb-6 italic leading-snug">
+              <h4 className="text-navy-900 dark:text-white text-2xl font-bold mb-6 italic leading-snug">
                 "You need a better way. AcceptConnect is it."
               </h4>
               <p className="text-[#8B98AB] leading-relaxed font-medium">
@@ -144,13 +144,13 @@ function ProcessSection() {
   ];
 
   return (
-    <section className="py-24 bg-[#0d111a]">
+    <section className="py-24 bg-white dark:bg-[#0d111a]">
       <div className="mx-auto max-w-[1140px] px-6 text-center">
         <div className="max-w-3xl mx-auto mb-16">
           <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">
             HOW IT WORKS
           </h2>
-          <h3 className="text-white text-4xl font-bold mb-4 tracking-tight">
+          <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-4 tracking-tight">
             Simple for workers. Powerful for you.
           </h3>
         </div>
@@ -163,7 +163,7 @@ function ProcessSection() {
               <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-8 group-hover:bg-teal-5 group-hover:text-white transition-all mx-auto">
                 <s.icon size={28} />
               </div>
-              <h4 className="text-white text-xl font-bold mb-4">{s.title}</h4>
+              <h4 className="text-navy-900 dark:text-white text-xl font-bold mb-4">{s.title}</h4>
               <p className="text-[#8B98AB] text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
@@ -176,14 +176,14 @@ function ProcessSection() {
 // ─── App Experience Mockup ────────────────────────────────────────────────
 function AppExperience() {
   return (
-    <section className="py-24 bg-navy-900">
+    <section className="py-24 bg-white dark:bg-navy-900">
       <div className="mx-auto max-w-[1140px] px-6">
         <div className="bg-white/[0.03] rounded-2xl border border-white/5 overflow-hidden shadow-2xl relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
             {/* Interactive UI Left */}
             <div className="lg:col-span-7 p-8 md:p-20 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-teal-5/5 blur-[100px]" />
-              <h3 className="text-white text-3xl font-bold mb-8 tracking-tight">
+              <h3 className="text-navy-900 dark:text-white text-3xl font-bold mb-8 tracking-tight">
                 Built for Engagement
               </h3>
               <p className="text-[#8B98AB] text-lg leading-relaxed mb-12 max-w-xl">
@@ -199,7 +199,7 @@ function AppExperience() {
                     <IconMessage2 size={20} />
                   </div>
                   <div>
-                    <div className="text-white text-sm font-bold mb-1">
+                    <div className="text-navy-900 dark:text-white text-sm font-bold mb-1">
                       Shift Update: Food Production
                     </div>
                     <p className="text-[#8B98AB] text-xs leading-relaxed">
@@ -233,8 +233,8 @@ function AppExperience() {
             </div>
 
             {/* Features List Right */}
-            <div className="lg:col-span-5 bg-gradient-to-b from-[#1c2436] to-[#161b28] p-12 lg:p-20 border-l border-white/5">
-              <h4 className="text-white text-sm font-bold uppercase tracking-widest mb-10">
+            <div className="lg:col-span-5 bg-gradient-to-b from-gray-100 to-white dark:from-[#1c2436] dark:to-[#161b28] p-12 lg:p-20 border-l border-black/5 dark:border-white/5">
+              <h4 className="text-navy-900 dark:text-white text-sm font-bold uppercase tracking-widest mb-10">
                 What You Can Do
               </h4>
               <div className="space-y-8">
@@ -265,7 +265,7 @@ function AppExperience() {
                       <item.i size={20} />
                     </div>
                     <div>
-                      <h5 className="text-white font-bold text-sm mb-1">
+                      <h5 className="text-navy-900 dark:text-white font-bold text-sm mb-1">
                         {item.t}
                       </h5>
                       <p className="text-[#8B98AB] text-xs leading-relaxed">
@@ -286,7 +286,7 @@ function AppExperience() {
 // ─── The Coach AI Section ──────────────────────────────────────────────────
 function CoachSection() {
   return (
-    <section className="py-24 bg-[#0d111a] overflow-hidden">
+    <section className="py-24 bg-white dark:bg-[#0d111a] overflow-hidden">
       <div className="mx-auto max-w-[1140px] px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           {/* Content Left */}
@@ -296,11 +296,11 @@ function CoachSection() {
                 BUILT-IN INTELLIGENCE
               </span>
             </div>
-            <h3 className="text-white text-4xl md:text-5xl font-bold mb-8 tracking-tight">
+            <h3 className="text-navy-900 dark:text-white text-4xl md:text-5xl font-bold mb-8 tracking-tight">
               The Coach: <br />
               24/7 Support
             </h3>
-            <p className="text-white/60 text-xl leading-relaxed mb-10">
+            <p className="text-gray-600 dark:text-white/60 text-xl leading-relaxed mb-10">
               Workers have questions at all hours. AcceptConnect includes The
               Coach — an AI assistant that handles common queries instantly.
             </p>
@@ -317,7 +317,7 @@ function CoachSection() {
                   className="flex items-center gap-3 text-white font-medium"
                 >
                   <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0" />
-                  "{q}"
+                  <span className="text-navy-900 dark:text-white font-medium">"{q}"</span>
                 </div>
               ))}
             </div>
@@ -342,7 +342,7 @@ function CoachSection() {
                   <div className="flex items-center gap-2 text-[#8B98AB] text-[10px] font-bold uppercase tracking-widest mb-2">
                     <IconUsers size={12} /> Worker:
                   </div>
-                  <div className="text-white text-base">"When's payday?"</div>
+                  <div className="text-navy-900 dark:text-white text-base">"When's payday?"</div>
                 </motion.div>
 
                 {/* AI Coach Response */}
@@ -402,13 +402,13 @@ function ScenariosSection() {
   ];
 
   return (
-    <section className="py-24 bg-navy-900">
+    <section className="py-24 bg-gray-50 dark:bg-navy-900">
       <div className="mx-auto max-w-[1140px] px-6">
         <div className="max-w-3xl mb-16">
           <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">
             REAL SCENARIOS
           </h2>
-          <h3 className="text-white text-4xl font-bold mb-6 tracking-tight">
+          <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-6 tracking-tight">
             Real Solutions.
           </h3>
         </div>
@@ -416,7 +416,7 @@ function ScenariosSection() {
           {scenarios.map((s, i) => (
             <div
               key={i}
-              className="p-10 rounded-2xl bg-white/[0.03] border border-white/5 relative overflow-hidden group hover:border-teal-5/20 transition-all flex flex-col h-full"
+              className="p-10 rounded-2xl bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/5 relative overflow-hidden group hover:border-teal-5/20 transition-all flex flex-col h-full"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-teal-5/5 blur-[60px] pointer-events-none" />
               <div className="mb-8">
@@ -424,8 +424,8 @@ function ScenariosSection() {
                   {s.badge}
                 </div>
                 <div className="flex items-center gap-3 mb-4">
-                  <s.icon className="text-white/60" size={24} />
-                  <h4 className="text-white font-bold text-xl">{s.title}</h4>
+                  <s.icon className="text-navy-900/60 dark:text-white/60" size={24} />
+                  <h4 className="text-navy-900 dark:text-white font-bold text-xl">{s.title}</h4>
                 </div>
               </div>
               <p className="text-[#8B98AB] text-sm leading-relaxed mb-10 flex-grow italic">
@@ -445,7 +445,7 @@ function ScenariosSection() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function AcceptConnectPage() {
   return (
-    <main className="bg-navy-900 min-h-screen">
+    <main className="bg-white dark:bg-navy-900 min-h-screen transition-colors duration-300">
       <Navbar />
 
       <ConnectHero />

@@ -126,6 +126,7 @@ export default async function BlogPostPage({ params }) {
                          prose-p:text-gray-600 dark:prose-p:text-white/70 prose-p:leading-relaxed 
                          prose-a:text-teal-6 dark:prose-a:text-teal-4 prose-a:no-underline hover:prose-a:text-teal-7 hover:dark:prose-a:text-teal-3 hover:prose-a:underline
                          prose-img:rounded-xl prose-img:border prose-img:border-black/5 dark:prose-img:border-white/10
+                         prose-figcaption:text-gray-500 dark:prose-figcaption:text-white/50
                          prose-blockquote:border-teal-5/50 prose-blockquote:bg-teal-5/5 dark:prose-blockquote:bg-white/5 prose-blockquote:px-6 prose-blockquote:py-2 prose-blockquote:rounded-r-xl prose-blockquote:font-medium prose-blockquote:text-navy-800 dark:prose-blockquote:text-white/90
                          prose-strong:text-navy-900 dark:prose-strong:text-white prose-strong:font-semibold
                          prose-li:text-gray-600 dark:prose-li:text-white/70"

@@ -21,7 +21,7 @@ import {
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function FeedbackHero() {
   return (
-    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-navy-900 pt-32 pb-16">
+    <section className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-white dark:bg-navy-900 pt-32 pb-16 transition-colors duration-300">
       <div className="pointer-events-none absolute inset-0 z-0 opacity-10 dot-pattern" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-teal-5/5 blur-[120px] pointer-events-none" />
       
@@ -37,7 +37,7 @@ function FeedbackHero() {
         </motion.div>
 
         <motion.h1
-          className="text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
+          className="text-navy-900 dark:text-white text-5xl md:text-6xl lg:text-7xl font-semibold mb-8 tracking-tight leading-[1.05]"
           initial={{ opacity: 0, y: 30 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
@@ -46,7 +46,7 @@ function FeedbackHero() {
         </motion.h1>
 
         <motion.p
-          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-white/60 mb-12"
+          className="mx-auto max-w-3xl text-xl font-medium leading-relaxed text-gray-600 dark:text-white/60 mb-12"
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -61,12 +61,12 @@ function FeedbackHero() {
 // ─── Problem Section ───────────────────────────────────────────────────────
 function SilenceSection() {
     return (
-        <section className="py-24 bg-navy-900">
+        <section className="py-24 bg-gray-50 dark:bg-navy-900">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE PROBLEM</h2>
-                        <h3 className="text-white text-4xl font-bold mb-8 tracking-tight">The Silence is Deafening</h3>
+                        <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-8 tracking-tight">The Silence is Deafening</h3>
                         <p className="text-white/60 text-lg leading-relaxed mb-8">
                             Workers don't usually complain to clients; they simply stop showing up. This "silent turnover" leaves you guessing why workers are leaving and keeps you trapped in a cycle of recruitment costs.
                         </p>
@@ -84,12 +84,12 @@ function SilenceSection() {
                             ))}
                         </div>
                     </div>
-                    <div className="p-10 rounded-2xl bg-gradient-to-br from-[#161b28] to-[#0d1522] border border-white/5 shadow-2xl relative">
+                    <div className="p-10 rounded-2xl bg-gradient-to-br from-gray-100 to-white dark:from-[#161b28] dark:to-[#0d1522] border border-black/5 dark:border-white/5 shadow-2xl relative">
                         <div className="absolute top-0 right-0 p-8">
-                            <IconLock className="text-white/10" size={32} />
+                            <IconLock className="text-black/5 dark:text-white/10" size={32} />
                         </div>
-                        <h4 className="text-white text-2xl font-bold mb-6 italic">"Intelligence that helps everyone."</h4>
-                        <p className="text-[#8B98AB] leading-relaxed mb-10">
+                        <h4 className="text-navy-900 dark:text-white text-2xl font-bold mb-6 italic">"Intelligence that helps everyone."</h4>
+                        <p className="text-gray-600 dark:text-[#8B98AB] leading-relaxed mb-10">
                             Our Site Intelligence platform bridges the gap. By providing a safe, anonymous channel for feedback, we uncover the real reasons behind turnover and give you the data needed to create a site where workers want to stay.
                         </p>
                         <div className="p-6 rounded-2xl bg-teal-5/5 border border-teal-5/10">
@@ -106,12 +106,12 @@ function SilenceSection() {
 // ─── Interactive Questionnaire Mockup ──────────────────────────────────────
 function InteractiveSurvey() {
     return (
-        <section className="py-24 bg-[#0d111a]">
+        <section className="py-24 bg-white dark:bg-[#0d111a]">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                     <div className="lg:col-span-5">
                         <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE FEEDBACK LOOP</h2>
-                        <h3 className="text-white text-4xl font-bold mb-8 tracking-tight">Real Insights. <br/>After Every Shift.</h3>
+                        <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-8 tracking-tight">Real Insights. <br/>After Every Shift.</h3>
                         <p className="text-[#8B98AB] text-lg leading-relaxed mb-10">
                             Workers receive a 30-second digital questionnaire automatically after their shift. It’s fast, mobile-first, and designed for maximum engagement.
                         </p>
@@ -126,8 +126,8 @@ function InteractiveSurvey() {
                                         <IconCheck size={20} />
                                     </div>
                                     <div>
-                                        <div className="text-white font-bold">{item.title}</div>
-                                        <div className="text-[#8B98AB]/70 text-xs font-medium">{item.sub}</div>
+                                        <div className="text-navy-900 dark:text-white font-bold">{item.title}</div>
+                                        <div className="text-gray-500 dark:text-[#8B98AB]/70 text-xs font-medium">{item.sub}</div>
                                     </div>
                                 </li>
                             ))}
@@ -140,7 +140,7 @@ function InteractiveSurvey() {
                             <div className="p-8 pt-16">
                                 <div className="mb-10">
                                     <div className="text-teal-4 text-[10px] font-bold uppercase tracking-widest mb-2">Shift Confirmation</div>
-                                    <h4 className="text-white text-xl font-bold">How was your day?</h4>
+                                    <h4 className="text-navy-900 dark:text-white text-xl font-bold">How was your day?</h4>
                                 </div>
                                 
                                 <div className="space-y-10">
@@ -194,7 +194,7 @@ function ValueGrid() {
     ];
 
     return (
-        <section className="py-24 bg-navy-900">
+        <section className="py-24 bg-white dark:bg-navy-900">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {pillars.map((p, i) => (
@@ -202,8 +202,8 @@ function ValueGrid() {
                              <div className="w-14 h-14 rounded-2xl bg-teal-5/10 flex items-center justify-center text-teal-4 mb-8 group-hover:bg-teal-5 group-hover:text-white transition-all">
                                 <p.icon size={28} />
                             </div>
-                            <h3 className="text-white text-xl font-bold mb-4">{p.title}</h3>
-                            <p className="text-[#8B98AB] text-sm leading-relaxed">{p.desc}</p>
+                            <h3 className="text-navy-900 dark:text-white text-xl font-bold mb-4">{p.title}</h3>
+                            <p className="text-gray-600 dark:text-[#8B98AB] text-sm leading-relaxed">{p.desc}</p>
                         </div>
                     ))}
                 </div>
@@ -215,11 +215,11 @@ function ValueGrid() {
 // ─── Comparison Section ────────────────────────────────────────────────────
 function ComparisonSection() {
     return (
-        <section className="py-24 bg-navy-900">
+        <section className="py-24 bg-gray-50 dark:bg-navy-900">
             <div className="mx-auto max-w-[1140px] px-6">
                 <div className="text-center max-w-3xl mx-auto mb-20">
                     <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE DIFFERENCE</h2>
-                    <h3 className="text-white text-4xl font-bold mb-6 tracking-tight">Transparency vs. Mystery</h3>
+                    <h3 className="text-navy-900 dark:text-white text-4xl font-bold mb-6 tracking-tight">Transparency vs. Mystery</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/10">
                     <div className="bg-white/[0.03] p-12 lg:p-20">
@@ -267,7 +267,7 @@ function ComparisonSection() {
 // ─── Main ───────────────────────────────────────────────────────────────────
 export default function ClientFeedbackPage() {
   return (
-    <main className="bg-navy-900 min-h-screen">
+    <main className="bg-white dark:bg-navy-900 min-h-screen transition-colors duration-300">
       <Navbar />
 
       <FeedbackHero />

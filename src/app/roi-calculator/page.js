@@ -80,7 +80,7 @@ export default function RoiCalculator() {
   }, [workers, hours, weeks, prodValue, trainingCost, mgmtHours]);
 
   return (
-    <main className="bg-navy-900 min-h-screen font-sans">
+    <main className="bg-white dark:bg-navy-900 min-h-screen font-sans transition-colors duration-300">
       <Navbar />
 
       {/* Hero */}
@@ -96,18 +96,18 @@ export default function RoiCalculator() {
             <span className="h-2 w-2 rounded-full bg-teal-5 animate-pulse" />
             <span className="text-sm font-semibold text-teal-4">Financial Analyzer</span>
           </motion.div>
-          <motion.h1 className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+          <motion.h1 className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-navy-900 dark:text-white md:text-6xl lg:text-7xl mb-8" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
             Calculate Your <span className="text-teal-5">Hidden Staffing Costs.</span>
           </motion.h1>
-          <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+          <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-white/60 mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             No-shows, unfilled shifts, and high turnover cost more than you think. See how much you could save with Accept Recruitment.
           </motion.p>
         </div>
-        <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-[#0d111a] to-transparent" />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-white dark:from-[#0d111a] to-white/0 dark:to-[#0d111a]/0" />
       </section>
 
       {/* Calculator Section */}
-      <section className="py-24 bg-[#0d111a] relative overflow-hidden">
+      <section className="py-24 bg-white dark:bg-[#0d111a] relative overflow-hidden">
         <div className="pointer-events-none absolute -right-64 top-1/4 h-[600px] w-[600px] rounded-full bg-teal-5/10 blur-[130px]" />
         <div className="relative z-10 mx-auto max-w-[1140px] px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -115,11 +115,11 @@ export default function RoiCalculator() {
             {/* Inputs Sidebar */}
             <div className="lg:col-span-7 space-y-8">
               <div className="glass-card rounded-2xl p-8 md:p-12">
-                <div className="flex items-center gap-3 mb-10 pb-6 border-b border-white/5">
+                <div className="flex items-center gap-3 mb-10 pb-6 border-b border-black/5 dark:border-white/5">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#00A99D] text-white">
                     <IconCalculator size={20} />
                   </div>
-                  <h2 className="text-white font-semibold text-[22px] tracking-tight">Your Staffing Details</h2>
+                  <h2 className="text-navy-900 dark:text-white font-semibold text-[22px] tracking-tight">Your Staffing Details</h2>
                 </div>
 
                 <div className="space-y-12">
@@ -150,7 +150,7 @@ export default function RoiCalculator() {
                       <item.icon size={20} />
                     </div>
                     <h3 className="relative text-[#8B98AB] text-[10px] font-bold uppercase tracking-widest mb-1">{item.title}</h3>
-                    <div className="relative text-2xl font-semibold text-white mb-2">£{item.val.toLocaleString()}</div>
+                    <div className="relative text-2xl font-semibold text-navy-900 dark:text-white mb-2">£{item.val.toLocaleString()}</div>
                     <p className="relative text-[13px] leading-relaxed text-[#8B98AB]">{item.desc}</p>
                   </div>
                 ))}
@@ -170,7 +170,7 @@ export default function RoiCalculator() {
 
                   <div className="mb-10">
                     <div className="text-[#8B98AB] text-sm font-semibold uppercase tracking-tight mb-2">Total Estimated Benefit</div>
-                    <div className="text-6xl md:text-7xl font-semibold text-white tracking-tighter mb-4 flex items-baseline">
+                    <div className="text-6xl md:text-7xl font-semibold text-navy-900 dark:text-white tracking-tighter mb-4 flex items-baseline">
                       <span className="text-4xl md:text-5xl mr-2">£</span>
                       <AnimatedNumber value={results.totalSavings} />
                     </div>
@@ -209,13 +209,13 @@ export default function RoiCalculator() {
                 <div className="glass-card group relative overflow-hidden rounded-2xl p-6 text-center transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm">
                   <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <IconCheck className="relative text-teal-5 mx-auto mb-3" size={24} />
-                  <div className="relative text-lg font-semibold text-white">98%</div>
+                  <div className="relative text-lg font-semibold text-navy-900 dark:text-white">98%</div>
                   <div className="relative text-[13px] font-semibold uppercase tracking-wider text-teal-5 mt-1">Fill Rate</div>
                 </div>
                 <div className="glass-card group relative overflow-hidden rounded-2xl p-6 text-center transition-all duration-300 hover:border-teal-5/30 hover:teal-glow-sm">
                   <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-teal-5/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <IconCheck className="relative text-teal-5 mx-auto mb-3" size={24} />
-                  <div className="relative text-lg font-semibold text-white">92%</div>
+                  <div className="relative text-lg font-semibold text-navy-900 dark:text-white">92%</div>
                   <div className="relative text-[13px] font-semibold uppercase tracking-wider text-teal-5 mt-1">Retention</div>
                 </div>
               </div>
@@ -226,14 +226,14 @@ export default function RoiCalculator() {
       </section>
 
       {/* Comparisons */}
-      <section className="py-24 bg-navy-700 relative overflow-hidden">
+      <section className="py-24 bg-gray-50 dark:bg-navy-700 relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 dot-pattern opacity-40" />
         <div className="pointer-events-none absolute -left-48 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-purple-6/15 blur-[100px]" />
         <div className="relative z-10 mx-auto max-w-[1140px] px-6">
           <motion.div className="text-center mb-14" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <span className="mb-4 inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#00A99D]">BENCHMARKS</span>
-            <h2 className="text-4xl font-semibold text-white md:text-5xl lg:text-[54px] tracking-tight">Performance Gap</h2>
-            <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">Why the standard agency model is costing you money.</p>
+            <h2 className="text-4xl font-semibold text-navy-900 dark:text-white md:text-5xl lg:text-[54px] tracking-tight">Performance Gap</h2>
+            <p className="mt-6 text-lg text-gray-600 dark:text-white/60 leading-relaxed max-w-2xl mx-auto">Why the standard agency model is costing you money.</p>
           </motion.div>
 
           <div className="mx-auto max-w-[900px] space-y-12">
