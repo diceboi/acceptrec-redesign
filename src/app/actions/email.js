@@ -21,7 +21,7 @@ export async function sendGetStartedEmail(formData) {
 
     const { data, error } = await resend.emails.send({
       from: 'Accept Recruitment <website@acceptrec.co.uk>',
-      to: ['szasz.szabolcs1995@gmail.com'],
+      to: ['szasz.szabolcs1995@gmail.com', 'admin@acceptrec.co.uk'],
       subject: `New Staffing Inquiry: ${companyName}`,
       html: `
         <h2>New Staffing Inquiry from Website</h2>
@@ -62,7 +62,7 @@ export async function sendInnovationEmail(formData) {
 
     const { data, error } = await resend.emails.send({
       from: 'Accept Recruitment <website@acceptrec.co.uk>',
-      to: ['szasz.szabolcs1995@gmail.com'],
+      to: ['szasz.szabolcs1995@gmail.com', 'admin@acceptrec.co.uk'],
       subject: `New Innovation Partner Application: ${companyName}`,
       html: `
         <h2>New Innovation Partner Application</h2>
@@ -101,7 +101,7 @@ export async function sendPayQueryEmail(formData) {
 
     const { data, error } = await resend.emails.send({
       from: 'Accept Recruitment <website@acceptrec.co.uk>',
-      to: ['szasz.szabolcs1995@gmail.com'],
+      to: ['szasz.szabolcs1995@gmail.com', 'admin@acceptrec.co.uk'],
       subject: `New Pay Query: ${fullName}`,
       html: `
         <h2>New Pay Query Submission</h2>
