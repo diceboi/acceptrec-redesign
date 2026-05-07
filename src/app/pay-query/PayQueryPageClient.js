@@ -8,6 +8,7 @@ import { Footer } from '@/components/sections/Footer';
 import { IconCheck, IconMail, IconMapPin, IconArrowRight } from '@tabler/icons-react';
 import { useState } from "react";
 import { sendPayQueryEmail } from "@/app/actions/email";
+import { TurnstileWidget } from "@/components/ui/TurnstileWidget";
 
 
 const requiredInfo = ["Full Name", "Telephone Number", "National Insurance Number", "Week Commencing (date of the week in question)", "List hours and place you worked", "How many hours were you paid?", "How many hours are you missing?"];
@@ -21,14 +22,19 @@ export default function PayQueryPageClient() {
         weekCommencing: "",
         workPlace: "",
         hoursPaid: "",
-        hoursMissing: ""
+        hoursMissing: "",
+        _gotcha: "" // Honeypot
     });
+    const [turnstileToken, setTurnstileToken] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus("loading");
         
-        const result = await sendPayQueryEmail(formData);
+        const result = await sendPayQueryEmail({
+            ...formData,
+            turnstileToken,
+        });
         
         if (result.success) {
             setStatus("success");
@@ -185,6 +191,24 @@ export default function PayQueryPageClient() {
                                     />
                                 </div>
                             </div>
+
+                            {/* Honeypot - hidden from humans */}
+                            <input
+                                type="text"
+                                name="_gotcha"
+                                tabIndex="-1"
+                                autoComplete="off"
+                                className="hidden"
+                                value={formData._gotcha}
+                                onChange={handleChange}
+                            />
+
+                            <TurnstileWidget 
+                                onSuccess={(token) => setTurnstileToken(token)}
+                                onExpire={() => setTurnstileToken("")}
+                                onError={() => setTurnstileToken("")}
+                            />
+
                             <div className="pt-4">
                                 <button 
                                     type="submit"

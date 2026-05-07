@@ -19,6 +19,7 @@ import {
 } from "@tabler/icons-react";
 import { useState } from "react";
 import { sendGetStartedEmail } from "@/app/actions/email";
+import { TurnstileWidget } from "@/components/ui/TurnstileWidget";
 
 // ─── Hero ──────────────────────────────────────────────────────────────────
 function GetStartedHero() {
@@ -134,13 +135,18 @@ function IntakeForm() {
     lastName: "",
     email: "",
     phone: "",
+    _gotcha: "", // Honeypot
   });
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
 
-    const result = await sendGetStartedEmail(formData);
+    const result = await sendGetStartedEmail({
+      ...formData,
+      turnstileToken,
+    });
 
     if (result.success) {
       setStatus("success");
@@ -439,6 +445,23 @@ function IntakeForm() {
                   className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white font-semibold outline-none focus:border-teal-5/50 transition-all"
                 />
               </div>
+
+              {/* Honeypot - hidden from humans */}
+              <input
+                type="text"
+                name="_gotcha"
+                tabIndex="-1"
+                autoComplete="off"
+                className="hidden"
+                value={formData._gotcha}
+                onChange={handleChange}
+              />
+
+              <TurnstileWidget 
+                onSuccess={(token) => setTurnstileToken(token)}
+                onExpire={() => setTurnstileToken("")}
+                onError={() => setTurnstileToken("")}
+              />
 
               <div className="pt-8">
                 <button

@@ -21,6 +21,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { useState } from "react";
 import { sendInnovationEmail } from "@/app/actions/email";
+import { TurnstileWidget } from "@/components/ui/TurnstileWidget";
 
 const containerVariants = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
 const cardVariants = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } } };
@@ -219,14 +220,19 @@ function InnovationForm() {
         email: "",
         companyName: "",
         sector: "",
-        message: ""
+        message: "",
+        _gotcha: "" // Honeypot
     });
+    const [turnstileToken, setTurnstileToken] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus("loading");
         
-        const result = await sendInnovationEmail(formData);
+        const result = await sendInnovationEmail({
+            ...formData,
+            turnstileToken,
+        });
         
         if (result.success) {
             setStatus("success");
@@ -333,6 +339,24 @@ function InnovationForm() {
                                     placeholder="Briefly describe your interest..." 
                                 />
                             </div>
+
+                            {/* Honeypot - hidden from humans */}
+                            <input
+                                type="text"
+                                name="_gotcha"
+                                tabIndex="-1"
+                                autoComplete="off"
+                                className="hidden"
+                                value={formData._gotcha}
+                                onChange={handleChange}
+                            />
+
+                            <TurnstileWidget 
+                                onSuccess={(token) => setTurnstileToken(token)}
+                                onExpire={() => setTurnstileToken("")}
+                                onError={() => setTurnstileToken("")}
+                            />
+
                             <div className="text-center">
                                 <Button 
                                     type="submit"
