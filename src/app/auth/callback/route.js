@@ -22,10 +22,12 @@ export async function GET(request) {
     
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      return NextResponse.redirect(`${requestUrl.origin}${next}`)
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || requestUrl.origin
+      return NextResponse.redirect(`${baseUrl}${next}`)
     }
   }
 
   // Ha nincs kód, vagy hiba volt, irányítsuk a loginra
-  return NextResponse.redirect(`${requestUrl.origin}/auth/login?error=InvalidToken`)
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || requestUrl.origin
+  return NextResponse.redirect(`${baseUrl}/auth/login?error=InvalidToken`)
 }
