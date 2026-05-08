@@ -13,7 +13,6 @@ const stats = [
 ];
 
 const logos = [
-  { name: "DPD", src: "/partner-logos/DPD_Bildmotiv_Logo.png" },
   { name: "Wayfair", src: "/partner-logos/wayfair-logo.png" },
   { name: "InPost", src: "/partner-logos/InPost_logo.png" },
   { name: "Vistry Group", src: "/partner-logos/vistry-group.webp" },
@@ -51,7 +50,7 @@ export function StatsBar() {
             <span className="text-teal-5">Every single day.</span>
           </h2>
           <p className="mt-4 text-white/60 text-lg">
-            190+ companies. DPD. Wayfair. InPost.{" "}
+            190+ companies. Wayfair. InPost.{" "}
             <strong className="text-white">Names you know.</strong>
           </p>
         </motion.div>

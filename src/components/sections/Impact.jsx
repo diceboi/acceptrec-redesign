@@ -7,7 +7,7 @@ const bigStats = [
   { value: "30K+", label: "Workers Placed" },
   { value: "1M+", label: "Hours Worked" },
   { value: "190+", label: "Active Clients" },
-  { value: "15+", label: "Years Experience" },
+  { value: "11", label: "Years in Business" },
 ];
 
 export function Impact() {

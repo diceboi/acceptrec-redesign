@@ -574,16 +574,20 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.28 }}
           >
-            {["AcceptPulse", "AcceptRate", "AcceptMatch", "AcceptConnect"].map(
-              (t) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-white/15 bg-white/6 px-3 py-1 text-sm text-white/60"
-                >
-                  {t}
-                </span>
-              ),
-            )}
+            {[
+              { label: "AcceptPulse", href: "/technology/acceptpulse" },
+              { label: "AcceptRate", href: "/technology/worker-ratings" },
+              { label: "AcceptMatch", href: "/technology/smart-matching" },
+              { label: "AcceptConnect", href: "/technology/acceptconnect" },
+            ].map((t) => (
+              <Link
+                key={t.label}
+                href={t.href}
+                className="rounded-full border border-white/15 bg-white/6 px-3 py-1 text-sm text-white/60 transition-all hover:border-teal-5/50 hover:bg-white/10 hover:text-white"
+              >
+                {t.label}
+              </Link>
+            ))}
           </motion.div>
 
           {/* CTAs */}
