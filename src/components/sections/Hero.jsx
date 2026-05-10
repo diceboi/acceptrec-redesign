@@ -548,14 +548,15 @@ export function Hero() {
           </motion.div>
 
           {/* H1 */}
-          <motion.h1
+          <h1 className="sr-only">Industrial Recruitment Agency Across Leicester, Coventry &amp; Tamworth</h1>
+          <motion.h2
             className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             We Give a <span className="text-teal-5">Shift</span>.
-          </motion.h1>
+          </motion.h2>
 
           {/* Sub */}
           <motion.p
@@ -699,7 +700,7 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      <h2 className="sr-only">Looking for work?</h2>
+
     </section>
   );
 }

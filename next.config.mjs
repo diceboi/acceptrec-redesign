@@ -92,7 +92,97 @@ const nextConfig = {
         source: '/clients/national-temporary-worker-day',
         destination: '/employers',
         permanent: true,
-      }
+      },
+      // ── Old location hub URLs ─────────────────────────────────────
+      {
+        source: '/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/our-locations/leicester-recruitment',
+        destination: '/offices/leicester',
+        permanent: true,
+      },
+      {
+        source: '/our-locations/coventry-recruitment',
+        destination: '/offices/coventry',
+        permanent: true,
+      },
+      {
+        source: '/our-locations/tamworth-recruitment',
+        destination: '/offices/tamworth',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/our-locations/leicester-recruitment',
+        destination: '/offices/leicester',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/our-locations/coventry-recruitment',
+        destination: '/offices/coventry',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/our-locations/tamworth-recruitment',
+        destination: '/offices/tamworth',
+        permanent: true,
+      },
+      // ── Old standalone pages ──────────────────────────────────────
+      {
+        source: '/coventry',
+        destination: '/offices/coventry',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/case-studies',
+        destination: '/case-studies',
+        permanent: true,
+      },
+      {
+        source: '/hidden-labour-exploitation',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/national-insurance-changes',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/join-our-team',
+        destination: '/team',
+        permanent: true,
+      },
+      // ── Old pay/GDPR/policy pages ─────────────────────────────────
+      {
+        source: '/gdpr',
+        destination: '/privacy-policy',
+        permanent: true,
+      },
+      {
+        source: '/modern-slavery-statement',
+        destination: '/about',
+        permanent: true,
+      },
+      // ── Old team member pages ─────────────────────────────────────
+      {
+        source: '/about-us/team/:teammember*',
+        destination: '/team',
+        permanent: true,
+      },
+      // ── Old industry slugs ────────────────────────────────────────
+      {
+        source: '/industries/:slug*',
+        destination: '/industries/:slug*',
+        permanent: false,
+      },
     ];
   },
   images: {

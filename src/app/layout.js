@@ -20,11 +20,9 @@ const poppins = Poppins({
 
 export const metadata = {
   title:
-    "Accept Recruitment – Dependable Temporary Staffing | Leicester & Midlands",
+    "Industrial Recruitment Agency Leicester, Coventry & Tamworth | Accept Recruitment",
   description:
-    "Accept Recruitment specialises in temporary staffing for warehousing, manufacturing, food production, and logistics across Leicester, Coventry & Tamworth. 190+ clients, 98% retention rate.",
-  keywords:
-    "recruitment agency Leicester, temp agency Coventry, warehouse staffing Tamworth, industrial recruitment Midlands, Accept Recruitment",
+    "Industrial recruitment agency supplying warehouse, food production, manufacturing and driving staff across Leicester, Coventry and Tamworth. 190+ clients, 4.8★ rated.",
 };
 
 export default function RootLayout({ children }) {
