@@ -155,33 +155,11 @@ const nextConfig = {
         destination: '/blog',
         permanent: true,
       },
-      {
-        source: '/join-our-team',
-        destination: '/team',
-        permanent: true,
-      },
-      // ── Old pay/GDPR/policy pages ─────────────────────────────────
-      {
-        source: '/gdpr',
-        destination: '/privacy-policy',
-        permanent: true,
-      },
-      {
-        source: '/modern-slavery-statement',
-        destination: '/about',
-        permanent: true,
-      },
       // ── Old team member pages ─────────────────────────────────────
       {
         source: '/about-us/team/:teammember*',
         destination: '/team',
         permanent: true,
-      },
-      // ── Old industry slugs ────────────────────────────────────────
-      {
-        source: '/industries/:slug*',
-        destination: '/industries/:slug*',
-        permanent: false,
       },
     ];
   },
