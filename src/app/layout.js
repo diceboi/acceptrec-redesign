@@ -34,8 +34,8 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable}`}
     >
       <body className="antialiased">
-        <Script 
-          src="https://widget.superchat.de/snippet.js?applicationKey=WCOzVqDdxywB4oPRE7ag28MkpX" 
+        <Script
+          src="https://widget.superchat.de/snippet.js?applicationKey=WCOzVqDdxywB4oPRE7ag28MkpX"
           referrerPolicy="no-referrer-when-downgrade"
           strategy="lazyOnload"
         />

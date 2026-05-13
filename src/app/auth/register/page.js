@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { IconMail, IconLock, IconUserPlus } from "@tabler/icons-react";
+import { notifyAccessRequest } from "@/app/actions/slack";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,7 @@ export default function RegisterPage() {
       setError(signUpError.message);
       setLoading(false);
     } else {
+      await notifyAccessRequest(email);
       router.push("/auth/pending");
       router.refresh();
     }

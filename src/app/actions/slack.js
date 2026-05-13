@@ -198,3 +198,115 @@ export async function notifyPayQuery(formData) {
 
   return sendSlackMessage(blocks);
 }
+
+export async function notifyAdminJob(job, isNew) {
+  const blocks = [
+    {
+      type: "header",
+      text: {
+        type: "plain_text",
+        text: isNew ? "🆕 New Job Created" : "📝 Job Updated",
+        emoji: true
+      }
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*Title:*\n${job.title}` },
+        { type: "mrkdwn", text: `*Reference:*\n${job.ref}` }
+      ]
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*Location:*\n${job.location}` },
+        { type: "mrkdwn", text: `*Client:*\n${job.clientName || 'N/A'}` }
+      ]
+    }
+  ];
+  return sendSlackMessage(blocks);
+}
+
+export async function notifyAdminClient(client, isNew) {
+  const blocks = [
+    {
+      type: "header",
+      text: {
+        type: "plain_text",
+        text: isNew ? "🆕 New Client Created" : "📝 Client Updated",
+        emoji: true
+      }
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*Name:*\n${client.name}` },
+        { type: "mrkdwn", text: `*Code:*\n${client.client_code}` }
+      ]
+    }
+  ];
+  return sendSlackMessage(blocks);
+}
+
+export async function notifyAdminBlog(blog, isNew) {
+  const blocks = [
+    {
+      type: "header",
+      text: {
+        type: "plain_text",
+        text: isNew ? "🆕 New Blog Post Created" : "📝 Blog Post Updated",
+        emoji: true
+      }
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `*Title:*\n${blog.title}`
+      }
+    }
+  ];
+  return sendSlackMessage(blocks);
+}
+
+export async function notifyAdminTeamMember(member, isNew) {
+  const blocks = [
+    {
+      type: "header",
+      text: {
+        type: "plain_text",
+        text: isNew ? "🆕 New Team Member Added" : "📝 Team Member Updated",
+        emoji: true
+      }
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*Name:*\n${member.name}` },
+        { type: "mrkdwn", text: `*Role:*\n${member.role}` }
+      ]
+    }
+  ];
+  return sendSlackMessage(blocks);
+}
+
+export async function notifyAccessRequest(email) {
+  const blocks = [
+    {
+      type: "header",
+      text: {
+        type: "plain_text",
+        text: "🔐 New Admin Access Request",
+        emoji: true
+      }
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `*Email:*\n${email}`
+      }
+    }
+  ];
+  return sendSlackMessage(blocks);
+}
