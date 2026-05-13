@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,11 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable}`}
     >
       <body className="antialiased">
+        <Script 
+          src="https://widget.superchat.de/snippet.js?applicationKey=WCOzVqDdxywB4oPRE7ag28MkpX" 
+          referrerPolicy="no-referrer-when-downgrade"
+          strategy="lazyOnload"
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
