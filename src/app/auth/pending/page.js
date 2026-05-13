@@ -24,7 +24,7 @@ export default function PendingPage() {
       
       <h1 className="text-2xl font-bold text-white mb-3">Pending Approval</h1>
       <p className="text-sm text-white/50 mb-8 leading-relaxed">
-        Your account has been created successfully, but it is currently waiting for administrator approval. You will be able to access the dashboard once an admin approves your request.
+        Your account has been created successfully. <strong>Please check your inbox to verify your email address.</strong> After verifying, an administrator will review your request. You will be able to access the dashboard once approved.
       </p>
 
       <button

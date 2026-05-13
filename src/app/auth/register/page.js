@@ -32,9 +32,12 @@ export default function RegisterPage() {
       setError(signUpError.message);
       setLoading(false);
     } else {
-      await notifyAccessRequest(email);
+      try {
+        await notifyAccessRequest(email);
+      } catch (slackError) {
+        console.error("Slack notification error:", slackError);
+      }
       router.push("/auth/pending");
-      router.refresh();
     }
   };
 

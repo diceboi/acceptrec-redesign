@@ -11,6 +11,10 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "500", "600
 export const metadata = {
   title: "Admin | Accept Recruitment",
   description: "Content management dashboard",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function AdminLayout({ children }) {

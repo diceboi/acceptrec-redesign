@@ -3,6 +3,10 @@
 import { notifyGetStarted, notifyInnovation, notifyPayQuery } from './slack';
 
 async function verifyTurnstileToken(token) {
+  if (process.env.NODE_ENV === "development") {
+    console.log("Bypassing Turnstile verification in development mode");
+    return true;
+  }
   if (!token) return false;
 
   try {

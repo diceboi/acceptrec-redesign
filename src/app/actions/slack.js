@@ -1,7 +1,7 @@
 "use server";
 
-export async function sendSlackMessage(blocks) {
-  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+export async function sendSlackMessage(blocks, customWebhookUrl = null) {
+  const webhookUrl = customWebhookUrl || process.env.SLACK_WEBHOOK_URL;
 
   if (!webhookUrl) {
     console.error("SLACK_WEBHOOK_URL is not defined in environment variables.");
@@ -196,7 +196,7 @@ export async function notifyPayQuery(formData) {
     }
   ];
 
-  return sendSlackMessage(blocks);
+  return sendSlackMessage(blocks, process.env.PAY_QUERY_SLACK_WEBHOOK_URL);
 }
 
 export async function notifyAdminJob(job, isNew) {
@@ -308,5 +308,5 @@ export async function notifyAccessRequest(email) {
       }
     }
   ];
-  return sendSlackMessage(blocks);
+  return sendSlackMessage(blocks, process.env.ADMIN_SLACK_WEBHOOK_URL);
 }
