@@ -161,6 +161,72 @@ const nextConfig = {
         destination: '/team',
         permanent: true,
       },
+      // ── Google Search Console Legacy Redirects ────────────────────────
+      {
+        source: '/jobs/:id(\\d+)',
+        destination: '/jobs',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/our-locations/leicester',
+        destination: '/offices/leicester',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/our-locations/tamworth',
+        destination: '/offices/tamworth',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/our-locations/coventry',
+        destination: '/offices/coventry',
+        permanent: true,
+      },
+      {
+        source: '/blogs/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/for-employers/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/clients/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/our-locations/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/about-us/team/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/industries/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/jobs/for-employers/our-locations',
+        destination: '/offices',
+        permanent: true,
+      },
+      {
+        source: '/writing-job-description',
+        destination: '/blog/how-to-write-a-successful-job-description',
+        permanent: true,
+      },
+      {
+        source: '/industries/driving-logistics',
+        destination: '/industries/logistics',
+        permanent: true,
+      },
     ];
   },
   images: {
