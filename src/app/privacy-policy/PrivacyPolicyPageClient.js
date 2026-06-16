@@ -10,7 +10,7 @@ const sections = [
   {
     title: "About this notice",
     content: [
-      "Accept Recruitment Limited (&quot;Accept&quot;, &quot;we&quot;, &quot;us&quot;, &quot;our&quot;) respects your privacy and is committed to protecting your personal data. This notice explains how we collect, use, share and protect personal data in connection with our recruitment services and our workforce management platform, AcceptPulse.",
+      "Accept Recruitment Limited (Accept, we, us, our) respects your privacy and is committed to protecting your personal data. This notice explains how we collect, use, share and protect personal data in connection with our recruitment services and our workforce management platform, AcceptPulse.",
       "This notice applies to:",
       "• Workers and candidates registered with Accept (whether for permanent or temporary roles);",
       "• Visitors to our website at www.acceptrec.co.uk;",
