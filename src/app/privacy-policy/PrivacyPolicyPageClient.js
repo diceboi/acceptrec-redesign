@@ -6,8 +6,6 @@ import { motion } from "framer-motion";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 
-
-
 const sections = [
   {
     title: "About this notice",
@@ -350,12 +348,11 @@ export default function PrivacyPolicyPageClient() {
         <div className="mx-auto max-w-4xl px-6">
           <div className="glass-card rounded-2xl p-10 md:p-16 mb-8">
             <p className="text-[#8B98AB] leading-relaxed font-medium">
-              Accept Recruitment Limited (&ldquo;Accept&rdquo;,
-              &ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) respects
-              your privacy and is committed to protecting your personal data.
-              This notice explains how we collect, use, share and protect
-              personal data in connection with our recruitment services and our
-              workforce management platform, AcceptPulse.
+              Accept Recruitment Limited (Accept, we, us, our) respects your
+              privacy and is committed to protecting your personal data. This
+              notice explains how we collect, use, share and protect personal
+              data in connection with our recruitment services and our workforce
+              management platform, AcceptPulse.
             </p>
           </div>
 
