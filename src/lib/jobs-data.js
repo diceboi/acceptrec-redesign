@@ -208,10 +208,10 @@ export async function createJob(job) {
     .select()
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message };
   revalidatePath("/admin/jobs");
   revalidatePath("/jobs");
-  return data;
+  return { success: true, data };
 }
 
 export async function updateJob(id, updates) {
@@ -245,7 +245,7 @@ export async function updateJob(id, updates) {
     })
     .eq("id", Number(id));
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message };
   revalidatePath("/admin/jobs");
   revalidatePath("/jobs");
   return { success: true };

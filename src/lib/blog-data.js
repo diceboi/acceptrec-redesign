@@ -183,7 +183,7 @@ export async function createPost(post) {
     .select()
     .single();
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message };
 
   // 2. Insert tags
   if (post.tags && post.tags.length > 0) {
@@ -195,7 +195,7 @@ export async function createPost(post) {
   }
 
   revalidatePath("/admin/blog");
-  return newPost;
+  return { success: true, data: newPost };
 }
 
 export async function updatePost(id, updates) {
@@ -222,7 +222,7 @@ export async function updatePost(id, updates) {
     })
     .eq("id", Number(id));
 
-  if (error) throw new Error(error.message);
+  if (error) return { error: error.message };
 
   // 2. Update tags (Delete old, insert new)
   if (updates.tags) {

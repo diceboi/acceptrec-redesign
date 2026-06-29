@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createJob, updateJob, getNextJobSequence } from "@/lib/jobs-data";
 import { getClients } from "@/lib/clients-data";
-import { IconDeviceFloppy, IconArrowLeft, IconPlus, IconX, IconSearch, IconRefresh } from "@tabler/icons-react";
+import { IconDeviceFloppy, IconArrowLeft, IconPlus, IconX, IconSearch, IconRefresh, IconAlertCircle } from "@tabler/icons-react";
 import { useEffect, useCallback } from "react";
 import Link from "next/link";
 import { RichTextEditor } from "./RichTextEditor";
@@ -172,6 +172,18 @@ const fieldBox =
 export function JobEditor({ job, isNew }) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
+  const [errorPopup, setErrorPopup] = useState(null);
+
+  const getFriendlyErrorMessage = (msg) => {
+    if (!msg) return "An unknown error occurred.";
+    if (msg.includes("duplicate key value") && msg.includes("slug")) {
+      return "A job with this Slug already exists. Please change the Job Title or Slug to make it unique.";
+    }
+    if (msg.includes("duplicate key value") && msg.includes("ref")) {
+      return "A job with this Reference ID already exists. Please generate a new Reference ID.";
+    }
+    return msg;
+  };
 
   const [form, setForm] = useState({
     title: job?.title || "",
@@ -255,22 +267,53 @@ export function JobEditor({ job, isNew }) {
     e.preventDefault();
     setSaving(true);
     try {
+      let res;
       if (isNew) {
-        await createJob(form);
+        res = await createJob(form);
       } else {
-        await updateJob(job.id, form);
+        res = await updateJob(job.id, form);
+      }
+      if (res?.error) {
+        throw new Error(res.error);
       }
       router.push("/admin/jobs");
       router.refresh();
     } catch (err) {
-      alert("Error saving: " + err.message);
+      setErrorPopup(getFriendlyErrorMessage(err.message));
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="min-h-screen bg-[#0d111a]">
+    <>
+      {errorPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-[#1c2230] border border-red-500/30 rounded-2xl w-full max-w-md p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-red-500/10 text-red-400 rounded-xl shrink-0">
+                <IconAlertCircle size={24} />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-white mb-1">Could not save job</h3>
+                <p className="text-sm text-white/60 leading-relaxed">
+                  {errorPopup}
+                </p>
+                <div className="mt-6 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setErrorPopup(null)}
+                    className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer"
+                  >
+                    Okay, I'll fix it
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="min-h-screen bg-[#0d111a]">
       {/* Header */}
       <div className="px-6 py-6 border-b border-white/5 flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -601,6 +644,7 @@ export function JobEditor({ job, isNew }) {
           </div>
         </div>
       </div>
-    </form>
+      </form>
+    </>
   );
 }
