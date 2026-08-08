@@ -23,6 +23,15 @@ export function BlogEditor({ post, categories, tags, isNew }) {
   const router = useRouter();
   const supabase = createClient();
   const [saving, setSaving] = useState(false);
+  const [errorPopup, setErrorPopup] = useState(null);
+
+  const getFriendlyErrorMessage = (msg) => {
+    if (!msg) return "An unknown error occurred.";
+    if (msg.includes("duplicate key value") && msg.includes("slug")) {
+      return "A blog post with this Slug already exists. Please change the Title or Slug to make it unique.";
+    }
+    return msg;
+  };
   const [uploading, setUploading] = useState({ coverImage: false, ogImage: false });
   const [analyzing, setAnalyzing] = useState(false);
   const [aiSuggestions, setAiSuggestions] = useState(null);
@@ -155,22 +164,53 @@ export function BlogEditor({ post, categories, tags, isNew }) {
     e.preventDefault();
     setSaving(true);
     try {
+      let res;
       if (isNew) {
-        await createPost(form);
+        res = await createPost(form);
       } else {
-        await updatePost(post.id, form);
+        res = await updatePost(post.id, form);
+      }
+      if (res?.error) {
+        throw new Error(res.error);
       }
       router.push("/admin/blog");
       router.refresh();
     } catch (err) {
-      alert("Error saving: " + err.message);
+      setErrorPopup(getFriendlyErrorMessage(err.message));
     } finally {
       setSaving(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="min-h-screen bg-[#0d111a]">
+    <>
+      {errorPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-[#1c2230] border border-red-500/30 rounded-2xl w-full max-w-md p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-red-500/10 text-red-400 rounded-xl shrink-0">
+                <IconAlertCircle size={24} />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-white mb-1">Could not save post</h3>
+                <p className="text-sm text-white/60 leading-relaxed">
+                  {errorPopup}
+                </p>
+                <div className="mt-6 flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setErrorPopup(null)}
+                    className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold rounded-xl transition-colors cursor-pointer"
+                  >
+                    Okay, I'll fix it
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="min-h-screen bg-[#0d111a]">
       {/* Header */}
       <div className="px-6 py-6 border-b border-white/5 flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -542,6 +582,7 @@ export function BlogEditor({ post, categories, tags, isNew }) {
           </div>
         </div>
       </div>
-    </form>
+      </form>
+    </>
   );
 }
