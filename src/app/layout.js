@@ -35,9 +35,9 @@ export default function RootLayout({ children }) {
     >
       <body className="antialiased">
         <Script
-          src="https://widget.superchat.de/snippet.js?applicationKey=WCOzVqDdxywB4oPRE7ag28MkpX"
-          referrerPolicy="no-referrer-when-downgrade"
-          strategy="lazyOnload"
+          src="https://accept-connect-v2-next.vercel.app/webchat/widget.js"
+          data-site="acceptrec"
+          strategy="afterInteractive"
         />
         <ThemeProvider
           attribute="class"

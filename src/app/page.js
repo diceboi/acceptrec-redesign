@@ -1,5 +1,7 @@
 import { Navbar } from "@/components/sections/Navbar";
-import { Hero } from "@/components/sections/Hero";
+// import { Hero } from "@/components/sections/Hero"; // ← régi hero, kommentelve
+import { HeroV2 } from "@/components/sections/HeroV2";
+import { WI2Section } from "@/components/sections/WI2Section";
 import { StatsBar } from "@/components/sections/StatsBar";
 import { Industries } from "@/components/sections/Industries";
 import { Impact } from "@/components/sections/Impact";
@@ -13,7 +15,9 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      <Hero />
+      {/* <Hero /> */}
+      <HeroV2 />
+      <WI2Section />
       <StatsBar />
       <Industries />
       <Impact />
