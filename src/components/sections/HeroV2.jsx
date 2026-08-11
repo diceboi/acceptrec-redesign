@@ -394,7 +394,7 @@ function DashboardPanel() {
               </div>
               <Sparkline data={[4, 5, 3, 6, 5, 7, 6, 8, 7, 9]} />
               <div className="mt-1 text-[10px] text-white/25">
-                Based on 286 reviews
+                Based on 1400+ reviews
               </div>
             </div>
 
@@ -459,7 +459,7 @@ const BOTTOM_STATS = [
       </svg>
     ),
     value: "4.8 Google rating",
-    sub: "Based on 286 reviews",
+    sub: "Based on 1400+ reviews",
   },
   {
     icon: (
