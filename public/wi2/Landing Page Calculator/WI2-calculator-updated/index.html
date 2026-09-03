@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Use your own figures to estimate how released administrative capacity, avoided additional headcount and improved retention could offset your recruitment agency margin.">
+  <title>Temporary Workforce Cost Calculator | WI2 | Accept Recruitment</title>
+  <style>
+    :root {
+      --ink: #0b1020;
+      --ink-2: #11182c;
+      --ink-3: #18223b;
+      --paper: #ffffff;
+      --paper-2: #f3f6f8;
+      --paper-3: #e8edf1;
+      --text: #171b25;
+      --muted: #657084;
+      --line: #d9e0e7;
+      --accent: #c9ff42;
+      --accent-2: #9fe311;
+      --accent-ink: #101505;
+      --positive: #12824c;
+      --positive-bg: #eaf8f0;
+      --warning: #a45b00;
+      --warning-bg: #fff5e7;
+      --danger: #a72f2f;
+      --shadow: 0 18px 55px rgba(9, 16, 35, 0.13);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.modal-open { overflow: hidden; }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid rgba(201, 255, 66, 0.85); outline-offset: 3px; }
+
+    .container { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      font-size: 0.76rem;
+      font-weight: 850;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 3px; border-radius: 99px; background: var(--accent); }
+    .display {
+      margin: 0;
+      font-size: clamp(2.55rem, 5.2vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      font-weight: 900;
+      max-width: 820px;
+    }
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+    h3 { margin: 0 0 10px; font-size: 1.25rem; line-height: 1.2; }
+    p { margin: 0 0 16px; }
+    .lede { font-size: clamp(1.08rem, 2vw, 1.32rem); color: rgba(255,255,255,0.8); max-width: 760px; }
+    .muted { color: var(--muted); }
+    .small { font-size: 0.88rem; }
+    .fine { font-size: 0.77rem; color: var(--muted); }
+    .highlight { color: var(--accent); }
+    .no-margin { margin: 0; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 16, 32, 0.94);
+      color: #fff;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+    }
+    .nav {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-radius: 12px 4px 12px 4px;
+      font-size: 1rem;
+      box-shadow: 0 8px 20px rgba(201, 255, 66, 0.18);
+    }
+    .logo-text { font-size: 1.12rem; }
+    .logo-text span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 24px; font-size: 0.92rem; }
+    .nav-links a { text-decoration: none; color: rgba(255,255,255,0.76); }
+    .nav-links a:hover { color: #fff; }
+    .prototype-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.74rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .prototype-badge i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+    .hero {
+      overflow: hidden;
+      position: relative;
+      padding: 42px 0 46px;
+      background:
+        radial-gradient(circle at 80% 15%, rgba(201,255,66,0.15), transparent 28%),
+        radial-gradient(circle at 10% 95%, rgba(70,104,255,0.14), transparent 32%),
+        var(--ink);
+      color: #fff;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -140px;
+      bottom: -260px;
+      width: 540px;
+      height: 540px;
+      border: 1px solid rgba(201,255,66,0.24);
+      border-radius: 50%;
+      box-shadow: 0 0 0 70px rgba(201,255,66,0.035), 0 0 0 140px rgba(201,255,66,0.02);
+      pointer-events: none;
+    }
+    .hero-grid { position: relative; z-index: 1; display: block; }
+    .hero .display strong { color: var(--accent); font-weight: inherit; }
+    .hero-side { display: none; }
+    .hero-stat {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: clamp(3rem, 5.4vw, 4.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      font-weight: 900;
+      color: var(--accent);
+    }
+    .hero-stat-label { max-width: 360px; color: rgba(255,255,255,0.77); font-size: 1.06rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .trust-line { display: flex; align-items: center; gap: 10px; margin-top: 14px; color: rgba(255,255,255,0.65); font-size: 0.86rem; }
+    .trust-line svg { flex: none; }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 20px;
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 820;
+      text-decoration: none;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 12px 30px rgba(201,255,66,0.16); }
+    .btn-primary:hover { background: #d5ff68; box-shadow: 0 14px 34px rgba(201,255,66,0.23); }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-dark:hover { background: var(--ink-3); }
+    .btn-light { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+    .btn-light:hover { border-color: #b9c3ce; box-shadow: 0 8px 24px rgba(9,16,35,0.08); }
+    .btn-ghost { background: transparent; color: inherit; border: 1px solid currentColor; }
+    .btn-sm { min-height: 40px; padding: 9px 14px; border-radius: 10px; font-size: 0.86rem; }
+    .text-button { border: 0; padding: 0; background: none; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; font-weight: 780; }
+
+    section { padding: 92px 0; }
+    .credibility { background: var(--paper-2); }
+    .credibility-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 70px; align-items: start; }
+    .quote-card {
+      padding: 34px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+    .quote-card p { font-size: 1.25rem; line-height: 1.4; }
+    .quote-card strong { color: var(--accent); }
+    .check-list { display: grid; gap: 12px; margin: 25px 0 0; padding: 0; list-style: none; }
+    .check-list li { position: relative; padding-left: 32px; }
+    .check-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.35em;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: inset 0 0 0 5px var(--ink);
+      border: 2px solid var(--accent);
+    }
+
+    .math-section { background: #fff; }
+    .math-panel {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+    .math-cell { padding: 30px; border-right: 1px solid rgba(255,255,255,0.11); }
+    .math-cell:last-child { border-right: 0; background: var(--accent); color: var(--accent-ink); }
+    .math-cell span { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.58); font-weight: 750; }
+    .math-cell:last-child span { color: rgba(16,21,5,0.64); }
+    .math-cell strong { display: block; margin-top: 10px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1; letter-spacing: -0.05em; }
+    .math-cell small { display: block; margin-top: 7px; color: rgba(255,255,255,0.58); }
+    .math-cell:last-child small { color: rgba(16,21,5,0.64); }
+    .pull-quote { margin: 34px 0 0; font-size: clamp(1.6rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -0.04em; font-weight: 880; }
+
+    .calculator-section { background: var(--paper-2); padding: 30px 0 74px; scroll-margin-top: 72px; }
+    .calculator-section h2 { font-size: clamp(1.9rem, 3.2vw, 2.9rem); }
+    .calc-heading { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 22px; }
+    .calc-heading p { max-width: 650px; }
+    .calc-shell { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; align-items: start; }
+    .calc-main { display: grid; gap: 18px; }
+    .step-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 10px 35px rgba(9,16,35,0.055);
+    }
+    .step-head { display: flex; gap: 15px; align-items: flex-start; padding: 25px 27px 20px; }
+    .step-number {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--ink);
+      color: var(--accent);
+      font-weight: 900;
+    }
+    .step-head h3 { font-size: 1.32rem; }
+    .step-head p { margin: 5px 0 0; color: var(--muted); font-size: 0.93rem; }
+    .step-body { padding: 0 27px 27px; }
+    .section-rule { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
+
+    .mode-tabs { display: flex; gap: 8px; padding: 5px; background: var(--paper-2); border-radius: 12px; margin-bottom: 22px; }
+    .mode-tabs label { flex: 1; cursor: pointer; }
+    .mode-tabs input { position: absolute; opacity: 0; pointer-events: none; }
+    .mode-tabs span { display: block; padding: 11px 12px; border-radius: 9px; text-align: center; font-size: 0.85rem; font-weight: 780; color: var(--muted); }
+    .mode-tabs input:checked + span { background: #fff; color: var(--ink); box-shadow: 0 5px 16px rgba(9,16,35,0.09); }
+
+    .choice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 11px; margin-bottom: 22px; }
+    .choice-card { cursor: pointer; min-width: 0; }
+    .choice-card input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice-card span {
+      display: block;
+      height: 100%;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+      font-size: 0.87rem;
+      line-height: 1.35;
+      font-weight: 750;
+      transition: border .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .choice-card input:checked + span { border-color: var(--ink); background: #f8fae9; box-shadow: inset 0 0 0 1px var(--ink); }
+    .choice-card input:focus-visible + span { outline: 3px solid rgba(201,255,66,0.85); outline-offset: 3px; }
+
+    .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 17px; }
+    .field-grid.three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    label.field-label { display: block; margin-bottom: 7px; font-size: 0.86rem; font-weight: 780; }
+    .input-wrap { position: relative; }
+    .input-prefix, .input-suffix {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #687488;
+      font-weight: 780;
+      pointer-events: none;
+    }
+    .input-prefix { left: 14px; }
+    .input-suffix { right: 14px; font-size: 0.84rem; }
+    input[type="number"], input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 13px;
+      border: 1px solid #cdd6df;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      transition: border .15s ease, box-shadow .15s ease;
+    }
+    input.has-prefix { padding-left: 29px; }
+    input.has-suffix { padding-right: 62px; }
+    input:hover, textarea:hover, select:hover { border-color: #aeb9c5; }
+    input:focus, textarea:focus, select:focus { border-color: var(--ink); box-shadow: 0 0 0 4px rgba(24,34,59,0.09); outline: none; }
+    textarea { min-height: 100px; resize: vertical; }
+    .helper { display: block; margin-top: 6px; color: var(--muted); font-size: 0.76rem; line-height: 1.4; }
+    .field-error { min-height: 1.1em; margin-top: 4px; color: var(--danger); font-size: 0.75rem; }
+    .conditional { display: none; }
+    .conditional.show { display: block; animation: reveal .2s ease; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+    .result-strip {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 17px;
+      border-radius: 12px;
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+    }
+    .result-strip span { color: var(--muted); font-size: 0.84rem; }
+    .result-strip strong { text-align: right; font-size: 1.12rem; }
+    .double-count-note { margin-top: 14px; padding: 13px 15px; border-left: 4px solid var(--accent-2); background: #f8fae9; font-size: 0.82rem; display: none; }
+    .double-count-note.show { display: block; }
+
+    .range-choice { display: flex; flex-wrap: wrap; gap: 9px; }
+    .range-choice label { cursor: pointer; }
+    .range-choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .range-choice span { display: block; min-width: 68px; text-align: center; padding: 10px 13px; border: 1px solid var(--line); border-radius: 10px; font-weight: 790; font-size: 0.86rem; }
+    .range-choice input:checked + span { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .range-choice input:focus-visible + span { outline: 3px solid rgba(201,255,66,0.85); outline-offset: 3px; }
+    .range-choice .test-scenario span { border-color: var(--accent-2); box-shadow: inset 0 0 0 1px var(--accent-2); }
+    .range-choice .test-scenario span::after { content: "Test scenario"; display: block; margin-top: 2px; font-size: 0.61rem; line-height: 1.1; letter-spacing: 0.04em; text-transform: uppercase; color: var(--positive); }
+    .range-choice .test-scenario input:checked + span::after { color: var(--accent); }
+
+    .gap-panel { display: none; margin-top: 18px; padding: 21px; border-radius: 14px; background: var(--warning-bg); border: 1px solid #f4d29d; }
+    .gap-panel.show { display: block; }
+    .gap-panel h3 { color: #704000; }
+    .gap-panel ol { margin: 12px 0 0; padding-left: 21px; }
+    .gap-panel li { margin: 7px 0; }
+
+    .sticky-summary {
+      position: sticky;
+      top: 96px;
+      background: var(--ink);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .sticky-summary::after { content: ""; position: absolute; right: -80px; bottom: -90px; width: 210px; height: 210px; border-radius: 50%; background: rgba(201,255,66,0.08); pointer-events: none; }
+    .sticky-summary .eyebrow { color: rgba(255,255,255,0.64); margin-bottom: 10px; }
+    .summary-primary { margin-bottom: 20px; }
+    .summary-primary span { color: rgba(255,255,255,0.62); font-size: 0.82rem; }
+    .summary-primary strong { display: block; margin-top: 4px; color: var(--accent); font-size: 3rem; line-height: 1; letter-spacing: -0.055em; }
+    .summary-list { position: relative; z-index: 1; display: grid; gap: 0; border-top: 1px solid rgba(255,255,255,0.13); }
+    .summary-row { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.10); font-size: 0.86rem; }
+    .summary-row span { color: rgba(255,255,255,0.58); }
+    .summary-row strong { text-align: right; }
+    .summary-message { position: relative; z-index: 1; margin-top: 18px; padding: 14px; border-radius: 12px; background: rgba(255,255,255,0.08); font-size: 0.86rem; color: rgba(255,255,255,0.82); }
+    .summary-actions { position: relative; z-index: 1; display: grid; gap: 9px; margin-top: 16px; }
+    .summary-actions .btn { width: 100%; }
+
+    .full-results { background: var(--ink); color: #fff; }
+    .result-header { display: grid; grid-template-columns: 1fr auto; gap: 35px; align-items: end; }
+    .result-badge { display: inline-flex; padding: 9px 13px; border-radius: 999px; background: rgba(201,255,66,0.12); color: var(--accent); border: 1px solid rgba(201,255,66,0.3); font-size: 0.82rem; font-weight: 800; }
+    .result-grid { margin-top: 35px; display: grid; grid-template-columns: repeat(3,1fr); gap: 13px; }
+    .result-card { padding: 23px; border: 1px solid rgba(255,255,255,0.13); border-radius: 15px; background: rgba(255,255,255,0.045); }
+    .result-card.featured { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+    .result-card span { display: block; color: rgba(255,255,255,0.56); font-size: 0.78rem; font-weight: 740; text-transform: uppercase; letter-spacing: 0.065em; }
+    .result-card.featured span { color: rgba(16,21,5,0.62); }
+    .result-card strong { display: block; margin-top: 9px; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1; letter-spacing: -0.055em; }
+    .dynamic-panel { margin-top: 18px; padding: 25px; border-radius: 15px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); }
+    .dynamic-panel h3 { color: var(--accent); font-size: 1.35rem; }
+    .dynamic-panel p { color: rgba(255,255,255,0.76); }
+    .result-actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 23px; }
+    .result-actions .btn-light { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.08); color: #fff; }
+
+    .value-section { background: #fff; }
+    .value-grid { margin-top: 35px; display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .value-card { padding: 24px; border-radius: 16px; background: var(--paper-2); border: 1px solid var(--line); }
+    .value-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: var(--ink); color: var(--accent); margin-bottom: 20px; }
+    .value-card p { color: var(--muted); font-size: 0.91rem; }
+
+    .report-section { background: var(--paper-2); }
+    .report-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 64px; align-items: center; }
+    .report-cover {
+      aspect-ratio: 0.72;
+      max-width: 390px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      padding: 34px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 28px 65px rgba(9,16,35,0.24);
+      transform: rotate(-2deg);
+      overflow: hidden;
+    }
+    .report-cover::after { content: ""; position: absolute; width: 260px; height: 260px; border: 50px solid rgba(201,255,66,0.12); border-radius: 50%; right: -160px; bottom: -150px; }
+    .report-cover .mini-logo { font-weight: 900; font-size: 1.2rem; }
+    .report-cover .mini-logo span { color: var(--accent); }
+    .report-cover h3 { margin-top: 100px; max-width: 250px; font-size: 2.2rem; line-height: 1.03; letter-spacing: -0.05em; }
+    .report-cover p { color: rgba(255,255,255,0.63); }
+    .report-lines { position: absolute; left: 34px; right: 34px; bottom: 36px; display: grid; gap: 8px; }
+    .report-lines i { height: 4px; border-radius: 4px; background: rgba(255,255,255,0.12); }
+    .report-lines i:nth-child(1) { width: 100%; }
+    .report-lines i:nth-child(2) { width: 75%; }
+    .report-lines i:nth-child(3) { width: 88%; }
+
+    .review-section { background: var(--accent); color: var(--accent-ink); }
+    .review-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
+    .review-section .eyebrow::before { background: var(--ink); }
+    .review-list { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+    .review-list li { display: flex; gap: 10px; align-items: flex-start; }
+    .review-list svg { flex: none; margin-top: 3px; }
+    .review-card { padding: 29px; border-radius: 20px; background: var(--ink); color: #fff; box-shadow: var(--shadow); }
+    .review-card p { color: rgba(255,255,255,0.72); }
+    .review-card .btn { width: 100%; margin-top: 8px; }
+
+    .faq { background: #fff; }
+    details { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; padding: 22px 4px; display: flex; justify-content: space-between; gap: 20px; align-items: center; font-weight: 820; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-size: 1.6rem; font-weight: 400; }
+    details[open] summary::after { content: "-"; }
+    details p { padding: 0 4px 21px; max-width: 850px; color: var(--muted); }
+
+    footer { padding: 38px 0; background: var(--ink); color: rgba(255,255,255,0.65); }
+    .footer-grid { display: flex; justify-content: space-between; gap: 30px; align-items: center; }
+    footer a { color: #fff; }
+    .disclaimer { margin-top: 18px; max-width: 900px; font-size: 0.76rem; color: rgba(255,255,255,0.48); }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      padding: 24px;
+      background: rgba(3,7,18,0.76);
+      backdrop-filter: blur(7px);
+      overflow-y: auto;
+    }
+    .modal.show { display: grid; place-items: center; }
+    .modal-card { width: min(100%, 680px); max-height: calc(100vh - 48px); overflow-y: auto; padding: 28px; border-radius: 20px; background: #fff; box-shadow: 0 35px 90px rgba(0,0,0,0.34); }
+    .modal-head { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; margin-bottom: 22px; }
+    .modal-close { width: 42px; height: 42px; display: grid; place-items: center; flex: none; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 1.35rem; }
+    .modal-summary { margin: 16px 0 22px; padding: 16px; border-radius: 12px; background: var(--paper-2); font-size: 0.86rem; }
+    .modal-summary-grid { display: grid; grid-template-columns: 1fr auto; gap: 6px 20px; }
+    .modal-summary-grid strong { text-align: right; }
+    .checkbox-row { display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 0.84rem; }
+    .checkbox-row input { flex: none; margin-top: 4px; }
+    .modal-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .success-panel { display: none; padding: 25px; text-align: center; border-radius: 14px; background: var(--positive-bg); border: 1px solid #bde3cd; }
+    .success-panel.show { display: block; }
+    .success-panel h3 { color: var(--positive); }
+    .dev-payload { margin-top: 15px; text-align: left; padding: 12px; border-radius: 9px; background: #fff; border: 1px solid #cfe1d7; color: #35433b; font: 0.73rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+    .demo-note { margin-top: 13px; padding: 11px 13px; border-radius: 10px; background: #fff9e8; border: 1px solid #efd897; font-size: 0.77rem; color: #735000; }
+
+    @media (max-width: 980px) {
+      .hero-grid, .credibility-grid, .report-grid, .review-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-side { max-width: 600px; }
+      .calc-shell { grid-template-columns: 1fr; }
+      .sticky-summary { position: relative; top: 0; }
+      .math-panel { grid-template-columns: repeat(2,1fr); }
+      .math-cell:nth-child(2) { border-right: 0; }
+      .math-cell { border-bottom: 1px solid rgba(255,255,255,0.11); }
+      .math-cell:nth-child(3), .math-cell:nth-child(4) { border-bottom: 0; }
+      .value-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 720px) {
+      .container { width: min(calc(100% - 28px), var(--max)); }
+      section { padding: 70px 0; }
+      .nav-links a { display: none; }
+      .prototype-badge { display: none; }
+      .hero { padding: 30px 0 34px; }
+      .display { font-size: clamp(2.35rem, 11vw, 3.35rem); }
+      .hero-side { display: none; }
+      .calculator-section { padding: 24px 0 62px; }
+      #exampleButton { display: none; }
+      .hero-stat { font-size: 3.7rem; }
+      .hero-actions { flex-direction: column; align-items: stretch; margin-top: 20px; }
+      .btn { width: 100%; }
+      .calc-heading { display: block; }
+      .calc-heading .btn { margin-top: 14px; }
+      .field-grid, .field-grid.three, .choice-grid { grid-template-columns: 1fr; }
+      .math-panel, .result-grid, .value-grid { grid-template-columns: 1fr; }
+      .math-cell { border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.11) !important; }
+      .math-cell:last-child { border-bottom: 0 !important; }
+      .step-head, .step-body { padding-left: 20px; padding-right: 20px; }
+      .mode-tabs { flex-direction: column; }
+      .result-header { grid-template-columns: 1fr; }
+      .result-actions { display: grid; }
+      .footer-grid { display: grid; }
+      .modal { padding: 10px; }
+      .modal-card { max-height: calc(100vh - 20px); padding: 20px; }
+    }
+
+    @media print {
+      .topbar, .hero, .credibility, .math-section, .calculator-section, .value-section, .report-section, .review-section, .faq, footer, .result-actions, .result-badge { display: none !important; }
+      .full-results { display: block !important; padding: 20px; background: #fff; color: #000; }
+      .full-results .container { width: 100%; }
+      .full-results .eyebrow, .full-results p, .result-card span { color: #555 !important; }
+      .result-card, .dynamic-panel { background: #fff !important; color: #000 !important; border-color: #bbb !important; break-inside: avoid; }
+      .result-card.featured { background: #eee !important; }
+      .dynamic-panel h3 { color: #000; }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#top" class="logo" aria-label="Accept Recruitment home">
+        <span class="logo-mark">A</span>
+        <span class="logo-text">accept<span>recruitment</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Page navigation">
+        <a href="#calculator">Calculator</a>
+        <a href="#report">Example report</a>
+        <a href="#review">Cost review</a>
+        <span class="prototype-badge"><i></i> Working prototype</span>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">WI&sup2; Workforce Cost Calculator</div>
+          <h1 class="display">One client avoided a <strong>&pound;35,000 annual cost.</strong></h1>
+          <p class="lede" style="margin-top:15px;">Technology can reduce the administrative workload enough to redeploy an administrator elsewhere in the business, avoid additional headcount or release a role for higher-value work. Use your own figures to see whether similar value could offset your agency margin.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#calculator">Start the calculator
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+          <div class="trust-line">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.4 8.5-8 9-4.6-.5-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 12l2.3 2.3 4.8-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Around two minutes. No contact details required.
+          </div>
+        </div>
+              </div>
+    </section>
+
+    <section class="calculator-section" id="calculator">
+      <div class="container">
+        <div class="calc-heading">
+          <div>
+            <div class="eyebrow">Start here</div>
+            <h2>See what the saving could be.</h2>
+            <p class="muted">Enter your agency margin, then add released administrative capacity and optional retention savings.</p>
+          </div>
+          <button type="button" class="btn btn-light btn-sm" id="exampleButton">Use worked example figures</button>
+        </div>
+
+        <div class="calc-shell">
+          <div class="calc-main">
+            <article class="step-card" id="step1">
+              <div class="step-head">
+                <div class="step-number">1</div>
+                <div><h3>Start with the visible agency cost</h3><p>Enter either annual hours and margin per hour, or the total annual margin directly.</p></div>
+              </div>
+              <div class="step-body">
+                <div class="mode-tabs" role="radiogroup" aria-label="Agency cost calculation method">
+                  <label><input type="radio" name="marginMode" value="hourly" checked><span>Hours and hourly margin</span></label>
+                  <label><input type="radio" name="marginMode" value="direct"><span>Annual margin directly</span></label>
+                </div>
+
+                <div id="marginHourlyFields" class="conditional show">
+                  <div class="field-grid">
+                    <div class="field">
+                      <label class="field-label" for="annualHours">Temporary-worker hours each year</label>
+                      <div class="input-wrap"><input id="annualHours" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 25000"><span class="input-suffix">hours</span></div>
+                      <span class="helper">Use the total temporary hours from the last 12 months.</span>
+                    </div>
+                    <div class="field">
+                      <label class="field-label" for="marginPerHour">Agency margin per hour</label>
+                      <div class="input-wrap"><span class="input-prefix">&pound;</span><input id="marginPerHour" class="has-prefix" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 1.00"></div>
+                      <span class="helper">Exclude worker pay, on-costs and VAT.</span>
+                    </div>
+                  </div>
+                  <button type="button" class="text-button small" id="estimateHoursToggle" style="margin-top:13px;">Help me estimate annual hours</button>
+                  <div id="estimateHours" class="conditional" style="margin-top:16px;">
+                    <div class="field-grid three">
+                      <div class="field"><label class="field-label" for="avgWorkers">Average workers per week</label><input id="avgWorkers" type="number" min="0" step="1" inputmode="numeric"></div>
+                      <div class="field"><label class="field-label" for="avgHours">Average hours per worker</label><input id="avgHours" type="number" min="0" step="0.1" inputmode="decimal"></div>
+                      <div class="field"><label class="field-label" for="operatingWeeks">Operating weeks per year</label><input id="operatingWeeks" type="number" min="1" max="52" step="1" value="52" inputmode="numeric"></div>
+                    </div>
+                    <button type="button" class="btn btn-light btn-sm" id="applyHoursEstimate" style="margin-top:12px; width:auto;">Use this estimate</button>
+                  </div>
+                </div>
+
+                <div id="marginDirectFields" class="conditional">
+                  <div class="field">
+                    <label class="field-label" for="annualMarginDirect">Approximate total annual agency margin</label>
+                    <div class="input-wrap"><span class="input-prefix">&pound;</span><input id="annualMarginDirect" class="has-prefix" type="number" min="0" step="100" inputmode="decimal" placeholder="e.g. 25000"></div>
+                  </div>
+                </div>
+                <div class="result-strip"><span>Estimated annual agency margin</span><strong id="step1Result">Not calculated</strong></div>
+              </div>
+            </article>
+
+            <article class="step-card" id="step2">
+              <div class="step-head">
+                <div class="step-number">2</div>
+                <div><h3>What capacity could reduced administration release?</h3><p>Include bookings, attendance, replacements, timesheets, payroll queries, reporting and general agency coordination.</p></div>
+              </div>
+              <div class="step-body">
+                <label class="field-label">Which statement is closest to your position?</label>
+                <div class="choice-grid" role="radiogroup" aria-label="Administration cost scenario">
+                  <label class="choice-card"><input type="radio" name="adminMode" value="headcount"><span>An administrator or coordinator role could be redeployed, released for higher-value work or avoided as we grow.</span></label>
+                  <label class="choice-card"><input type="radio" name="adminMode" value="time"><span>Existing managers and employees currently absorb the workload.</span></label>
+                  <label class="choice-card"><input type="radio" name="adminMode" value="both"><span>Both apply to our operation.</span></label>
+                </div>
+
+                <div id="headcountFields" class="conditional">
+                  <hr class="section-rule">
+                  <h3>Administrative role capacity</h3>
+                  <div class="field-grid">
+                    <div class="field">
+                      <label class="field-label" for="roleCost">Fully loaded annual cost of the administrator or coordinator role</label>
+                      <div class="input-wrap"><span class="input-prefix">&pound;</span><input id="roleCost" class="has-prefix" type="number" min="0" step="100" inputmode="decimal" placeholder="e.g. 35000"></div>
+                      <span class="helper">Include salary, employer NI, pension and other employment costs.</span>
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Proportion of the role's capacity potentially released</label>
+                      <div class="range-choice" role="radiogroup" aria-label="Proportion of administrative role capacity potentially released">
+                        <label><input type="radio" name="headcountPct" value="25"><span>25%</span></label>
+                        <label><input type="radio" name="headcountPct" value="50"><span>50%</span></label>
+                        <label><input type="radio" name="headcountPct" value="75"><span>75%</span></label>
+                        <label><input type="radio" name="headcountPct" value="100"><span>100%</span></label>
+                      </div>
+                      <span class="helper">Test the capacity that could be redeployed elsewhere, used for higher-value work or used to avoid additional headcount. This is a scenario, not a predicted result.</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="timeFields" class="conditional">
+                  <hr class="section-rule">
+                  <h3>Existing management and administrative time</h3>
+                  <div class="field-grid three">
+                    <div class="field"><label class="field-label" for="weeklyHours">Combined hours spent each week</label><div class="input-wrap"><input id="weeklyHours" type="number" min="0" step="0.5" inputmode="decimal" placeholder="e.g. 20"><span class="input-suffix">hours</span></div></div>
+                    <div class="field"><label class="field-label" for="loadedHourlyCost">Average fully loaded hourly cost</label><div class="input-wrap"><span class="input-prefix">&pound;</span><input id="loadedHourlyCost" class="has-prefix" type="number" min="0" step="0.5" inputmode="decimal" placeholder="e.g. 30"></div></div>
+                    <div class="field"><label class="field-label" for="adminWeeks">Weeks per year</label><input id="adminWeeks" type="number" min="1" max="52" step="1" value="52" inputmode="numeric"></div>
+                  </div>
+                  <div class="field" style="margin-top:17px;">
+                    <label class="field-label">Proportion of this workload potentially removed</label>
+                    <div class="range-choice" role="radiogroup" aria-label="Proportion of existing workload potentially removed">
+                      <label><input type="radio" name="timePct" value="25"><span>25%</span></label>
+                      <label><input type="radio" name="timePct" value="50"><span>50%</span></label>
+                      <label><input type="radio" name="timePct" value="75"><span>75%</span></label>
+                    </div>
+                    <span class="helper">Released capacity creates value when it is productively redeployed, used for higher-value work or prevents additional headcount.</span>
+                  </div>
+                </div>
+
+                <div id="doubleCountNote" class="double-count-note">Where both scenarios apply, the calculator uses the higher value rather than adding both together. This reduces the risk of counting the same workload twice.</div>
+                <div class="result-strip"><span>Potential value from released or avoided role capacity</span><strong id="step2Result">Not calculated</strong></div>
+              </div>
+            </article>
+
+            <article class="step-card" id="step3">
+              <div class="step-head">
+                <div class="step-number">3</div>
+                <div><h3>What could improved retention save?</h3><p>WI&sup2; Mentor coaches workers while Connect supports and engages them. Together, they can help improve retention and reduce current early attrition. Test a percentage reduction using your own data; no reduction is guaranteed.</p></div>
+              </div>
+              <div class="step-body">
+                <label class="field-label">Do you know your annual inductions and four-week attrition?</label>
+                <div class="choice-grid" role="radiogroup" aria-label="Availability of attrition information">
+                  <label class="choice-card"><input type="radio" name="attritionKnowledge" value="yes"><span>Yes, I have this information.</span></label>
+                  <label class="choice-card"><input type="radio" name="attritionKnowledge" value="partial"><span>I know some of it.</span></label>
+                  <label class="choice-card"><input type="radio" name="attritionKnowledge" value="no"><span>No - my agency has not provided it.</span></label>
+                </div>
+
+                <div id="attritionFields" class="conditional">
+                  <div class="field-grid">
+                    <div class="field"><label class="field-label" for="annualInductions">Temporary workers inducted each year</label><input id="annualInductions" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 500"></div>
+                    <div class="field"><label class="field-label" for="attritionRate">Leaving within the first four weeks</label><div class="input-wrap"><input id="attritionRate" class="has-suffix" type="number" min="0" max="100" step="0.1" inputmode="decimal" placeholder="e.g. 20"><span class="input-suffix">%</span></div></div>
+                    <div class="field"><label class="field-label" for="costPerLeaver">Approximate cost of each early leaver</label><div class="input-wrap"><span class="input-prefix">&pound;</span><input id="costPerLeaver" class="has-prefix" type="number" min="0" step="10" inputmode="decimal" placeholder="e.g. 600"></div><span class="helper">Consider repeat induction, trainer time, administration, PPE, reduced productivity and management intervention.</span></div>
+                    <div class="field">
+                      <label class="field-label">What percentage reduction in current attrition do you want to test?</label>
+                      <div class="range-choice" role="radiogroup" aria-label="Percentage reduction in current four-week attrition to test">
+                        <label><input type="radio" name="attritionReduction" value="25"><span>25%</span></label>
+                        <label class="test-scenario"><input type="radio" name="attritionReduction" value="50"><span>50%</span></label>
+                        <label><input type="radio" name="attritionReduction" value="75"><span>75%</span></label>
+                      </div>
+                      <span class="helper">This reduces the number of current early leavers by the selected percentage. The 50% option is prominent as a useful test scenario, but it is not preselected, predicted or guaranteed.</span>
+                    </div>
+                  </div>
+                  <div class="result-strip"><span id="avoidedLeaversLabel">Current early leavers: - &middot; Potentially prevented: -</span><strong id="step3Result">Not calculated</strong></div>
+                </div>
+
+                <div id="gapPanel" class="gap-panel">
+                  <h3>A workforce information gap has been identified.</h3>
+                  <p>If your agency cannot tell you how many temporary workers leave within four weeks, it cannot show you what that attrition costs or demonstrate how it is reducing it.</p>
+                  <p class="small"><strong>Five questions to ask your current agency:</strong></p>
+                  <ol class="small">
+                    <li>How many temporary workers did we induct during the last 12 months?</li>
+                    <li>How many remained after seven days and 28 days?</li>
+                    <li>Which shifts, departments and start times have the highest early attrition?</li>
+                    <li>What is the estimated cost of repeat inductions and replacement activity?</li>
+                    <li>What action are you taking, and how are you measuring whether it works?</li>
+                  </ol>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="sticky-summary" aria-live="polite" aria-atomic="true">
+            <div class="eyebrow">Live result</div>
+            <div class="summary-primary"><span>Total potential annual value</span><strong id="sideTotal">&pound;0</strong></div>
+            <div class="summary-list">
+              <div class="summary-row"><span>Agency margin</span><strong id="sideMargin">-</strong></div>
+              <div class="summary-row"><span>Released/avoided capacity</span><strong id="sideAdmin">-</strong></div>
+              <div class="summary-row"><span>Retention saving</span><strong id="sideAttrition">-</strong></div>
+              <div class="summary-row"><span>Net value after margin</span><strong id="sideNet">-</strong></div>
+              <div class="summary-row"><span>Value per &pound;1 margin</span><strong id="sideMultiple">-</strong></div>
+            </div>
+            <div class="summary-message" id="sideMessage">Enter your agency cost and administration figures to see the potential result.</div>
+            <div class="summary-actions">
+              <button type="button" class="btn btn-primary btn-sm" id="sideEmailButton">Email this calculation</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="sideReviewButton">Validate the numbers</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="full-results" id="results">
+      <div class="container">
+        <div class="result-header">
+          <div><div class="eyebrow">Your calculation</div><h2>Could your recruitment service effectively pay for itself?</h2></div>
+          <div class="result-badge" id="resultBadge">Enter your figures above</div>
+        </div>
+        <div class="result-grid">
+          <div class="result-card"><span>Estimated annual agency margin</span><strong id="resultMargin">-</strong></div>
+          <div class="result-card"><span>Released/avoided role capacity</span><strong id="resultAdmin">-</strong></div>
+          <div class="result-card"><span>Potential retention saving</span><strong id="resultAttrition">-</strong></div>
+          <div class="result-card"><span>Total potential annual value</span><strong id="resultTotal">-</strong></div>
+          <div class="result-card"><span>Net value after agency margin</span><strong id="resultNet">-</strong></div>
+          <div class="result-card featured"><span>Potential value per &pound;1 of margin</span><strong id="resultMultiple">-</strong></div>
+        </div>
+        <div class="dynamic-panel" aria-live="polite">
+          <h3 id="dynamicTitle">Your result will appear here.</h3>
+          <p id="dynamicMessage">Complete the agency-cost and administration sections to compare potential value with the agency margin you pay.</p>
+          <p id="missingDataMessage" class="small" style="display:none;"></p>
+        </div>
+        <div class="result-actions">
+          <button type="button" class="btn btn-primary" id="emailButton">Email me this calculation</button>
+          <button type="button" class="btn btn-light" id="reviewButton">Request a Workforce Cost Review</button>
+          <button type="button" class="btn btn-light" id="copyButton">Copy result</button>
+          <button type="button" class="btn btn-light" id="printButton">Print or save as PDF</button>
+        </div>
+        <p class="fine" style="color:rgba(255,255,255,0.46); margin-top:20px;">This is an illustrative estimate based on the information and assumptions entered. It is not a guarantee of savings or financial performance.</p>
+      </div>
+    </section>
+
+    <section class="math-section">
+      <div class="container">
+        <div class="eyebrow">The commercial question</div>
+        <h2>What if your agency saved you twice what it earned?</h2>
+        <p class="muted" style="max-width:760px;">Most businesses compare agencies by the margin charged per hour. WI&sup2; asks a different question: after the cost and time removed from the wider operation, what does the recruitment service really cost?</p>
+        <div class="math-panel" aria-label="Illustrative value calculation">
+          <div class="math-cell"><span>Temporary hours</span><strong>25,000</strong><small>per year</small></div>
+          <div class="math-cell"><span>Agency margin</span><strong>&pound;25k</strong><small>at &pound;1 per hour</small></div>
+          <div class="math-cell"><span>Potential value</span><strong>&pound;65k</strong><small>&pound;35k role capacity + &pound;30k retention</small></div>
+          <div class="math-cell"><span>Value returned</span><strong>&pound;2.60</strong><small>for every &pound;1 of margin</small></div>
+        </div>
+        <p class="pull-quote">Your agency can tell you what it charges. Can it tell you what it saves?</p>
+        <p class="fine" style="margin-top:14px;">Illustrative example only. Actual outcomes depend on the figures entered, operational circumstances and changes successfully implemented.</p>
+      </div>
+    </section>
+
+    <section class="credibility">
+      <div class="container credibility-grid">
+        <div class="quote-card">
+          <div class="eyebrow">A fair objection</div>
+          <p><strong>&pound;35,000 sounds like a bold number.</strong> You may think this is simply another recruitment company using a large figure to get your attention.</p>
+          <p class="small" style="color:rgba(255,255,255,0.62);">That would be a reasonable reaction.</p>
+        </div>
+        <div>
+          <h2>The figure is not the promise. The method is.</h2>
+          <p class="muted">The &pound;35,000 is the approximate annual cost one client told us it avoided. This calculator does not assume that every business will achieve the same result, and it does not rely on a generic industry average.</p>
+          <p class="muted"><strong style="color:var(--text);">You enter the figures. The calculator shows the financial implication.</strong></p>
+          <ul class="check-list">
+            <li>Released administrative capacity and avoided additional headcount are calculated first.</li>
+            <li>Management time is valued using your employment costs.</li>
+            <li>Retention saving is only added when you have enough attrition information.</li>
+            <li>Potential value is compared directly with the agency margin you pay.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="value-section">
+      <div class="container">
+        <div class="eyebrow">Where the value comes from</div>
+        <h2>Not by cutting a few pence from the agency rate.</h2>
+        <div class="value-grid">
+          <article class="value-card"><div class="value-icon">01</div><h3>Redeploy administrative capacity</h3><p>Remove enough manual work to redeploy an administrator elsewhere in the business, release a role for higher-value work or avoid additional headcount as the operation grows.</p></article>
+          <article class="value-card"><div class="value-icon">02</div><h3>Release management time</h3><p>Give supervisors, managers, HR, payroll and administrators fewer spreadsheets, calls, messages and queries to manage, so their capacity can be used more productively.</p></article>
+          <article class="value-card"><div class="value-icon">03</div><h3>Improve retention</h3><p>WI&sup2; Mentor coaches workers and Connect supports and engages them, helping address avoidable early attrition and reduce repeat inductions.</p></article>
+          <article class="value-card"><div class="value-icon">04</div><h3>Make better decisions</h3><p>Move beyond fill-rate reporting and understand who attends, who returns, where people leave and where intervention is required.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="report-section" id="report">
+      <div class="container report-grid">
+        <div class="report-cover" aria-hidden="true">
+          <div class="mini-logo">accept<span>recruitment</span></div>
+          <h3>Workforce Intelligence Report</h3>
+          <p>An anonymised example</p>
+          <div class="report-lines"><i></i><i></i><i></i></div>
+        </div>
+        <div>
+          <div class="eyebrow">See the intelligence</div>
+          <h2>The calculator shows the opportunity. The report shows what makes better decisions possible.</h2>
+          <p class="muted">The anonymised WI&sup2; report demonstrates the workforce intelligence that can sit behind the calculation, including attendance, worker responses, retention patterns, operational performance and workforce feedback.</p>
+          <p class="pull-quote" style="font-size:clamp(1.35rem,2.6vw,2.1rem);">Could your current recruitment agency tell you this about your workforce?</p>
+          <button type="button" class="btn btn-dark" id="reportButton" style="margin-top:22px; width:auto;">View the anonymised WI&sup2; report</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="review-section" id="review">
+      <div class="container review-grid">
+        <div>
+          <div class="eyebrow">The next step</div>
+          <h2>Would it be a bad idea to validate the numbers?</h2>
+          <p>A calculator can identify the potential opportunity. A Workforce Cost Review tests the assumptions against the way your operation actually works.</p>
+          <ul class="review-list">
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Bookings, communication and attendance processes</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Hours processing, reporting and management time</li>
+            <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Inductions, early attrition and replacement activity</li>
+          </ul>
+        </div>
+        <div class="review-card">
+          <h3>If there is no credible financial case, we will say so.</h3>
+          <p>Use the figures you have just entered as the starting point for a straightforward commercial review - not a software demonstration.</p>
+          <button type="button" class="btn btn-primary" id="reviewSectionButton">Request my Workforce Cost Review</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="container">
+        <div class="eyebrow">Questions</div>
+        <h2>What this calculation does - and does not - claim.</h2>
+        <details><summary>Is the &pound;35,000 a guaranteed saving?</summary><p>No. It is an approximate, client-reported example of annual role capacity released or additional employment cost avoided. Every calculator result is based on the visitor's own figures and assumptions.</p></details>
+        <details><summary>Does released capacity count as cash?</summary><p>Not automatically. It represents capacity that may allow an administrator to be redeployed elsewhere, a role to focus on higher-value work or additional headcount to be avoided. The calculator presents potential operational value, not a guaranteed cash saving.</p></details>
+        <details><summary>How is the retention saving calculated?</summary><p>Current early leavers equal annual inductions multiplied by the current attrition rate. Prevented early leavers equal that result multiplied by the selected percentage reduction. The retention saving equals prevented early leavers multiplied by the cost per early leaver. WI&sup2; Mentor coaches workers and Connect supports and engages them, but the selected reduction is a test scenario, not a guaranteed result.</p></details>
+        <details><summary>Why is attrition optional?</summary><p>Many businesses do not know their annual inductions or four-week attrition rate. The calculator does not invent those figures. Instead, it identifies the information gap and gives the client questions to ask their current agency.</p></details>
+        <details><summary>Why compare savings with agency margin?</summary><p>Agency margin is visible and easy to compare. The wider cost of administering and repeatedly replacing temporary workers is often less visible. Comparing the two helps a business consider the net value of the whole service, not only the hourly rate.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <a href="#top" class="logo"><span class="logo-mark">A</span><span class="logo-text">accept<span>recruitment</span></span></a>
+        <div>WI&sup2; Workforce Intelligence System</div>
+      </div>
+      <p class="disclaimer">This calculator provides an illustrative estimate based solely on the information and assumptions entered by the user. It is not a guarantee of savings, retention improvement or financial performance. Actual outcomes depend on operational circumstances, implementation, workforce behaviour and verified baseline data. Released capacity may create value through redeployment, higher-value work or avoided additional headcount; it does not necessarily represent a direct cash saving.</p>
+    </div>
+  </footer>
+
+  <div class="modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div><div class="eyebrow" id="modalEyebrow">Your result</div><h2 id="modalTitle" style="font-size:2rem;">Email this calculation</h2><p class="muted" id="modalIntro">Enter your details and the live website will send a copy of the result.</p></div>
+        <button type="button" class="modal-close" id="modalClose" aria-label="Close dialog">&times;</button>
+      </div>
+      <div id="formArea">
+        <div class="modal-summary" id="modalSummary"></div>
+        <form id="leadForm" novalidate>
+          <input type="hidden" id="formIntent" name="form_intent">
+          <div class="field-grid">
+            <div class="field"><label class="field-label" for="firstName">First name *</label><input id="firstName" name="first_name" type="text" required autocomplete="given-name"></div>
+            <div class="field"><label class="field-label" for="lastName">Last name</label><input id="lastName" name="last_name" type="text" autocomplete="family-name"></div>
+            <div class="field"><label class="field-label" for="company">Company *</label><input id="company" name="company" type="text" required autocomplete="organization"></div>
+            <div class="field"><label class="field-label" for="jobTitle">Job title</label><input id="jobTitle" name="job_title" type="text" autocomplete="organization-title"></div>
+            <div class="field"><label class="field-label" for="workEmail">Work email *</label><input id="workEmail" name="work_email" type="email" required autocomplete="email"></div>
+            <div class="field"><label class="field-label" for="telephone">Telephone</label><input id="telephone" name="telephone" type="tel" autocomplete="tel"></div>
+            <div class="field full"><label class="field-label" for="message">Anything we should know?</label><textarea id="message" name="message"></textarea></div>
+          </div>
+          <div class="checkbox-row"><input id="marketingConsent" name="marketing_consent" type="checkbox"><label for="marketingConsent">Yes, I would also like to receive occasional workforce intelligence insights and updates by email.</label></div>
+          <p class="fine" style="margin-top:13px;">By submitting this form, you agree that Accept Recruitment may contact you about your calculation or Workforce Cost Review. Marketing consent is separate and optional.</p>
+          <div class="modal-actions"><button class="btn btn-primary" type="submit" id="submitButton">Send my calculation</button><button class="btn btn-light" type="button" id="cancelButton">Cancel</button></div>
+          <div class="demo-note"><strong>Prototype behaviour:</strong> this form saves a sample payload in the browser and shows it below. The developer will connect the live version to the website enquiry process and Campaign Monitor.</div>
+        </form>
+      </div>
+      <div class="success-panel" id="successPanel">
+        <h3>Prototype submission captured.</h3>
+        <p id="successText">The live website will now email the calculation and notify the relevant account owner.</p>
+        <div class="dev-payload" id="payloadPreview"></div>
+        <button type="button" class="btn btn-dark" id="successClose" style="margin-top:18px; width:auto;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="reportModal" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div><div class="eyebrow">Developer placeholder</div><h2 id="reportModalTitle" style="font-size:2rem;">Anonymised WI&sup2; report</h2></div>
+        <button type="button" class="modal-close report-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <p>The working prototype deliberately uses a placeholder here. In the live build this button should open:</p>
+      <p><code>/wi2-anonymised-workforce-intelligence-report.pdf</code></p>
+      <p class="muted">The PDF filename, document metadata, URL and visible page copy should not contain the anonymised client's name.</p>
+      <button type="button" class="btn btn-dark report-close" style="width:auto;">Understood</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const CONFIG = {
+        reportUrl: "",
+        formEndpoint: "",
+        campaignMonitorList: "WI2 Calculator Leads"
+      };
+
+      const $ = (id) => document.getElementById(id);
+      const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+      const getRadio = (name) => document.querySelector('input[name="' + name + '"]:checked')?.value || "";
+      const num = (id) => {
+        const value = parseFloat($(id)?.value);
+        return Number.isFinite(value) && value >= 0 ? value : 0;
+      };
+      const money = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP", maximumFractionDigits: 0 });
+      const number = new Intl.NumberFormat("en-GB", { maximumFractionDigits: 1 });
+      const formatMoney = (value) => money.format(Number.isFinite(value) ? value : 0);
+      const formatSignedMoney = (value) => value >= 0 ? formatMoney(value) : "-" + formatMoney(Math.abs(value));
+
+      const state = {
+        margin: 0,
+        headcountValue: 0,
+        timeValue: 0,
+        adminValue: 0,
+        currentEarlyLeavers: 0,
+        avoidedLeavers: 0,
+        attritionReductionPct: 0,
+        attritionValue: 0,
+        totalValue: 0,
+        netValue: 0,
+        multiple: 0,
+        offset: 0,
+        marginReady: false,
+        adminReady: false,
+        attritionReady: false,
+        attritionUnknown: false,
+        resultReady: false
+      };
+
+      window.dataLayer = window.dataLayer || [];
+      const tracked = new Set();
+      function track(event, params = {}, once = false) {
+        if (once && tracked.has(event)) return;
+        if (once) tracked.add(event);
+        window.dataLayer.push({ event, ...params });
+        console.info("WI2 event:", event, params);
+      }
+
+      const query = new URLSearchParams(window.location.search);
+      const attribution = {
+        utm_source: query.get("utm_source") || "",
+        utm_medium: query.get("utm_medium") || "",
+        utm_campaign: query.get("utm_campaign") || "",
+        utm_content: query.get("utm_content") || "",
+        landing_page: window.location.href
+      };
+
+      function toggle(id, show) { $(id).classList.toggle("show", !!show); }
+
+      function updateConditionalFields() {
+        const marginMode = getRadio("marginMode");
+        toggle("marginHourlyFields", marginMode === "hourly");
+        toggle("marginDirectFields", marginMode === "direct");
+
+        const adminMode = getRadio("adminMode");
+        toggle("headcountFields", adminMode === "headcount" || adminMode === "both");
+        toggle("timeFields", adminMode === "time" || adminMode === "both");
+        toggle("doubleCountNote", adminMode === "both");
+
+        const attritionKnowledge = getRadio("attritionKnowledge");
+        toggle("attritionFields", attritionKnowledge === "yes" || attritionKnowledge === "partial");
+        toggle("gapPanel", attritionKnowledge === "no" || attritionKnowledge === "partial");
+      }
+
+      function calculate() {
+        updateConditionalFields();
+
+        const marginMode = getRadio("marginMode");
+        if (marginMode === "hourly") {
+          state.margin = num("annualHours") * num("marginPerHour");
+          state.marginReady = num("annualHours") > 0 && num("marginPerHour") > 0;
+        } else {
+          state.margin = num("annualMarginDirect");
+          state.marginReady = state.margin > 0;
+        }
+
+        const adminMode = getRadio("adminMode");
+        const headcountPct = parseFloat(getRadio("headcountPct")) || 0;
+        const timePct = parseFloat(getRadio("timePct")) || 0;
+        state.headcountValue = num("roleCost") * headcountPct / 100;
+        state.timeValue = num("weeklyHours") * num("adminWeeks") * num("loadedHourlyCost") * timePct / 100;
+
+        const headcountReady = num("roleCost") > 0 && headcountPct > 0;
+        const timeReady = num("weeklyHours") > 0 && num("adminWeeks") > 0 && num("loadedHourlyCost") > 0 && timePct > 0;
+        if (adminMode === "headcount") {
+          state.adminValue = state.headcountValue;
+          state.adminReady = headcountReady;
+        } else if (adminMode === "time") {
+          state.adminValue = state.timeValue;
+          state.adminReady = timeReady;
+        } else if (adminMode === "both") {
+          state.adminValue = Math.max(state.headcountValue, state.timeValue);
+          state.adminReady = headcountReady && timeReady;
+        } else {
+          state.adminValue = 0;
+          state.adminReady = false;
+        }
+
+        const knowledge = getRadio("attritionKnowledge");
+        state.attritionUnknown = knowledge === "no" || knowledge === "partial";
+        const reductionSelected = parseFloat(getRadio("attritionReduction")) || 0;
+        const attritionInputsReady = num("annualInductions") > 0 && num("attritionRate") > 0 && num("costPerLeaver") > 0 && reductionSelected > 0;
+        if ((knowledge === "yes" || knowledge === "partial") && attritionInputsReady) {
+          state.currentEarlyLeavers = num("annualInductions") * num("attritionRate") / 100;
+          state.attritionReductionPct = reductionSelected;
+          state.avoidedLeavers = state.currentEarlyLeavers * state.attritionReductionPct / 100;
+          state.attritionValue = state.avoidedLeavers * num("costPerLeaver");
+          state.attritionReady = true;
+        } else {
+          state.currentEarlyLeavers = 0;
+          state.avoidedLeavers = 0;
+          state.attritionReductionPct = 0;
+          state.attritionValue = 0;
+          state.attritionReady = knowledge === "no";
+        }
+
+        state.totalValue = state.adminValue + state.attritionValue;
+        state.netValue = state.totalValue - state.margin;
+        state.multiple = state.margin > 0 ? state.totalValue / state.margin : 0;
+        state.offset = state.margin > 0 ? state.totalValue / state.margin * 100 : 0;
+        state.resultReady = state.marginReady && state.adminReady;
+
+        render();
+      }
+
+      function render() {
+        $("step1Result").textContent = state.marginReady ? formatMoney(state.margin) : "Not calculated";
+        $("step2Result").textContent = state.adminReady ? formatMoney(state.adminValue) + " per year" : "Not calculated";
+        $("step3Result").textContent = state.attritionValue > 0 ? formatMoney(state.attritionValue) + " per year" : (getRadio("attritionKnowledge") === "no" ? "Excluded" : "Not calculated");
+        $("avoidedLeaversLabel").textContent = state.attritionValue > 0 ? "Current early leavers: " + number.format(state.currentEarlyLeavers) + " · Potentially prevented at " + state.attritionReductionPct + "%: " + number.format(state.avoidedLeavers) : "Current early leavers: - · Potentially prevented: -";
+
+        $("sideMargin").textContent = state.marginReady ? formatMoney(state.margin) : "-";
+        $("sideAdmin").textContent = state.adminReady ? formatMoney(state.adminValue) : "-";
+        $("sideAttrition").textContent = state.attritionValue > 0 ? formatMoney(state.attritionValue) : (getRadio("attritionKnowledge") === "no" ? "Excluded" : "-");
+        $("sideTotal").textContent = state.resultReady ? formatMoney(state.totalValue) : "&pound;0";
+        $("sideTotal").innerHTML = state.resultReady ? formatMoney(state.totalValue) : "&pound;0";
+        $("sideNet").textContent = state.resultReady ? formatSignedMoney(state.netValue) : "-";
+        $("sideMultiple").textContent = state.resultReady ? state.multiple.toFixed(1) + "x" : "-";
+
+        $("resultMargin").textContent = state.marginReady ? formatMoney(state.margin) : "-";
+        $("resultAdmin").textContent = state.adminReady ? formatMoney(state.adminValue) : "-";
+        $("resultAttrition").textContent = state.attritionValue > 0 ? formatMoney(state.attritionValue) : (getRadio("attritionKnowledge") === "no" ? "Excluded" : "-");
+        $("resultTotal").textContent = state.resultReady ? formatMoney(state.totalValue) : "-";
+        $("resultNet").textContent = state.resultReady ? formatSignedMoney(state.netValue) : "-";
+        $("resultMultiple").textContent = state.resultReady ? state.multiple.toFixed(1) + "x" : "-";
+
+        const message = getDynamicMessage();
+        $("dynamicTitle").textContent = message.title;
+        $("dynamicMessage").textContent = message.body;
+        $("sideMessage").textContent = message.side;
+        $("resultBadge").textContent = message.badge;
+
+        const missing = state.resultReady && (getRadio("attritionKnowledge") === "no" || (getRadio("attritionKnowledge") === "partial" && !state.attritionValue));
+        $("missingDataMessage").style.display = missing ? "block" : "none";
+        $("missingDataMessage").textContent = missing ? "Potential retention savings have not been included because the necessary attrition information was unavailable. This means the result may understate the wider opportunity." : "";
+
+        if (state.marginReady) track("wi2_calculator_step_1_complete", {}, true);
+        if (state.adminReady) track("wi2_calculator_step_2_complete", { admin_scenario: getRadio("adminMode") }, true);
+        if (getRadio("attritionKnowledge") === "yes") track("wi2_calculator_attrition_known", {}, true);
+        if (getRadio("attritionKnowledge") === "no") track("wi2_calculator_attrition_unknown", {}, true);
+        if (state.resultReady) track("wi2_calculator_result_view", resultBands(), true);
+      }
+
+      function getDynamicMessage() {
+        if (!state.marginReady) return { title: "Start with the agency cost.", body: "Enter your annual temporary hours and margin per hour, or the annual agency margin directly.", side: "Enter your agency cost to establish the visible benchmark.", badge: "Enter your agency cost" };
+        if (!state.adminReady) return { title: "Now add administrative capacity.", body: "Select the scenario that best describes your operation and enter the relevant employment costs.", side: "Your annual agency margin is " + formatMoney(state.margin) + ". Now add the capacity that could be redeployed, released for higher-value work or used to avoid additional headcount.", badge: "Agency margin: " + formatMoney(state.margin) };
+        if (state.multiple >= 2) return { title: "The potential value is approximately " + state.multiple.toFixed(1) + " times the agency margin.", body: "Based on your figures, " + formatMoney(state.totalValue) + " of potential value compares with approximately " + formatMoney(state.margin) + " of agency margin. In net financial terms, the service could effectively pay for itself and return a further " + formatMoney(state.netValue) + " in operational value.", side: "Potential value could fully offset the agency margin and return " + formatMoney(state.netValue) + " again.", badge: state.multiple.toFixed(1) + "x potential value-to-margin" };
+        if (state.multiple >= 1) return { title: "The potential value could fully offset the agency margin.", body: "Based on your figures, the value identified is " + formatMoney(state.totalValue) + " against an estimated agency margin of " + formatMoney(state.margin) + ", leaving approximately " + formatMoney(state.netValue) + " in additional operational value.", side: "The identified value could fully offset the agency margin.", badge: Math.round(state.offset) + "% of margin offset" };
+        return { title: "The identified value could offset approximately " + Math.round(state.offset) + "% of the agency margin.", body: "Based on the figures entered, the current calculation identifies " + formatMoney(state.totalValue) + " of potential value. It excludes any cost for which information has not been provided, including attendance failure, overtime, productivity loss, quality issues and unfilled shifts.", side: "Current inputs could offset around " + Math.round(state.offset) + "% of the agency margin.", badge: Math.round(state.offset) + "% of margin offset" };
+      }
+
+      function resultBands() {
+        let savingBand = "under_10000";
+        if (state.totalValue >= 100000) savingBand = "100000_plus";
+        else if (state.totalValue >= 50000) savingBand = "50000_99999";
+        else if (state.totalValue >= 25000) savingBand = "25000_49999";
+        else if (state.totalValue >= 10000) savingBand = "10000_24999";
+        let multipleBand = "under_0_5x";
+        if (state.multiple >= 2) multipleBand = "2x_plus";
+        else if (state.multiple >= 1.5) multipleBand = "1_5_1_9x";
+        else if (state.multiple >= 1) multipleBand = "1_0_1_4x";
+        else if (state.multiple >= 0.5) multipleBand = "0_5_0_9x";
+        return { result_band: savingBand, value_multiple_band: multipleBand, attrition_known: getRadio("attritionKnowledge") === "yes" ? "yes" : "no", admin_scenario: getRadio("adminMode") || "not_selected" };
+      }
+
+      function loadExample() {
+        document.querySelector('input[name="marginMode"][value="hourly"]').checked = true;
+        $("annualHours").value = "25000";
+        $("marginPerHour").value = "1";
+        document.querySelector('input[name="adminMode"][value="both"]').checked = true;
+        $("roleCost").value = "35000";
+        document.querySelector('input[name="headcountPct"][value="100"]').checked = true;
+        $("weeklyHours").value = "20";
+        $("loadedHourlyCost").value = "30";
+        $("adminWeeks").value = "52";
+        document.querySelector('input[name="timePct"][value="50"]').checked = true;
+        document.querySelector('input[name="attritionKnowledge"][value="yes"]').checked = true;
+        $("annualInductions").value = "500";
+        $("attritionRate").value = "20";
+        $("costPerLeaver").value = "600";
+        document.querySelector('input[name="attritionReduction"][value="50"]').checked = true;
+        calculate();
+        $("calculator").scrollIntoView({ behavior: "smooth", block: "start" });
+        track("wi2_calculator_example_loaded", {}, false);
+      }
+
+      function resultSummaryText() {
+        if (!state.resultReady) return "Complete the calculator before copying the result.";
+        return [
+          "WI2 Temporary Workforce Cost Calculation",
+          "Estimated annual agency margin: " + formatMoney(state.margin),
+          "Potential value from released or avoided role capacity: " + formatMoney(state.adminValue),
+          "Current early leavers: " + number.format(state.currentEarlyLeavers),
+          "Attrition reduction scenario tested: " + state.attritionReductionPct + "%",
+          "Potentially prevented early leavers: " + number.format(state.avoidedLeavers),
+          "Potential retention saving: " + formatMoney(state.attritionValue),
+          "Total potential annual value: " + formatMoney(state.totalValue),
+          "Potential net value after margin: " + formatSignedMoney(state.netValue),
+          "Potential value per GBP1 of margin: " + state.multiple.toFixed(1) + "x",
+          "",
+          getDynamicMessage().body,
+          "",
+          "Illustrative estimate based on user-entered assumptions; not a guarantee of savings."
+        ].join("\n");
+      }
+
+      async function copyResult() {
+        const text = resultSummaryText();
+        try {
+          await navigator.clipboard.writeText(text);
+          $("copyButton").textContent = "Copied";
+          setTimeout(() => $("copyButton").textContent = "Copy result", 1800);
+        } catch (e) {
+          const area = document.createElement("textarea");
+          area.value = text;
+          document.body.appendChild(area);
+          area.select();
+          document.execCommand("copy");
+          area.remove();
+        }
+      }
+
+      function openLeadModal(intent) {
+        if (!state.resultReady) {
+          $("calculator").scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+        const isReview = intent === "workforce_cost_review";
+        $("formIntent").value = intent;
+        $("modalEyebrow").textContent = isReview ? "Workforce Cost Review" : "Your calculation";
+        $("modalTitle").textContent = isReview ? "Would it be a bad idea to validate the numbers?" : "Email this calculation";
+        $("modalIntro").textContent = isReview ? "Tell us who to contact. The live website will send the calculation with your request." : "Enter your details and the live website will email a copy of the result.";
+        $("submitButton").textContent = isReview ? "Request my review" : "Send my calculation";
+        $("modalSummary").innerHTML = '<div class="modal-summary-grid">' +
+          '<span>Agency margin</span><strong>' + formatMoney(state.margin) + '</strong>' +
+          '<span>Total potential value</span><strong>' + formatMoney(state.totalValue) + '</strong>' +
+          '<span>Net value after margin</span><strong>' + formatSignedMoney(state.netValue) + '</strong>' +
+          '<span>Value per &pound;1 of margin</span><strong>' + state.multiple.toFixed(1) + 'x</strong></div>';
+        $("formArea").style.display = "block";
+        $("successPanel").classList.remove("show");
+        $("leadModal").classList.add("show");
+        document.body.classList.add("modal-open");
+        setTimeout(() => $("firstName").focus(), 50);
+      }
+
+      function closeLeadModal() {
+        $("leadModal").classList.remove("show");
+        document.body.classList.remove("modal-open");
+      }
+
+      function showReport() {
+        if (CONFIG.reportUrl) {
+          window.open(CONFIG.reportUrl, "_blank", "noopener");
+        } else {
+          $("reportModal").classList.add("show");
+          document.body.classList.add("modal-open");
+        }
+        track("wi2_calculator_report_click", resultBands(), false);
+      }
+
+      function closeReport() {
+        $("reportModal").classList.remove("show");
+        document.body.classList.remove("modal-open");
+      }
+
+      function buildPayload(form) {
+        const fd = new FormData(form);
+        return {
+          contact: Object.fromEntries(fd.entries()),
+          calculation: {
+            annual_agency_margin: Math.round(state.margin),
+            administration_headcount_value: Math.round(state.adminValue),
+            released_or_avoided_capacity_value: Math.round(state.adminValue),
+            current_early_leavers: Number(state.currentEarlyLeavers.toFixed(2)),
+            attrition_reduction_percentage: state.attritionReductionPct,
+            prevented_early_leavers: Number(state.avoidedLeavers.toFixed(2)),
+            attrition_value: Math.round(state.attritionValue),
+            total_potential_value: Math.round(state.totalValue),
+            net_potential_value: Math.round(state.netValue),
+            value_multiple: Number(state.multiple.toFixed(2)),
+            margin_offset_percentage: Math.round(state.offset),
+            attrition_information_known: getRadio("attritionKnowledge") === "yes",
+            admin_scenario: getRadio("adminMode")
+          },
+          attribution,
+          campaign_monitor_list: CONFIG.campaignMonitorList,
+          submitted_at: new Date().toISOString()
+        };
+      }
+
+      function submitLead(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        if (!form.reportValidity()) return;
+        const payload = buildPayload(form);
+        try {
+          const existing = JSON.parse(localStorage.getItem("wi2DemoSubmissions") || "[]");
+          existing.push(payload);
+          localStorage.setItem("wi2DemoSubmissions", JSON.stringify(existing));
+        } catch (storageError) {
+          console.warn("Prototype storage unavailable; displaying payload without saving it.", storageError);
+        }
+        $("formArea").style.display = "none";
+        $("successPanel").classList.add("show");
+        $("successText").textContent = payload.contact.form_intent === "workforce_cost_review" ? "The live website will notify the team and send the visitor a copy of the calculation." : "The live website will email the visitor a copy of the calculation.";
+        $("payloadPreview").textContent = JSON.stringify(payload, null, 2);
+        track(payload.contact.form_intent === "workforce_cost_review" ? "wi2_calculator_review_request" : "wi2_calculator_email_result", resultBands(), false);
+      }
+
+      $$('input').forEach((input) => {
+        input.addEventListener("input", () => { track("wi2_calculator_start", {}, true); calculate(); });
+        input.addEventListener("change", calculate);
+      });
+
+      $("estimateHoursToggle").addEventListener("click", () => toggle("estimateHours", !$("estimateHours").classList.contains("show")));
+      $("applyHoursEstimate").addEventListener("click", () => {
+        const estimate = num("avgWorkers") * num("avgHours") * num("operatingWeeks");
+        if (estimate > 0) { $("annualHours").value = Math.round(estimate); calculate(); }
+      });
+      $("exampleButton").addEventListener("click", loadExample);
+      $("heroExampleButton")?.addEventListener("click", loadExample);
+      $("emailButton").addEventListener("click", () => openLeadModal("email_result"));
+      $("sideEmailButton").addEventListener("click", () => openLeadModal("email_result"));
+      $("reviewButton").addEventListener("click", () => openLeadModal("workforce_cost_review"));
+      $("sideReviewButton").addEventListener("click", () => openLeadModal("workforce_cost_review"));
+      $("reviewSectionButton").addEventListener("click", () => openLeadModal("workforce_cost_review"));
+      $("copyButton").addEventListener("click", copyResult);
+      $("printButton").addEventListener("click", () => window.print());
+      $("reportButton").addEventListener("click", showReport);
+      $("modalClose").addEventListener("click", closeLeadModal);
+      $("cancelButton").addEventListener("click", closeLeadModal);
+      $("successClose").addEventListener("click", closeLeadModal);
+      $$(".report-close").forEach((button) => button.addEventListener("click", closeReport));
+      $("leadModal").addEventListener("click", (e) => { if (e.target === $("leadModal")) closeLeadModal(); });
+      $("reportModal").addEventListener("click", (e) => { if (e.target === $("reportModal")) closeReport(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeLeadModal(); closeReport(); } });
+      $("leadForm").addEventListener("submit", submitLead);
+
+      track("wi2_calculator_view", attribution, true);
+      calculate();
+      if (query.get("example") === "1") {
+        loadExample();
+      }
+    })();
+  </script>
+</body>
+</html>
