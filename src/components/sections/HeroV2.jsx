@@ -349,9 +349,8 @@ function DashboardPanel() {
                 className="rounded-xl p-2"
                 style={{
                   background: "rgba(255,255,255,0.04)",
-                  border: `1px solid ${
-                    s.accent ? "rgba(0,165,165,0.22)" : "rgba(255,255,255,0.06)"
-                  }`,
+                  border: `1px solid ${s.accent ? "rgba(0,165,165,0.22)" : "rgba(255,255,255,0.06)"
+                    }`,
                 }}
               >
                 <div className="mb-1 text-[9px] lg:text-[10px] text-white/38">
@@ -395,7 +394,7 @@ function DashboardPanel() {
               </div>
               <Sparkline data={[4, 5, 3, 6, 5, 7, 6, 8, 7, 9]} />
               <div className="mt-1 text-[10px] text-white/25">
-                Based on 286 reviews
+                Based on 1400+ reviews
               </div>
             </div>
 
@@ -460,7 +459,7 @@ const BOTTOM_STATS = [
       </svg>
     ),
     value: "4.8 Google rating",
-    sub: "Based on 286 reviews",
+    sub: "Based on 1400+ reviews",
   },
   {
     icon: (
@@ -481,26 +480,6 @@ const BOTTOM_STATS = [
     ),
     value: "1,200+ workers daily",
     sub: "Across all sites",
-  },
-  {
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z"
-        />
-      </svg>
-    ),
-    value: "ISO 9001 Certified",
-    sub: "Quality you can trust",
   },
 ];
 
@@ -613,8 +592,7 @@ export function HeroV2() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.22 }}
           >
-            The Workforce Intelligence System helping industrial businesses
-            understand, retain and strengthen their temporary workforce.
+            The Workforce Intelligence System helping industrial businesses recruit, understand, retain and strengthen their workforce.
           </motion.p>
 
           {/* CTAs */}
@@ -625,7 +603,7 @@ export function HeroV2() {
             transition={{ duration: 0.6, delay: 0.35 }}
           >
             <Link
-              href="/innovation-partners#apply"
+              href="/get-started"
               className="group inline-flex items-center gap-2 rounded-xl border border-teal-5 px-7 py-3.5 text-base font-bold text-white transition-all duration-300 bg-teal-5"
             >
               <span>Book a Workforce Intelligence Review</span>
@@ -648,7 +626,7 @@ export function HeroV2() {
 
             <Link
               href="/get-started"
-              className="inline-flex underline items-center gap-1.5 text-sm font-semibold text-white underline-offset-2 transition-colors duration-200 hover:text-teal-4"
+              className="inline-flex underline items-center gap-1.5 text-lg font-semibold text-white underline-offset-2 transition-colors duration-200 hover:text-teal-4"
             >
               Need temporary staff today? <span className="ml-0.5">→</span>
             </Link>
@@ -676,13 +654,12 @@ export function HeroV2() {
         </div>
       </div>
 
-      {/* ── Bottom 3-col stats bar ── */}
       <div className="hero-v2-stats-bar relative z-10 w-full border-t border-white/10" style={{ backdropFilter: "blur(16px)" }}>
-        <div className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-white/7 sm:grid-cols-3 sm:divide-x sm:divide-y-0 px-6">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 divide-y divide-white/7 sm:grid-cols-2 sm:divide-x sm:divide-y-0 px-6">
           {BOTTOM_STATS.map((s, i) => (
             <motion.div
               key={i}
-              className="flex items-center gap-4 py-5 sm:px-8"
+              className="flex items-center lg:justify-center gap-4 py-5 sm:px-8"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.65 + i * 0.12 }}
