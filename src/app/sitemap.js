@@ -56,7 +56,7 @@ export default async function sitemap() {
     { path: '/join-our-team', priority: 0.7 },
     { path: '/innovation-partners', priority: 0.6 },
     { path: '/pay-query', priority: 0.5 },
-    { path: '/roi-calculator', priority: 0.5 },
+    { path: '/workforce-cost-calculator', priority: 0.8 },
     { path: '/success-stories', priority: 0.7 },
     { path: '/employers/rewards', priority: 0.6 },
     { path: '/clients/intelligence', priority: 0.6 },

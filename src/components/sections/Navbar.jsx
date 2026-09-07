@@ -150,9 +150,9 @@ const menuData = {
           },
           {
             icon: IconChartBar,
-            label: "ROI Calculator",
-            desc: "See your cost savings",
-            href: "/roi-calculator",
+            label: "Workforce Cost Calculator",
+            desc: "WI² margin & value comparison",
+            href: "/workforce-cost-calculator",
           },
         ],
       },
@@ -172,6 +172,7 @@ const menuData = {
       {
         heading: "Client Tools",
         items: [
+          { label: "Workforce Cost Calculator", href: "/workforce-cost-calculator" },
           { label: "AcceptPulse", href: "/technology/acceptpulse" },
           { label: "Client Portal", href: "/technology/client-portal" },
           { label: "Rate Calculator", href: "/technology/rate-calculator" },
@@ -212,6 +213,11 @@ const menuData = {
       {
         heading: "Solutions",
         items: [
+          {
+            label: "Workforce Cost Calculator",
+            desc: "Calculate potential margin offset",
+            href: "/workforce-cost-calculator",
+          },
           {
             label: "AcceptRewards",
             desc: "Why our workers perform better",

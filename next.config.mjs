@@ -3,6 +3,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/roi-calculator',
+        destination: '/workforce-cost-calculator',
+        permanent: true,
+      },
+      {
+        source: '/wi2-calculator',
+        destination: '/workforce-cost-calculator',
+        permanent: true,
+      },
+      {
         source: '/tools/rate-calculator',
         destination: '/technology/rate-calculator',
         permanent: true,

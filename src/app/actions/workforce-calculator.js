@@ -158,6 +158,7 @@ export async function submitWorkforceCalculatorLead(payload) {
 
     // Campaign attribution
     const utmDetails = [
+      attribution.campaign_id ? `ID: ${attribution.campaign_id}` : null,
       attribution.utm_source ? `Source: ${attribution.utm_source}` : null,
       attribution.utm_medium ? `Medium: ${attribution.utm_medium}` : null,
       attribution.utm_campaign ? `Campaign: ${attribution.utm_campaign}` : null,
