@@ -23,13 +23,14 @@ export async function GET(request, context) {
     timeStyle: "short",
   });
 
-  const webhookUrl = process.env.GOOGLE_SHEET_CAMPAIGN_WEBHOOK_URL;
+  const webhookUrl =
+    process.env.GOOGLE_SHEET_CAMPAIGN_WEBHOOK_URL ||
+    "https://script.google.com/macros/s/AKfycbwU9D2pwFlegZ3BKgSs03SgyuwNaPaPXgkMd1BJAxCkAhcP3jIRRIKdglr7zDlDeU6h3w/exec";
 
-  // 1. Notify Google Sheet Webhook if configured
+  // 1. Notify Google Sheet Webhook
   if (webhookUrl && !isBot && cleanId) {
     try {
-      // Fire-and-forget fetch to Google Apps Script
-      fetch(webhookUrl, {
+      await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -38,16 +39,16 @@ export async function GET(request, context) {
           userAgent,
           ip,
         }),
-      }).catch((err) => console.error("Google Sheet webhook error:", err));
+      });
     } catch (err) {
-      console.error("Failed to initiate webhook call:", err);
+      console.error("Google Sheet webhook error:", err);
     }
   }
 
   // 2. Notify Slack channel
   if (!isBot && cleanId) {
     try {
-      sendSlackMessage([
+      await sendSlackMessage([
         {
           type: "header",
           text: {
@@ -80,7 +81,7 @@ export async function GET(request, context) {
             },
           ],
         },
-      ]).catch((err) => console.error("Slack alert error:", err));
+      ]);
     } catch (slackErr) {
       console.error("Failed to send Slack alert:", slackErr);
     }
