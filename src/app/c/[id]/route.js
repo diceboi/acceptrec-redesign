@@ -27,10 +27,12 @@ export async function GET(request, context) {
     process.env.GOOGLE_SHEET_CAMPAIGN_WEBHOOK_URL ||
     "https://script.google.com/macros/s/AKfycbwU9D2pwFlegZ3BKgSs03SgyuwNaPaPXgkMd1BJAxCkAhcP3jIRRIKdglr7zDlDeU6h3w/exec";
 
-  // 1. Notify Google Sheet Webhook
+  let sheetData = null;
+
+  // 1. Notify Google Sheet Webhook and verify prospect
   if (webhookUrl && !isBot && cleanId) {
     try {
-      await fetch(webhookUrl, {
+      const response = await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -39,15 +41,50 @@ export async function GET(request, context) {
           userAgent,
           ip,
         }),
+        signal: AbortSignal.timeout(6000),
       });
+
+      if (response.ok) {
+        sheetData = await response.json().catch(() => null);
+      }
     } catch (err) {
       console.error("Google Sheet webhook error:", err);
     }
   }
 
-  // 2. Notify Slack channel
-  if (!isBot && cleanId) {
+  // 2. Notify Slack channel ONLY if valid campaign prospect was verified in sheet
+  if (!isBot && cleanId && sheetData?.status === "success") {
     try {
+      const company = sheetData.company || "Unknown Company";
+      const contact = sheetData.name || "Unknown Contact";
+      const count = sheetData.count || 1;
+
+      const fields = [
+        {
+          type: "mrkdwn",
+          text: `*Company:*\n${company}`,
+        },
+        {
+          type: "mrkdwn",
+          text: `*Contact:*\n${contact}`,
+        },
+        {
+          type: "mrkdwn",
+          text: `*Campaign ID:*\n\`${cleanId}\``,
+        },
+        {
+          type: "mrkdwn",
+          text: `*Time (UK):*\n${ukTimeString}`,
+        },
+      ];
+
+      if (count > 1) {
+        fields.push({
+          type: "mrkdwn",
+          text: `*Visits:*\n${count}x`,
+        });
+      }
+
       await sendSlackMessage([
         {
           type: "header",
@@ -59,16 +96,7 @@ export async function GET(request, context) {
         },
         {
           type: "section",
-          fields: [
-            {
-              type: "mrkdwn",
-              text: `*Campaign ID:*\n\`${cleanId}\``,
-            },
-            {
-              type: "mrkdwn",
-              text: `*Time (UK):*\n${ukTimeString}`,
-            },
-          ],
+          fields,
         },
         {
           type: "context",
@@ -77,7 +105,7 @@ export async function GET(request, context) {
               type: "mrkdwn",
               text: `📍 *Source:* Royal Mail Print Campaign | Device: ${
                 userAgent.includes("Mobile") ? "📱 Mobile" : "💻 Desktop"
-              }`,
+              }${count > 1 ? ` | 🔄 Repeat Visitor (${count}th time)` : ""}`,
             },
           ],
         },
@@ -85,6 +113,8 @@ export async function GET(request, context) {
     } catch (slackErr) {
       console.error("Failed to send Slack alert:", slackErr);
     }
+  } else if (!isBot && cleanId && sheetData?.status === "not_found") {
+    console.warn(`[Print Campaign] Ignored scan for unknown campaign ID: "${cleanId}"`);
   }
 
   // 3. Redirect to live calculator with attribution
