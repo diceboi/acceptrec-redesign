@@ -35,8 +35,9 @@ function ContactHero() {
                     <span className="w-2 h-2 rounded-full bg-teal-5 animate-pulse" />
                     <span className="text-sm font-semibold text-teal-4">24/7 Availability</span>
                 </motion.div>
-                <motion.h1 className="font-sans text-5xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-7xl mb-8" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>Let&apos;s Talk</motion.h1>
-                <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>Three offices across the Midlands. WhatsApp us for an instant response.</motion.p>
+                <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                    Three offices across the Midlands. Not sure <Link href="/where-we-cover" className="text-teal-4 hover:underline font-medium">which branch covers you</Link>? See our travel-time catchment guide or message any office below.
+                </motion.p>
             </div>
             <div className="pointer-events-none absolute bottom-0 left-0 h-32 w-full bg-gradient-to-t from-navy-700 to-transparent" />
         </section>

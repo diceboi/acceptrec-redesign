@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
@@ -99,7 +100,14 @@ function CalculatorHero() {
         >
           Holiday pay, employer NI, pension contributions... these are statutory
           requirements. Every recruiter pays them. Every employer pays them.
-          They&apos;re unavoidable.
+          They&apos;re unavoidable. Read our full guide on{" "}
+          <Link
+            href="/workforce-intelligence/reducing-agency-labour-costs"
+            className="text-teal-4 hover:underline font-medium"
+          >
+            what sits inside an hourly rate
+          </Link>{" "}
+          to see why quotes differ and how margins are structured.
         </motion.p>
       </div>
     </section>

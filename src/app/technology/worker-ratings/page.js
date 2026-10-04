@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
@@ -42,7 +43,7 @@ function RatingsHero() {
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          We Rate Every Worker. <br /><span className="text-teal-5">Every Shift.</span>
+          Structured Worker Ratings. <br /><span className="text-teal-5">Across Four Dimensions.</span>
         </motion.h1>
 
         <motion.p
@@ -51,7 +52,14 @@ function RatingsHero() {
           animate={{ opacity: 1, y: 0 }} 
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Your feedback matters. The good ones come back. The bad ones don't. <br/>Data-driven workforce quality you can rely on.
+          Authorised supervisors rate punctuality, work quality, attitude, and communication when they choose to — feeding live records to stop unsuitable workers returning. Discover{" "}
+          <Link
+            href="/workforce-intelligence/temporary-worker-feedback/"
+            className="text-teal-4 hover:underline font-semibold"
+          >
+            how to give useful feedback
+          </Link>{" "}
+          and what temporary worker behaviour tells you.
         </motion.p>
       </div>
     </section>

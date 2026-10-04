@@ -44,7 +44,7 @@ function InnerHero() {
           Your Warehouse <span className="text-teal-5">Never Stops</span>
         </motion.h2>
         <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-          Peak season, night shifts, last-minute cover. A decade of logistics expertise, built into systems that deliver.
+          Peak season, night shifts, last-minute cover across the Midlands. See <Link href="/where-we-cover" className="text-teal-4 hover:underline font-medium">where we cover</Link> and how shift travel times determine reliable site attendance.
         </motion.p>
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
           <Button variant="primary" size="lg" href="/get-started">Fix Your Staffing</Button>
@@ -85,9 +85,43 @@ function HeroStats() {
 // ─── Pain Points ───────────────────────────────────────────────────────────
 function PainPoints() {
   const pains = [
-    { title: "Peak season panic", desc: "We've planned 200+ peak seasons. Your surge is our normal Tuesday.", icon: IconAlertCircle },
-    { title: "No-shows killing productivity", desc: "AcceptPulse tracks arrivals in real-time. Know who's on site before your shift starts.", icon: IconDeviceDesktopAnalytics },
-    { title: "Agency workers who can't keep up", desc: "We rate every worker, every shift. Unreliable ones don't come back.", icon: IconStarFilled },
+    {
+      title: "Peak season panic",
+      desc: (
+        <>
+          We&apos;ve planned 200+ peak seasons with reliable{" "}
+          <Link href="/recruitment/high-volume" className="text-teal-4 hover:underline font-medium">
+            peak and high volume
+          </Link>{" "}
+          staffing. Your surge is our normal Tuesday.
+        </>
+      ),
+      icon: IconAlertCircle,
+    },
+    {
+      title: "Agency workers who can't keep up",
+      desc: (
+        <>
+          Structured supervisor ratings across four dimensions ensure poor performers are filtered out.
+          Considering{" "}
+          <Link
+            href="/employers/changing-recruitment-supplier"
+            className="text-teal-4 hover:underline font-medium"
+          >
+            switching agency
+          </Link>
+          ? See how to transition safely without losing attendance, and discover our operational approach to{" "}
+          <Link
+            href="/workforce-intelligence/temporary-worker-retention/"
+            className="text-teal-4 hover:underline font-medium"
+          >
+            keeping reliable workers
+          </Link>{" "}
+          shift after shift.
+        </>
+      ),
+      icon: IconStarFilled,
+    },
     { title: "Forklift certification chaos", desc: "Every licence verified. Every expiry tracked. No surprises.", icon: IconShieldCheck },
   ];
 

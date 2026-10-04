@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
@@ -310,7 +311,18 @@ function FeaturesGrid() {
         },
         {
             title: "Analytics",
-            desc: "Identify trends and gain insights into your site performance with automated high-level data visualisations.",
+            desc: (
+                <>
+                    Identify operational trends and discover{" "}
+                    <Link
+                        href="/workforce-intelligence/workforce-analytics/"
+                        className="text-teal-4 hover:underline font-semibold"
+                    >
+                        what to review each week
+                    </Link>{" "}
+                    to manage agency labour before output is affected.
+                </>
+            ),
             icon: IconChartBar
         }
     ];

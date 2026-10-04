@@ -159,6 +159,16 @@ function ContentSection() {
                                     </div>
                                 ))}
                             </div>
+                            <p className="mt-6 text-white/60 text-sm leading-relaxed">
+                                Explore{" "}
+                                <Link
+                                    href="/workforce-intelligence/workforce-analytics/"
+                                    className="text-teal-4 hover:underline font-semibold"
+                                >
+                                    the reporting behind this
+                                </Link>{" "}
+                                and learn what workforce metrics operations managers should review weekly.
+                            </p>
                         </motion.div>
                     </div>
 

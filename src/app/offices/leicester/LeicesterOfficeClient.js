@@ -193,6 +193,7 @@ function CoverageSection() {
                         <div>
                              <h4 className="text-white text-2xl font-semibold mb-4">Covering the East Midlands</h4>
                              <p className="text-[#8B98AB] leading-relaxed font-medium">From our Leicester base, we serve operations across the region: Coalville, Loughborough, Market Harborough, Hinckley, Lutterworth, and the dozens of industrial estates scattered between them. Whether you&apos;re on the A6, A46, or tucked away on a trading estate in Braunstone, we&apos;ve probably already got people working near you.</p>
+                             <p className="mt-4 text-sm text-[#8B98AB]">Looking for coverage across Coventry, Warwickshire, or Tamworth? Explore <Link href="/where-we-cover" className="text-teal-5 hover:underline font-semibold">our other branches</Link> and complete Midlands coverage.</p>
                         </div>
                         <div className="space-y-6">
                              <div className="flex items-center gap-4"><div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-5"><IconMapPin size={24} /></div><div className="text-[#8B98AB] text-sm font-medium">Forest Business Park<br />Leicester, United Kingdom</div></div>

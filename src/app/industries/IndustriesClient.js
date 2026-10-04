@@ -71,7 +71,7 @@ function InnerHero() {
           className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Not generic staffing. Specialist knowledge in logistics, manufacturing, e-commerce, and food production.
+          Not generic staffing. Specialist knowledge in logistics, manufacturing, engineering & technical, e-commerce, and food production.
         </motion.p>
 
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>

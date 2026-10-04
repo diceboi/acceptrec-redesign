@@ -310,3 +310,44 @@ export async function notifyAccessRequest(email) {
   ];
   return sendSlackMessage(blocks, process.env.ADMIN_SLACK_WEBHOOK_URL);
 }
+
+export async function notifyChangingSupplierEnquiry(formData) {
+  const { name, company, telephone, siteLocation, requirements } = formData;
+
+  const blocks = [
+    {
+      type: "header",
+      text: {
+        type: "plain_text",
+        text: "🚨 Urgent Staffing / Supplier Change Enquiry",
+        emoji: true,
+      },
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*Contact Name:*\n${name || "Not provided"}` },
+        { type: "mrkdwn", text: `*Company:*\n${company || "Not provided"}` },
+      ],
+    },
+    {
+      type: "section",
+      fields: [
+        { type: "mrkdwn", text: `*Telephone:*\n${telephone || "Not provided"}` },
+        { type: "mrkdwn", text: `*Site / Postcode:*\n${siteLocation || "Not provided"}` },
+      ],
+    },
+    {
+      type: "divider",
+    },
+    {
+      type: "section",
+      text: {
+        type: "mrkdwn",
+        text: `*What is needed and when:*\n${requirements || "Not specified"}`,
+      },
+    },
+  ];
+
+  return sendSlackMessage(blocks);
+}

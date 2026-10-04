@@ -86,7 +86,19 @@ function HeroStats() {
 // ─── Pain Points ───────────────────────────────────────────────────────────
 function PainPoints() {
   const pains = [
-    { title: "Peak season nightmares", desc: "We've scaled operations from 50 to 500 workers in days. Your peak is our expertise.", icon: IconAlertCircle },
+    {
+      title: "Peak season nightmares",
+      desc: (
+        <>
+          We scale operations rapidly with dedicated{" "}
+          <Link href="/recruitment/high-volume" className="text-teal-4 hover:underline font-medium">
+            peak staffing
+          </Link>{" "}
+          plans. Your peak is our expertise.
+        </>
+      ),
+      icon: IconAlertCircle,
+    },
     { title: "Pick rates that miss targets", desc: "We send experienced pickers who know the pressure. Not first-timers learning on your dime.", icon: IconStarFilled },
     { title: "Returns piling up post-peak", desc: "Dedicated returns teams ready to deploy. Clear the backlog, recover the value.", icon: IconRefresh },
     { title: "Can't find reliable night shift workers", desc: "Our database includes thousands of night-shift-ready workers. We know who actually shows up at 2am.", icon: IconMoon },

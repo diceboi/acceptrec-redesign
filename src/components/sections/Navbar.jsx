@@ -36,63 +36,103 @@ import {
   IconMenu2,
   IconX,
   IconChevronDown,
+  IconShieldCheck,
 } from "@tabler/icons-react";
 
-// ─── Mega-menu data ──────────────────────────────────────────────────
-// Each menu can have:
-//   sections   – array of { heading, items: [{ icon, label, desc, href }] }
-//   featured   – top header block { title, desc, href }
-//   footer     – bottom CTA block { label, badge, desc, href }
+// ─── Mega-menu data (Agreed Navigation Structure v2.1) ─────────────────
+// 6 Top Level Options:
+// 1. Recruitment Services
+// 2. Industries
+// 3. Workforce Intelligence
+// 4. Technology
+// 5. About Accept
+// 6. Candidates
 
 const menuData = {
   services: {
     id: "services",
-    title: "Services",
-    width: "w-[560px]",
+    title: "Recruitment Services",
+    width: "w-[620px]",
     sections: [
       {
-        heading: "Staffing Solutions",
+        heading: "Staffing Services",
         items: [
           {
             icon: IconRefresh,
             label: "Temporary Staffing",
-            desc: "Flexible workforce solutions",
+            desc: "Flexible volume workforce solutions",
             href: "/temporary-staffing",
           },
           {
             icon: IconBriefcase,
             label: "Permanent Recruitment",
-            desc: "Find your next hire",
+            desc: "Direct hire search & placement",
             href: "/permanent-recruitment",
           },
           {
             icon: IconBuildingFactory2,
             label: "On-Site Management",
-            desc: "Embedded recruitment teams",
+            desc: "Dedicated embedded recruitment teams",
             href: "/on-site-managed-services",
           },
-        ],
-      },
-      {
-        heading: "By Sector",
-        items: [
           {
             icon: IconPackage,
             label: "Warehouse Staffing",
-            desc: "Pick, pack & dispatch teams",
+            desc: "Pick, pack, sort & dispatch teams",
             href: "/warehouse-staffing",
           },
           {
             icon: IconTool,
             label: "Industrial Staffing",
-            desc: "Production line workers",
+            desc: "Production line & assembly operatives",
             href: "/industrial-staffing",
           },
           {
             icon: IconTruck,
             label: "Driving Recruitment",
-            desc: "HGV & van drivers",
+            desc: "HGV 1, 2 & commercial drivers",
             href: "/driving-recruitment",
+          },
+          {
+            icon: IconUsers,
+            label: "High Volume & Peak Staffing",
+            desc: "Scalable peak labour with guaranteed fill rates",
+            href: "/recruitment/high-volume",
+          },
+        ],
+      },
+      {
+        heading: "Working With Accept",
+        items: [
+          {
+            icon: IconCircleCheck,
+            label: "Employer Overview",
+            desc: "Why Midlands employers choose us",
+            href: "/employers",
+          },
+          {
+            icon: IconRefresh,
+            label: "Changing Recruitment Supplier",
+            desc: "Zero-downtime agency transfer protocol",
+            href: "/employers/changing-recruitment-supplier",
+          },
+          {
+            icon: IconShieldCheck,
+            label: "Compliance",
+            desc: "GLAA licensed, right-to-work verified",
+            href: "/compliance",
+          },
+          {
+            icon: IconHelp,
+            label: "Employer FAQs",
+            desc: "Transparent rates, charge formulas & SLA",
+            href: "/employers/faq",
+          },
+          {
+            icon: IconBook2,
+            label: "Case Studies",
+            desc: "InPost, Vistry, Poundstretcher results",
+            href: "/case-studies",
           },
         ],
       },
@@ -102,56 +142,127 @@ const menuData = {
   industries: {
     id: "industries",
     title: "Industries",
-    width: "w-[480px]",
+    width: "w-[580px]",
     sections: [
       {
-        heading: "Sectors We Cover",
+        heading: "Our Sectors",
         items: [
-          {
-            icon: IconWorld,
-            label: "All Industries",
-            desc: "See our full coverage",
-            href: "/industries",
-          },
           {
             icon: IconTruckDelivery,
             label: "Logistics & Warehousing",
-            desc: "Supply chain & fulfilment",
+            desc: "Distribution hubs, 3PL & pick-and-pack",
             href: "/industries/logistics",
           },
           {
             icon: IconBuildingFactory,
             label: "Manufacturing",
-            desc: "Production & assembly",
+            desc: "Automotive, engineering & production",
             href: "/industries/manufacturing",
           },
           {
             icon: IconShoppingCart,
             label: "E-commerce & Fulfilment",
-            desc: "Fast-moving retail ops",
+            desc: "High-speed retail dispatch & returns",
             href: "/industries/ecommerce",
+          },
+          {
+            icon: IconToolsKitchen2,
+            label: "Food Production",
+            desc: "GLAA compliant, hygiene-trained teams",
+            href: "/industries/food-production",
+          },
+          {
+            icon: IconTool,
+            label: "Engineering & Technical",
+            desc: "CNC machinists, technicians & engineers",
+            href: "/industries/technical",
           },
         ],
       },
       {
-        heading: "Resources",
+        heading: "Related Information",
         items: [
           {
-            icon: IconToolsKitchen2,
-            label: "Food Production",
-            desc: "Hygiene-compliant staffing",
-            href: "/industries/food-production",
+            icon: IconWorld,
+            label: "All Industries",
+            desc: "Comprehensive sector coverage overview",
+            href: "/industries",
           },
           {
             icon: IconBook2,
             label: "Case Studies",
-            desc: "Real results, real clients",
+            desc: "Real operational results with clients",
             href: "/case-studies",
+          },
+          {
+            icon: IconUsers,
+            label: "High Volume & Peak Staffing",
+            desc: "Midlands-wide seasonal surge staffing",
+            href: "/recruitment/high-volume",
           },
           {
             icon: IconChartBar,
             label: "Workforce Cost Calculator",
-            desc: "WI² margin & value comparison",
+            desc: "WI² margin & true cost comparison",
+            href: "/workforce-cost-calculator",
+          },
+        ],
+      },
+    ],
+  },
+
+  "workforce-intelligence": {
+    id: "workforce-intelligence",
+    title: "Workforce Intelligence",
+    width: "w-[620px]",
+    featured: {
+      title: "Workforce Intelligence Overview",
+      desc: "Data, technology and retention models that reduce total labour cost →",
+      href: "/workforce-intelligence",
+    },
+    sections: [
+      {
+        heading: "Attendance and Retention",
+        items: [
+          {
+            icon: IconCircleCheck,
+            label: "Attendance & Reliability",
+            desc: "Fixing early-drop & day-one dropouts",
+            href: "/workforce-intelligence/temporary-worker-attendance",
+          },
+          {
+            icon: IconUsers,
+            label: "Worker Retention",
+            desc: "5 operational measures to keep reliable temps",
+            href: "/workforce-intelligence/temporary-worker-retention",
+          },
+          {
+            icon: IconStar,
+            label: "Worker Feedback",
+            desc: "Post-placement scoring & supervisor reviews",
+            href: "/workforce-intelligence/temporary-worker-feedback",
+          },
+        ],
+      },
+      {
+        heading: "Analytics and Costs",
+        items: [
+          {
+            icon: IconChartBar,
+            label: "Workforce Analytics",
+            desc: "Single source of truth across all sites & shifts",
+            href: "/workforce-intelligence/workforce-analytics",
+          },
+          {
+            icon: IconBulb,
+            label: "Reducing Agency Labour Costs",
+            desc: "Total labour cost vs headline agency margin",
+            href: "/workforce-intelligence/reducing-agency-labour-costs",
+          },
+          {
+            icon: IconChartBar,
+            label: "Workforce Cost Calculator",
+            desc: "Interactive attendance & margin savings model",
             href: "/workforce-cost-calculator",
           },
         ],
@@ -162,139 +273,169 @@ const menuData = {
   technology: {
     id: "technology",
     title: "Technology",
-    width: "w-[540px]",
+    width: "w-[620px]",
     featured: {
-      title: "How We Work Different",
-      desc: "Technology that transforms temporary staffing →",
+      title: "Technology Overview",
+      desc: "Client tools and how Accept operates →",
       href: "/technology",
     },
     sections: [
       {
         heading: "Client Tools",
         items: [
-          { label: "Workforce Cost Calculator", href: "/workforce-cost-calculator" },
-          { label: "AcceptPulse", href: "/technology/acceptpulse" },
-          { label: "Client Portal", href: "/technology/client-portal" },
-          { label: "Rate Calculator", href: "/technology/rate-calculator" },
-          { label: "Quote Builder", href: "/technology/quote-builder" },
-          { label: "Daily Hours", href: "/technology/daily-hours" },
-          { label: "Client Feedback", href: "/technology/client-feedback" },
+          {
+            icon: IconWorld,
+            label: "Client Tools Overview",
+            desc: "Live visibility & reporting ecosystem",
+            href: "/clients/intelligence",
+          },
+          {
+            icon: IconSearch,
+            label: "Client Portal",
+            desc: "Real-time rota, timesheets & worker tracking",
+            href: "/technology/client-portal",
+          },
+          {
+            icon: IconChartBar,
+            label: "Workforce Cost Calculator",
+            desc: "Cost model & savings calculation",
+            href: "/workforce-cost-calculator",
+          },
+          {
+            icon: IconBulb,
+            label: "Rate Calculator",
+            desc: "Transparent statutory & charge rates",
+            href: "/technology/rate-calculator",
+          },
+          {
+            icon: IconClipboard,
+            label: "Quote Builder",
+            desc: "Instant bespoke workforce quotes",
+            href: "/technology/quote-builder",
+          },
+          {
+            icon: IconStar,
+            label: "Client Feedback",
+            desc: "Monthly ratings & service reviews",
+            href: "/technology/client-feedback",
+          },
         ],
       },
       {
         heading: "How We Operate",
         items: [
-          { label: "AcceptConnect", href: "/technology/acceptconnect" },
-          { label: "AcceptMatch", href: "/technology/smart-matching" },
-          { label: "AcceptMentor", href: "/technology/acceptmentor" },
-          { label: "AcceptRate", href: "/technology/worker-ratings" },
-          { label: "AcceptRewards", href: "/technology/acceptrewards" },
+          {
+            icon: IconCircleCheck,
+            label: "AcceptPulse",
+            desc: "Live site attendance tracking",
+            href: "/technology/acceptpulse",
+          },
+          {
+            icon: IconRefresh,
+            label: "AcceptConnect",
+            desc: "Automated worker communications",
+            href: "/technology/acceptconnect",
+          },
+          {
+            icon: IconUsers,
+            label: "AcceptMentor",
+            desc: "Structured day-one worker induction",
+            href: "/technology/acceptmentor",
+          },
+          {
+            icon: IconTool,
+            label: "Worker-Site Matching",
+            desc: "Skill & route matching algorithms",
+            href: "/technology/smart-matching",
+          },
+          {
+            icon: IconStar,
+            label: "Worker Ratings",
+            desc: "Objective shift performance reviews",
+            href: "/technology/worker-ratings",
+          },
         ],
       },
     ],
     footer: {
       label: "Innovation Partners",
-      badge: "New",
-      desc: "Get early access to new features",
+      badge: "Supporting",
+      desc: "Early access to new tools and client pilot programs",
       href: "/innovation-partners",
-    },
-  },
-
-  employers: {
-    id: "employers",
-    title: "Employers",
-    width: "w-[320px]",
-    featured: {
-      title: "Why Accept",
-      desc: "Better temps, not just more temps",
-      href: "/employers",
-    },
-    sections: [
-      {
-        heading: "Solutions",
-        items: [
-          {
-            label: "Workforce Cost Calculator",
-            desc: "Calculate potential margin offset",
-            href: "/workforce-cost-calculator",
-          },
-          {
-            label: "AcceptRewards",
-            desc: "Why our workers perform better",
-            href: "/employers/rewards",
-          },
-          { label: "On-Site Management", href: "/on-site-managed-services" },
-          { label: "Case Studies", href: "/case-studies" },
-          { label: "Client Tools", href: "/clients/intelligence" },
-        ],
-      },
-    ],
-    footer: {
-      label: "Get Started →",
-      desc: "Ready to transform your workforce?",
-      href: "/get-started",
     },
   },
 
   about: {
     id: "about",
-    title: "About",
-    width: "w-[480px]",
+    title: "About Accept",
+    width: "w-[560px]",
     sections: [
       {
-        heading: "Company",
+        heading: "About the Company",
         items: [
           {
             icon: IconBook2,
             label: "About Us",
-            desc: "Our story and mission",
+            desc: "Our story, standards and mission",
             href: "/about",
           },
           {
             icon: IconCircleCheck,
             label: "Why Accept",
-            desc: "What makes us different",
+            desc: "What makes our agency model different",
             href: "/why-accept",
           },
           {
             icon: IconUsers,
             label: "Our Team",
-            desc: "The people behind the brand",
+            desc: "Meet our directors and recruiters",
             href: "/team",
           },
           {
             icon: IconPencil,
             label: "Blog",
-            desc: "Insights & industry news",
+            desc: "Recruitment insights & market news",
             href: "/blog",
+          },
+          {
+            icon: IconBriefcase,
+            label: "Work for Us",
+            desc: "Careers at Accept Recruitment",
+            href: "/join-our-team",
           },
         ],
       },
       {
-        heading: "Locations",
+        heading: "Locations and Contact",
         items: [
           {
             icon: IconMapPin,
+            label: "Where We Cover",
+            desc: "Midlands branches & national coverage",
+            href: "/where-we-cover",
+          },
+          {
+            icon: IconMapPin,
             label: "Leicester",
-            desc: "0116 218 2133",
+            desc: "0116 218 2133 · Head office",
             href: "/offices/leicester",
           },
           {
             icon: IconMapPin,
             label: "Coventry",
-            desc: "024 7718 0356",
+            desc: "024 7718 0356 · Branch office",
             href: "/offices/coventry",
           },
           {
             icon: IconMapPin,
             label: "Tamworth",
-            desc: "01827 438 334",
+            desc: "01827 438 334 · Branch office",
             href: "/offices/tamworth",
           },
           {
             icon: IconMail,
             label: "Contact Us",
-            desc: "Get in touch",
+            desc: "Get in touch with any branch",
             href: "/contact",
           },
         ],
@@ -305,7 +446,7 @@ const menuData = {
   candidates: {
     id: "candidates",
     title: "Candidates",
-    width: "w-[480px]",
+    width: "w-[520px]",
     sections: [
       {
         heading: "Find Work",
@@ -313,43 +454,49 @@ const menuData = {
           {
             icon: IconSearch,
             label: "Find Jobs",
-            desc: "Browse open roles",
+            desc: "Browse live vacancies across the Midlands",
             href: "/jobs",
           },
           {
             icon: IconClipboard,
             label: "Register Now",
-            desc: "Join the Accept talent pool",
+            desc: "Fast digital registration for shifts",
             href: "/registration",
           },
           {
             icon: IconTruck,
             label: "Driver Jobs",
-            desc: "HGV, LGV & van driving",
+            desc: "HGV Class 1, 2 and 7.5T assignments",
             href: "/drivers",
+          },
+          {
+            icon: IconBulb,
+            label: "Why Work With Us",
+            desc: "Weekly pay, holiday pay and worker app",
+            href: "/candidates",
           },
         ],
       },
       {
-        heading: "Support",
+        heading: "Candidate Support",
         items: [
           {
-            icon: IconBulb,
-            label: "Why Work With Us",
-            desc: "Benefits of being with Accept",
-            href: "/candidates",
+            icon: IconHelp,
+            label: "Candidate FAQs",
+            desc: "Answers to common worker questions",
+            href: "/faq",
           },
           {
             icon: IconStar,
             label: "Success Stories",
-            desc: "Real candidate experiences",
+            desc: "Real worker journeys and reviews",
             href: "/success-stories",
           },
           {
             icon: IconHelp,
-            label: "FAQ",
-            desc: "Common questions answered",
-            href: "/faq",
+            label: "Pay Query",
+            desc: "Direct support for payroll inquiries",
+            href: "/pay-query",
           },
         ],
       },
@@ -357,119 +504,104 @@ const menuData = {
   },
 };
 
-// ─── Dropdown content renderers ───────────────────────────────────────
+// ─── Dropdown content renderer ───────────────────────────────────────
 
 function StandardColumns({ menu, isSolid }) {
   const dark = !isSolid;
   return (
-    <div className="p-5">
-      <div
-        className={`grid gap-x-8 gap-y-1`}
-        style={{ gridTemplateColumns: `repeat(${menu.sections.length}, 1fr)` }}
-      >
-        {menu.sections.map((section) => (
-          <div key={section.heading}>
-            <p
-              className={`mb-3 text-[11px] font-bold uppercase tracking-widest ${dark ? "text-teal-5" : "text-teal-6"}`}
-            >
-              {section.heading}
-            </p>
-            <div className="flex flex-col gap-0.5">
-              {section.items.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`group flex items-start gap-3 rounded-lg px-2 py-2 transition-colors duration-150
-                    ${dark ? "hover:bg-white/6" : "hover:bg-gray-50"}`}
-                >
-                  {item.icon &&
-                    (() => {
-                      const Icon = item.icon;
-                      return (
-                        <span
-                          className={`mt-0.5 shrink-0 flex h-7 w-7 items-center justify-center rounded-md
-                        ${dark ? "bg-white/8 text-teal-4" : "bg-gray-100 text-teal-6"}`}
-                        >
-                          <Icon size={16} strokeWidth={1.6} />
-                        </span>
-                      );
-                    })()}
-                  <span className="flex flex-col">
-                    <span
-                      className={`text-sm font-semibold leading-snug ${dark ? "text-white group-hover:text-teal-4" : "text-gray-900 group-hover:text-teal-6"}`}
-                    >
-                      {item.label}
-                    </span>
-                    {item.desc && (
-                      <span
-                        className={`mt-0.5 text-xs ${dark ? "text-white/45" : "text-gray-500"}`}
-                      >
-                        {item.desc}
-                      </span>
-                    )}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function TechnologyPanel({ menu, isSolid }) {
-  const dark = !isSolid;
-  return (
-    <div>
-      {/* Featured header */}
+    <div className="flex flex-col">
+      {/* Featured Header */}
       {menu.featured && (
         <Link
           href={menu.featured.href}
-          className={`block px-6 pt-5 pb-4 border-b ${dark ? "border-white/10 hover:bg-white/4" : "border-gray-100 hover:bg-gray-50"} transition-colors`}
+          className={`block px-6 pt-4 pb-3.5 border-b ${
+            dark ? "border-white/10 hover:bg-white/4" : "border-gray-100 hover:bg-gray-50"
+          } transition-colors group`}
         >
-          <p
-            className={`text-sm font-bold ${dark ? "text-white" : "text-gray-900"}`}
-          >
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-5" />
+            <p className={`text-[10px] font-bold uppercase tracking-wider ${dark ? "text-teal-4" : "text-teal-6"}`}>
+              Overview
+            </p>
+          </div>
+          <p className={`mt-0.5 text-sm font-bold ${dark ? "text-white group-hover:text-teal-4" : "text-gray-900 group-hover:text-teal-6"} transition-colors`}>
             {menu.featured.title}
           </p>
-          <p
-            className={`mt-0.5 text-xs ${dark ? "text-white/50" : "text-gray-500"}`}
-          >
+          <p className={`mt-0.5 text-xs ${dark ? "text-white/50" : "text-gray-500"}`}>
             {menu.featured.desc}
           </p>
         </Link>
       )}
-      {/* Two columns, plain links */}
-      <div className="grid grid-cols-2 gap-x-6 px-6 py-4">
-        {menu.sections.map((section) => (
-          <div key={section.heading}>
-            <p
-              className={`mb-3 text-[10px] font-bold uppercase tracking-widest ${dark ? "text-teal-5" : "text-teal-6"}`}
-            >
-              {section.heading}
-            </p>
-            <div className="flex flex-col gap-0.5">
-              {section.items.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`rounded-md px-1 py-1.5 text-sm transition-colors
-                    ${dark ? "text-white/75 hover:text-white hover:bg-white/6" : "text-gray-700 hover:text-gray-900 hover:bg-gray-50"}`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+
+      {/* Columns Grid */}
+      <div className="p-5">
+        <div
+          className="grid gap-x-8 gap-y-1"
+          style={{ gridTemplateColumns: `repeat(${menu.sections.length}, 1fr)` }}
+        >
+          {menu.sections.map((section) => (
+            <div key={section.heading}>
+              <p
+                className={`mb-3 text-[11px] font-bold uppercase tracking-widest ${
+                  dark ? "text-teal-5" : "text-teal-6"
+                }`}
+              >
+                {section.heading}
+              </p>
+              <div className="flex flex-col gap-0.5">
+                {section.items.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`group flex items-start gap-3 rounded-lg px-2.5 py-2 transition-colors duration-150
+                      ${dark ? "hover:bg-white/6" : "hover:bg-gray-50"}`}
+                  >
+                    {item.icon &&
+                      (() => {
+                        const Icon = item.icon;
+                        return (
+                          <span
+                            className={`mt-0.5 shrink-0 flex h-7 w-7 items-center justify-center rounded-md
+                          ${dark ? "bg-white/8 text-teal-4" : "bg-gray-100 text-teal-6"}`}
+                          >
+                            <Icon size={16} strokeWidth={1.6} />
+                          </span>
+                        );
+                      })()}
+                    <span className="flex flex-col">
+                      <span
+                        className={`text-sm font-semibold leading-snug ${
+                          dark ? "text-white group-hover:text-teal-4" : "text-gray-900 group-hover:text-teal-6"
+                        }`}
+                      >
+                        {item.label}
+                      </span>
+                      {item.desc && (
+                        <span
+                          className={`mt-0.5 text-xs ${dark ? "text-white/45" : "text-gray-500"}`}
+                        >
+                          {item.desc}
+                        </span>
+                      )}
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
+
       {/* Footer CTA */}
       {menu.footer && (
         <Link
           href={menu.footer.href}
-          className={`block border-t px-6 py-4 transition-colors
-            ${dark ? "border-white/10 bg-teal-5/8 hover:bg-teal-5/14" : "border-gray-100 bg-teal-1/60 hover:bg-teal-1"}`}
+          className={`block border-t px-6 py-3.5 transition-colors
+            ${
+              dark
+                ? "border-white/10 bg-teal-5/8 hover:bg-teal-5/14"
+                : "border-gray-100 bg-teal-1/60 hover:bg-teal-1"
+            }`}
         >
           <div className="flex items-center gap-2">
             <span
@@ -477,9 +609,11 @@ function TechnologyPanel({ menu, isSolid }) {
             >
               {menu.footer.label}
             </span>
-            <span className="rounded-full bg-teal-5 px-2 py-0.5 text-[10px] font-bold text-white uppercase">
-              {menu.footer.badge}
-            </span>
+            {menu.footer.badge && (
+              <span className="rounded-full bg-teal-5 px-2 py-0.5 text-[10px] font-bold text-black uppercase">
+                {menu.footer.badge}
+              </span>
+            )}
           </div>
           <p
             className={`mt-0.5 text-xs ${dark ? "text-white/45" : "text-gray-500"}`}
@@ -706,6 +840,33 @@ export function Navbar() {
               </button>
             </div>
           ))}
+
+          {/* Crawler-accessible static links for LLMs and SEO */}
+          <div className="sr-only">
+            {Object.values(menuData).map((menu) => (
+              <div key={`crawl-${menu.id}`}>
+                <span>{menu.title}</span>
+                {menu.featured && (
+                  <Link href={menu.featured.href}>{menu.featured.title}</Link>
+                )}
+                {menu.sections.map((section) => (
+                  <div key={section.heading}>
+                    <span>{section.heading}</span>
+                    <ul>
+                      {section.items.map((item) => (
+                        <li key={item.href}>
+                          <Link href={item.href}>{item.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+                {menu.footer && (
+                  <Link href={menu.footer.href}>{menu.footer.label}</Link>
+                )}
+              </div>
+            ))}
+          </div>
         </nav>
 
         {/* Mega-Menu Panel – content-width, centered under nav */}
@@ -739,35 +900,25 @@ export function Navbar() {
                 >
                   {/* Inner: natural size, measured by ResizeObserver */}
                   <div ref={contentRef} style={{ width: "max-content" }}>
-                    <div className="p-5">
-                      <AnimatePresence
+                    <AnimatePresence
+                      custom={direction}
+                      mode="popLayout"
+                      initial={false}
+                    >
+                      <motion.div
+                        key={activeDropdown}
                         custom={direction}
-                        mode="popLayout"
-                        initial={false}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
                       >
-                        <motion.div
-                          key={activeDropdown}
-                          custom={direction}
-                          variants={slideVariants}
-                          initial="enter"
-                          animate="center"
-                          exit="exit"
-                        >
-                          {activeDropdown === "technology" ||
-                          activeDropdown === "employers" ? (
-                            <TechnologyPanel
-                              menu={menuData[activeDropdown]}
-                              isSolid={false}
-                            />
-                          ) : (
-                            <StandardColumns
-                              menu={menuData[activeDropdown]}
-                              isSolid={false}
-                            />
-                          )}
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
+                        <StandardColumns
+                          menu={menuData[activeDropdown]}
+                          isSolid={false}
+                        />
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
                 </motion.div>
               </motion.div>
@@ -850,9 +1001,25 @@ export function Navbar() {
                       {menu.title}
                     </h4>
 
+                    {menu.featured && (
+                      <Link
+                        href={menu.featured.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-teal-5/10 hover:bg-teal-5/20 text-teal-6 dark:text-teal-4 transition-colors group mx-1"
+                      >
+                        <span className="text-xs font-bold tracking-tight">
+                          {menu.featured.title}
+                        </span>
+                        <span className="text-xs font-bold">→</span>
+                      </Link>
+                    )}
+
                     <div className="grid grid-cols-1 gap-1">
                       {menu.sections.map((section) => (
                         <div key={section.heading} className="space-y-1">
+                          <p className="text-[9px] font-bold uppercase tracking-wider text-gray-400 dark:text-white/30 px-3 pt-2">
+                            {section.heading}
+                          </p>
                           {section.items.map((item) => {
                             const Icon = item.icon;
 
@@ -861,16 +1028,16 @@ export function Navbar() {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="flex items-center gap-4 px-3 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 active:bg-gray-200 dark:active:bg-white/10 transition-colors group"
+                                className="flex items-center gap-4 px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 active:bg-gray-200 dark:active:bg-white/10 transition-colors group"
                               >
                                 {Icon && (
-                                  <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-lg bg-gray-100 dark:bg-white/5 text-teal-6 dark:text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
-                                    <Icon size={18} />
+                                  <span className="shrink-0 flex h-8 w-8 items-center justify-center rounded-lg bg-gray-100 dark:bg-white/5 text-teal-6 dark:text-teal-4 group-hover:bg-teal-5 group-hover:text-black transition-all">
+                                    <Icon size={16} />
                                   </span>
                                 )}
 
                                 <div>
-                                  <div className="text-[15px] font-semibold text-gray-900 dark:text-white group-hover:text-teal-6 dark:group-hover:text-teal-4 transition-colors">
+                                  <div className="text-[14px] font-semibold text-gray-900 dark:text-white group-hover:text-teal-6 dark:group-hover:text-teal-4 transition-colors">
                                     {item.label}
                                   </div>
 

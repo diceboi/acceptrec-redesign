@@ -117,7 +117,14 @@ function ContentSection() {
                         {/* The Response */}
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-[#161b28] border border-white/5 rounded-3xl p-10 md:p-12">
                             <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">THE RESPONSE</h2>
-                            <h3 className="text-white text-3xl font-bold mb-8 tracking-tight">From first phone call to fully operational team — in just 72 hours.</h3>
+                            <h3 className="text-white text-3xl font-bold mb-4 tracking-tight">From first phone call to fully operational team — in just 72 hours.</h3>
+                            <p className="text-white/60 text-base leading-relaxed mb-8">
+                                To understand the preparation and capacity behind this speed, discover{" "}
+                                <Link href="/recruitment/high-volume" className="text-teal-4 hover:underline font-medium">
+                                    how we handle high volume
+                                </Link>{" "}
+                                and peak workforce deployments.
+                            </p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-4">
                                     <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-teal-5/10 text-teal-4">

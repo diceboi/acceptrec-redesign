@@ -491,7 +491,7 @@ function CoverageSection() {
             <p className="text-[#8B98AB] text-lg leading-relaxed mb-10">
               We don&apos;t just cover the map; we dominate the local talent
               pool. Our strategic hubs in Leicester, Coventry, and Tamworth
-              ensure we can get staff to your site within 60 minutes.
+              ensure we can get staff to your site reliably. See full details on <Link href="/where-we-cover" className="text-[#00A99D] hover:underline font-medium">where we cover</Link> and how shift travel-times determine real site coverage.
             </p>
             <ul className="space-y-4">
               {[

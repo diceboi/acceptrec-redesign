@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
@@ -258,6 +259,18 @@ function ComparisonSection() {
                             ))}
                         </ul>
                     </div>
+                </div>
+                <div className="mt-12 text-center">
+                    <p className="text-white/70 text-sm">
+                        Understand the operational discipline behind gathering intelligence and explore{" "}
+                        <Link
+                            href="/workforce-intelligence/temporary-worker-feedback/"
+                            className="text-teal-4 hover:underline font-semibold"
+                        >
+                            what to do with the feedback
+                        </Link>{" "}
+                        to solve workplace retention problems.
+                    </p>
                 </div>
             </div>
         </section>
