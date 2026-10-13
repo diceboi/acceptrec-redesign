@@ -103,10 +103,18 @@ const nextConfig = {
         destination: '/employers',
         permanent: true,
       },
+      // ── New Location Hub Redirect (Sitemap v2_1) ─────────────────
+      // Redirects /offices to /where-we-cover/ with a 301.
+      // Individual branches (/offices/leicester, /offices/coventry, /offices/tamworth) remain active.
+      {
+        source: '/offices',
+        destination: '/where-we-cover',
+        permanent: true,
+      },
       // ── Old location hub URLs ─────────────────────────────────────
       {
         source: '/our-locations',
-        destination: '/offices',
+        destination: '/where-we-cover',
         permanent: true,
       },
       {

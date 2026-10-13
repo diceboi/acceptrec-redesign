@@ -97,8 +97,11 @@ function EmployersHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           Other agencies send whoever&apos;s available. We send workers who are
-          rated, coached, and rewarded for performance. Better temps, not just
-          more temps.
+          rated, coached, and rewarded for performance. Whether for day-to-day requirements or{" "}
+          <Link href="/recruitment/high-volume" className="text-teal-4 hover:underline font-medium">
+            high volume and peak staffing
+          </Link>
+          , get better temps, not just more temps.
         </motion.p>
         <motion.div
           className="flex flex-wrap justify-center gap-4"
@@ -131,8 +134,8 @@ function EmployersHero() {
 function ValuePillars() {
   const pillars = [
     {
-      t: "Rated Every Shift",
-      d: "Every worker receives a 1-5 star rating after every shift. Total transparency on quality.",
+      t: "Structured Ratings",
+      d: "Authorised supervisors rate performance across four key dimensions to ensure actionable quality records.",
       i: IconStar,
     },
     {
@@ -187,12 +190,20 @@ function ComparisonSection() {
   const comparisons = [
     {
       prob: "Workers doing the bare minimum.",
-      solution: "Every shift rated 1-5 stars.",
+      solution: "Supervisor ratings across 4 dimensions.",
       icon: IconStar,
     },
     {
       prob: "Same problems every week.",
-      solution: "Feedback that creates change.",
+      solution: (
+        <>
+          Actionable{" "}
+          <Link href="/workforce-intelligence/temporary-worker-feedback/" className="text-teal-4 hover:underline font-semibold">
+            worker feedback
+          </Link>{" "}
+          that creates change.
+        </>
+      ),
       icon: IconRefresh,
     },
     {
@@ -224,6 +235,21 @@ function ComparisonSection() {
           <h2 className="text-4xl font-semibold text-white md:text-5xl tracking-tight">
             The difference is data.
           </h2>
+          <p className="mt-4 text-[#8B98AB] max-w-xl mx-auto text-base">
+            Unfilled shifts, early leavers, and supervision add up to more than the margin. See{" "}
+            <Link href="/workforce-intelligence/reducing-agency-labour-costs" className="text-teal-4 hover:underline font-medium">
+              what agency labour actually costs
+            </Link>
+            , explore how to improve{" "}
+            <Link href="/workforce-intelligence/temporary-worker-retention/" className="text-teal-4 hover:underline font-medium">
+              worker retention
+            </Link>
+            , and discover{" "}
+            <Link href="/workforce-intelligence/workforce-analytics/" className="text-teal-4 hover:underline font-medium">
+              what you should be able to see
+            </Link>{" "}
+            from your supplier without chasing.
+          </p>
         </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {comparisons.map((c, i) => (
@@ -260,7 +286,7 @@ function ComparisonSection() {
 // ─── Stats Bar ─────────────────────────────────────────────────────────────
 function StatsBar() {
   const stats = [
-    { label: "Workers Rated", val: "100%", sub: "Every single shift" },
+    { label: "Quality Criteria", val: "4-Part", sub: "Structured dimensions" },
     { label: "Avg Star Rating", val: "4.2★", sub: "Performance score" },
     { label: "Fill Rate", val: "98%", sub: "Industry leading" },
     { label: "Daily Workers", val: "1,200+", sub: "Across the UK" },
@@ -334,6 +360,23 @@ function CaseStudiesTeaser() {
           <h2 className="text-4xl font-semibold text-white md:text-5xl tracking-tight">
             Real Results for Real Clients.
           </h2>
+          <p className="mt-4 text-[#8B98AB] max-w-xl mx-auto text-sm">
+            Facing repeated agency shortfalls? Learn our safe process for{" "}
+            <Link
+              href="/employers/changing-recruitment-supplier"
+              className="text-teal-4 hover:underline font-medium"
+            >
+              changing recruitment supplier
+            </Link>{" "}
+            without losing the workers who keep your lines running, or read our{" "}
+            <Link
+              href="/employers/faq/"
+              className="text-teal-4 hover:underline font-medium"
+            >
+              employer FAQs
+            </Link>{" "}
+            for direct answers on pay, attendance, and turnover.
+          </p>
         </motion.div>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-5"

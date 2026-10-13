@@ -47,7 +47,7 @@ function InnerHero() {
           GLA Licensed. <span className="text-teal-5">Fully Compliant.</span>
         </motion.h2>
         <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-          Food-safe staffing with no shortcuts. Right-to-work verified, hygiene trained — every worker, every time.
+          Food-safe staffing with no shortcuts across the Midlands. Learn more about <Link href="/where-we-cover" className="text-teal-4 hover:underline font-medium">where we cover</Link> and how shift timing connects with our local worker pools.
         </motion.p>
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
           <Button variant="primary" size="lg" href="/get-started">Get Compliant Staff</Button>

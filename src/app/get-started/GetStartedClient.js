@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import {
@@ -273,9 +274,19 @@ function IntakeForm() {
               <h3 className="text-3xl font-semibold text-white mb-4 tracking-tight leading-tight">
                 Let&apos;s fix your staffing.
               </h3>
-              <p className="text-[#8B98AB] text-lg">
+              <p className="text-[#8B98AB] text-lg mb-3">
                 Tell us what&apos;s not working. We&apos;ll show you how
                 we&apos;d fix it.
+              </p>
+              <p className="text-xs text-white/50">
+                Looking for answers on pay rates, attendance benchmarks, or agency terms first? See our{" "}
+                <Link
+                  href="/employers/faq/"
+                  className="text-teal-4 hover:underline font-medium"
+                >
+                  common questions
+                </Link>
+                .
               </p>
             </div>
 

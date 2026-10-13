@@ -132,9 +132,18 @@ function ContentSection() {
                         {/* The Turning Point */}
                         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-[#161b28] border border-white/5 rounded-3xl p-10 md:p-12">
                             <h2 className="text-teal-5 text-[11px] font-bold uppercase tracking-[0.2em] mb-6">2025: THE TURNING POINT</h2>
-                            <h3 className="text-white text-3xl font-bold mb-8 tracking-tight">From underdog to sole supplier.</h3>
-                            <p className="text-white/80 text-lg leading-relaxed">
+                            <p className="text-white/80 text-lg leading-relaxed mb-6">
                                 After eight years of consistently going above and beyond, Accept Recruitment was appointed as the sole recruitment supplier for the entire distribution centre. That relentless consistency turned a challenger appointment into a sole-supplier partnership.
+                            </p>
+                            <p className="text-white/60 text-sm leading-relaxed">
+                                See{" "}
+                                <Link
+                                    href="/employers/changing-recruitment-supplier"
+                                    className="text-teal-4 hover:underline font-medium"
+                                >
+                                    how a supplier change was handled
+                                </Link>{" "}
+                                and how we deliver operational stability during complex multi-site transitions.
                             </p>
                         </motion.div>
 

@@ -75,7 +75,11 @@ function InnerHero() {
           className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Need 50, 100, 200+ temps a day? We&apos;ve got the infrastructure. 1,200 workers deployed daily. Data-driven forecasting. Zero guesswork.
+          Need 50, 100, 200+ temps a day? Whether you are{" "}
+          <Link href="/recruitment/high-volume" className="text-teal-4 hover:underline font-medium">
+            opening a new site
+          </Link>{" "}
+          or scaling for peak, we&apos;ve got the infrastructure: 1,200 workers deployed daily, data-driven forecasting, and zero guesswork.
         </motion.p>
 
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
@@ -191,7 +195,14 @@ function TrackRecord() {
              We&apos;ve been doing this for a decade.
           </h2>
           <p className="mt-6 text-lg text-white/60 leading-relaxed max-w-2xl mx-auto">
-            Not promises. Data. Every shift, every worker, every outcome — tracked, analysed, improved.
+            Not promises. Data. Every shift, every worker, every outcome — tracked, analysed, improved, with{" "}
+            <Link
+              href="/workforce-intelligence/workforce-analytics/"
+              className="text-teal-4 hover:underline font-semibold"
+            >
+              reporting you can see yourself
+            </Link>
+            .
           </p>
         </motion.div>
 
@@ -244,7 +255,21 @@ function PredictivePlanning() {
 
   const benefits = [
     { strong: "No scrambling.", text: "Workers are lined up before peak hits." },
-    { strong: "Cost predictability.", text: "Forecast accuracy means budget accuracy." },
+    {
+      strong: "Cost predictability.",
+      text: (
+        <>
+          Forecast accuracy means budget accuracy. Read our breakdown on{" "}
+          <Link
+            href="/workforce-intelligence/reducing-agency-labour-costs"
+            className="text-teal-4 hover:underline font-medium"
+          >
+            the cost of an onsite service
+          </Link>{" "}
+          and what sits inside hourly rates.
+        </>
+      ),
+    },
     { strong: "Fewer emergencies.", text: "Problems anticipated, not reacted to." },
     { strong: "Operational stability.", text: "Your production runs; we handle the people." },
   ];
@@ -384,8 +409,32 @@ function WhatYouGet() {
     { title: "Dedicated Account Manager", desc: "Your single point of contact. On-site presence tailored to your needs.", icon: IconUserCheck },
     { title: "Demand Forecasting", desc: "Data-driven predictions. Workers lined up before you need them.", icon: IconChartLine },
     { title: "Real-Time Attendance", desc: "Live dashboard. Photo verification. Instant no-show alerts.", icon: IconDeviceDesktopAnalytics },
-    { title: "Quality Management", desc: "Every worker rated. Poor performers removed. Standards maintained.", icon: IconStarFilled },
-    { title: "Worker Coaching", desc: "Continuous improvement. Feedback loops. Workers get better over time.", icon: IconSchool },
+    { 
+      title: "Quality Management", 
+      desc: (
+        <>
+          Structured supervisor ratings across four dimensions to manage{" "}
+          <Link href="/workforce-intelligence/temporary-worker-feedback/" className="text-teal-4 hover:underline font-medium">
+            worker quality on site
+          </Link>
+          . Poor performers removed and top performers prioritised.
+        </>
+      ), 
+      icon: IconStarFilled 
+    },
+    { 
+      title: "Worker Coaching", 
+      desc: (
+        <>
+          Continuous improvement and structured onboarding to maintain{" "}
+          <Link href="/workforce-intelligence/temporary-worker-retention/" className="text-teal-4 hover:underline font-medium">
+            continuity of workers
+          </Link>{" "}
+          and reduce churn.
+        </>
+      ), 
+      icon: IconSchool 
+    },
     { title: "Full Compliance", desc: "Right to work, payroll, holiday pay, insurance. All handled.", icon: IconShieldCheck },
   ];
 
@@ -581,6 +630,23 @@ function FitCheck() {
             </ul>
           </motion.div>
         </div>
+        <p className="mt-10 text-center text-sm text-white/60">
+          Considering{" "}
+          <Link
+            href="/employers/changing-recruitment-supplier"
+            className="text-teal-4 hover:underline font-medium"
+          >
+            replacing an onsite provider
+          </Link>
+          ? Read our practical transition checklist covering TUPE, keeping good workers, and parallel runs, or explore our{" "}
+          <Link
+            href="/employers/faq/"
+            className="text-teal-4 hover:underline font-medium"
+          >
+            frequently asked questions
+          </Link>{" "}
+          for employers.
+        </p>
       </div>
     </section>
   );

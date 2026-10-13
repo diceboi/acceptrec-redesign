@@ -46,7 +46,7 @@ function InnerHero() {
           Production Lines <span className="text-teal-5">Can&apos;t Wait</span>
         </motion.h2>
         <motion.p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
-          Machines need operators. We get the right people to your factory floor, fast.
+          Machines need operators. We get the right people to your factory floor fast, across Leicester, Coventry, and Tamworth. Check <Link href="/where-we-cover" className="text-teal-4 hover:underline font-medium">where we cover</Link> and our shift travel-time model.
         </motion.p>
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
           <Button variant="primary" size="lg" href="/get-started">Keep Your Line Running</Button>

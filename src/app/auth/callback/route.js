@@ -7,9 +7,12 @@ export async function GET(request) {
   const next = requestUrl.searchParams.get('next') ?? '/auth/pending'
   
   if (code) {
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder-url.supabase.co";
+    const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder-anon-key";
+
     const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      url,
+      key,
       {
         cookies: {
           getAll() { return request.cookies.getAll() },

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { Footer } from "@/components/sections/Footer";
@@ -66,7 +67,7 @@ function InnerHero() {
           className="mx-auto max-w-2xl text-lg leading-relaxed text-white/60 mb-10"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
         >
-          HGV Class 1 &amp; 2, van drivers, multi-drop. Every licence verified. Every driver vetted.
+          HGV Class 1 &amp; 2, van drivers, multi-drop. Our driving division supplies drivers nationally. See <Link href="/where-we-cover" className="text-teal-4 hover:underline font-medium">where we cover</Link> for regional branch support and nationwide driver placement.
         </motion.p>
 
         <motion.div className="flex flex-wrap justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
